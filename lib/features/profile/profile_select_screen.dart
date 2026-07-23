@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
+import '../../core/widgets/parent_gate.dart';
 import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
 import '../../data/repositories/profile_repository.dart';
@@ -51,6 +52,97 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
     _openProfile(p);
   }
 
+  /// F15 — Chạm giữ 1 hồ sơ để sửa tên/avatar hoặc xóa (gate bằng cổng phụ
+  /// huynh trước khi cho vào bảng chọn hành động).
+  Future<void> _handleLongPress(Profile p) async {
+    final gateOk = await showParentGate(context);
+    if (!gateOk || !mounted) return;
+
+    final action = await showModalBottomSheet<String>(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.edit_rounded),
+              title: Text('Sửa hồ sơ "${p.name}"'),
+              onTap: () => Navigator.of(context).pop('edit'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete_outline_rounded,
+                  color: AppColors.error),
+              title: const Text('Xóa hồ sơ'),
+              onTap: () => Navigator.of(context).pop('delete'),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (!mounted || action == null) return;
+
+    if (action == 'edit') {
+      await _showEditDialog(p);
+    } else if (action == 'delete') {
+      final confirmed = await confirmDeleteProfile(context, p.name);
+      if (!confirmed || !mounted) return;
+      await _profileRepo.delete(p.id);
+    }
+  }
+
+  Future<void> _showEditDialog(Profile p) async {
+    final nameController = TextEditingController(text: p.name);
+    var avatar = p.avatarEmoji;
+    final saved = await showDialog<bool>(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+          title: const Text('Sửa hồ sơ'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: nameController,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(border: OutlineInputBorder()),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.sm,
+                children: _avatarChoices
+                    .map((a) => _AvatarChoice(
+                          emoji: a,
+                          selected: a == avatar,
+                          onTap: () => setDialogState(() => avatar = a),
+                        ))
+                    .toList(),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Hủy'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Lưu'),
+            ),
+          ],
+        ),
+      ),
+    );
+    final name = nameController.text.trim();
+    nameController.dispose();
+    if (saved == true && name.isNotEmpty && mounted) {
+      await _profileRepo.update(p.id, name: name, avatarEmoji: avatar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -80,21 +172,38 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
   Widget _buildProfileGrid(List<Profile> profiles) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: AppSpacing.md,
-          mainAxisSpacing: AppSpacing.md,
-        ),
-        itemCount: profiles.length + 1,
-        itemBuilder: (context, i) {
-          if (i == profiles.length) {
-            return _AddProfileTile(
-                onTap: () => setState(() => _creating = true));
-          }
-          final p = profiles[i];
-          return _ProfileTile(profile: p, onTap: () => _openProfile(p));
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: AppSpacing.md,
+                mainAxisSpacing: AppSpacing.md,
+              ),
+              itemCount: profiles.length + 1,
+              itemBuilder: (context, i) {
+                if (i == profiles.length) {
+                  return _AddProfileTile(
+                      onTap: () => setState(() => _creating = true));
+                }
+                final p = profiles[i];
+                return _ProfileTile(
+                  profile: p,
+                  onTap: () => _openProfile(p),
+                  onLongPress: () => _handleLongPress(p),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          const Text(
+            'Mẹo: chạm giữ 1 hồ sơ để sửa hoặc xóa (dành cho phụ huynh)',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+          ),
+        ],
       ),
     );
   }
@@ -152,8 +261,10 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
 class _ProfileTile extends StatelessWidget {
   final Profile profile;
   final VoidCallback onTap;
+  final VoidCallback onLongPress;
 
-  const _ProfileTile({required this.profile, required this.onTap});
+  const _ProfileTile(
+      {required this.profile, required this.onTap, required this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +275,7 @@ class _ProfileTile extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         onTap: onTap,
+        onLongPress: onLongPress,
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.sm),
           child: Column(

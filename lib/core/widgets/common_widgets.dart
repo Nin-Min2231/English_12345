@@ -11,6 +11,10 @@ class PrimaryButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
   final Color? color;
+  // Mặc định trắng (khớp nền primary/secondary/info/success hiện có, sẫm màu).
+  // Nền sáng màu (vd warning vàng, error đỏ nhạt) cần truyền chữ tối để đủ
+  // tương phản cho trẻ đọc — xem CR-005/CR-008 BUGS_CR.md.
+  final Color? foregroundColor;
 
   const PrimaryButton({
     super.key,
@@ -18,6 +22,7 @@ class PrimaryButton extends StatelessWidget {
     this.icon = Icons.play_arrow_rounded,
     this.onPressed,
     this.color,
+    this.foregroundColor,
   });
 
   @override
@@ -33,7 +38,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: foregroundColor ?? Colors.white,
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusMd),

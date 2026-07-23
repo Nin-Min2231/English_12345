@@ -1,0 +1,490 @@
+{
+  "game_type_id": "G04",
+  "game_type_name": "Xếp chữ (kéo xếp chữ xáo trộn thành từ đúng)",
+  "asset_base": "assets/content/",
+  "note_skipped": "Từ mở rộng chưa có audio nên bỏ qua (giống G02/G03), xem README_data.md.",
+  "skipped": [
+    {
+      "word_id": "W050",
+      "word": "twelve",
+      "unit_id": 13,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W051",
+      "word": "sixteen",
+      "unit_id": 14,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W052",
+      "word": "seventeen",
+      "unit_id": 14,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W053",
+      "word": "eighteen",
+      "unit_id": 14,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W054",
+      "word": "nineteen",
+      "unit_id": 14,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W055",
+      "word": "twenty",
+      "unit_id": 14,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    },
+    {
+      "word_id": "W056",
+      "word": "near",
+      "unit_id": 16,
+      "reason": "audio_ready=false (chưa có audio, xem CLAUDE.md muc 9)"
+    }
+  ],
+  "instances": [
+    {
+      "game_id": "U01_G04",
+      "unit_id": 1,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W001",
+            "word": "pasta",
+            "image": "Unit01/image/pasta.png",
+            "audio": "Unit01/audio/word_pasta.mp3"
+          },
+          {
+            "word_id": "W002",
+            "word": "popcorn",
+            "image": "Unit01/image/popcorn.png",
+            "audio": "Unit01/audio/word_popcorn.mp3"
+          },
+          {
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U02_G04",
+      "unit_id": 2,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W004",
+            "word": "kite",
+            "image": "Unit02/image/kite.png",
+            "audio": "Unit02/audio/word_kite.mp3"
+          },
+          {
+            "word_id": "W005",
+            "word": "bike",
+            "image": "Unit02/image/bike.png",
+            "audio": "Unit02/audio/word_bike.mp3"
+          },
+          {
+            "word_id": "W006",
+            "word": "kitten",
+            "image": "Unit02/image/kitten.png",
+            "audio": "Unit02/audio/word_kitten.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U03_G04",
+      "unit_id": 3,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W007",
+            "word": "sail",
+            "image": "Unit03/image/sail.png",
+            "audio": "Unit03/audio/word_sail.mp3"
+          },
+          {
+            "word_id": "W008",
+            "word": "sand",
+            "image": "Unit03/image/sand.png",
+            "audio": "Unit03/audio/word_sand.mp3"
+          },
+          {
+            "word_id": "W009",
+            "word": "sea",
+            "image": "Unit03/image/sea.png",
+            "audio": "Unit03/audio/word_sea.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U04_G04",
+      "unit_id": 4,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W010",
+            "word": "rainbow",
+            "image": "Unit04/image/rainbow.png",
+            "audio": "Unit04/audio/word_rainbow.mp3"
+          },
+          {
+            "word_id": "W011",
+            "word": "river",
+            "image": "Unit04/image/river.png",
+            "audio": "Unit04/audio/word_river.mp3"
+          },
+          {
+            "word_id": "W012",
+            "word": "road",
+            "image": "Unit04/image/road.png",
+            "audio": "Unit04/audio/word_road.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U05_G04",
+      "unit_id": 5,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W013",
+            "word": "question",
+            "image": "Unit05/image/question.png",
+            "audio": "Unit05/audio/word_question.mp3"
+          },
+          {
+            "word_id": "W014",
+            "word": "square",
+            "image": "Unit05/image/square.png",
+            "audio": "Unit05/audio/word_square.mp3"
+          },
+          {
+            "word_id": "W015",
+            "word": "quiz",
+            "image": "Unit05/image/quiz.png",
+            "audio": "Unit05/audio/word_quiz.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U06_G04",
+      "unit_id": 6,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W016",
+            "word": "box",
+            "image": "Unit06/image/box.png",
+            "audio": "Unit06/audio/word_box.mp3"
+          },
+          {
+            "word_id": "W017",
+            "word": "fox",
+            "image": "Unit06/image/fox.png",
+            "audio": "Unit06/audio/word_fox.mp3"
+          },
+          {
+            "word_id": "W018",
+            "word": "ox",
+            "image": "Unit06/image/ox.png",
+            "audio": "Unit06/audio/word_ox.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U07_G04",
+      "unit_id": 7,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W019",
+            "word": "juice",
+            "image": "Unit07/image/juice.png",
+            "audio": "Unit07/audio/word_juice.mp3"
+          },
+          {
+            "word_id": "W020",
+            "word": "jelly",
+            "image": "Unit07/image/jelly.png",
+            "audio": "Unit07/audio/word_jelly.mp3"
+          },
+          {
+            "word_id": "W021",
+            "word": "jam",
+            "image": "Unit07/image/jam.png",
+            "audio": "Unit07/audio/word_jam.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U08_G04",
+      "unit_id": 8,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W022",
+            "word": "village",
+            "image": "Unit08/image/village.png",
+            "audio": "Unit08/audio/word_village.mp3"
+          },
+          {
+            "word_id": "W023",
+            "word": "van",
+            "image": "Unit08/image/van.png",
+            "audio": "Unit08/audio/word_van.mp3"
+          },
+          {
+            "word_id": "W024",
+            "word": "volleyball",
+            "image": "Unit08/image/volleyball.png",
+            "audio": "Unit08/audio/word_volleyball.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U09_G04",
+      "unit_id": 9,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W025",
+            "word": "yogurt",
+            "image": "Unit09/image/yogurt.png",
+            "audio": "Unit09/audio/word_yogurt.mp3"
+          },
+          {
+            "word_id": "W026",
+            "word": "yams",
+            "image": "Unit09/image/yams.png",
+            "audio": "Unit09/audio/word_yams.mp3"
+          },
+          {
+            "word_id": "W027",
+            "word": "yo-yos",
+            "image": "Unit09/image/yo_yos.png",
+            "audio": "Unit09/audio/word_yo_yos.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U10_G04",
+      "unit_id": 10,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W028",
+            "word": "zoo",
+            "image": "Unit10/image/zoo.png",
+            "audio": "Unit10/audio/word_zoo.mp3"
+          },
+          {
+            "word_id": "W029",
+            "word": "zebu",
+            "image": "Unit10/image/zebu.png",
+            "audio": "Unit10/audio/word_zebu.mp3"
+          },
+          {
+            "word_id": "W030",
+            "word": "zebra",
+            "image": "Unit10/image/zebra.png",
+            "audio": "Unit10/audio/word_zebra.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U11_G04",
+      "unit_id": 11,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W031",
+            "word": "sliding",
+            "image": "Unit11/image/sliding.png",
+            "audio": "Unit11/audio/word_sliding.mp3"
+          },
+          {
+            "word_id": "W032",
+            "word": "riding",
+            "image": "Unit11/image/riding.png",
+            "audio": "Unit11/audio/word_riding.mp3"
+          },
+          {
+            "word_id": "W033",
+            "word": "driving",
+            "image": "Unit11/image/driving.png",
+            "audio": "Unit11/audio/word_driving.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U12_G04",
+      "unit_id": 12,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W034",
+            "word": "grapes",
+            "image": "Unit12/image/grapes.png",
+            "audio": "Unit12/audio/word_grapes.mp3"
+          },
+          {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3"
+          },
+          {
+            "word_id": "W036",
+            "word": "table",
+            "image": "Unit12/image/table.png",
+            "audio": "Unit12/audio/word_table.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U13_G04",
+      "unit_id": 13,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W037",
+            "word": "eleven",
+            "image": "Unit13/image/eleven.png",
+            "audio": "Unit13/audio/word_eleven.mp3"
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3"
+          },
+          {
+            "word_id": "W039",
+            "word": "fourteen",
+            "image": "Unit13/image/fourteen.png",
+            "audio": "Unit13/audio/word_fourteen.mp3"
+          },
+          {
+            "word_id": "W040",
+            "word": "fifteen",
+            "image": "Unit13/image/fifteen.png",
+            "audio": "Unit13/audio/word_fifteen.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U14_G04",
+      "unit_id": 14,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W041",
+            "word": "brother",
+            "image": "Unit14/image/brother.png",
+            "audio": "Unit14/audio/word_brother.mp3"
+          },
+          {
+            "word_id": "W042",
+            "word": "sister",
+            "image": "Unit14/image/sister.png",
+            "audio": "Unit14/audio/word_sister.mp3"
+          },
+          {
+            "word_id": "W043",
+            "word": "grandmother",
+            "image": "Unit14/image/grandmother.png",
+            "audio": "Unit14/audio/word_grandmother.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U15_G04",
+      "unit_id": 15,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W044",
+            "word": "shirts",
+            "image": "Unit15/image/shirts.png",
+            "audio": "Unit15/audio/word_shirts.mp3"
+          },
+          {
+            "word_id": "W045",
+            "word": "shoes",
+            "image": "Unit15/image/shoes.png",
+            "audio": "Unit15/audio/word_shoes.mp3"
+          },
+          {
+            "word_id": "W046",
+            "word": "shorts",
+            "image": "Unit15/image/shorts.png",
+            "audio": "Unit15/audio/word_shorts.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U16_G04",
+      "unit_id": 16,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "W047",
+            "word": "tent",
+            "image": "Unit16/image/tent.png",
+            "audio": "Unit16/audio/word_tent.mp3"
+          },
+          {
+            "word_id": "W048",
+            "word": "teapot",
+            "image": "Unit16/image/teapot.png",
+            "audio": "Unit16/audio/word_teapot.mp3"
+          },
+          {
+            "word_id": "W049",
+            "word": "blanket",
+            "image": "Unit16/image/blanket.png",
+            "audio": "Unit16/audio/word_blanket.mp3"
+          }
+        ]
+      }
+    }
+  ]
+}

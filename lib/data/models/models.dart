@@ -117,3 +117,96 @@ class FillItem {
             (j['distractors'] as List).map((e) => e as String).toList(),
       );
 }
+
+/// G04 — một từ để xếp lại từ các chữ cái xáo trộn.
+class ScrambleItem {
+  final String wordId;
+  final String word;
+  final String image;
+  final String? audio;
+
+  const ScrambleItem({
+    required this.wordId,
+    required this.word,
+    required this.image,
+    this.audio,
+  });
+
+  factory ScrambleItem.fromJson(Map<String, dynamic> j) => ScrambleItem(
+        wordId: j['word_id'] as String,
+        word: j['word'] as String,
+        image: j['image'] as String,
+        audio: j['audio'] as String?,
+      );
+}
+
+/// G05 — một câu ví dụ để lắp ráp lại theo đúng thứ tự token.
+class SentenceItem {
+  final String sentence;
+  final List<String> tokens;
+  final String? audio;
+
+  const SentenceItem({
+    required this.sentence,
+    required this.tokens,
+    this.audio,
+  });
+
+  factory SentenceItem.fromJson(Map<String, dynamic> j) => SentenceItem(
+        sentence: j['sentence'] as String,
+        tokens: (j['tokens'] as List).map((e) => e as String).toList(),
+        audio: j['audio'] as String?,
+      );
+}
+
+/// G06 — một lựa chọn hình trong mindmap (giống [PickOption] nhưng có thêm
+/// chữ + audio riêng để trẻ chạm nghe từng lựa chọn).
+class MindmapOption {
+  final String wordId;
+  final String word;
+  final String image;
+  final String? audio;
+
+  const MindmapOption({
+    required this.wordId,
+    required this.word,
+    required this.image,
+    this.audio,
+  });
+
+  factory MindmapOption.fromJson(Map<String, dynamic> j) => MindmapOption(
+        wordId: j['word_id'] as String,
+        word: j['word'] as String,
+        image: j['image'] as String,
+        audio: j['audio'] as String?,
+      );
+}
+
+/// G06 — một câu mẫu khuyết 1 từ (`pattern` chứa "___"), chạm hình đúng để
+/// điền từ hoàn thành câu. `audio` là audio "Mẫu câu" dùng chung cả unit
+/// (giống [SentenceItem]) — chưa có audio cắt riêng từng câu.
+class MindmapItem {
+  final String wordId;
+  final String pattern;
+  final List<MindmapOption> options;
+  final int answerIdx;
+  final String? audio;
+
+  const MindmapItem({
+    required this.wordId,
+    required this.pattern,
+    required this.options,
+    required this.answerIdx,
+    this.audio,
+  });
+
+  factory MindmapItem.fromJson(Map<String, dynamic> j) => MindmapItem(
+        wordId: j['word_id'] as String,
+        pattern: j['pattern'] as String,
+        options: (j['options'] as List)
+            .map((e) => MindmapOption.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        answerIdx: j['answer_idx'] as int,
+        audio: j['audio'] as String?,
+      );
+}

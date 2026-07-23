@@ -8,6 +8,9 @@ class AppColors {
   static const warning = Color(0xFFFFCC00);
   static const error = Color(0xFFFF6B6B);
   static const info = Color(0xFF5AC8FA);
+  // Tông đậm hơn info gốc — dùng cho G08 vì chữ trắng trên info gốc khó đọc
+  // (BUGS_CR.md CR-018). info gốc giữ nguyên cho G03 (fill_letter_screen.dart).
+  static const infoDark = Color(0xFF0277BD);
   static const background = Color(0xFFF7F9FC);
   static const surface = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF1F2937);

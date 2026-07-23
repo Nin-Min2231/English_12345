@@ -6,6 +6,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
+import '../../../services/settings_service.dart';
 
 /// F08 / G03 — Điền chữ cái thiếu (theo âm phonics). Chạm chữ đúng để điền
 /// vào ô trống. Hỗ trợ digraph (sh, er) như một khối. Có hình + audio gợi ý.
@@ -28,6 +29,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
   bool _filled = false;
   String? _wrongPick;
   List<String> _options = [];
+  // Độ khó Dễ: 1 đáp án nhiễu bị loại bớt làm gợi ý.
+  String? _eliminatedLetter;
   AnswerFeedback? _feedback;
 
   @override
@@ -47,12 +50,23 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
 
   void _prepare() {
     _options = [_it.answer, ..._it.distractors]..shuffle(Random());
+    _eliminatedLetter = null;
+    if (SettingsService.instance.isEasy) {
+      final distractors = _options.where((o) => o != _it.answer).toList();
+      if (distractors.isNotEmpty) {
+        _eliminatedLetter = (distractors..shuffle(Random())).first;
+      }
+    }
   }
 
   void _playHint() => AudioService.instance.play(_it.audio);
 
   void _pick(String letter) {
-    if (_filled) return;
+    if (_filled ||
+        _feedback == AnswerFeedback.wrong ||
+        letter == _eliminatedLetter) {
+      return;
+    }
     if (letter == _it.answer) {
       setState(() {
         _filled = true;
@@ -163,6 +177,15 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: PrimaryButton(
+                  label: 'Nghe gợi ý',
+                  icon: Icons.volume_up_rounded,
+                  onPressed: _playHint,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
               Expanded(
                 flex: 3,
                 child: Padding(
@@ -200,15 +223,6 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.sm),
-                child: PrimaryButton(
-                  label: 'Nghe gợi ý',
-                  icon: Icons.volume_up_rounded,
-                  onPressed: _playHint,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
                     AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
                 child: Row(
                   children: [
@@ -240,6 +254,7 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
 
   Widget _letterTile(String letter) {
     final isAnswer = letter == _it.answer;
+    final eliminated = letter == _eliminatedLetter;
     Color bg = AppColors.surface;
     if (_filled && isAnswer) {
       bg = AppColors.success;
@@ -247,23 +262,26 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
       bg = AppColors.error;
     }
     final light = (_filled && isAnswer) || _wrongPick == letter;
-    return Material(
-      color: bg,
-      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-      elevation: 2,
-      child: InkWell(
+    return Opacity(
+      opacity: eliminated ? 0.3 : 1,
+      child: Material(
+        color: bg,
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-        onTap: () => _pick(letter),
-        child: Container(
-          width: 64,
-          height: 64,
-          alignment: Alignment.center,
-          child: Text(
-            letter,
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: light ? Colors.white : AppColors.textPrimary,
+        elevation: 2,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          onTap: eliminated ? null : () => _pick(letter),
+          child: Container(
+            width: 64,
+            height: 64,
+            alignment: Alignment.center,
+            child: Text(
+              letter,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: light ? Colors.white : AppColors.textPrimary,
+              ),
             ),
           ),
         ),

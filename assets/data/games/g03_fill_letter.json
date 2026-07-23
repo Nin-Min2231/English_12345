@@ -80,12 +80,72 @@
             ]
           },
           {
+            "word_id": "W001",
+            "word": "pasta",
+            "image": "Unit01/image/pasta.png",
+            "audio": "Unit01/audio/word_pasta.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "l",
+              "y",
+              "j"
+            ]
+          },
+          {
+            "word_id": "W001",
+            "word": "pasta",
+            "image": "Unit01/image/pasta.png",
+            "audio": "Unit01/audio/word_pasta.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "s",
+            "distractors": [
+              "l",
+              "y",
+              "j"
+            ]
+          },
+          {
             "word_id": "W002",
             "word": "popcorn",
             "image": "Unit01/image/popcorn.png",
             "audio": "Unit01/audio/word_popcorn.mp3",
             "hidden_idx": [
               0
+            ],
+            "answer": "p",
+            "distractors": [
+              "u",
+              "e",
+              "l"
+            ]
+          },
+          {
+            "word_id": "W002",
+            "word": "popcorn",
+            "image": "Unit01/image/popcorn.png",
+            "audio": "Unit01/audio/word_popcorn.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "u",
+              "e",
+              "l"
+            ]
+          },
+          {
+            "word_id": "W002",
+            "word": "popcorn",
+            "image": "Unit01/image/popcorn.png",
+            "audio": "Unit01/audio/word_popcorn.mp3",
+            "hidden_idx": [
+              2
             ],
             "answer": "p",
             "distractors": [
@@ -103,6 +163,36 @@
               0
             ],
             "answer": "p",
+            "distractors": [
+              "d",
+              "g",
+              "k"
+            ]
+          },
+          {
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "d",
+              "g",
+              "k"
+            ]
+          },
+          {
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "z",
             "distractors": [
               "d",
               "g",
@@ -137,6 +227,36 @@
             ]
           },
           {
+            "word_id": "W004",
+            "word": "kite",
+            "image": "Unit02/image/kite.png",
+            "audio": "Unit02/audio/word_kite.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "l",
+              "r",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W004",
+            "word": "kite",
+            "image": "Unit02/image/kite.png",
+            "audio": "Unit02/audio/word_kite.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "t",
+            "distractors": [
+              "l",
+              "r",
+              "d"
+            ]
+          },
+          {
             "word_id": "W005",
             "word": "bike",
             "image": "Unit02/image/bike.png",
@@ -152,6 +272,36 @@
             ]
           },
           {
+            "word_id": "W005",
+            "word": "bike",
+            "image": "Unit02/image/bike.png",
+            "audio": "Unit02/audio/word_bike.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "b",
+            "distractors": [
+              "v",
+              "u",
+              "x"
+            ]
+          },
+          {
+            "word_id": "W005",
+            "word": "bike",
+            "image": "Unit02/image/bike.png",
+            "audio": "Unit02/audio/word_bike.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "v",
+              "u",
+              "x"
+            ]
+          },
+          {
             "word_id": "W006",
             "word": "kitten",
             "image": "Unit02/image/kitten.png",
@@ -160,6 +310,36 @@
               0
             ],
             "answer": "k",
+            "distractors": [
+              "p",
+              "a",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W006",
+            "word": "kitten",
+            "image": "Unit02/image/kitten.png",
+            "audio": "Unit02/audio/word_kitten.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "p",
+              "a",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W006",
+            "word": "kitten",
+            "image": "Unit02/image/kitten.png",
+            "audio": "Unit02/audio/word_kitten.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "t",
             "distractors": [
               "p",
               "a",
@@ -194,6 +374,36 @@
             ]
           },
           {
+            "word_id": "W007",
+            "word": "sail",
+            "image": "Unit03/image/sail.png",
+            "audio": "Unit03/audio/word_sail.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "v",
+              "r",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W007",
+            "word": "sail",
+            "image": "Unit03/image/sail.png",
+            "audio": "Unit03/audio/word_sail.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "i",
+            "distractors": [
+              "v",
+              "r",
+              "h"
+            ]
+          },
+          {
             "word_id": "W008",
             "word": "sand",
             "image": "Unit03/image/sand.png",
@@ -209,6 +419,36 @@
             ]
           },
           {
+            "word_id": "W008",
+            "word": "sand",
+            "image": "Unit03/image/sand.png",
+            "audio": "Unit03/audio/word_sand.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "c",
+              "p",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W008",
+            "word": "sand",
+            "image": "Unit03/image/sand.png",
+            "audio": "Unit03/audio/word_sand.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "n",
+            "distractors": [
+              "c",
+              "p",
+              "m"
+            ]
+          },
+          {
             "word_id": "W009",
             "word": "sea",
             "image": "Unit03/image/sea.png",
@@ -217,6 +457,36 @@
               0
             ],
             "answer": "s",
+            "distractors": [
+              "b",
+              "l",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W009",
+            "word": "sea",
+            "image": "Unit03/image/sea.png",
+            "audio": "Unit03/audio/word_sea.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "b",
+              "l",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W009",
+            "word": "sea",
+            "image": "Unit03/image/sea.png",
+            "audio": "Unit03/audio/word_sea.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "a",
             "distractors": [
               "b",
               "l",
@@ -251,6 +521,36 @@
             ]
           },
           {
+            "word_id": "W010",
+            "word": "rainbow",
+            "image": "Unit04/image/rainbow.png",
+            "audio": "Unit04/audio/word_rainbow.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "t",
+              "l",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W010",
+            "word": "rainbow",
+            "image": "Unit04/image/rainbow.png",
+            "audio": "Unit04/audio/word_rainbow.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "i",
+            "distractors": [
+              "t",
+              "l",
+              "h"
+            ]
+          },
+          {
             "word_id": "W011",
             "word": "river",
             "image": "Unit04/image/river.png",
@@ -266,6 +566,36 @@
             ]
           },
           {
+            "word_id": "W011",
+            "word": "river",
+            "image": "Unit04/image/river.png",
+            "audio": "Unit04/audio/word_river.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "q",
+              "u",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W011",
+            "word": "river",
+            "image": "Unit04/image/river.png",
+            "audio": "Unit04/audio/word_river.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "v",
+            "distractors": [
+              "q",
+              "u",
+              "o"
+            ]
+          },
+          {
             "word_id": "W012",
             "word": "road",
             "image": "Unit04/image/road.png",
@@ -274,6 +604,36 @@
               0
             ],
             "answer": "r",
+            "distractors": [
+              "c",
+              "m",
+              "y"
+            ]
+          },
+          {
+            "word_id": "W012",
+            "word": "road",
+            "image": "Unit04/image/road.png",
+            "audio": "Unit04/audio/word_road.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "c",
+              "m",
+              "y"
+            ]
+          },
+          {
+            "word_id": "W012",
+            "word": "road",
+            "image": "Unit04/image/road.png",
+            "audio": "Unit04/audio/word_road.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "a",
             "distractors": [
               "c",
               "m",
@@ -308,6 +668,36 @@
             ]
           },
           {
+            "word_id": "W013",
+            "word": "question",
+            "image": "Unit05/image/question.png",
+            "audio": "Unit05/audio/word_question.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "u",
+            "distractors": [
+              "v",
+              "m",
+              "c"
+            ]
+          },
+          {
+            "word_id": "W013",
+            "word": "question",
+            "image": "Unit05/image/question.png",
+            "audio": "Unit05/audio/word_question.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "e",
+            "distractors": [
+              "v",
+              "m",
+              "c"
+            ]
+          },
+          {
             "word_id": "W014",
             "word": "square",
             "image": "Unit05/image/square.png",
@@ -323,6 +713,36 @@
             ]
           },
           {
+            "word_id": "W014",
+            "word": "square",
+            "image": "Unit05/image/square.png",
+            "audio": "Unit05/audio/word_square.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "s",
+            "distractors": [
+              "w",
+              "b",
+              "z"
+            ]
+          },
+          {
+            "word_id": "W014",
+            "word": "square",
+            "image": "Unit05/image/square.png",
+            "audio": "Unit05/audio/word_square.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "u",
+            "distractors": [
+              "w",
+              "b",
+              "z"
+            ]
+          },
+          {
             "word_id": "W015",
             "word": "quiz",
             "image": "Unit05/image/quiz.png",
@@ -331,6 +751,36 @@
               0
             ],
             "answer": "q",
+            "distractors": [
+              "o",
+              "l",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W015",
+            "word": "quiz",
+            "image": "Unit05/image/quiz.png",
+            "audio": "Unit05/audio/word_quiz.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "u",
+            "distractors": [
+              "o",
+              "l",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W015",
+            "word": "quiz",
+            "image": "Unit05/image/quiz.png",
+            "audio": "Unit05/audio/word_quiz.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "i",
             "distractors": [
               "o",
               "l",
@@ -365,6 +815,36 @@
             ]
           },
           {
+            "word_id": "W016",
+            "word": "box",
+            "image": "Unit06/image/box.png",
+            "audio": "Unit06/audio/word_box.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "b",
+            "distractors": [
+              "p",
+              "j",
+              "n"
+            ]
+          },
+          {
+            "word_id": "W016",
+            "word": "box",
+            "image": "Unit06/image/box.png",
+            "audio": "Unit06/audio/word_box.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "p",
+              "j",
+              "n"
+            ]
+          },
+          {
             "word_id": "W017",
             "word": "fox",
             "image": "Unit06/image/fox.png",
@@ -380,6 +860,36 @@
             ]
           },
           {
+            "word_id": "W017",
+            "word": "fox",
+            "image": "Unit06/image/fox.png",
+            "audio": "Unit06/audio/word_fox.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "f",
+            "distractors": [
+              "h",
+              "l",
+              "b"
+            ]
+          },
+          {
+            "word_id": "W017",
+            "word": "fox",
+            "image": "Unit06/image/fox.png",
+            "audio": "Unit06/audio/word_fox.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "h",
+              "l",
+              "b"
+            ]
+          },
+          {
             "word_id": "W018",
             "word": "ox",
             "image": "Unit06/image/ox.png",
@@ -388,6 +898,21 @@
               1
             ],
             "answer": "x",
+            "distractors": [
+              "e",
+              "k",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W018",
+            "word": "ox",
+            "image": "Unit06/image/ox.png",
+            "audio": "Unit06/audio/word_ox.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "o",
             "distractors": [
               "e",
               "k",
@@ -422,6 +947,36 @@
             ]
           },
           {
+            "word_id": "W019",
+            "word": "juice",
+            "image": "Unit07/image/juice.png",
+            "audio": "Unit07/audio/word_juice.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "u",
+            "distractors": [
+              "s",
+              "p",
+              "a"
+            ]
+          },
+          {
+            "word_id": "W019",
+            "word": "juice",
+            "image": "Unit07/image/juice.png",
+            "audio": "Unit07/audio/word_juice.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "i",
+            "distractors": [
+              "s",
+              "p",
+              "a"
+            ]
+          },
+          {
             "word_id": "W020",
             "word": "jelly",
             "image": "Unit07/image/jelly.png",
@@ -437,6 +992,36 @@
             ]
           },
           {
+            "word_id": "W020",
+            "word": "jelly",
+            "image": "Unit07/image/jelly.png",
+            "audio": "Unit07/audio/word_jelly.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "s",
+              "v",
+              "u"
+            ]
+          },
+          {
+            "word_id": "W020",
+            "word": "jelly",
+            "image": "Unit07/image/jelly.png",
+            "audio": "Unit07/audio/word_jelly.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "l",
+            "distractors": [
+              "s",
+              "v",
+              "u"
+            ]
+          },
+          {
             "word_id": "W021",
             "word": "jam",
             "image": "Unit07/image/jam.png",
@@ -445,6 +1030,36 @@
               0
             ],
             "answer": "j",
+            "distractors": [
+              "b",
+              "d",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W021",
+            "word": "jam",
+            "image": "Unit07/image/jam.png",
+            "audio": "Unit07/audio/word_jam.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "b",
+              "d",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W021",
+            "word": "jam",
+            "image": "Unit07/image/jam.png",
+            "audio": "Unit07/audio/word_jam.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "m",
             "distractors": [
               "b",
               "d",
@@ -479,6 +1094,36 @@
             ]
           },
           {
+            "word_id": "W022",
+            "word": "village",
+            "image": "Unit08/image/village.png",
+            "audio": "Unit08/audio/word_village.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "q",
+              "k",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W022",
+            "word": "village",
+            "image": "Unit08/image/village.png",
+            "audio": "Unit08/audio/word_village.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "l",
+            "distractors": [
+              "q",
+              "k",
+              "h"
+            ]
+          },
+          {
             "word_id": "W023",
             "word": "van",
             "image": "Unit08/image/van.png",
@@ -494,6 +1139,36 @@
             ]
           },
           {
+            "word_id": "W023",
+            "word": "van",
+            "image": "Unit08/image/van.png",
+            "audio": "Unit08/audio/word_van.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "s",
+              "d",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W023",
+            "word": "van",
+            "image": "Unit08/image/van.png",
+            "audio": "Unit08/audio/word_van.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "n",
+            "distractors": [
+              "s",
+              "d",
+              "o"
+            ]
+          },
+          {
             "word_id": "W024",
             "word": "volleyball",
             "image": "Unit08/image/volleyball.png",
@@ -502,6 +1177,36 @@
               0
             ],
             "answer": "v",
+            "distractors": [
+              "n",
+              "r",
+              "x"
+            ]
+          },
+          {
+            "word_id": "W024",
+            "word": "volleyball",
+            "image": "Unit08/image/volleyball.png",
+            "audio": "Unit08/audio/word_volleyball.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "n",
+              "r",
+              "x"
+            ]
+          },
+          {
+            "word_id": "W024",
+            "word": "volleyball",
+            "image": "Unit08/image/volleyball.png",
+            "audio": "Unit08/audio/word_volleyball.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "l",
             "distractors": [
               "n",
               "r",
@@ -536,6 +1241,36 @@
             ]
           },
           {
+            "word_id": "W025",
+            "word": "yogurt",
+            "image": "Unit09/image/yogurt.png",
+            "audio": "Unit09/audio/word_yogurt.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "k",
+              "a",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W025",
+            "word": "yogurt",
+            "image": "Unit09/image/yogurt.png",
+            "audio": "Unit09/audio/word_yogurt.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "g",
+            "distractors": [
+              "k",
+              "a",
+              "d"
+            ]
+          },
+          {
             "word_id": "W026",
             "word": "yams",
             "image": "Unit09/image/yams.png",
@@ -551,6 +1286,36 @@
             ]
           },
           {
+            "word_id": "W026",
+            "word": "yams",
+            "image": "Unit09/image/yams.png",
+            "audio": "Unit09/audio/word_yams.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "a",
+            "distractors": [
+              "q",
+              "z",
+              "b"
+            ]
+          },
+          {
+            "word_id": "W026",
+            "word": "yams",
+            "image": "Unit09/image/yams.png",
+            "audio": "Unit09/audio/word_yams.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "m",
+            "distractors": [
+              "q",
+              "z",
+              "b"
+            ]
+          },
+          {
             "word_id": "W027",
             "word": "yo-yos",
             "image": "Unit09/image/yo_yos.png",
@@ -559,6 +1324,36 @@
               0
             ],
             "answer": "y",
+            "distractors": [
+              "b",
+              "h",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W027",
+            "word": "yo-yos",
+            "image": "Unit09/image/yo_yos.png",
+            "audio": "Unit09/audio/word_yo_yos.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "b",
+              "h",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W027",
+            "word": "yo-yos",
+            "image": "Unit09/image/yo_yos.png",
+            "audio": "Unit09/audio/word_yo_yos.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "-",
             "distractors": [
               "b",
               "h",
@@ -593,6 +1388,36 @@
             ]
           },
           {
+            "word_id": "W028",
+            "word": "zoo",
+            "image": "Unit10/image/zoo.png",
+            "audio": "Unit10/audio/word_zoo.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "j",
+              "x",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W028",
+            "word": "zoo",
+            "image": "Unit10/image/zoo.png",
+            "audio": "Unit10/audio/word_zoo.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "o",
+            "distractors": [
+              "j",
+              "x",
+              "v"
+            ]
+          },
+          {
             "word_id": "W029",
             "word": "zebu",
             "image": "Unit10/image/zebu.png",
@@ -608,6 +1433,36 @@
             ]
           },
           {
+            "word_id": "W029",
+            "word": "zebu",
+            "image": "Unit10/image/zebu.png",
+            "audio": "Unit10/audio/word_zebu.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "r",
+              "d",
+              "n"
+            ]
+          },
+          {
+            "word_id": "W029",
+            "word": "zebu",
+            "image": "Unit10/image/zebu.png",
+            "audio": "Unit10/audio/word_zebu.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "b",
+            "distractors": [
+              "r",
+              "d",
+              "n"
+            ]
+          },
+          {
             "word_id": "W030",
             "word": "zebra",
             "image": "Unit10/image/zebra.png",
@@ -616,6 +1471,36 @@
               0
             ],
             "answer": "z",
+            "distractors": [
+              "n",
+              "c",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W030",
+            "word": "zebra",
+            "image": "Unit10/image/zebra.png",
+            "audio": "Unit10/audio/word_zebra.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "n",
+              "c",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W030",
+            "word": "zebra",
+            "image": "Unit10/image/zebra.png",
+            "audio": "Unit10/audio/word_zebra.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "b",
             "distractors": [
               "n",
               "c",
@@ -650,6 +1535,36 @@
             ]
           },
           {
+            "word_id": "W031",
+            "word": "sliding",
+            "image": "Unit11/image/sliding.png",
+            "audio": "Unit11/audio/word_sliding.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "s",
+            "distractors": [
+              "k",
+              "b",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W031",
+            "word": "sliding",
+            "image": "Unit11/image/sliding.png",
+            "audio": "Unit11/audio/word_sliding.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "l",
+            "distractors": [
+              "k",
+              "b",
+              "w"
+            ]
+          },
+          {
             "word_id": "W032",
             "word": "riding",
             "image": "Unit11/image/riding.png",
@@ -665,6 +1580,36 @@
             ]
           },
           {
+            "word_id": "W032",
+            "word": "riding",
+            "image": "Unit11/image/riding.png",
+            "audio": "Unit11/audio/word_riding.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "r",
+            "distractors": [
+              "o",
+              "t",
+              "p"
+            ]
+          },
+          {
+            "word_id": "W032",
+            "word": "riding",
+            "image": "Unit11/image/riding.png",
+            "audio": "Unit11/audio/word_riding.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "d",
+            "distractors": [
+              "o",
+              "t",
+              "p"
+            ]
+          },
+          {
             "word_id": "W033",
             "word": "driving",
             "image": "Unit11/image/driving.png",
@@ -673,6 +1618,36 @@
               2
             ],
             "answer": "i",
+            "distractors": [
+              "s",
+              "x",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W033",
+            "word": "driving",
+            "image": "Unit11/image/driving.png",
+            "audio": "Unit11/audio/word_driving.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "d",
+            "distractors": [
+              "s",
+              "x",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W033",
+            "word": "driving",
+            "image": "Unit11/image/driving.png",
+            "audio": "Unit11/audio/word_driving.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "r",
             "distractors": [
               "s",
               "x",
@@ -707,6 +1682,36 @@
             ]
           },
           {
+            "word_id": "W034",
+            "word": "grapes",
+            "image": "Unit12/image/grapes.png",
+            "audio": "Unit12/audio/word_grapes.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "g",
+            "distractors": [
+              "m",
+              "d",
+              "x"
+            ]
+          },
+          {
+            "word_id": "W034",
+            "word": "grapes",
+            "image": "Unit12/image/grapes.png",
+            "audio": "Unit12/audio/word_grapes.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "r",
+            "distractors": [
+              "m",
+              "d",
+              "x"
+            ]
+          },
+          {
             "word_id": "W035",
             "word": "cake",
             "image": "Unit12/image/cake.png",
@@ -722,6 +1727,36 @@
             ]
           },
           {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "c",
+            "distractors": [
+              "o",
+              "f",
+              "t"
+            ]
+          },
+          {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "k",
+            "distractors": [
+              "o",
+              "f",
+              "t"
+            ]
+          },
+          {
             "word_id": "W036",
             "word": "table",
             "image": "Unit12/image/table.png",
@@ -730,6 +1765,36 @@
               1
             ],
             "answer": "a",
+            "distractors": [
+              "r",
+              "c",
+              "f"
+            ]
+          },
+          {
+            "word_id": "W036",
+            "word": "table",
+            "image": "Unit12/image/table.png",
+            "audio": "Unit12/audio/word_table.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "t",
+            "distractors": [
+              "r",
+              "c",
+              "f"
+            ]
+          },
+          {
+            "word_id": "W036",
+            "word": "table",
+            "image": "Unit12/image/table.png",
+            "audio": "Unit12/audio/word_table.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "b",
             "distractors": [
               "r",
               "c",
@@ -764,6 +1829,36 @@
             ]
           },
           {
+            "word_id": "W037",
+            "word": "eleven",
+            "image": "Unit13/image/eleven.png",
+            "audio": "Unit13/audio/word_eleven.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "e",
+            "distractors": [
+              "f",
+              "a",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W037",
+            "word": "eleven",
+            "image": "Unit13/image/eleven.png",
+            "audio": "Unit13/audio/word_eleven.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "l",
+            "distractors": [
+              "f",
+              "a",
+              "w"
+            ]
+          },
+          {
             "word_id": "W038",
             "word": "thirteen",
             "image": "Unit13/image/thirteen.png",
@@ -772,6 +1867,36 @@
               7
             ],
             "answer": "n",
+            "distractors": [
+              "u",
+              "c",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "t",
+            "distractors": [
+              "u",
+              "c",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "h",
             "distractors": [
               "u",
               "c",
@@ -794,6 +1919,36 @@
             ]
           },
           {
+            "word_id": "W039",
+            "word": "fourteen",
+            "image": "Unit13/image/fourteen.png",
+            "audio": "Unit13/audio/word_fourteen.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "f",
+            "distractors": [
+              "j",
+              "k",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W039",
+            "word": "fourteen",
+            "image": "Unit13/image/fourteen.png",
+            "audio": "Unit13/audio/word_fourteen.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "o",
+            "distractors": [
+              "j",
+              "k",
+              "m"
+            ]
+          },
+          {
             "word_id": "W040",
             "word": "fifteen",
             "image": "Unit13/image/fifteen.png",
@@ -802,6 +1957,36 @@
               6
             ],
             "answer": "n",
+            "distractors": [
+              "u",
+              "v",
+              "s"
+            ]
+          },
+          {
+            "word_id": "W040",
+            "word": "fifteen",
+            "image": "Unit13/image/fifteen.png",
+            "audio": "Unit13/audio/word_fifteen.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "f",
+            "distractors": [
+              "u",
+              "v",
+              "s"
+            ]
+          },
+          {
+            "word_id": "W040",
+            "word": "fifteen",
+            "image": "Unit13/image/fifteen.png",
+            "audio": "Unit13/audio/word_fifteen.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
             "distractors": [
               "u",
               "v",
@@ -837,6 +2022,36 @@
             ]
           },
           {
+            "word_id": "W041",
+            "word": "brother",
+            "image": "Unit14/image/brother.png",
+            "audio": "Unit14/audio/word_brother.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "b",
+            "distractors": [
+              "wh",
+              "ng",
+              "sh"
+            ]
+          },
+          {
+            "word_id": "W041",
+            "word": "brother",
+            "image": "Unit14/image/brother.png",
+            "audio": "Unit14/audio/word_brother.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "r",
+            "distractors": [
+              "wh",
+              "ng",
+              "sh"
+            ]
+          },
+          {
             "word_id": "W042",
             "word": "sister",
             "image": "Unit14/image/sister.png",
@@ -853,6 +2068,36 @@
             ]
           },
           {
+            "word_id": "W042",
+            "word": "sister",
+            "image": "Unit14/image/sister.png",
+            "audio": "Unit14/audio/word_sister.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "s",
+            "distractors": [
+              "ck",
+              "ch",
+              "ph"
+            ]
+          },
+          {
+            "word_id": "W042",
+            "word": "sister",
+            "image": "Unit14/image/sister.png",
+            "audio": "Unit14/audio/word_sister.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "i",
+            "distractors": [
+              "ck",
+              "ch",
+              "ph"
+            ]
+          },
+          {
             "word_id": "W043",
             "word": "grandmother",
             "image": "Unit14/image/grandmother.png",
@@ -862,6 +2107,36 @@
               10
             ],
             "answer": "er",
+            "distractors": [
+              "ph",
+              "ng",
+              "wh"
+            ]
+          },
+          {
+            "word_id": "W043",
+            "word": "grandmother",
+            "image": "Unit14/image/grandmother.png",
+            "audio": "Unit14/audio/word_grandmother.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "g",
+            "distractors": [
+              "ph",
+              "ng",
+              "wh"
+            ]
+          },
+          {
+            "word_id": "W043",
+            "word": "grandmother",
+            "image": "Unit14/image/grandmother.png",
+            "audio": "Unit14/audio/word_grandmother.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "r",
             "distractors": [
               "ph",
               "ng",
@@ -897,6 +2172,36 @@
             ]
           },
           {
+            "word_id": "W044",
+            "word": "shirts",
+            "image": "Unit15/image/shirts.png",
+            "audio": "Unit15/audio/word_shirts.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "i",
+            "distractors": [
+              "ch",
+              "wh",
+              "er"
+            ]
+          },
+          {
+            "word_id": "W044",
+            "word": "shirts",
+            "image": "Unit15/image/shirts.png",
+            "audio": "Unit15/audio/word_shirts.mp3",
+            "hidden_idx": [
+              3
+            ],
+            "answer": "r",
+            "distractors": [
+              "ch",
+              "wh",
+              "er"
+            ]
+          },
+          {
             "word_id": "W045",
             "word": "shoes",
             "image": "Unit15/image/shoes.png",
@@ -913,6 +2218,36 @@
             ]
           },
           {
+            "word_id": "W045",
+            "word": "shoes",
+            "image": "Unit15/image/shoes.png",
+            "audio": "Unit15/audio/word_shoes.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "o",
+            "distractors": [
+              "ck",
+              "ch",
+              "ph"
+            ]
+          },
+          {
+            "word_id": "W045",
+            "word": "shoes",
+            "image": "Unit15/image/shoes.png",
+            "audio": "Unit15/audio/word_shoes.mp3",
+            "hidden_idx": [
+              3
+            ],
+            "answer": "e",
+            "distractors": [
+              "ck",
+              "ch",
+              "ph"
+            ]
+          },
+          {
             "word_id": "W046",
             "word": "shorts",
             "image": "Unit15/image/shorts.png",
@@ -922,6 +2257,36 @@
               1
             ],
             "answer": "sh",
+            "distractors": [
+              "th",
+              "wh",
+              "er"
+            ]
+          },
+          {
+            "word_id": "W046",
+            "word": "shorts",
+            "image": "Unit15/image/shorts.png",
+            "audio": "Unit15/audio/word_shorts.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "o",
+            "distractors": [
+              "th",
+              "wh",
+              "er"
+            ]
+          },
+          {
+            "word_id": "W046",
+            "word": "shorts",
+            "image": "Unit15/image/shorts.png",
+            "audio": "Unit15/audio/word_shorts.mp3",
+            "hidden_idx": [
+              3
+            ],
+            "answer": "r",
             "distractors": [
               "th",
               "wh",
@@ -956,6 +2321,36 @@
             ]
           },
           {
+            "word_id": "W047",
+            "word": "tent",
+            "image": "Unit16/image/tent.png",
+            "audio": "Unit16/audio/word_tent.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "x",
+              "c",
+              "z"
+            ]
+          },
+          {
+            "word_id": "W047",
+            "word": "tent",
+            "image": "Unit16/image/tent.png",
+            "audio": "Unit16/audio/word_tent.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "n",
+            "distractors": [
+              "x",
+              "c",
+              "z"
+            ]
+          },
+          {
             "word_id": "W048",
             "word": "teapot",
             "image": "Unit16/image/teapot.png",
@@ -971,6 +2366,36 @@
             ]
           },
           {
+            "word_id": "W048",
+            "word": "teapot",
+            "image": "Unit16/image/teapot.png",
+            "audio": "Unit16/audio/word_teapot.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "e",
+            "distractors": [
+              "m",
+              "n",
+              "b"
+            ]
+          },
+          {
+            "word_id": "W048",
+            "word": "teapot",
+            "image": "Unit16/image/teapot.png",
+            "audio": "Unit16/audio/word_teapot.mp3",
+            "hidden_idx": [
+              2
+            ],
+            "answer": "a",
+            "distractors": [
+              "m",
+              "n",
+              "b"
+            ]
+          },
+          {
             "word_id": "W049",
             "word": "blanket",
             "image": "Unit16/image/blanket.png",
@@ -979,6 +2404,36 @@
               6
             ],
             "answer": "t",
+            "distractors": [
+              "d",
+              "c",
+              "g"
+            ]
+          },
+          {
+            "word_id": "W049",
+            "word": "blanket",
+            "image": "Unit16/image/blanket.png",
+            "audio": "Unit16/audio/word_blanket.mp3",
+            "hidden_idx": [
+              0
+            ],
+            "answer": "b",
+            "distractors": [
+              "d",
+              "c",
+              "g"
+            ]
+          },
+          {
+            "word_id": "W049",
+            "word": "blanket",
+            "image": "Unit16/image/blanket.png",
+            "audio": "Unit16/audio/word_blanket.mp3",
+            "hidden_idx": [
+              1
+            ],
+            "answer": "l",
             "distractors": [
               "d",
               "c",

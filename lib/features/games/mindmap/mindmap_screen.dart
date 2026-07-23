@@ -8,39 +8,33 @@ import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
 import '../../../services/settings_service.dart';
 
-/// F07 / G02 — Nghe chọn hình. Phát audio → chọn 1 trong các hình.
-/// Đúng: xanh + phát âm lại + hiệu ứng + sang câu sau khi bấm "Tiếp theo".
-/// Sai: hiệu ứng nhẹ nhàng + xáo trộn lại vị trí các hình, cho thử lại.
-class ListenPickScreen extends StatefulWidget {
+/// F10 / G06 — Mindmap hoàn thành câu: đọc câu mẫu khuyết 1 từ (`pattern` có
+/// "___"), chạm đúng hình để điền từ hoàn thành câu. Cùng cơ chế chọn-đáp-án
+/// với G02 (ListenPickScreen) — chỉ khác phần "hỏi" là chữ (đọc) thay vì audio
+/// (nghe); xem CLAUDE.md §6 quy ước chung, SPRINT2_PLAN.md Phase 2.
+class MindmapScreen extends StatefulWidget {
   final UnitInfo unit;
-  final List<ListenQuestion> questions;
+  final List<MindmapItem> items;
 
-  const ListenPickScreen(
-      {super.key, required this.unit, required this.questions});
+  const MindmapScreen({super.key, required this.unit, required this.items});
 
   @override
-  State<ListenPickScreen> createState() => _ListenPickScreenState();
+  State<MindmapScreen> createState() => _MindmapScreenState();
 }
 
-class _ListenPickScreenState extends State<ListenPickScreen> {
+class _MindmapScreenState extends State<MindmapScreen> {
   int _index = 0;
-  // Câu đã trả lời đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
   final Set<int> _correctIndices = {};
-  int? _wrongPick; // vị trí (display) vừa chọn sai
+  int? _wrongPick;
   bool _answered = false;
   AnswerFeedback? _feedback;
-  // Vị trí hiển thị -> index thật trong _q.options (xáo trộn khi vào câu mới
-  // hoặc sau khi chọn sai, để trẻ không nhớ vị trí mà đoán mò).
   List<int> _order = [];
-  // Độ khó Dễ: bớt 1 lựa chọn sai (vị trí hiển thị) làm gợi ý — xem
-  // CLAUDE.md §6, SettingsService.
   int? _eliminatedDisplayPos;
 
   @override
   void initState() {
     super.initState();
     _prepareOrder();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _playPrompt());
   }
 
   @override
@@ -49,29 +43,28 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
     super.dispose();
   }
 
-  ListenQuestion get _q => widget.questions[_index];
+  MindmapItem get _it => widget.items[_index];
 
   void _prepareOrder() {
-    _order = List<int>.generate(_q.options.length, (i) => i)..shuffle(Random());
+    _order = List<int>.generate(_it.options.length, (i) => i)
+      ..shuffle(Random());
     _recomputeEliminated();
   }
 
-  /// Độ khó Dễ: chọn 1 vị trí hiển thị đang giữ lựa chọn SAI để loại bớt.
-  /// Phải gọi lại mỗi khi `_order` đổi (câu mới hoặc xáo lại sau khi chọn
-  /// sai) — nếu không, vị trí "đã loại" cũ có thể trùng đáp án đúng ở vị
-  /// trí mới sau khi xáo.
+  /// Độ khó Dễ: bớt 1 lựa chọn sai — xem ghi chú tương tự trong
+  /// listen_pick_screen.dart.
   void _recomputeEliminated() {
     _eliminatedDisplayPos = null;
     if (SettingsService.instance.isEasy && _order.length > 2) {
       final wrongPositions = [
         for (var i = 0; i < _order.length; i++)
-          if (_order[i] != _q.answerIdx) i
+          if (_order[i] != _it.answerIdx) i
       ]..shuffle(Random());
       _eliminatedDisplayPos = wrongPositions.first;
     }
   }
 
-  void _playPrompt() => AudioService.instance.play(_q.promptAudio);
+  void _playPattern() => AudioService.instance.play(_it.audio);
 
   void _pick(int displayPos) {
     if (_answered ||
@@ -80,14 +73,14 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
       return;
     }
     final actualIdx = _order[displayPos];
-    if (actualIdx == _q.answerIdx) {
+    if (actualIdx == _it.answerIdx) {
       setState(() {
         _answered = true;
         _wrongPick = null;
         _correctIndices.add(_index);
         _feedback = AnswerFeedback.correct;
       });
-      AudioService.instance.play(_q.promptAudio);
+      AudioService.instance.play(_it.options[actualIdx].audio);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
@@ -119,7 +112,6 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
       _feedback = null;
       _prepareOrder();
     });
-    _playPrompt();
   }
 
   void _goBack() {
@@ -127,7 +119,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
   }
 
   void _goNext() {
-    if (_index + 1 >= widget.questions.length) {
+    if (_index + 1 >= widget.items.length) {
       _showResult();
       return;
     }
@@ -135,7 +127,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
   }
 
   void _showResult() {
-    final total = widget.questions.length;
+    final total = widget.items.length;
     final correct = _correctIndices.length;
     final stars = correct >= total ? 3 : (correct >= total * 0.6 ? 2 : 1);
     showDialog<void>(
@@ -157,8 +149,8 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // đóng dialog
-              Navigator.of(context).pop(stars); // trả sao cho UnitScreen
+              Navigator.of(context).pop();
+              Navigator.of(context).pop(stars);
             },
             child: const Text('Xong'),
           ),
@@ -172,26 +164,40 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
     return AppScaffold(
       backgroundColor: AppColors.unitColor(widget.unit.unitId),
       appBar: AppBar(
-        backgroundColor: AppColors.secondary,
-        foregroundColor: Colors.white,
-        title: Text('Nghe chọn hình • Unit ${widget.unit.unitId}'),
+        backgroundColor: AppColors.error,
+        foregroundColor: AppColors.textPrimary,
+        title: Text('Hoàn thành câu • Unit ${widget.unit.unitId}'),
       ),
       body: Stack(
         children: [
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                child: Text('Câu ${_index + 1}/${widget.questions.length}',
+                padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.md, AppSpacing.md, 0),
+                child: Text('Câu ${_index + 1}/${widget.items.length}',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
               ),
               Padding(
-                padding: const EdgeInsets.all(AppSpacing.sm),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                 child: PrimaryButton(
-                  label: 'Nghe',
+                  label: 'Gợi ý',
                   icon: Icons.volume_up_rounded,
-                  onPressed: _playPrompt,
+                  color: AppColors.error,
+                  foregroundColor: AppColors.textPrimary,
+                  onPressed: _playPattern,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.lg),
+                child: Text(
+                  _it.pattern,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -202,7 +208,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
                     crossAxisSpacing: AppSpacing.md,
                     mainAxisSpacing: AppSpacing.md,
                   ),
-                  itemCount: _q.options.length,
+                  itemCount: _it.options.length,
                   itemBuilder: (context, i) => _optionTile(i),
                 ),
               ),
@@ -222,6 +228,8 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
                       child: PrimaryButton(
                         label: 'Tiếp theo',
                         icon: Icons.arrow_forward_rounded,
+                        color: AppColors.error,
+                        foregroundColor: AppColors.textPrimary,
                         onPressed: _answered ? _goNext : null,
                       ),
                     ),
@@ -238,8 +246,8 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
 
   Widget _optionTile(int displayPos) {
     final actualIdx = _order[displayPos];
-    final option = _q.options[actualIdx];
-    final isAnswer = actualIdx == _q.answerIdx;
+    final option = _it.options[actualIdx];
+    final isAnswer = actualIdx == _it.answerIdx;
     final eliminated = displayPos == _eliminatedDisplayPos;
     Color border = Colors.transparent;
     if (_answered && isAnswer) {

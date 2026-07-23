@@ -1,6 +1,7 @@
 import 'package:just_audio/just_audio.dart';
 
 import '../data/content_repository.dart';
+import 'settings_service.dart';
 
 /// Phát audio từ vựng/gợi ý. Bọc try/catch để file thiếu (vd 7 từ mở rộng
 /// chưa có audio) không làm app crash.
@@ -18,6 +19,7 @@ class AudioService {
   /// [relativePath] dạng "Unit01/audio/word_pasta.mp3" (như trong JSON).
   Future<void> play(String? relativePath) async {
     if (relativePath == null || relativePath.isEmpty) return;
+    if (!SettingsService.instance.soundOn) return;
     try {
       await _player.stop();
       await _player.setAsset(ContentRepository.asset(relativePath));
@@ -30,6 +32,7 @@ class AudioService {
   /// Âm hiệu ứng ngắn khi trả lời đúng/sai (vd "correct.mp3", "wrong.mp3"
   /// trong `assets/sfx/`). An toàn khi thiếu file — xem mục 9 CLAUDE.md.
   Future<void> playSfx(String fileName) async {
+    if (!SettingsService.instance.soundOn) return;
     try {
       await _sfxPlayer.stop();
       await _sfxPlayer.setAsset('$_sfxBase$fileName');

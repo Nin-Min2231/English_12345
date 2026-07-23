@@ -1,0 +1,661 @@
+{
+  "game_type_id": "G05",
+  "game_type_name": "Lắp ráp câu",
+  "asset_base": "assets/content/",
+  "generated_from": "02_Phan_tich/TiengAnh2_GiaoTrinh_Game_AppData.xlsx (sheet 02, cột F, Lesson 3), doi chieu 2026-07-23",
+  "instances": [
+    {
+      "game_id": "U01_G05",
+      "unit_id": 1,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "The popcorn is yummy.",
+            "tokens": [
+              "The",
+              "popcorn",
+              "is",
+              "yummy."
+            ],
+            "audio": "Unit01/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "The pasta is yummy.",
+            "tokens": [
+              "The",
+              "pasta",
+              "is",
+              "yummy."
+            ],
+            "audio": "Unit01/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "The pizza is yummy.",
+            "tokens": [
+              "The",
+              "pizza",
+              "is",
+              "yummy."
+            ],
+            "audio": "Unit01/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U02_G05",
+      "unit_id": 2,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Is she flying a kite?",
+            "tokens": [
+              "Is",
+              "she",
+              "flying",
+              "a",
+              "kite?"
+            ],
+            "audio": "Unit02/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Yes, she is.",
+            "tokens": [
+              "Yes,",
+              "she",
+              "is."
+            ],
+            "audio": "Unit02/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, she isn't.",
+            "tokens": [
+              "No,",
+              "she",
+              "isn't."
+            ],
+            "audio": "Unit02/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U03_G05",
+      "unit_id": 3,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Let's look at the sea!",
+            "tokens": [
+              "Let's",
+              "look",
+              "at",
+              "the",
+              "sea!"
+            ],
+            "audio": "Unit03/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Let's look at the sail!",
+            "tokens": [
+              "Let's",
+              "look",
+              "at",
+              "the",
+              "sail!"
+            ],
+            "audio": "Unit03/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Let's look at the sand!",
+            "tokens": [
+              "Let's",
+              "look",
+              "at",
+              "the",
+              "sand!"
+            ],
+            "audio": "Unit03/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U04_G05",
+      "unit_id": 4,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "What can you see?",
+            "tokens": [
+              "What",
+              "can",
+              "you",
+              "see?"
+            ],
+            "audio": "Unit04/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "I can see a rainbow.",
+            "tokens": [
+              "I",
+              "can",
+              "see",
+              "a",
+              "rainbow."
+            ],
+            "audio": "Unit04/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "I can see a river.",
+            "tokens": [
+              "I",
+              "can",
+              "see",
+              "a",
+              "river."
+            ],
+            "audio": "Unit04/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "I can see a road.",
+            "tokens": [
+              "I",
+              "can",
+              "see",
+              "a",
+              "road."
+            ],
+            "audio": "Unit04/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U05_G05",
+      "unit_id": 5,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "What's he doing?",
+            "tokens": [
+              "What's",
+              "he",
+              "doing?"
+            ],
+            "audio": "Unit05/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "He's doing a quiz.",
+            "tokens": [
+              "He's",
+              "doing",
+              "a",
+              "quiz."
+            ],
+            "audio": "Unit05/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "She's colouring a square.",
+            "tokens": [
+              "She's",
+              "colouring",
+              "a",
+              "square."
+            ],
+            "audio": "Unit05/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "He's answering a question.",
+            "tokens": [
+              "He's",
+              "answering",
+              "a",
+              "question."
+            ],
+            "audio": "Unit05/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U06_G05",
+      "unit_id": 6,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Is there a fox?",
+            "tokens": [
+              "Is",
+              "there",
+              "a",
+              "fox?"
+            ],
+            "audio": "Unit06/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Yes, there is.",
+            "tokens": [
+              "Yes,",
+              "there",
+              "is."
+            ],
+            "audio": "Unit06/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, there isn't.",
+            "tokens": [
+              "No,",
+              "there",
+              "isn't."
+            ],
+            "audio": "Unit06/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U07_G05",
+      "unit_id": 7,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Pass me the jam, please.",
+            "tokens": [
+              "Pass",
+              "me",
+              "the",
+              "jam,",
+              "please."
+            ],
+            "audio": "Unit07/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Here you are.",
+            "tokens": [
+              "Here",
+              "you",
+              "are."
+            ],
+            "audio": "Unit07/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U08_G05",
+      "unit_id": 8,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Can you draw a van?",
+            "tokens": [
+              "Can",
+              "you",
+              "draw",
+              "a",
+              "van?"
+            ],
+            "audio": "Unit08/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Yes, I can.",
+            "tokens": [
+              "Yes,",
+              "I",
+              "can."
+            ],
+            "audio": "Unit08/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, I can't.",
+            "tokens": [
+              "No,",
+              "I",
+              "can't."
+            ],
+            "audio": "Unit08/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U09_G05",
+      "unit_id": 9,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "What do you want?",
+            "tokens": [
+              "What",
+              "do",
+              "you",
+              "want?"
+            ],
+            "audio": "Unit09/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "I want some yams.",
+            "tokens": [
+              "I",
+              "want",
+              "some",
+              "yams."
+            ],
+            "audio": "Unit09/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "I want some yogurt.",
+            "tokens": [
+              "I",
+              "want",
+              "some",
+              "yogurt."
+            ],
+            "audio": "Unit09/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U10_G05",
+      "unit_id": 10,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Do you like the zoo?",
+            "tokens": [
+              "Do",
+              "you",
+              "like",
+              "the",
+              "zoo?"
+            ],
+            "audio": "Unit10/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Yes, I do.",
+            "tokens": [
+              "Yes,",
+              "I",
+              "do."
+            ],
+            "audio": "Unit10/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, I don't.",
+            "tokens": [
+              "No,",
+              "I",
+              "don't."
+            ],
+            "audio": "Unit10/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U11_G05",
+      "unit_id": 11,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "They're driving cars.",
+            "tokens": [
+              "They're",
+              "driving",
+              "cars."
+            ],
+            "audio": "Unit11/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "They're riding bikes.",
+            "tokens": [
+              "They're",
+              "riding",
+              "bikes."
+            ],
+            "audio": "Unit11/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "They're sliding.",
+            "tokens": [
+              "They're",
+              "sliding."
+            ],
+            "audio": "Unit11/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U12_G05",
+      "unit_id": 12,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "The cake is on the table.",
+            "tokens": [
+              "The",
+              "cake",
+              "is",
+              "on",
+              "the",
+              "table."
+            ],
+            "audio": "Unit12/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "The grapes are on the table.",
+            "tokens": [
+              "The",
+              "grapes",
+              "are",
+              "on",
+              "the",
+              "table."
+            ],
+            "audio": "Unit12/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U13_G05",
+      "unit_id": 13,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "What number is it?",
+            "tokens": [
+              "What",
+              "number",
+              "is",
+              "it?"
+            ],
+            "audio": "Unit13/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "It's eleven.",
+            "tokens": [
+              "It's",
+              "eleven."
+            ],
+            "audio": "Unit13/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "It's twelve.",
+            "tokens": [
+              "It's",
+              "twelve."
+            ],
+            "audio": "Unit13/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U14_G05",
+      "unit_id": 14,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "How old is your brother?",
+            "tokens": [
+              "How",
+              "old",
+              "is",
+              "your",
+              "brother?"
+            ],
+            "audio": "Unit14/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "He's nineteen.",
+            "tokens": [
+              "He's",
+              "nineteen."
+            ],
+            "audio": "Unit14/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "She's sixteen.",
+            "tokens": [
+              "She's",
+              "sixteen."
+            ],
+            "audio": "Unit14/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U15_G05",
+      "unit_id": 15,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Where are the shoes?",
+            "tokens": [
+              "Where",
+              "are",
+              "the",
+              "shoes?"
+            ],
+            "audio": "Unit15/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Over there.",
+            "tokens": [
+              "Over",
+              "there."
+            ],
+            "audio": "Unit15/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "U16_G05",
+      "unit_id": 16,
+      "lesson_no": 3,
+      "order_idx": 1,
+      "config": {
+        "items": [
+          {
+            "sentence": "Is the blanket near the tent?",
+            "tokens": [
+              "Is",
+              "the",
+              "blanket",
+              "near",
+              "the",
+              "tent?"
+            ],
+            "audio": "Unit16/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, it isn't. It's in the tent.",
+            "tokens": [
+              "No,",
+              "it",
+              "isn't.",
+              "It's",
+              "in",
+              "the",
+              "tent."
+            ],
+            "audio": "Unit16/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Is the table near the tent?",
+            "tokens": [
+              "Is",
+              "the",
+              "table",
+              "near",
+              "the",
+              "tent?"
+            ],
+            "audio": "Unit16/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "Is the teapot near the table?",
+            "tokens": [
+              "Is",
+              "the",
+              "teapot",
+              "near",
+              "the",
+              "table?"
+            ],
+            "audio": "Unit16/audio/sentence_pattern.mp3"
+          },
+          {
+            "sentence": "No, it isn't. It's on the table.",
+            "tokens": [
+              "No,",
+              "it",
+              "isn't.",
+              "It's",
+              "on",
+              "the",
+              "table."
+            ],
+            "audio": "Unit16/audio/sentence_pattern.mp3"
+          }
+        ]
+      }
+    }
+  ]
+}

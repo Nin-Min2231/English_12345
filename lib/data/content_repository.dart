@@ -12,12 +12,18 @@ class ContentRepository {
   final Map<int, List<FlashCard>> flashByUnit;
   final Map<int, List<ListenQuestion>> listenByUnit;
   final Map<int, List<FillItem>> fillByUnit;
+  final Map<int, List<ScrambleItem>> scrambleByUnit;
+  final Map<int, List<SentenceItem>> sentenceByUnit;
+  final Map<int, List<MindmapItem>> mindmapByUnit;
 
   ContentRepository({
     required this.units,
     required this.flashByUnit,
     required this.listenByUnit,
     required this.fillByUnit,
+    required this.scrambleByUnit,
+    required this.sentenceByUnit,
+    required this.mindmapByUnit,
   });
 
   /// Thư mục gốc chứa ảnh/audio (mirror của 04_image+audio).
@@ -66,11 +72,44 @@ class ContentRepository {
           .toList();
     }
 
+    final scramble = <int, List<ScrambleItem>>{};
+    final g04 = await _read('assets/data/games/g04_scramble.json');
+    for (final inst in (g04['instances'] as List)) {
+      final m = inst as Map<String, dynamic>;
+      final cfg = m['config'] as Map<String, dynamic>;
+      scramble[m['unit_id'] as int] = (cfg['items'] as List)
+          .map((e) => ScrambleItem.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    final sentence = <int, List<SentenceItem>>{};
+    final g05 = await _read('assets/data/games/g05_sentence.json');
+    for (final inst in (g05['instances'] as List)) {
+      final m = inst as Map<String, dynamic>;
+      final cfg = m['config'] as Map<String, dynamic>;
+      sentence[m['unit_id'] as int] = (cfg['items'] as List)
+          .map((e) => SentenceItem.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    final mindmap = <int, List<MindmapItem>>{};
+    final g06 = await _read('assets/data/games/g06_mindmap.json');
+    for (final inst in (g06['instances'] as List)) {
+      final m = inst as Map<String, dynamic>;
+      final cfg = m['config'] as Map<String, dynamic>;
+      mindmap[m['unit_id'] as int] = (cfg['items'] as List)
+          .map((e) => MindmapItem.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
     return ContentRepository(
       units: units,
       flashByUnit: flash,
       listenByUnit: listen,
       fillByUnit: fill,
+      scrambleByUnit: scramble,
+      sentenceByUnit: sentence,
+      mindmapByUnit: mindmap,
     );
   }
 }

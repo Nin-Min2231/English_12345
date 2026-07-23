@@ -7,6 +7,7 @@ import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/progress_repository.dart';
 import '../profile/profile_select_screen.dart';
+import '../settings/settings_screen.dart';
 import '../unit/unit_screen.dart';
 
 /// F01 — Trang chủ & Bản đồ Unit: hiện sao đã đạt + khóa unit chưa mở.
@@ -28,6 +29,16 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Chọn bài học',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         actions: [
+          IconButton(
+            tooltip: 'Cài đặt',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) =>
+                    SettingsScreen(repo: repo, db: db, profile: profile),
+              ),
+            ),
+            icon: const Icon(Icons.settings_rounded),
+          ),
           IconButton(
             tooltip: profile.name,
             onPressed: () => Navigator.of(context).pushReplacement(
@@ -60,6 +71,7 @@ class HomeScreen extends StatelessWidget {
               return _UnitCard(
                 unit: u,
                 stars: stars,
+                maxStars: progressRepo.maxStarsPerUnit,
                 locked: !unlocked,
                 onTap: !unlocked
                     ? null
@@ -85,12 +97,14 @@ class HomeScreen extends StatelessWidget {
 class _UnitCard extends StatelessWidget {
   final UnitInfo unit;
   final int stars;
+  final int maxStars;
   final bool locked;
   final VoidCallback? onTap;
 
   const _UnitCard(
       {required this.unit,
       required this.stars,
+      required this.maxStars,
       required this.locked,
       required this.onTap});
 
@@ -127,7 +141,7 @@ class _UnitCard extends StatelessWidget {
                         children: [
                           const Icon(Icons.star_rounded,
                               color: AppColors.warning, size: 18),
-                          Text(' $stars/9',
+                          Text(' $stars/$maxStars',
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 13)),
                         ],

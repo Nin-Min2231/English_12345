@@ -2,7 +2,13 @@ import 'package:drift/drift.dart';
 
 import '../db/app_database.dart';
 
-const _gameTypes = ['g01', 'g02', 'g03'];
+// Thứ tự = thứ tự mở khóa tuần tự trong 1 unit. g07 KHÔNG nằm trong danh sách
+// này — karaoke không chấm sao, không khóa/mở (xem unit_screen.dart, kUnitGames).
+const _gameTypes = ['g01', 'g02', 'g03', 'g04', 'g05', 'g06', 'g08'];
+
+// Chỉ 4 game lõi (từ vựng/phonics) là điều kiện mở unit tiếp theo — g05/g06/g08
+// vẫn cho sao nhưng không chặn tiến độ, giữ 1 unit gần mục tiêu "≤5 phút/phiên".
+const _coreGameTypes = ['g01', 'g02', 'g03', 'g04'];
 
 /// F14 — Tiến độ & sao. Cũng chứa quy tắc khóa/mở dùng chung cho
 /// Home (F01, khóa unit) và Unit (F03, khóa game tuần tự trong unit).
@@ -56,11 +62,15 @@ class ProgressRepository {
     return 0;
   }
 
-  /// Tổng sao 1 unit (0-9): tổng sao của g01+g02+g03.
+  /// Tổng sao tối đa 1 unit = số game (đang là 7) × 3 — dùng thay vì hardcode
+  /// số, tránh lệch khi thêm/bớt game (xem home_screen.dart _UnitCard).
+  int get maxStarsPerUnit => _gameTypes.length * 3;
+
+  /// Tổng sao 1 unit: cộng sao mọi game trong _gameTypes (g01..g06,g08).
   int totalStarsForUnit(List<LessonProgress> progress, int unitId) =>
       _gameTypes.fold(0, (sum, g) => sum + starsFor(progress, unitId, g));
 
-  /// F03 — g01 luôn mở; g02 cần g01 đạt ≥1 sao; g03 cần g02 đạt ≥1 sao.
+  /// F03 — game đầu tiên (g01) luôn mở; game sau cần game ngay trước đạt ≥1 sao.
   bool isGameUnlocked(
       List<LessonProgress> progress, int unitId, String gameType) {
     final i = _gameTypes.indexOf(gameType);
@@ -68,9 +78,10 @@ class ProgressRepository {
     return starsFor(progress, unitId, _gameTypes[i - 1]) >= 1;
   }
 
-  /// F01 — unit 1 luôn mở; unit sau cần unit trước hoàn thành cả 3 game (≥1 sao).
+  /// F01 — unit 1 luôn mở; unit sau cần unit trước hoàn thành **4 game lõi**
+  /// (g01-g04, ≥1 sao mỗi game) — g05/g06/g08 không chặn mở unit tiếp theo.
   bool isUnitUnlocked(List<LessonProgress> progress, int unitId) {
     if (unitId <= 1) return true;
-    return _gameTypes.every((g) => starsFor(progress, unitId - 1, g) >= 1);
+    return _coreGameTypes.every((g) => starsFor(progress, unitId - 1, g) >= 1);
   }
 }
