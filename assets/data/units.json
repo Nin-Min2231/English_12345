@@ -1,0 +1,102 @@
+{
+  "course": "Tiếng Anh 2 - Global Success",
+  "total_units": 16,
+  "units": [
+    {
+      "unit_id": 1,
+      "theme": "At my birthday party",
+      "phonics": "p",
+      "word_count": 3
+    },
+    {
+      "unit_id": 2,
+      "theme": "In the backyard",
+      "phonics": "k",
+      "word_count": 3
+    },
+    {
+      "unit_id": 3,
+      "theme": "At the seaside",
+      "phonics": "s",
+      "word_count": 3
+    },
+    {
+      "unit_id": 4,
+      "theme": "In the countryside",
+      "phonics": "r",
+      "word_count": 3
+    },
+    {
+      "unit_id": 5,
+      "theme": "In the classroom",
+      "phonics": "q",
+      "word_count": 3
+    },
+    {
+      "unit_id": 6,
+      "theme": "On the farm",
+      "phonics": "x",
+      "word_count": 3
+    },
+    {
+      "unit_id": 7,
+      "theme": "In the kitchen",
+      "phonics": "j",
+      "word_count": 3
+    },
+    {
+      "unit_id": 8,
+      "theme": "In the village",
+      "phonics": "v",
+      "word_count": 3
+    },
+    {
+      "unit_id": 9,
+      "theme": "In the grocery store",
+      "phonics": "y",
+      "word_count": 3
+    },
+    {
+      "unit_id": 10,
+      "theme": "At the zoo",
+      "phonics": "z",
+      "word_count": 3
+    },
+    {
+      "unit_id": 11,
+      "theme": "In the playground",
+      "phonics": "i",
+      "word_count": 3
+    },
+    {
+      "unit_id": 12,
+      "theme": "At the cafe",
+      "phonics": "a",
+      "word_count": 3
+    },
+    {
+      "unit_id": 13,
+      "theme": "In the maths class",
+      "phonics": "n",
+      "word_count": 5
+    },
+    {
+      "unit_id": 14,
+      "theme": "At home",
+      "phonics": "er",
+      "word_count": 8
+    },
+    {
+      "unit_id": 15,
+      "theme": "In the clothes shop",
+      "phonics": "sh",
+      "word_count": 3
+    },
+    {
+      "unit_id": 16,
+      "theme": "At the campsite",
+      "phonics": "t",
+      "word_count": 4
+    }
+  ]
+}
