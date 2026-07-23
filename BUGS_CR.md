@@ -34,6 +34,7 @@ Khi xử lý xong một mục: cập nhật Trạng thái + điền "Cách xử 
 | BUG-004 | Bug | Build APK lỗi "Daemon compilation failed" (Kotlin incremental cache) sau khi thêm package `record`/`shared_preferences` | Cao | Đã sửa | 2026-07-23 |
 | CR-017 | CR | G05: đổi nút "Nghe câu mẫu"→"Gợi ý" + bỏ tự động phát âm thanh (giống CR-012 của G06) | Thấp | Đã sửa (chưa xác nhận) | 2026-07-23 |
 | CR-018 | CR | G08: màu xanh đậm hơn + bỏ tự chấm sao, thay bằng nhận diện giọng nói tự động so khớp đáp án ra %/điểm/âm thanh cảnh báo | Cao | Đã sửa (chưa xác nhận) | 2026-07-23 |
+| CR-019 | CR | Sprint 3: thêm G09 Fun Time, G10 Săn chữ, G12 Boss Quiz + huy hiệu (G11 truyện vẫn pending) | Cao | Đã sửa (chưa xác nhận) | 2026-07-23 |
 
 ---
 
@@ -653,3 +654,78 @@ Khi xử lý xong một mục: cập nhật Trạng thái + điền "Cách xử 
     đặc biệt cần test: mic có thật sự tự dừng sau ~2s im lặng không, độ chính xác nhận diện tiếng
     Anh trẻ em đọc, và máy test có cần bật mạng để nhận diện chạy được không.
 - **Trạng thái**: Đã sửa (chưa xác nhận) — cần test thật, xem ghi chú "Build" ở trên.
+
+---
+
+## CR-019 — Sprint 3: G09 Fun Time, G10 Săn chữ, G12 Boss Quiz + huy hiệu
+
+- **Yêu cầu**: "triển khai tiếp Sprint 3" — chưa có kế hoạch chi tiết trước đó (CLAUDE.md chỉ có 1
+  dòng tóm tắt), nên đã nghiên cứu lại 2 file Excel gốc trước khi code (giống cách Sprint 2 đã làm),
+  lập kế hoạch qua plan mode, người dùng duyệt trước khi bắt đầu — xem `SPRINT3_PLAN.md` (đầy đủ chi
+  tiết từng phase) để biết lý do/thiết kế; mục này chỉ tóm tắt kết quả.
+- **2 điều chỉnh xác nhận với người dùng trước khi code**:
+  1. **"G13" là gõ nhầm** — tài liệu gốc (2 file Excel, 3 chỗ khác nhau) gọi Boss Quiz là **G12**
+     (catalog chỉ có đúng G01-G12). Đã đổi theo tài liệu gốc, không dùng "G13" nữa.
+  2. **G11 Truyện tương tác (Phil & Sue) — để pending giống G07**: không có lời thoại/ảnh trang
+     truyện ở bất kỳ đâu trong 2 file Excel hay `04_image+audio/` — nội dung thật (nếu có) nằm trong
+     `01_Document/book.pdf` trang 20/37/54/71, file quá lớn để đọc trong môi trường này. Sprint 3 chỉ
+     làm G09+G10+G12.
+- **Cách xử lý (2026-07-23)** — chi tiết đầy đủ từng phase ở `SPRINT3_PLAN.md`, tóm tắt nhanh:
+  - **Shared plumbing**: `progress_repository.dart`'s `_gameTypes` đổi tên công khai
+    `kGameTypeOrder`; `game_defs.dart`'s `kUnitGames` đổi từ danh sách tay sang **suy ra** từ
+    `kGameTypeOrder` (map `gameDefsByType`) — trước đây là 2 danh sách độc lập phải tự tay giữ đồng
+    bộ, nay thiếu 1 mục sẽ crash rõ ràng lúc khởi động thay vì âm thầm sai (`isGameUnlocked` coi
+    gameType không có trong danh sách là "luôn mở"). Thêm `isCheckpointUnlocked` (Fun
+    Time/Boss Quiz cần chính unit gắn checkpoint xong 4 game lõi, không phải unit trước — khác
+    `isUnitUnlocked`). `checkpoints.dart` (mới) — Fun Time gắn sau Unit 2/6/10/14, Boss Quiz sau Unit
+    4/8/12/16, tái dùng nguyên cơ chế `GameDef`/`kUnitGames` (2 field mới: `isUnlockedOverride`,
+    `badgeId`), không cần redesign màn Home. `badge_defs.dart` (mới) — 4 huy hiệu, tên/icon placeholder
+    (tài liệu gốc ghi "App tự định nghĩa" — chưa có sẵn), dễ đổi sau.
+  - **G09 Fun Time (memory match)**: sinh `g09_memory.json` từ `g01_flashcard.json` — **phát hiện khi
+    sinh dữ liệu**: `g01_flashcard.json` KHÔNG tự loại 7 từ mở rộng chưa có audio (khác G02/G03) nên
+    phải tự lọc `audio != null`, nếu không Fun Time 4 (Unit 13-14) sẽ có 13 cặp gồm cả từ không audio
+    thay vì đúng 7 cặp có audio. `memory_match_screen.dart`: lật 2 thẻ (1 hình + 1 chữ) khớp cùng từ;
+    **cố ý KHÔNG áp dụng quy ước "chọn sai thì xáo trộn"** (CR-002) — xáo lại vị trí sẽ phá hỏng bản
+    chất trò chơi trí nhớ, chỉ đổi mặt úp/ngửa của thẻ. Không có độ khó Dễ (không khớp 2 mẫu độ khó
+    hiện có, ghi nhận là khoảng trống đã biết).
+  - **G10 Săn chữ**: sinh `g10_letter_hunt.json` — `target_letter` copy thẳng từ `units.json.phonics`
+    (không cần tạo mới), `reward_*` lấy từ đầu tiên mỗi unit. **Đơn giản hóa có chủ ý**: làm theo mẫu
+    chọn-đáp-án tĩnh (lưới xáo lại, giống G02) thay vì chữ rơi/di chuyển thật như mô tả gốc — tránh
+    thêm animation/va chạm vật lý mới chưa có tiền lệ trong app, giữ đúng tinh thần "đơn giản hóa có
+    chủ ý" đã áp dụng nhiều nơi (không Riverpod/go_router, chạm thay vì kéo-thả ở G03). Nút "Nghe gợi
+    ý" phát audio từ thưởng (âm đầu gần đúng phonics, không phải âm tách biệt — chưa có audio phonics
+    riêng). Digraph Unit 14 (`er`)/Unit 15 (`sh`) giữ nguyên chuỗi 2 ký tự trong ô, không tách. **Sao
+    tối đa 2** (không phải 3, theo đúng catalog gốc) — thêm `_maxStarsByGameType` vào
+    `progress_repository.dart` để `maxStarsPerUnit`/hiển thị "X/Y sao" không bị lệch.
+  - **G12 Boss Quiz + huy hiệu**: script sinh `g12_boss_quiz.json` — trộn 10 câu/checkpoint từ dữ
+    liệu **đã có sẵn** của G02 (nghe chọn hình, giữ nguyên)/G03 (điền chữ, chỉ lấy 1 lượt/từ dù data
+    gốc có 3 lượt — tránh Boss Quiz lặp lại gần giống nhau, chuyển thành trắc nghiệm chữ thay vì điền
+    tay)/G05 (lắp câu, chuyển thành trắc nghiệm — câu nhiễu sinh bằng xáo thứ tự token của chính câu
+    đúng, đảm bảo sai ngữ pháp mà không cần bịa nội dung mới; câu quá ngắn không đủ cách xáo khác biệt
+    thì mượn câu nhiễu từ 1 câu khác cùng nhóm 4 unit). `boss_quiz_screen.dart` gần như bản sao
+    `listen_pick_screen.dart`, chỉ khác phần hiển thị "hỏi"/"lựa chọn" phải xem trường nào có giá trị
+    (ảnh hay chữ) vì 3 nguồn câu hỏi khác định dạng.
+  - **Huy hiệu — migration DB đầu tiên của app**: bảng `EarnedBadges` mới (`app_database.dart`),
+    `schemaVersion` 1→2, thêm `MigrationStrategy` (`onCreate` vẫn `createAll()` cho cài mới,
+    `onUpgrade` chỉ tạo thêm bảng `EarnedBadges` cho máy đã có DB cũ — **trước đây app chưa từng có
+    `migration` override, chỉ dựa vào `onCreate` mặc định**, từ giờ bắt buộc phải có mỗi khi tăng
+    version). `ProfileRepository.delete()` cập nhật xóa thêm `EarnedBadges` trong cùng transaction
+    (giống lý do CR-014 đã xử lý cho `LessonProgressTable` — `EarnedBadges` cũng tham chiếu
+    `Profiles` nhưng DB chưa bật FK cascade). `badge_repository.dart` (mới, cùng phong cách
+    `ProgressRepository`). `badges_screen.dart` (mới) — xem lại huy hiệu đã/chưa đạt, entry point
+    icon 🏆 trên AppBar Home — nếu không có màn này, huy hiệu chỉ hiện đúng 1 lần lúc vừa đạt rồi mất
+    hẳn. Trao huy hiệu tại `UnitScreen._playGame` (đổi tham số đầu từ `String gameType` sang
+    `GameDef game` để đọc được `badgeId`) — ngưỡng ≥2 sao (khớp mốc "khá tốt" dùng ở G08 CR-018),
+    giữ màn hình game "không biết gì về DB" như quy ước cũ (chỉ `UnitScreen` chạm DB).
+  - **3 file sinh mới** (không phải sửa tay): `assets/data/games/g09_memory.json`,
+    `g10_letter_hunt.json`, `g12_boss_quiz.json` (đồng thời lưu bản sao ở
+    `03_Assets/data_json/games/`, theo đúng quy ước README_data.md).
+- **Build**: `flutter analyze` sạch sau từng phase, `dart run build_runner build` (bảng Drift mới),
+  `flutter build apk --debug` thành công (1 cảnh báo Kotlin Gradle Plugin không chặn build, giống
+  CR-018). APK debug: `05_Build_APK/lop2_english_app-debug-2026-07-23-12.apk`.
+- **Trạng thái**: Đã sửa (chưa xác nhận) — **cần test thật đặc biệt cẩn thận vì có migration DB đầu
+  tiên**: cài APK này như bản CẬP NHẬT đè lên bản cũ trên điện thoại đang có sẵn hồ sơ/tiến độ thật
+  (không gỡ cài đặt lại trước khi cài, sẽ mất hết dữ liệu cũ và không kiểm tra được đường nâng cấp),
+  xác nhận hồ sơ/sao cũ vẫn còn sau khi mở app bản mới. Ngoài ra cần test: Fun Time 4 (14 thẻ, nhiều
+  hơn bình thường) không bị tràn/cắt hình trên máy thật, ô chữ digraph Unit 14/15 hiển thị ổn, tile
+  Fun Time/Boss Quiz thực sự khóa khi unit gắn nó chưa xong 4 game lõi dù unit đã mở được.

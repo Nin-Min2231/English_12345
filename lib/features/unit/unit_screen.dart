@@ -5,7 +5,10 @@ import '../../core/widgets/common_widgets.dart';
 import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
+import '../../data/repositories/badge_repository.dart';
 import '../../data/repositories/progress_repository.dart';
+import '../badges/badge_defs.dart';
+import 'checkpoints.dart';
 import 'game_defs.dart';
 
 /// F03 — Màn hình một unit: danh sách game ([kUnitGames]), mở tuần tự (game
@@ -31,18 +34,58 @@ class UnitScreen extends StatefulWidget {
 
 class _UnitScreenState extends State<UnitScreen> {
   late final ProgressRepository _progressRepo = ProgressRepository(widget.db);
+  late final BadgeRepository _badgeRepo = BadgeRepository(widget.db);
 
   Future<void> _playGame(
-      String gameType, Future<Object?> Function() openGame) async {
+      GameDef game, Future<Object?> Function() openGame) async {
     final result = await openGame();
-    if (result is int) {
-      await _progressRepo.reportResult(
-        profileId: widget.profile.id,
-        unitId: widget.unit.unitId,
-        gameType: gameType,
-        stars: result,
-      );
+    if (result is! int) return;
+    await _progressRepo.reportResult(
+      profileId: widget.profile.id,
+      unitId: widget.unit.unitId,
+      gameType: game.gameType,
+      stars: result,
+    );
+    // Sprint 3 — chỉ Boss Quiz (G12) có badgeId; ngưỡng đạt huy hiệu = cùng
+    // mốc 2 sao dùng cho "khá tốt" ở nơi khác trong app (vd G08 CR-018).
+    final badgeId = game.badgeId;
+    if (badgeId != null && result >= 2 && mounted) {
+      final isNew = await _badgeRepo.award(widget.profile.id, badgeId);
+      if (isNew && mounted) await _showBadgeEarnedDialog(badgeId);
     }
+  }
+
+  Future<void> _showBadgeEarnedDialog(String badgeId) {
+    final badge = kBadgeDefs.firstWhere((b) => b.badgeId == badgeId);
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+        title: const Text('Huy hiệu mới! 🏅'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(badge.icon, color: AppColors.warning, size: 56),
+            const SizedBox(height: AppSpacing.md),
+            Text(badge.name,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: AppSpacing.sm),
+            const Text('Bé giỏi quá! Tiếp tục cố gắng nhé.',
+                textAlign: TextAlign.center),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Tuyệt vời!'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -77,6 +120,12 @@ class _UnitScreenState extends State<UnitScreen> {
                 _gameRowFor(context, game, progress, unit),
                 const SizedBox(height: AppSpacing.lg),
               ],
+              // Sprint 3 — Fun Time (G09) / Boss Quiz (G12) chỉ xuất hiện
+              // trên đúng 1 unit checkpoint, xem checkpoints.dart.
+              for (final game in extraGamesForUnit(unit.unitId)) ...[
+                _gameRowFor(context, game, progress, unit),
+                const SizedBox(height: AppSpacing.lg),
+              ],
             ],
           );
         },
@@ -88,7 +137,8 @@ class _UnitScreenState extends State<UnitScreen> {
       List<LessonProgress> progress, UnitInfo unit) {
     final stars = _progressRepo.starsFor(progress, unit.unitId, game.gameType);
     final unlocked =
-        _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType);
+        game.isUnlockedOverride?.call(_progressRepo, progress, unit.unitId) ??
+            _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType);
     final count = game.countFor(widget.repo, unit.unitId);
 
     return _gameRow(
@@ -102,7 +152,7 @@ class _UnitScreenState extends State<UnitScreen> {
         onPressed: !unlocked || count == 0
             ? null
             : () => _playGame(
-                  game.gameType,
+                  game,
                   () => Navigator.of(context).push<Object?>(
                     MaterialPageRoute(
                       builder: (_) =>

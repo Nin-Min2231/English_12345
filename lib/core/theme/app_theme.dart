@@ -11,6 +11,12 @@ class AppColors {
   // Tông đậm hơn info gốc — dùng cho G08 vì chữ trắng trên info gốc khó đọc
   // (BUGS_CR.md CR-018). info gốc giữ nguyên cho G03 (fill_letter_screen.dart).
   static const infoDark = Color(0xFF0277BD);
+  // Sprint 3 — hết 6 màu vai trò gốc từ G01-G08, G09/G10/G12 dùng lại 3 màu
+  // sau nhưng tông đậm hơn (cùng kỹ thuật infoDark), phân biệt bằng icon/nhãn
+  // thay vì thêm hue mới — xem SPRINT3_PLAN.md Phase 0.
+  static const successDark = Color(0xFF2E7D32);
+  static const secondaryDark = Color(0xFFE65100);
+  static const errorDark = Color(0xFFC62828);
   static const background = Color(0xFFF7F9FC);
   static const surface = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF1F2937);

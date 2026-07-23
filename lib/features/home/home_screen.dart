@@ -6,6 +6,7 @@ import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/progress_repository.dart';
+import '../badges/badges_screen.dart';
 import '../profile/profile_select_screen.dart';
 import '../settings/settings_screen.dart';
 import '../unit/unit_screen.dart';
@@ -29,6 +30,15 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Chọn bài học',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         actions: [
+          IconButton(
+            tooltip: 'Huy hiệu',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BadgesScreen(db: db, profile: profile),
+              ),
+            ),
+            icon: const Icon(Icons.emoji_events_rounded),
+          ),
           IconButton(
             tooltip: 'Cài đặt',
             onPressed: () => Navigator.of(context).push(

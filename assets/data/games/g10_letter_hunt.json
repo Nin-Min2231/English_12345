@@ -1,0 +1,311 @@
+{
+  "game_type_id": "G10",
+  "game_type_name": "San chu (phonics letter hunt)",
+  "asset_base": "assets/content/",
+  "instances": [
+    {
+      "game_id": "U01_G10",
+      "unit_id": 1,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "p",
+        "distractors": [
+          "v",
+          "d",
+          "a",
+          "y",
+          "i"
+        ],
+        "reward_word_id": "W001",
+        "reward_word": "pasta",
+        "reward_image": "Unit01/image/pasta.png",
+        "reward_audio": "Unit01/audio/word_pasta.mp3"
+      }
+    },
+    {
+      "game_id": "U02_G10",
+      "unit_id": 2,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "k",
+        "distractors": [
+          "h",
+          "e",
+          "y",
+          "d",
+          "w"
+        ],
+        "reward_word_id": "W004",
+        "reward_word": "kite",
+        "reward_image": "Unit02/image/kite.png",
+        "reward_audio": "Unit02/audio/word_kite.mp3"
+      }
+    },
+    {
+      "game_id": "U03_G10",
+      "unit_id": 3,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "s",
+        "distractors": [
+          "y",
+          "r",
+          "c",
+          "t",
+          "n"
+        ],
+        "reward_word_id": "W007",
+        "reward_word": "sail",
+        "reward_image": "Unit03/image/sail.png",
+        "reward_audio": "Unit03/audio/word_sail.mp3"
+      }
+    },
+    {
+      "game_id": "U04_G10",
+      "unit_id": 4,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "r",
+        "distractors": [
+          "b",
+          "a",
+          "c",
+          "g",
+          "h"
+        ],
+        "reward_word_id": "W010",
+        "reward_word": "rainbow",
+        "reward_image": "Unit04/image/rainbow.png",
+        "reward_audio": "Unit04/audio/word_rainbow.mp3"
+      }
+    },
+    {
+      "game_id": "U05_G10",
+      "unit_id": 5,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "q",
+        "distractors": [
+          "r",
+          "u",
+          "a",
+          "s",
+          "g"
+        ],
+        "reward_word_id": "W013",
+        "reward_word": "question",
+        "reward_image": "Unit05/image/question.png",
+        "reward_audio": "Unit05/audio/word_question.mp3"
+      }
+    },
+    {
+      "game_id": "U06_G10",
+      "unit_id": 6,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "x",
+        "distractors": [
+          "w",
+          "u",
+          "r",
+          "n",
+          "h"
+        ],
+        "reward_word_id": "W016",
+        "reward_word": "box",
+        "reward_image": "Unit06/image/box.png",
+        "reward_audio": "Unit06/audio/word_box.mp3"
+      }
+    },
+    {
+      "game_id": "U07_G10",
+      "unit_id": 7,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "j",
+        "distractors": [
+          "p",
+          "t",
+          "i",
+          "a",
+          "z"
+        ],
+        "reward_word_id": "W019",
+        "reward_word": "juice",
+        "reward_image": "Unit07/image/juice.png",
+        "reward_audio": "Unit07/audio/word_juice.mp3"
+      }
+    },
+    {
+      "game_id": "U08_G10",
+      "unit_id": 8,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "v",
+        "distractors": [
+          "f",
+          "x",
+          "n",
+          "k",
+          "i"
+        ],
+        "reward_word_id": "W022",
+        "reward_word": "village",
+        "reward_image": "Unit08/image/village.png",
+        "reward_audio": "Unit08/audio/word_village.mp3"
+      }
+    },
+    {
+      "game_id": "U09_G10",
+      "unit_id": 9,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "y",
+        "distractors": [
+          "e",
+          "g",
+          "z",
+          "k",
+          "d"
+        ],
+        "reward_word_id": "W025",
+        "reward_word": "yogurt",
+        "reward_image": "Unit09/image/yogurt.png",
+        "reward_audio": "Unit09/audio/word_yogurt.mp3"
+      }
+    },
+    {
+      "game_id": "U10_G10",
+      "unit_id": 10,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "z",
+        "distractors": [
+          "c",
+          "m",
+          "d",
+          "l",
+          "t"
+        ],
+        "reward_word_id": "W028",
+        "reward_word": "zoo",
+        "reward_image": "Unit10/image/zoo.png",
+        "reward_audio": "Unit10/audio/word_zoo.mp3"
+      }
+    },
+    {
+      "game_id": "U11_G10",
+      "unit_id": 11,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "i",
+        "distractors": [
+          "j",
+          "b",
+          "y",
+          "p",
+          "s"
+        ],
+        "reward_word_id": "W031",
+        "reward_word": "sliding",
+        "reward_image": "Unit11/image/sliding.png",
+        "reward_audio": "Unit11/audio/word_sliding.mp3"
+      }
+    },
+    {
+      "game_id": "U12_G10",
+      "unit_id": 12,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "a",
+        "distractors": [
+          "e",
+          "n",
+          "d",
+          "s",
+          "k"
+        ],
+        "reward_word_id": "W034",
+        "reward_word": "grapes",
+        "reward_image": "Unit12/image/grapes.png",
+        "reward_audio": "Unit12/audio/word_grapes.mp3"
+      }
+    },
+    {
+      "game_id": "U13_G10",
+      "unit_id": 13,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "n",
+        "distractors": [
+          "v",
+          "u",
+          "l",
+          "t",
+          "g"
+        ],
+        "reward_word_id": "W037",
+        "reward_word": "eleven",
+        "reward_image": "Unit13/image/eleven.png",
+        "reward_audio": "Unit13/audio/word_eleven.mp3"
+      }
+    },
+    {
+      "game_id": "U14_G10",
+      "unit_id": 14,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "er",
+        "distractors": [
+          "y",
+          "c",
+          "b",
+          "x",
+          "i"
+        ],
+        "reward_word_id": "W041",
+        "reward_word": "brother",
+        "reward_image": "Unit14/image/brother.png",
+        "reward_audio": "Unit14/audio/word_brother.mp3"
+      }
+    },
+    {
+      "game_id": "U15_G10",
+      "unit_id": 15,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "sh",
+        "distractors": [
+          "k",
+          "c",
+          "i",
+          "d",
+          "n"
+        ],
+        "reward_word_id": "W044",
+        "reward_word": "shirts",
+        "reward_image": "Unit15/image/shirts.png",
+        "reward_audio": "Unit15/audio/word_shirts.mp3"
+      }
+    },
+    {
+      "game_id": "U16_G10",
+      "unit_id": 16,
+      "lesson_no": 1,
+      "config": {
+        "target_letter": "t",
+        "distractors": [
+          "i",
+          "o",
+          "v",
+          "l",
+          "f"
+        ],
+        "reward_word_id": "W047",
+        "reward_word": "tent",
+        "reward_image": "Unit16/image/tent.png",
+        "reward_audio": "Unit16/audio/word_tent.mp3"
+      }
+    }
+  ]
+}

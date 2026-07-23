@@ -210,3 +210,110 @@ class MindmapItem {
         audio: j['audio'] as String?,
       );
 }
+
+/// G09 — một cặp hình-từ dùng cho Fun Time (memory match). Sinh 2 thẻ (1 thẻ
+/// hình + 1 thẻ chữ) từ mỗi mục — xem memory_match_screen.dart.
+class MemoryPairItem {
+  final String wordId;
+  final String word;
+  final String image;
+  final String? audio;
+
+  const MemoryPairItem({
+    required this.wordId,
+    required this.word,
+    required this.image,
+    this.audio,
+  });
+
+  factory MemoryPairItem.fromJson(Map<String, dynamic> j) => MemoryPairItem(
+        wordId: j['word_id'] as String,
+        word: j['word'] as String,
+        image: j['image'] as String,
+        audio: j['audio'] as String?,
+      );
+}
+
+/// G10 — 1 lượt săn chữ của 1 unit: 1 chữ mục tiêu (chuỗi vì digraph `er`/`sh`
+/// là 2 ký tự, xem CLAUDE.md §10) giữa các chữ nhiễu, thưởng là từ vựng đầu
+/// tiên của unit. Khác mọi model khác: chỉ 1 mục/unit (không phải danh sách),
+/// vòng lặp UI (5 lượt bắt chữ) là lặp lại phía màn hình, không phải 5 dòng
+/// dữ liệu riêng — xem content_repository.dart.
+class HuntLetterItem {
+  final String targetLetter;
+  final List<String> distractors;
+  final String rewardWordId;
+  final String rewardWord;
+  final String rewardImage;
+  final String? rewardAudio;
+
+  const HuntLetterItem({
+    required this.targetLetter,
+    required this.distractors,
+    required this.rewardWordId,
+    required this.rewardWord,
+    required this.rewardImage,
+    this.rewardAudio,
+  });
+
+  factory HuntLetterItem.fromJson(Map<String, dynamic> j) => HuntLetterItem(
+        targetLetter: j['target_letter'] as String,
+        distractors:
+            (j['distractors'] as List).map((e) => e as String).toList(),
+        rewardWordId: j['reward_word_id'] as String,
+        rewardWord: j['reward_word'] as String,
+        rewardImage: j['reward_image'] as String,
+        rewardAudio: j['reward_audio'] as String?,
+      );
+}
+
+/// G12 — 1 lựa chọn trong Boss Quiz: hoặc hình (câu hỏi gốc G02) hoặc chữ
+/// (câu hỏi gốc G03/G05) — màn hình tự chọn hiển thị theo trường nào có giá
+/// trị, không cần biết nguồn gốc game.
+class BossQuizOption {
+  final String? image;
+  final String? text;
+
+  const BossQuizOption({this.image, this.text});
+
+  factory BossQuizOption.fromJson(Map<String, dynamic> j) => BossQuizOption(
+        image: j['image'] as String?,
+        text: j['text'] as String?,
+      );
+}
+
+/// G12 — 1 câu hỏi Boss Quiz, trộn từ dữ liệu đã có của G02 (nghe chọn
+/// hình)/G03 (điền chữ)/G05 (lắp câu) — xem `sourceGame` chỉ để log/debug,
+/// không ảnh hưởng cách hiển thị. Đúng 1 trong 3 cặp (`promptAudio` /
+/// `promptText`+`promptImage` / `promptText` riêng) có giá trị tùy nguồn.
+class BossQuizQuestion {
+  final String sourceGame;
+  final int unitId;
+  final String? promptText;
+  final String? promptAudio;
+  final String? promptImage;
+  final List<BossQuizOption> options;
+  final int answerIdx;
+
+  const BossQuizQuestion({
+    required this.sourceGame,
+    required this.unitId,
+    this.promptText,
+    this.promptAudio,
+    this.promptImage,
+    required this.options,
+    required this.answerIdx,
+  });
+
+  factory BossQuizQuestion.fromJson(Map<String, dynamic> j) => BossQuizQuestion(
+        sourceGame: j['source_game'] as String,
+        unitId: j['unit_id'] as int,
+        promptText: j['prompt_text'] as String?,
+        promptAudio: j['prompt_audio'] as String?,
+        promptImage: j['prompt_image'] as String?,
+        options: (j['options'] as List)
+            .map((e) => BossQuizOption.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        answerIdx: j['answer_idx'] as int,
+      );
+}

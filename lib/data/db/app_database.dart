@@ -27,12 +27,38 @@ class LessonProgressTable extends Table {
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
 }
 
-@DriftDatabase(tables: [Profiles, LessonProgressTable])
+/// F13/G12 (Sprint 3) — huy hiệu đã trao cho 1 hồ sơ. `badgeId` khớp
+/// `BadgeDef.badgeId` (badge_defs.dart, hằng số Dart do app tự định nghĩa —
+/// không phải bảng "danh mục huy hiệu" trong DB, chỉ lưu SỰ KIỆN đã trao).
+@DataClassName('EarnedBadge')
+class EarnedBadges extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get profileId => integer().references(Profiles, #id)();
+  TextColumn get badgeId => text()();
+  DateTimeColumn get earnedAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+@DriftDatabase(tables: [Profiles, LessonProgressTable, EarnedBadges])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
+  // Sprint 3 — v2 thêm bảng EarnedBadges (F13/G12). Đây là migration đầu
+  // tiên của app: máy thật đang có sẵn Profiles/LessonProgressTable của
+  // người dùng thật, KHÔNG được để mất khi cài bản mới đè lên (không phải
+  // gỡ cài đặt lại) — xem `migration` override bên dưới, bắt buộc phải có
+  // từ lúc này, không còn dùng được onCreate mặc định một mình.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (m) => m.createAll(),
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            await m.createTable(earnedBadges);
+          }
+        },
+      );
 
   static LazyDatabase _openConnection() {
     return LazyDatabase(() async {

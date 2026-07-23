@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../data/content_repository.dart';
+import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
+import '../../data/repositories/progress_repository.dart';
 import '../flashcard/flashcard_screen.dart';
 import '../games/fill_letter/fill_letter_screen.dart';
 import '../games/listen_pick/listen_pick_screen.dart';
 import '../games/mindmap/mindmap_screen.dart';
+import '../games/letter_hunt/letter_hunt_screen.dart';
 import '../games/record/record_screen.dart';
 import '../games/scramble/scramble_screen.dart';
 import '../games/sentence_build/sentence_build_screen.dart';
 
 /// Khai báo 1 game trong danh sách game của 1 unit (UnitScreen) — thay cho
-/// việc chép tay 1 khối `_gameRow` cho mỗi game. Thêm game mới = thêm 1 dòng
-/// vào [kUnitGames], không cần sửa UnitScreen.
+/// việc chép tay 1 khối `_gameRow` cho mỗi game. Thêm game mới = thêm 1 mục
+/// vào [_gameDefsByType] + đúng gameType đó vào `kGameTypeOrder`
+/// (progress_repository.dart), không cần sửa UnitScreen.
 class GameDef {
   final String gameType;
   final String baseLabel;
@@ -23,6 +27,15 @@ class GameDef {
   // Nền sáng màu (warning vàng, error đỏ nhạt) cần chữ tối để đủ tương phản
   // cho trẻ đọc — xem CR-005/CR-008 BUGS_CR.md. null = mặc định trắng.
   final Color? foregroundColor;
+  // Sprint 3 — game checkpoint (Fun Time/Boss Quiz, xem checkpoints.dart)
+  // không nằm trong kGameTypeOrder nên cần điều kiện mở khóa riêng thay vì
+  // ProgressRepository.isGameUnlocked mặc định. null = dùng isGameUnlocked.
+  final bool Function(
+          ProgressRepository repo, List<LessonProgress> progress, int unitId)?
+      isUnlockedOverride;
+  // Sprint 3 — chỉ set cho 4 checkpoint Boss Quiz; UnitScreen dùng để trao
+  // huy hiệu sau khi hoàn thành đạt ngưỡng (xem unit_screen.dart).
+  final String? badgeId;
   final int Function(ContentRepository repo, int unitId) countFor;
   final Widget Function(
       BuildContext context, ContentRepository repo, UnitInfo unit) buildScreen;
@@ -34,6 +47,8 @@ class GameDef {
     required this.icon,
     this.color,
     this.foregroundColor,
+    this.isUnlockedOverride,
+    this.badgeId,
     required this.countFor,
     required this.buildScreen,
   });
@@ -42,8 +57,8 @@ class GameDef {
   String lockedLabel() => '$baseLabel 🔒';
 }
 
-final List<GameDef> kUnitGames = [
-  GameDef(
+final Map<String, GameDef> gameDefsByType = {
+  'g01': GameDef(
     gameType: 'g01',
     baseLabel: 'Flashcard',
     countSuffix: (n) => '($n thẻ)',
@@ -54,7 +69,7 @@ final List<GameDef> kUnitGames = [
       cards: repo.flashByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g02': GameDef(
     gameType: 'g02',
     baseLabel: 'Nghe chọn hình',
     countSuffix: (n) => '($n câu)',
@@ -66,7 +81,7 @@ final List<GameDef> kUnitGames = [
       questions: repo.listenByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g03': GameDef(
     gameType: 'g03',
     baseLabel: 'Điền chữ',
     countSuffix: (n) => '($n từ)',
@@ -78,7 +93,7 @@ final List<GameDef> kUnitGames = [
       items: repo.fillByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g04': GameDef(
     gameType: 'g04',
     baseLabel: 'Xếp chữ',
     countSuffix: (n) => '($n từ)',
@@ -90,7 +105,7 @@ final List<GameDef> kUnitGames = [
       items: repo.scrambleByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g05': GameDef(
     gameType: 'g05',
     baseLabel: 'Lắp ráp câu',
     countSuffix: (n) => '($n câu)',
@@ -103,7 +118,7 @@ final List<GameDef> kUnitGames = [
       items: repo.sentenceByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g06': GameDef(
     gameType: 'g06',
     baseLabel: 'Hoàn thành câu',
     countSuffix: (n) => '($n câu)',
@@ -116,7 +131,7 @@ final List<GameDef> kUnitGames = [
       items: repo.mindmapByUnit[unit.unitId] ?? const [],
     ),
   ),
-  GameDef(
+  'g08': GameDef(
     gameType: 'g08',
     baseLabel: 'Ghi âm',
     countSuffix: (n) => '($n từ)',
@@ -132,4 +147,27 @@ final List<GameDef> kUnitGames = [
       items: repo.flashByUnit[unit.unitId] ?? const [],
     ),
   ),
-];
+  'g10': GameDef(
+    gameType: 'g10',
+    baseLabel: 'Săn chữ',
+    countSuffix: (n) => n > 0 ? '(5 lượt)' : '',
+    icon: Icons.search_rounded,
+    color: AppColors.secondaryDark,
+    // Sao tối đa 2 (không phải 3) theo catalog gốc — xem
+    // progress_repository.dart _maxStarsByGameType.
+    countFor: (repo, unitId) => repo.huntByUnit.containsKey(unitId) ? 1 : 0,
+    buildScreen: (context, repo, unit) => LetterHuntScreen(
+      unit: unit,
+      item: repo.huntByUnit[unit.unitId]!,
+    ),
+  ),
+};
+
+/// Danh sách hiển thị trên UnitScreen, thứ tự SUY RA từ kGameTypeOrder
+/// (progress_repository.dart) — không tự giữ thứ tự riêng nữa (xem
+/// BUGS_CR.md Sprint 3 Phase 0: 2 danh sách độc lập trước đây là 1 lỗi tiềm
+/// ẩn, thiếu đồng bộ 1 bên sẽ không hiện lỗi rõ ràng). Thiếu 1 GameDef so với
+/// kGameTypeOrder sẽ crash ngay lúc khởi động (thay vì âm thầm sai) — cố ý,
+/// dễ phát hiện hơn khi thêm game mới.
+final List<GameDef> kUnitGames =
+    kGameTypeOrder.map((t) => gameDefsByType[t]!).toList();
