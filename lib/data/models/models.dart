@@ -234,36 +234,37 @@ class MemoryPairItem {
       );
 }
 
-/// G10 — 1 lượt săn chữ của 1 unit: 1 chữ mục tiêu (chuỗi vì digraph `er`/`sh`
-/// là 2 ký tự, xem CLAUDE.md §10) giữa các chữ nhiễu, thưởng là từ vựng đầu
-/// tiên của unit. Khác mọi model khác: chỉ 1 mục/unit (không phải danh sách),
-/// vòng lặp UI (5 lượt bắt chữ) là lặp lại phía màn hình, không phải 5 dòng
-/// dữ liệu riêng — xem content_repository.dart.
-class HuntLetterItem {
-  final String targetLetter;
-  final List<String> distractors;
-  final String rewardWordId;
-  final String rewardWord;
-  final String rewardImage;
-  final String? rewardAudio;
+/// G10 (đổi mới, CR-020) — 1 câu hỏi nghe & chọn đúng từ vựng vừa nghe. Đáp
+/// án là CHỮ (từ vựng của bài), không phải hình như G02 — `options[]` gộp từ
+/// vựng của unit hiện tại + unit liền trước (Unit 1 dùng 3 đại từ You/He/She
+/// thay cho "unit trước", xem content_repository.dart/gen script). `word` chỉ
+/// để tiện debug/xem lại dữ liệu, màn hình không hiển thị (lộ đáp án). `image`
+/// (CR-022) dùng cho màn "phần thưởng" cuối bài (câu hỏi đầu tiên của unit) —
+/// khôi phục tiêu chí "săn chữ có thưởng" (F11) sau khi đổi cơ chế CR-020.
+class WordHuntQuestion {
+  final String wordId;
+  final String word;
+  final String image;
+  final String promptAudio;
+  final List<String> options;
+  final int answerIdx;
 
-  const HuntLetterItem({
-    required this.targetLetter,
-    required this.distractors,
-    required this.rewardWordId,
-    required this.rewardWord,
-    required this.rewardImage,
-    this.rewardAudio,
+  const WordHuntQuestion({
+    required this.wordId,
+    required this.word,
+    required this.image,
+    required this.promptAudio,
+    required this.options,
+    required this.answerIdx,
   });
 
-  factory HuntLetterItem.fromJson(Map<String, dynamic> j) => HuntLetterItem(
-        targetLetter: j['target_letter'] as String,
-        distractors:
-            (j['distractors'] as List).map((e) => e as String).toList(),
-        rewardWordId: j['reward_word_id'] as String,
-        rewardWord: j['reward_word'] as String,
-        rewardImage: j['reward_image'] as String,
-        rewardAudio: j['reward_audio'] as String?,
+  factory WordHuntQuestion.fromJson(Map<String, dynamic> j) => WordHuntQuestion(
+        wordId: j['word_id'] as String,
+        word: j['word'] as String,
+        image: j['image'] as String,
+        promptAudio: j['prompt_audio'] as String,
+        options: (j['options'] as List).map((e) => e as String).toList(),
+        answerIdx: j['answer_idx'] as int,
       );
 }
 

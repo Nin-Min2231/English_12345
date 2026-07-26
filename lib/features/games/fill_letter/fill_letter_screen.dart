@@ -8,10 +8,19 @@ import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
 import '../../../services/settings_service.dart';
 
-/// F08 / G03 — Điền chữ cái thiếu (theo âm phonics). Chạm chữ đúng để điền
-/// vào ô trống. Hỗ trợ digraph (sh, er) như một khối. Có hình + audio gợi ý.
+/// F08 / G03 — Điền chữ cái thiếu (theo âm phonics). Có hình + audio gợi ý.
 /// Đúng: hiệu ứng + sang từ sau khi bấm "Tiếp theo". Sai: hiệu ứng nhẹ nhàng
 /// + xáo trộn lại các lựa chọn, cho thử lại.
+/// Từ ≥4 chữ ẩn 2 ô cùng lúc, vị trí có thể KHÔNG liền nhau (CR-020) — xem
+/// `_wordSpans` (ghép từng ký tự riêng, không giả định `hiddenIdx` liền dải).
+/// CR-023: mỗi ô trống điền RIÊNG 1 chữ cái (không còn 1 ô gộp trả lời chung
+/// cho 2 ô) — khay chữ là 1 pool chung ([_it.answer] tách từng ký tự +
+/// [_it.distractors], luôn là chữ đơn) dùng chung cho cả 1-2 ô của lượt hiện
+/// tại; chạm đúng chữ mục tiêu của ô trống ĐẦU TIÊN (trái sang phải) mới
+/// tính, xong ô đó mới chuyển mục tiêu sang ô kế tiếp. `_order` là vị trí
+/// hiển thị -> index thật trong `_options` (xáo khi sai, giống
+/// listen_pick_screen.dart) — KHÔNG xáo trực tiếp `_options` để index thật
+/// (`_usedPositions`/`_eliminatedPos`) không bị lệch sau khi xáo.
 class FillLetterScreen extends StatefulWidget {
   final UnitInfo unit;
   final List<FillItem> items;
@@ -26,11 +35,15 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
   int _index = 0;
   // Từ đã điền đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
   final Set<int> _correctIndices = {};
-  bool _filled = false;
-  String? _wrongPick;
-  List<String> _options = [];
-  // Độ khó Dễ: 1 đáp án nhiễu bị loại bớt làm gợi ý.
-  String? _eliminatedLetter;
+  // Số ô (trong hiddenIdx của lượt hiện tại) đã điền đúng, theo thứ tự trái
+  // sang phải — 0..hiddenIdx.length.
+  int _filledCount = 0;
+  List<String> _options = []; // cố định trong 1 lượt, không tự xáo trực tiếp
+  List<int> _order = []; // vị trí hiển thị -> index thật trong _options
+  final Set<int> _usedPositions = {}; // index thật đã dùng đúng (ẩn khỏi khay)
+  int? _wrongPick; // index thật vừa chọn sai
+  // Độ khó Dễ: 1 vị trí (index thật) đáp án nhiễu bị loại bớt làm gợi ý.
+  int? _eliminatedPos;
   AnswerFeedback? _feedback;
 
   @override
@@ -49,40 +62,64 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
   FillItem get _it => widget.items[_index];
 
   void _prepare() {
-    _options = [_it.answer, ..._it.distractors]..shuffle(Random());
-    _eliminatedLetter = null;
-    if (SettingsService.instance.isEasy) {
-      final distractors = _options.where((o) => o != _it.answer).toList();
-      if (distractors.isNotEmpty) {
-        _eliminatedLetter = (distractors..shuffle(Random())).first;
-      }
+    _options = [..._it.answer.split(''), ..._it.distractors];
+    _order = List<int>.generate(_options.length, (i) => i)..shuffle(Random());
+    _usedPositions.clear();
+    _filledCount = 0;
+    _wrongPick = null;
+    _recomputeEliminated();
+  }
+
+  /// Độ khó Dễ: loại 1 vị trí đang giữ chữ KHÁC chữ mục tiêu của ô trống kế
+  /// tiếp — phải gọi lại mỗi khi mục tiêu đổi (điền đúng 1 ô, hoặc xáo lại
+  /// sau khi chọn sai), giống listen_pick_screen.dart.
+  void _recomputeEliminated() {
+    _eliminatedPos = null;
+    if (SettingsService.instance.isEasy &&
+        _filledCount < _it.hiddenIdx.length) {
+      final target = _it.answer[_filledCount];
+      final candidates = [
+        for (final pos in _order)
+          if (!_usedPositions.contains(pos) && _options[pos] != target) pos
+      ]..shuffle(Random());
+      if (candidates.isNotEmpty) _eliminatedPos = candidates.first;
     }
   }
 
   void _playHint() => AudioService.instance.play(_it.audio);
 
-  void _pick(String letter) {
-    if (_filled ||
+  void _pick(int pos) {
+    if (_correctIndices.contains(_index) ||
         _feedback == AnswerFeedback.wrong ||
-        letter == _eliminatedLetter) {
+        _usedPositions.contains(pos) ||
+        pos == _eliminatedPos) {
       return;
     }
-    if (letter == _it.answer) {
+    final target = _it.answer[_filledCount];
+    if (_options[pos] == target) {
+      final completing = _filledCount + 1 >= _it.hiddenIdx.length;
       setState(() {
-        _filled = true;
+        _usedPositions.add(pos);
+        _filledCount++;
         _wrongPick = null;
-        _correctIndices.add(_index);
-        _feedback = AnswerFeedback.correct;
+        if (completing) {
+          _correctIndices.add(_index);
+          _feedback = AnswerFeedback.correct;
+        }
       });
-      AudioService.instance.play(_it.audio);
       AudioService.instance.playSfx('correct.mp3');
-      Future.delayed(const Duration(milliseconds: 1100), () {
-        if (!mounted || _feedback != AnswerFeedback.correct) return;
-        setState(() => _feedback = null);
-      });
+      if (completing) {
+        AudioService.instance.play(_it.audio);
+        Future.delayed(const Duration(milliseconds: 1100), () {
+          if (!mounted || _feedback != AnswerFeedback.correct) return;
+          setState(() => _feedback = null);
+        });
+      } else {
+        _recomputeEliminated();
+      }
     } else {
       setState(() {
-        _wrongPick = letter;
+        _wrongPick = pos;
         _feedback = AnswerFeedback.wrong;
       });
       AudioService.instance.playSfx('wrong.mp3');
@@ -91,7 +128,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
         setState(() {
           _feedback = null;
           _wrongPick = null;
-          _options.shuffle(Random());
+          _order.shuffle(Random());
+          _recomputeEliminated();
         });
       });
     }
@@ -100,10 +138,11 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
   void _goTo(int newIndex) {
     setState(() {
       _index = newIndex;
-      _filled = _correctIndices.contains(newIndex);
-      _wrongPick = null;
-      _feedback = null;
       _prepare();
+      // Quay lại 1 lượt ĐÃ đúng trước đó -> hiện lại đủ các ô đã điền.
+      if (_correctIndices.contains(newIndex)) {
+        _filledCount = _it.hiddenIdx.length;
+      }
     });
     _playHint();
   }
@@ -153,12 +192,41 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
     );
   }
 
+  /// Ghép từng ký tự của [it.word] thành span riêng — vị trí trong
+  /// `hiddenIdx` (có thể KHÔNG liền nhau, xem CR-020 BUGS_CR.md) hiện thành
+  /// '_'/đáp án theo tiến độ [_filledCount] (điền theo thứ tự trái sang
+  /// phải), ký tự còn lại giữ nguyên.
+  List<InlineSpan> _wordSpans(FillItem it) {
+    final spans = <InlineSpan>[];
+    final buffer = StringBuffer();
+    void flush() {
+      if (buffer.isNotEmpty) {
+        spans.add(TextSpan(text: buffer.toString()));
+        buffer.clear();
+      }
+    }
+
+    for (var i = 0; i < it.word.length; i++) {
+      final hiddenPos = it.hiddenIdx.indexOf(i);
+      if (hiddenPos == -1) {
+        buffer.write(it.word[i]);
+      } else {
+        flush();
+        final isFilled = hiddenPos < _filledCount;
+        spans.add(TextSpan(
+          text: isFilled ? it.answer[hiddenPos] : '_',
+          style: TextStyle(
+              color: isFilled ? AppColors.success : AppColors.primary),
+        ));
+      }
+    }
+    flush();
+    return spans;
+  }
+
   @override
   Widget build(BuildContext context) {
     final it = _it;
-    final prefix = it.word.substring(0, it.hiddenIdx.first);
-    final suffix = it.word.substring(it.hiddenIdx.last + 1);
-    final slot = _filled ? it.answer : '_' * it.hiddenIdx.length;
 
     return AppScaffold(
       backgroundColor: AppColors.unitColor(widget.unit.unitId),
@@ -201,16 +269,7 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary),
-                  children: [
-                    TextSpan(text: prefix),
-                    TextSpan(
-                      text: slot,
-                      style: TextStyle(
-                          color:
-                              _filled ? AppColors.success : AppColors.primary),
-                    ),
-                    TextSpan(text: suffix),
-                  ],
+                  children: _wordSpans(it),
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
@@ -218,7 +277,10 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
                 spacing: AppSpacing.md,
                 runSpacing: AppSpacing.md,
                 alignment: WrapAlignment.center,
-                children: _options.map(_letterTile).toList(),
+                children: [
+                  for (final pos in _order)
+                    if (!_usedPositions.contains(pos)) _letterTile(pos),
+                ],
               ),
               const Spacer(),
               Padding(
@@ -238,7 +300,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
                       child: PrimaryButton(
                         label: 'Tiếp theo',
                         icon: Icons.arrow_forward_rounded,
-                        onPressed: _filled ? _goNext : null,
+                        onPressed:
+                            _correctIndices.contains(_index) ? _goNext : null,
                       ),
                     ),
                   ],
@@ -252,25 +315,19 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
     );
   }
 
-  Widget _letterTile(String letter) {
-    final isAnswer = letter == _it.answer;
-    final eliminated = letter == _eliminatedLetter;
-    Color bg = AppColors.surface;
-    if (_filled && isAnswer) {
-      bg = AppColors.success;
-    } else if (_wrongPick == letter) {
-      bg = AppColors.error;
-    }
-    final light = (_filled && isAnswer) || _wrongPick == letter;
+  Widget _letterTile(int pos) {
+    final letter = _options[pos];
+    final eliminated = pos == _eliminatedPos;
+    final wrong = _wrongPick == pos;
     return Opacity(
       opacity: eliminated ? 0.3 : 1,
       child: Material(
-        color: bg,
+        color: wrong ? AppColors.error : AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         elevation: 2,
         child: InkWell(
           borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          onTap: eliminated ? null : () => _pick(letter),
+          onTap: eliminated ? null : () => _pick(pos),
           child: Container(
             width: 64,
             height: 64,
@@ -280,7 +337,7 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: light ? Colors.white : AppColors.textPrimary,
+                color: wrong ? Colors.white : AppColors.textPrimary,
               ),
             ),
           ),

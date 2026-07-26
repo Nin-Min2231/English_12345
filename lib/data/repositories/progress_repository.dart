@@ -107,4 +107,14 @@ class ProgressRepository {
   /// đã xong, nên checkpoint cần điều kiện riêng.
   bool isCheckpointUnlocked(List<LessonProgress> progress, int unitId) =>
       _coreGameTypes.every((g) => starsFor(progress, unitId, g) >= 1);
+
+  /// Fun Time / "Lật thẻ" (CR-023) — chặt hơn [isCheckpointUnlocked]: đây là
+  /// game ôn tập nên đòi hỏi HOÀN TẤT MỌI game (`kGameTypeOrder`, không chỉ 4
+  /// game lõi) của CẢ 2 unit trong phạm vi ôn tập (`fromUnit`/`toUnit` của
+  /// Checkpoint, xem checkpoints.dart). Không ảnh hưởng Boss Quiz (G12) —
+  /// game đó vẫn dùng [isCheckpointUnlocked] như cũ.
+  bool isFunTimeUnlocked(
+          List<LessonProgress> progress, int fromUnit, int toUnit) =>
+      [fromUnit, toUnit].every(
+          (u) => kGameTypeOrder.every((g) => starsFor(progress, u, g) >= 1));
 }

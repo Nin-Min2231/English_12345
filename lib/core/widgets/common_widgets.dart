@@ -15,6 +15,13 @@ class PrimaryButton extends StatelessWidget {
   // Nền sáng màu (vd warning vàng, error đỏ nhạt) cần truyền chữ tối để đủ
   // tương phản cho trẻ đọc — xem CR-005/CR-008 BUGS_CR.md.
   final Color? foregroundColor;
+  // CR-022: khi nút bị disabled (onPressed null), Flutter mặc định phớt lờ
+  // `color`/`foregroundColor` và tự vẽ màu xám disabled riêng — nếu muốn màu
+  // tùy biến VẪN hiện đúng lúc disabled (vd G08 "Ghi âm" nền đỏ khi đang nghe,
+  // lúc đó nút đang bị disabled), phải truyền rõ 2 giá trị này. Để trống (mặc
+  // định null) thì giữ nguyên màu xám disabled chuẩn của Flutter như trước.
+  final Color? disabledColor;
+  final Color? disabledForegroundColor;
 
   const PrimaryButton({
     super.key,
@@ -23,6 +30,8 @@ class PrimaryButton extends StatelessWidget {
     this.onPressed,
     this.color,
     this.foregroundColor,
+    this.disabledColor,
+    this.disabledForegroundColor,
   });
 
   @override
@@ -39,6 +48,8 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.primary,
           foregroundColor: foregroundColor ?? Colors.white,
+          disabledBackgroundColor: disabledColor,
+          disabledForegroundColor: disabledForegroundColor,
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusMd),

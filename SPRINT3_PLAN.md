@@ -17,6 +17,8 @@ nguyên như lúc duyệt.
   tay theo `audio != null`) — Fun Time 1-3 đủ 6 cặp, Fun Time 4 (Unit 13-14) chỉ 7 cặp (không phải 13
   như tính thô ban đầu). `MemoryPairItem` model, `funTimeByUnit` trong content_repository.dart,
   `memory_match_screen.dart` (lật cặp, KHÔNG xáo lại khi sai — khác quy ước thường của app).
+  **Follow-up (2026-07-26, CR-021)**: "Easy mode: explicitly deferred for G09" bên dưới (Phase 1 gốc)
+  nay đã bổ sung — xem trước toàn bộ thẻ 4 giây khi Dễ, chi tiết `BUGS_CR.md` CR-021.
 - [x] **Phase 2 — G10 Săn chữ** (2026-07-23): sinh `g10_letter_hunt.json` — `target_letter` = copy
   trực tiếp `units.json.phonics`, `reward_*` = từ đầu tiên mỗi unit trong `g01_flashcard.json`,
   digraph Unit14 (`er`)/Unit15 (`sh`) giữ nguyên chuỗi 2 ký tự. `HuntLetterItem` model (config phẳng,

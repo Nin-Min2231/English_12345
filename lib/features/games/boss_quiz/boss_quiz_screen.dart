@@ -298,11 +298,22 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
                 if (option.image != null)
                   WordImage(relativePath: option.image!),
                 if (option.text != null)
-                  Text(
-                    option.text!,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                  // CR-023: FittedBox co chữ lại cho vừa ô — câu hỏi nguồn
+                  // G05 (lắp câu) có thể dài hơn nhiều so với 1 chữ nguồn G03,
+                  // tránh tràn/cắt chữ trên ô vuông cố định (cùng cách xử lý
+                  // với G10 letter_hunt_screen.dart).
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        option.text!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                 if (_answered && isAnswer)
                   const Align(

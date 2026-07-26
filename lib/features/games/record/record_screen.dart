@@ -8,13 +8,22 @@ import '../../../core/widgets/common_widgets.dart';
 import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
 
-/// F09 / G08 — Ghi âm (shadowing): nghe từ mẫu → nói theo (tự dừng khi im
-/// lặng ~2 giây, không cần bấm "Dùng") → so khớp văn bản nhận diện được với
-/// đáp án bằng khoảng cách Levenshtein ra % chính xác → quy đổi điểm 0-100 +
-/// âm thanh cảnh báo theo mốc điểm (<=50 / 51-80 / 81-100). Đổi từ package
-/// `record` sang `speech_to_text` (CR-018) — đánh đổi đã xác nhận với người
-/// dùng: KHÔNG còn phát lại giọng ghi âm của bé (package không lộ file âm
-/// thanh thô) và KHÔNG còn tự chấm sao thủ công.
+/// F09 / G08 — Ghi âm (shadowing): nghe từ mẫu → nói theo → bấm "Dừng" khi
+/// xong → so khớp văn bản nhận diện được với đáp án bằng khoảng cách
+/// Levenshtein ra % chính xác → quy đổi điểm 0-100 + âm thanh cảnh báo theo
+/// mốc điểm (<=50 / 51-80 / 81-100). Đổi từ package `record` sang
+/// `speech_to_text` (CR-018) — đánh đổi đã xác nhận với người dùng: KHÔNG còn
+/// phát lại giọng ghi âm của bé (package không lộ file âm thanh thô) và
+/// KHÔNG còn tự chấm sao thủ công.
+/// CR-022: thêm `_isScoring` — khoảng thời gian giữa lúc mic dừng và lúc kết
+/// quả cuối cùng thực sự về tới (`onResult(finalResult: true)`) có thể trễ
+/// vài giây; khóa nút "Ghi âm" + hiện "Đang chấm điểm..." trong lúc chờ, và
+/// thêm trần chờ 1.5s (`_resultGraceWindow`) — quá hạn thì chấm luôn bằng
+/// bản ghi nhận từng phần gần nhất thay vì chờ vô thời hạn.
+/// CR-023: bỏ hẳn cơ chế tự dừng khi im lặng — trẻ tự bấm "Dừng" khi nói
+/// xong (`_stopListening`, gọi `_speech.stop()`); `pauseFor` đặt bằng
+/// `listenFor` để im lặng giữa chừng không còn tự ngắt (chỉ còn `listenFor`
+/// làm trần an toàn nếu trẻ quên bấm Dừng).
 class RecordScreen extends StatefulWidget {
   final UnitInfo unit;
   final List<FlashCard> items;
@@ -26,11 +35,20 @@ class RecordScreen extends StatefulWidget {
 }
 
 class _RecordScreenState extends State<RecordScreen> {
+  // CR-022: trần thời gian chờ kết quả CUỐI CÙNG sau khi mic đã dừng — nếu
+  // `speech_to_text` không trả `finalResult` trong khoảng này, dùng luôn bản
+  // ghi nhận từng phần (partial) gần nhất thay vì chờ vô thời hạn (xem
+  // `_onResult`/`onStatus` bên dưới).
+  static const _resultGraceWindow = Duration(milliseconds: 1500);
+
   int _index = 0;
   late List<int?> _scores; // % chính xác 0-100 mỗi từ; null = chưa nói thử.
   final _speech = SpeechToText();
   bool _speechAvailable = false;
   bool _isListening = false;
+  // Giữa lúc dừng nghe và lúc có điểm thật sự (CR-020) — khóa nút "Ghi âm"
+  // trong lúc này, xem class doc comment.
+  bool _isScoring = false;
   String _recognized = '';
   String? _micError; // 'denied' | 'permanentlyDenied' | 'notAvailable'
 
@@ -46,12 +64,37 @@ class _RecordScreenState extends State<RecordScreen> {
     final available = await _speech.initialize(
       onError: (_) {
         if (!mounted) return;
-        setState(() => _isListening = false);
+        // Lỗi thì không kẹt mãi ở "Đang chấm điểm..." (CR-020).
+        setState(() {
+          _isListening = false;
+          _isScoring = false;
+        });
       },
       onStatus: (status) {
         if (!mounted) return;
         if (status == 'done' || status == 'notListening') {
-          setState(() => _isListening = false);
+          final roundIndex = _index;
+          final alreadyScored = _scores[roundIndex] != null;
+          setState(() {
+            _isListening = false;
+            // Chỉ báo "đang chấm điểm" nếu lượt này CHƯA có điểm — status
+            // done/notListening có thể tới trước HOẶC sau khi kết quả cuối
+            // cùng đã về (xem CR-020 class doc comment).
+            if (!alreadyScored) _isScoring = true;
+          });
+          if (!alreadyScored) {
+            // CR-022: chặn trần thời gian chờ — nếu quá lâu vẫn chưa có
+            // finalResult thật, chấm luôn bằng bản ghi nhận từng phần gần
+            // nhất thay vì để trẻ chờ vô thời hạn. Chốt `roundIndex` từ lúc
+            // hẹn giờ để không lỡ chấm nhầm từ nếu trẻ đã bấm "Quay lại"/
+            // "Tiếp theo" sang từ khác trong lúc chờ.
+            Future.delayed(_resultGraceWindow, () {
+              if (!mounted) return;
+              if (_index == roundIndex && _scores[roundIndex] == null) {
+                _finishAttempt(_recognized);
+              }
+            });
+          }
         }
       },
     );
@@ -87,7 +130,7 @@ class _RecordScreenState extends State<RecordScreen> {
   }
 
   Future<void> _startListening() async {
-    if (_isListening) return;
+    if (_isListening || _isScoring) return;
     if (!_speechAvailable) {
       await _initSpeech();
       if (!_speechAvailable) return;
@@ -95,16 +138,25 @@ class _RecordScreenState extends State<RecordScreen> {
     setState(() {
       _recognized = '';
       _isListening = true;
+      _isScoring = false;
     });
     await _speech.listen(
       onResult: _onResult,
       listenOptions: SpeechListenOptions(
         partialResults: true,
+        // CR-023: pauseFor = listenFor để im lặng giữa chừng KHÔNG tự ngắt —
+        // trẻ tự bấm "Dừng" (_stopListening); listenFor chỉ còn là trần an
+        // toàn nếu quên bấm.
         listenFor: const Duration(seconds: 8),
-        pauseFor: const Duration(seconds: 2),
+        pauseFor: const Duration(seconds: 8),
         localeId: 'en_US',
       ),
     );
+  }
+
+  void _stopListening() {
+    if (!_isListening) return;
+    _speech.stop();
   }
 
   void _onResult(SpeechRecognitionResult result) {
@@ -122,6 +174,7 @@ class _RecordScreenState extends State<RecordScreen> {
       _recognized = recognized;
       _scores[_index] = score;
       _isListening = false;
+      _isScoring = false;
     });
     AudioService.instance.playSfx(_tierFor(score).sfx);
   }
@@ -131,6 +184,7 @@ class _RecordScreenState extends State<RecordScreen> {
       _index = newIndex;
       _recognized = '';
       _isListening = false;
+      _isScoring = false;
     });
     _playModel();
   }
@@ -227,15 +281,35 @@ class _RecordScreenState extends State<RecordScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             child: PrimaryButton(
-              label: _isListening ? 'Đang nghe...' : 'Ghi âm',
-              icon: _isListening ? Icons.graphic_eq_rounded : Icons.mic_rounded,
-              color: AppColors.infoDark,
-              onPressed: _isListening ? null : _startListening,
+              label: _isListening
+                  ? 'Dừng ghi âm'
+                  : (_isScoring ? 'Đang chấm điểm...' : 'Ghi âm'),
+              icon: _isListening
+                  ? Icons.stop_circle_rounded
+                  : (_isScoring
+                      ? Icons.hourglass_top_rounded
+                      : Icons.mic_rounded),
+              // Nền đỏ nhạt khi đang nghe để dễ phân biệt trạng thái (CR-020)
+              // — chữ tối để đủ tương phản trên nền sáng màu (quy ước CR-009).
+              // CR-023: nút này giờ LUÔN bấm được lúc đang nghe (để dừng thủ
+              // công) nên không còn cần disabledColor cho nhánh đó — chỉ lúc
+              // "Đang chấm điểm..." mới thực sự disabled, dùng màu xám mặc
+              // định của Flutter là đủ (nhất quán với các nút chờ khác trong
+              // app, vd "Tiếp theo" lúc chưa trả lời).
+              color: _isListening ? AppColors.error : AppColors.infoDark,
+              foregroundColor:
+                  _isListening ? AppColors.textPrimary : Colors.white,
+              onPressed: _isListening
+                  ? _stopListening
+                  : (_isScoring ? null : _startListening),
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
           if (_isListening)
-            const Text('Đang nghe... nói từ vừa nghe nhé!',
+            const Text('Đang nghe... nói từ vừa nghe, xong thì bấm "Dừng"!',
+                style: TextStyle(fontSize: 14, color: AppColors.textSecondary))
+          else if (_isScoring)
+            const Text('Đang chấm điểm, chờ chút nhé...',
                 style: TextStyle(fontSize: 14, color: AppColors.textSecondary))
           else if (score != null) ...[
             if (_recognized.isNotEmpty)

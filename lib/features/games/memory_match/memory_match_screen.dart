@@ -6,6 +6,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
+import '../../../services/settings_service.dart';
 
 enum _CardKind { image, word }
 
@@ -16,10 +17,18 @@ class _MemCard {
   const _MemCard(this.pairIndex, this.kind, this.item);
 }
 
-/// F11 / G09 — Fun Time: lật cặp thẻ hình-từ (memory match). Gắn vào 1 unit
-/// checkpoint (sau Unit 2/6/10/14, xem checkpoints.dart), không phải mọi
-/// unit như G01-G10. Khác quy ước "chọn sai thì xáo trộn" (CR-002): board KHÔNG
-/// xáo lại vị trí khi lật sai — xáo sẽ phá hỏng ý nghĩa của trò nhớ vị trí.
+/// F11 / G09 — "Lật thẻ" (đổi tên từ "Fun Time", CR-023): lật cặp thẻ hình-từ
+/// (memory match). Gắn vào 1 unit checkpoint (sau Unit 2/6/10/14, xem
+/// checkpoints.dart), không phải mọi unit như G01-G10. Khác quy ước "chọn sai
+/// thì xáo trộn" (CR-002): board KHÔNG xáo lại vị trí khi lật sai — xáo sẽ
+/// phá hỏng ý nghĩa của trò nhớ vị trí.
+/// Độ khó Dễ (CR-021): xem trước toàn bộ thẻ vài giây lúc mới vào màn hình —
+/// không khớp 2 mẫu độ khó chuẩn (không có "lựa chọn sai" để làm mờ, không có
+/// "ô/token" để điền sẵn, xem CLAUDE.md §6) nên dùng cơ chế riêng phù hợp hơn
+/// với bản chất trò nhớ vị trí: "bớt trở ngại" bằng cách hé lộ tạm thời.
+/// CR-023: mở khóa chặt hơn (`isFunTimeUnlocked` — cần MỌI game của cả 2 unit
+/// trong phạm vi ôn tập, không chỉ 4 game lõi); công thức sao rộng rãi hơn để
+/// khuyến khích trẻ; lưới thẻ phóng to gần lấp đầy màn hình (`LayoutBuilder`).
 class MemoryMatchScreen extends StatefulWidget {
   final UnitInfo unit;
   final List<MemoryPairItem> pairs;
@@ -39,6 +48,8 @@ class MemoryMatchScreen extends StatefulWidget {
 }
 
 class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
+  static const _previewDuration = Duration(seconds: 4);
+
   late List<_MemCard> _cards;
   late List<bool> _matched;
   int? _firstFlipped;
@@ -46,6 +57,8 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
   bool _locked = false;
   int _attempts = 0;
   AnswerFeedback? _feedback;
+  // Độ khó Dễ: true trong vài giây đầu — mọi thẻ lật ngửa, chưa chạm được.
+  bool _previewing = false;
 
   @override
   void initState() {
@@ -66,6 +79,13 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
     _locked = false;
     _attempts = 0;
     _feedback = null;
+    _previewing = SettingsService.instance.isEasy;
+    if (_previewing) {
+      Future.delayed(_previewDuration, () {
+        if (!mounted) return;
+        setState(() => _previewing = false);
+      });
+    }
   }
 
   @override
@@ -78,7 +98,9 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
   int get _matchedPairs => _matched.where((m) => m).length ~/ 2;
 
   void _tap(int pos) {
-    if (_locked || _matched[pos] || pos == _firstFlipped) return;
+    if (_previewing || _locked || _matched[pos] || pos == _firstFlipped) {
+      return;
+    }
     if (_firstFlipped == null) {
       setState(() => _firstFlipped = pos);
       return;
@@ -116,7 +138,9 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
 
   void _showResult() {
     final pairs = widget.pairs.length;
-    final stars = _attempts <= pairs ? 3 : (_attempts <= pairs * 2 ? 2 : 1);
+    // CR-023: nới rộng mốc tính sao (trước đây _attempts<=pairs mới được 3
+    // sao — gần như phải chơi hoàn hảo, quá khó) để khuyến khích trẻ hơn.
+    final stars = _attempts <= pairs * 2 ? 3 : (_attempts <= pairs * 3 ? 2 : 1);
     showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -153,33 +177,27 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.successDark,
         foregroundColor: Colors.white,
-        title: Text('Fun Time • Unit ${widget.fromUnit}-${widget.toUnit}'),
+        title: Text('Lật thẻ • Unit ${widget.fromUnit}-${widget.toUnit}'),
       ),
       body: Stack(
         children: [
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                 child: Text(
-                  'Lượt: $_attempts  •  Đã ghép: $_matchedPairs/${widget.pairs.length} cặp',
+                  _previewing
+                      ? 'Ghi nhớ vị trí các cặp nhé!'
+                      : 'Lượt: $_attempts  •  Đã ghép: $_matchedPairs/${widget.pairs.length} cặp',
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: AppSpacing.sm,
-                      mainAxisSpacing: AppSpacing.sm,
-                    ),
-                    itemCount: _cards.length,
-                    itemBuilder: (context, i) => _cardTile(i),
-                  ),
+                  padding: const EdgeInsets.all(AppSpacing.sm),
+                  child: _cardGrid(),
                 ),
               ),
             ],
@@ -190,10 +208,39 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
     );
   }
 
+  static const _crossAxisCount = 4;
+
+  /// Lưới thẻ phóng to gần lấp đầy màn hình (CR-023) — `GridView.count` mặc
+  /// định ô vuông tính theo bề rộng, để trống nhiều khoảng dưới nếu số hàng
+  /// ít hơn chiều cao sẵn có. Dùng `LayoutBuilder` đo đúng không gian thật rồi
+  /// tính `childAspectRatio` để ô kéo giãn lấp cả chiều cao lẫn chiều rộng.
+  Widget _cardGrid() {
+    return LayoutBuilder(builder: (context, constraints) {
+      const spacing = AppSpacing.sm;
+      final rows = (_cards.length / _crossAxisCount).ceil();
+      final cellWidth =
+          (constraints.maxWidth - spacing * (_crossAxisCount - 1)) /
+              _crossAxisCount;
+      final cellHeight = (constraints.maxHeight - spacing * (rows - 1)) / rows;
+      return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: _crossAxisCount,
+          crossAxisSpacing: spacing,
+          mainAxisSpacing: spacing,
+          childAspectRatio: cellWidth / cellHeight,
+        ),
+        itemCount: _cards.length,
+        itemBuilder: (context, i) => _cardTile(i),
+      );
+    });
+  }
+
   Widget _cardTile(int pos) {
     final card = _cards[pos];
-    final faceUp =
-        _matched[pos] || pos == _firstFlipped || pos == _secondFlipped;
+    final faceUp = _previewing ||
+        _matched[pos] ||
+        pos == _firstFlipped ||
+        pos == _secondFlipped;
     return Material(
       color: _matched[pos]
           ? AppColors.success.withValues(alpha: 0.25)
@@ -208,14 +255,17 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
           child: Center(
             child: !faceUp
                 ? const Icon(Icons.help_outline_rounded,
-                    color: AppColors.textSecondary, size: 28)
+                    color: AppColors.textSecondary, size: 40)
                 : card.kind == _CardKind.image
                     ? WordImage(relativePath: card.item.image)
-                    : Text(
-                        card.item.word,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
+                    : FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          card.item.word,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
                       ),
           ),
         ),

@@ -70,13 +70,14 @@
             "image": "Unit01/image/pasta.png",
             "audio": "Unit01/audio/word_pasta.mp3",
             "hidden_idx": [
-              0
+              0,
+              1
             ],
-            "answer": "p",
+            "answer": "pa",
             "distractors": [
-              "l",
-              "y",
-              "j"
+              "o",
+              "r",
+              "y"
             ]
           },
           {
@@ -85,13 +86,14 @@
             "image": "Unit01/image/pasta.png",
             "audio": "Unit01/audio/word_pasta.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "a",
+            "answer": "st",
             "distractors": [
-              "l",
-              "y",
-              "j"
+              "o",
+              "q",
+              "g"
             ]
           },
           {
@@ -100,12 +102,45 @@
             "image": "Unit01/image/pasta.png",
             "audio": "Unit01/audio/word_pasta.mp3",
             "hidden_idx": [
-              2
+              2,
+              4
             ],
-            "answer": "s",
+            "answer": "sa",
             "distractors": [
-              "l",
-              "y",
+              "f",
+              "z",
+              "q"
+            ]
+          },
+          {
+            "word_id": "W002",
+            "word": "popcorn",
+            "image": "Unit01/image/popcorn.png",
+            "audio": "Unit01/audio/word_popcorn.mp3",
+            "hidden_idx": [
+              0,
+              6
+            ],
+            "answer": "pn",
+            "distractors": [
+              "u",
+              "t",
+              "z"
+            ]
+          },
+          {
+            "word_id": "W002",
+            "word": "popcorn",
+            "image": "Unit01/image/popcorn.png",
+            "audio": "Unit01/audio/word_popcorn.mp3",
+            "hidden_idx": [
+              4,
+              5
+            ],
+            "answer": "or",
+            "distractors": [
+              "f",
+              "d",
               "j"
             ]
           },
@@ -115,88 +150,62 @@
             "image": "Unit01/image/popcorn.png",
             "audio": "Unit01/audio/word_popcorn.mp3",
             "hidden_idx": [
-              0
+              3,
+              4
             ],
-            "answer": "p",
+            "answer": "co",
             "distractors": [
-              "u",
               "e",
-              "l"
+              "r",
+              "z"
             ]
           },
           {
-            "word_id": "W002",
-            "word": "popcorn",
-            "image": "Unit01/image/popcorn.png",
-            "audio": "Unit01/audio/word_popcorn.mp3",
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3",
             "hidden_idx": [
+              0,
               1
             ],
-            "answer": "o",
+            "answer": "pi",
             "distractors": [
+              "w",
               "u",
-              "e",
-              "l"
+              "b"
             ]
           },
           {
-            "word_id": "W002",
-            "word": "popcorn",
-            "image": "Unit01/image/popcorn.png",
-            "audio": "Unit01/audio/word_popcorn.mp3",
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3",
             "hidden_idx": [
+              1,
+              3
+            ],
+            "answer": "iz",
+            "distractors": [
+              "t",
+              "m",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W003",
+            "word": "pizza",
+            "image": "Unit01/image/pizza.png",
+            "audio": "Unit01/audio/word_pizza.mp3",
+            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "p",
+            "answer": "iz",
             "distractors": [
               "u",
-              "e",
-              "l"
-            ]
-          },
-          {
-            "word_id": "W003",
-            "word": "pizza",
-            "image": "Unit01/image/pizza.png",
-            "audio": "Unit01/audio/word_pizza.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "p",
-            "distractors": [
-              "d",
-              "g",
-              "k"
-            ]
-          },
-          {
-            "word_id": "W003",
-            "word": "pizza",
-            "image": "Unit01/image/pizza.png",
-            "audio": "Unit01/audio/word_pizza.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "i",
-            "distractors": [
-              "d",
-              "g",
-              "k"
-            ]
-          },
-          {
-            "word_id": "W003",
-            "word": "pizza",
-            "image": "Unit01/image/pizza.png",
-            "audio": "Unit01/audio/word_pizza.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "z",
-            "distractors": [
-              "d",
-              "g",
-              "k"
+              "x",
+              "t"
             ]
           }
         ]
@@ -217,13 +226,14 @@
             "image": "Unit02/image/kite.png",
             "audio": "Unit02/audio/word_kite.mp3",
             "hidden_idx": [
-              0
+              0,
+              1
             ],
-            "answer": "k",
+            "answer": "ki",
             "distractors": [
-              "l",
-              "r",
-              "d"
+              "u",
+              "f",
+              "t"
             ]
           },
           {
@@ -232,13 +242,14 @@
             "image": "Unit02/image/kite.png",
             "audio": "Unit02/audio/word_kite.mp3",
             "hidden_idx": [
-              1
+              1,
+              2
             ],
-            "answer": "i",
+            "answer": "it",
             "distractors": [
-              "l",
-              "r",
-              "d"
+              "a",
+              "q",
+              "c"
             ]
           },
           {
@@ -247,13 +258,14 @@
             "image": "Unit02/image/kite.png",
             "audio": "Unit02/audio/word_kite.mp3",
             "hidden_idx": [
-              2
+              1,
+              3
             ],
-            "answer": "t",
+            "answer": "ie",
             "distractors": [
-              "l",
-              "r",
-              "d"
+              "b",
+              "g",
+              "h"
             ]
           },
           {
@@ -262,13 +274,14 @@
             "image": "Unit02/image/bike.png",
             "audio": "Unit02/audio/word_bike.mp3",
             "hidden_idx": [
-              2
+              2,
+              3
             ],
-            "answer": "k",
+            "answer": "ke",
             "distractors": [
-              "v",
-              "u",
-              "x"
+              "t",
+              "a",
+              "y"
             ]
           },
           {
@@ -277,13 +290,14 @@
             "image": "Unit02/image/bike.png",
             "audio": "Unit02/audio/word_bike.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "b",
+            "answer": "ie",
             "distractors": [
-              "v",
-              "u",
-              "x"
+              "o",
+              "k",
+              "s"
             ]
           },
           {
@@ -292,13 +306,30 @@
             "image": "Unit02/image/bike.png",
             "audio": "Unit02/audio/word_bike.mp3",
             "hidden_idx": [
+              0,
               1
             ],
-            "answer": "i",
+            "answer": "bi",
             "distractors": [
-              "v",
+              "g",
+              "q",
+              "h"
+            ]
+          },
+          {
+            "word_id": "W006",
+            "word": "kitten",
+            "image": "Unit02/image/kitten.png",
+            "audio": "Unit02/audio/word_kitten.mp3",
+            "hidden_idx": [
+              0,
+              3
+            ],
+            "answer": "kt",
+            "distractors": [
               "u",
-              "x"
+              "j",
+              "p"
             ]
           },
           {
@@ -307,13 +338,14 @@
             "image": "Unit02/image/kitten.png",
             "audio": "Unit02/audio/word_kitten.mp3",
             "hidden_idx": [
-              0
+              4,
+              5
             ],
-            "answer": "k",
+            "answer": "en",
             "distractors": [
-              "p",
               "a",
-              "d"
+              "v",
+              "c"
             ]
           },
           {
@@ -322,28 +354,14 @@
             "image": "Unit02/image/kitten.png",
             "audio": "Unit02/audio/word_kitten.mp3",
             "hidden_idx": [
-              1
-            ],
-            "answer": "i",
-            "distractors": [
-              "p",
-              "a",
-              "d"
-            ]
-          },
-          {
-            "word_id": "W006",
-            "word": "kitten",
-            "image": "Unit02/image/kitten.png",
-            "audio": "Unit02/audio/word_kitten.mp3",
-            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "t",
+            "answer": "it",
             "distractors": [
-              "p",
-              "a",
-              "d"
+              "o",
+              "u",
+              "n"
             ]
           }
         ]
@@ -364,12 +382,29 @@
             "image": "Unit03/image/sail.png",
             "audio": "Unit03/audio/word_sail.mp3",
             "hidden_idx": [
-              0
+              0,
+              2
             ],
-            "answer": "s",
+            "answer": "si",
             "distractors": [
-              "v",
               "r",
+              "c",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W007",
+            "word": "sail",
+            "image": "Unit03/image/sail.png",
+            "audio": "Unit03/audio/word_sail.mp3",
+            "hidden_idx": [
+              1,
+              2
+            ],
+            "answer": "ai",
+            "distractors": [
+              "k",
+              "y",
               "h"
             ]
           },
@@ -379,28 +414,46 @@
             "image": "Unit03/image/sail.png",
             "audio": "Unit03/audio/word_sail.mp3",
             "hidden_idx": [
-              1
+              1,
+              3
             ],
-            "answer": "a",
+            "answer": "al",
             "distractors": [
-              "v",
-              "r",
-              "h"
+              "q",
+              "j",
+              "c"
             ]
           },
           {
-            "word_id": "W007",
-            "word": "sail",
-            "image": "Unit03/image/sail.png",
-            "audio": "Unit03/audio/word_sail.mp3",
+            "word_id": "W008",
+            "word": "sand",
+            "image": "Unit03/image/sand.png",
+            "audio": "Unit03/audio/word_sand.mp3",
             "hidden_idx": [
+              0,
+              3
+            ],
+            "answer": "sd",
+            "distractors": [
+              "y",
+              "m",
+              "j"
+            ]
+          },
+          {
+            "word_id": "W008",
+            "word": "sand",
+            "image": "Unit03/image/sand.png",
+            "audio": "Unit03/audio/word_sand.mp3",
+            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "i",
+            "answer": "an",
             "distractors": [
-              "v",
-              "r",
-              "h"
+              "m",
+              "c",
+              "v"
             ]
           },
           {
@@ -409,43 +462,14 @@
             "image": "Unit03/image/sand.png",
             "audio": "Unit03/audio/word_sand.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "s",
+            "answer": "ad",
             "distractors": [
-              "c",
-              "p",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W008",
-            "word": "sand",
-            "image": "Unit03/image/sand.png",
-            "audio": "Unit03/audio/word_sand.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "a",
-            "distractors": [
-              "c",
-              "p",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W008",
-            "word": "sand",
-            "image": "Unit03/image/sand.png",
-            "audio": "Unit03/audio/word_sand.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "n",
-            "distractors": [
-              "c",
-              "p",
-              "m"
+              "g",
+              "b",
+              "p"
             ]
           },
           {
@@ -511,13 +535,14 @@
             "image": "Unit04/image/rainbow.png",
             "audio": "Unit04/audio/word_rainbow.mp3",
             "hidden_idx": [
-              0
+              0,
+              1
             ],
-            "answer": "r",
+            "answer": "ra",
             "distractors": [
-              "t",
-              "l",
-              "h"
+              "m",
+              "w",
+              "n"
             ]
           },
           {
@@ -526,13 +551,14 @@
             "image": "Unit04/image/rainbow.png",
             "audio": "Unit04/audio/word_rainbow.mp3",
             "hidden_idx": [
-              1
+              1,
+              4
             ],
-            "answer": "a",
+            "answer": "ab",
             "distractors": [
-              "t",
-              "l",
-              "h"
+              "c",
+              "s",
+              "u"
             ]
           },
           {
@@ -541,13 +567,30 @@
             "image": "Unit04/image/rainbow.png",
             "audio": "Unit04/audio/word_rainbow.mp3",
             "hidden_idx": [
+              5,
+              6
+            ],
+            "answer": "ow",
+            "distractors": [
+              "g",
+              "y",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W011",
+            "word": "river",
+            "image": "Unit04/image/river.png",
+            "audio": "Unit04/audio/word_river.mp3",
+            "hidden_idx": [
+              0,
               2
             ],
-            "answer": "i",
+            "answer": "rv",
             "distractors": [
-              "t",
-              "l",
-              "h"
+              "i",
+              "k",
+              "c"
             ]
           },
           {
@@ -556,13 +599,14 @@
             "image": "Unit04/image/river.png",
             "audio": "Unit04/audio/word_river.mp3",
             "hidden_idx": [
-              0
+              1,
+              2
             ],
-            "answer": "r",
+            "answer": "iv",
             "distractors": [
-              "q",
-              "u",
-              "o"
+              "j",
+              "k",
+              "a"
             ]
           },
           {
@@ -571,28 +615,30 @@
             "image": "Unit04/image/river.png",
             "audio": "Unit04/audio/word_river.mp3",
             "hidden_idx": [
+              1,
+              3
+            ],
+            "answer": "ie",
+            "distractors": [
+              "n",
+              "y",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W012",
+            "word": "road",
+            "image": "Unit04/image/road.png",
+            "audio": "Unit04/audio/word_road.mp3",
+            "hidden_idx": [
+              0,
               1
             ],
-            "answer": "i",
+            "answer": "ro",
             "distractors": [
-              "q",
-              "u",
-              "o"
-            ]
-          },
-          {
-            "word_id": "W011",
-            "word": "river",
-            "image": "Unit04/image/river.png",
-            "audio": "Unit04/audio/word_river.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "v",
-            "distractors": [
-              "q",
-              "u",
-              "o"
+              "e",
+              "h",
+              "w"
             ]
           },
           {
@@ -601,13 +647,14 @@
             "image": "Unit04/image/road.png",
             "audio": "Unit04/audio/word_road.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "r",
+            "answer": "od",
             "distractors": [
-              "c",
-              "m",
-              "y"
+              "a",
+              "b",
+              "z"
             ]
           },
           {
@@ -616,28 +663,14 @@
             "image": "Unit04/image/road.png",
             "audio": "Unit04/audio/word_road.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "o",
+            "answer": "ad",
             "distractors": [
-              "c",
-              "m",
-              "y"
-            ]
-          },
-          {
-            "word_id": "W012",
-            "word": "road",
-            "image": "Unit04/image/road.png",
-            "audio": "Unit04/audio/word_road.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "a",
-            "distractors": [
-              "c",
-              "m",
-              "y"
+              "p",
+              "f",
+              "v"
             ]
           }
         ]
@@ -658,13 +691,14 @@
             "image": "Unit05/image/question.png",
             "audio": "Unit05/audio/word_question.mp3",
             "hidden_idx": [
-              0
+              0,
+              7
             ],
-            "answer": "q",
+            "answer": "qn",
             "distractors": [
-              "v",
-              "m",
-              "c"
+              "r",
+              "g",
+              "o"
             ]
           },
           {
@@ -673,13 +707,14 @@
             "image": "Unit05/image/question.png",
             "audio": "Unit05/audio/word_question.mp3",
             "hidden_idx": [
-              1
+              4,
+              7
             ],
-            "answer": "u",
+            "answer": "tn",
             "distractors": [
-              "v",
-              "m",
-              "c"
+              "q",
+              "g",
+              "x"
             ]
           },
           {
@@ -688,13 +723,30 @@
             "image": "Unit05/image/question.png",
             "audio": "Unit05/audio/word_question.mp3",
             "hidden_idx": [
+              3,
+              5
+            ],
+            "answer": "si",
+            "distractors": [
+              "y",
+              "e",
+              "n"
+            ]
+          },
+          {
+            "word_id": "W014",
+            "word": "square",
+            "image": "Unit05/image/square.png",
+            "audio": "Unit05/audio/word_square.mp3",
+            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "e",
+            "answer": "qu",
             "distractors": [
-              "v",
               "m",
-              "c"
+              "d",
+              "n"
             ]
           },
           {
@@ -703,43 +755,46 @@
             "image": "Unit05/image/square.png",
             "audio": "Unit05/audio/word_square.mp3",
             "hidden_idx": [
+              4,
+              5
+            ],
+            "answer": "re",
+            "distractors": [
+              "g",
+              "a",
+              "i"
+            ]
+          },
+          {
+            "word_id": "W014",
+            "word": "square",
+            "image": "Unit05/image/square.png",
+            "audio": "Unit05/audio/word_square.mp3",
+            "hidden_idx": [
+              2,
+              4
+            ],
+            "answer": "ur",
+            "distractors": [
+              "z",
+              "s",
+              "j"
+            ]
+          },
+          {
+            "word_id": "W015",
+            "word": "quiz",
+            "image": "Unit05/image/quiz.png",
+            "audio": "Unit05/audio/word_quiz.mp3",
+            "hidden_idx": [
+              0,
               1
             ],
-            "answer": "q",
+            "answer": "qu",
             "distractors": [
-              "w",
-              "b",
-              "z"
-            ]
-          },
-          {
-            "word_id": "W014",
-            "word": "square",
-            "image": "Unit05/image/square.png",
-            "audio": "Unit05/audio/word_square.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "s",
-            "distractors": [
-              "w",
-              "b",
-              "z"
-            ]
-          },
-          {
-            "word_id": "W014",
-            "word": "square",
-            "image": "Unit05/image/square.png",
-            "audio": "Unit05/audio/word_square.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "u",
-            "distractors": [
-              "w",
-              "b",
-              "z"
+              "a",
+              "g",
+              "f"
             ]
           },
           {
@@ -748,13 +803,14 @@
             "image": "Unit05/image/quiz.png",
             "audio": "Unit05/audio/word_quiz.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "q",
+            "answer": "uz",
             "distractors": [
-              "o",
-              "l",
-              "m"
+              "m",
+              "t",
+              "s"
             ]
           },
           {
@@ -763,28 +819,14 @@
             "image": "Unit05/image/quiz.png",
             "audio": "Unit05/audio/word_quiz.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "u",
+            "answer": "iz",
             "distractors": [
-              "o",
-              "l",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W015",
-            "word": "quiz",
-            "image": "Unit05/image/quiz.png",
-            "audio": "Unit05/audio/word_quiz.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "i",
-            "distractors": [
-              "o",
-              "l",
-              "m"
+              "d",
+              "b",
+              "e"
             ]
           }
         ]
@@ -937,13 +979,14 @@
             "image": "Unit07/image/juice.png",
             "audio": "Unit07/audio/word_juice.mp3",
             "hidden_idx": [
-              0
+              0,
+              4
             ],
-            "answer": "j",
+            "answer": "je",
             "distractors": [
-              "s",
-              "p",
-              "a"
+              "g",
+              "o",
+              "i"
             ]
           },
           {
@@ -952,13 +995,14 @@
             "image": "Unit07/image/juice.png",
             "audio": "Unit07/audio/word_juice.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "u",
+            "answer": "ic",
             "distractors": [
-              "s",
-              "p",
-              "a"
+              "a",
+              "y",
+              "t"
             ]
           },
           {
@@ -967,12 +1011,45 @@
             "image": "Unit07/image/juice.png",
             "audio": "Unit07/audio/word_juice.mp3",
             "hidden_idx": [
-              2
+              3,
+              4
             ],
-            "answer": "i",
+            "answer": "ce",
             "distractors": [
-              "s",
-              "p",
+              "k",
+              "j",
+              "m"
+            ]
+          },
+          {
+            "word_id": "W020",
+            "word": "jelly",
+            "image": "Unit07/image/jelly.png",
+            "audio": "Unit07/audio/word_jelly.mp3",
+            "hidden_idx": [
+              0,
+              3
+            ],
+            "answer": "jl",
+            "distractors": [
+              "c",
+              "g",
+              "s"
+            ]
+          },
+          {
+            "word_id": "W020",
+            "word": "jelly",
+            "image": "Unit07/image/jelly.png",
+            "audio": "Unit07/audio/word_jelly.mp3",
+            "hidden_idx": [
+              2,
+              4
+            ],
+            "answer": "ly",
+            "distractors": [
+              "u",
+              "h",
               "a"
             ]
           },
@@ -982,43 +1059,14 @@
             "image": "Unit07/image/jelly.png",
             "audio": "Unit07/audio/word_jelly.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "j",
+            "answer": "el",
             "distractors": [
-              "s",
-              "v",
-              "u"
-            ]
-          },
-          {
-            "word_id": "W020",
-            "word": "jelly",
-            "image": "Unit07/image/jelly.png",
-            "audio": "Unit07/audio/word_jelly.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "e",
-            "distractors": [
-              "s",
-              "v",
-              "u"
-            ]
-          },
-          {
-            "word_id": "W020",
-            "word": "jelly",
-            "image": "Unit07/image/jelly.png",
-            "audio": "Unit07/audio/word_jelly.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "l",
-            "distractors": [
-              "s",
-              "v",
-              "u"
+              "t",
+              "o",
+              "s"
             ]
           },
           {
@@ -1084,13 +1132,14 @@
             "image": "Unit08/image/village.png",
             "audio": "Unit08/audio/word_village.mp3",
             "hidden_idx": [
-              0
+              0,
+              3
             ],
-            "answer": "v",
+            "answer": "vl",
             "distractors": [
-              "q",
-              "k",
-              "h"
+              "p",
+              "s",
+              "e"
             ]
           },
           {
@@ -1099,13 +1148,14 @@
             "image": "Unit08/image/village.png",
             "audio": "Unit08/audio/word_village.mp3",
             "hidden_idx": [
-              1
+              2,
+              4
             ],
-            "answer": "i",
+            "answer": "la",
             "distractors": [
-              "q",
-              "k",
-              "h"
+              "m",
+              "f",
+              "u"
             ]
           },
           {
@@ -1114,12 +1164,13 @@
             "image": "Unit08/image/village.png",
             "audio": "Unit08/audio/word_village.mp3",
             "hidden_idx": [
-              2
+              1,
+              5
             ],
-            "answer": "l",
+            "answer": "ig",
             "distractors": [
-              "q",
-              "k",
+              "e",
+              "j",
               "h"
             ]
           },
@@ -1174,27 +1225,13 @@
             "image": "Unit08/image/volleyball.png",
             "audio": "Unit08/audio/word_volleyball.mp3",
             "hidden_idx": [
-              0
-            ],
-            "answer": "v",
-            "distractors": [
-              "n",
-              "r",
-              "x"
-            ]
-          },
-          {
-            "word_id": "W024",
-            "word": "volleyball",
-            "image": "Unit08/image/volleyball.png",
-            "audio": "Unit08/audio/word_volleyball.mp3",
-            "hidden_idx": [
+              0,
               1
             ],
-            "answer": "o",
+            "answer": "vo",
             "distractors": [
-              "n",
-              "r",
+              "t",
+              "h",
               "x"
             ]
           },
@@ -1204,13 +1241,30 @@
             "image": "Unit08/image/volleyball.png",
             "audio": "Unit08/audio/word_volleyball.mp3",
             "hidden_idx": [
-              2
+              3,
+              8
             ],
-            "answer": "l",
+            "answer": "ll",
             "distractors": [
-              "n",
-              "r",
+              "g",
+              "f",
               "x"
+            ]
+          },
+          {
+            "word_id": "W024",
+            "word": "volleyball",
+            "image": "Unit08/image/volleyball.png",
+            "audio": "Unit08/audio/word_volleyball.mp3",
+            "hidden_idx": [
+              1,
+              8
+            ],
+            "answer": "ol",
+            "distractors": [
+              "u",
+              "r",
+              "g"
             ]
           }
         ]
@@ -1231,13 +1285,14 @@
             "image": "Unit09/image/yogurt.png",
             "audio": "Unit09/audio/word_yogurt.mp3",
             "hidden_idx": [
-              0
+              0,
+              2
             ],
-            "answer": "y",
+            "answer": "yg",
             "distractors": [
-              "k",
-              "a",
-              "d"
+              "v",
+              "m",
+              "p"
             ]
           },
           {
@@ -1246,13 +1301,14 @@
             "image": "Unit09/image/yogurt.png",
             "audio": "Unit09/audio/word_yogurt.mp3",
             "hidden_idx": [
-              1
+              3,
+              4
             ],
-            "answer": "o",
+            "answer": "ur",
             "distractors": [
-              "k",
-              "a",
-              "d"
+              "t",
+              "c",
+              "n"
             ]
           },
           {
@@ -1261,13 +1317,14 @@
             "image": "Unit09/image/yogurt.png",
             "audio": "Unit09/audio/word_yogurt.mp3",
             "hidden_idx": [
-              2
+              1,
+              4
             ],
-            "answer": "g",
+            "answer": "or",
             "distractors": [
-              "k",
-              "a",
-              "d"
+              "b",
+              "d",
+              "q"
             ]
           },
           {
@@ -1276,13 +1333,14 @@
             "image": "Unit09/image/yams.png",
             "audio": "Unit09/audio/word_yams.mp3",
             "hidden_idx": [
-              0
+              0,
+              3
             ],
-            "answer": "y",
+            "answer": "ys",
             "distractors": [
-              "q",
-              "z",
-              "b"
+              "i",
+              "h",
+              "x"
             ]
           },
           {
@@ -1291,13 +1349,14 @@
             "image": "Unit09/image/yams.png",
             "audio": "Unit09/audio/word_yams.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "a",
+            "answer": "ms",
             "distractors": [
-              "q",
-              "z",
-              "b"
+              "w",
+              "i",
+              "n"
             ]
           },
           {
@@ -1306,13 +1365,30 @@
             "image": "Unit09/image/yams.png",
             "audio": "Unit09/audio/word_yams.mp3",
             "hidden_idx": [
+              1,
               2
             ],
-            "answer": "m",
+            "answer": "am",
+            "distractors": [
+              "t",
+              "p",
+              "j"
+            ]
+          },
+          {
+            "word_id": "W027",
+            "word": "yo-yos",
+            "image": "Unit09/image/yo_yos.png",
+            "audio": "Unit09/audio/word_yo_yos.mp3",
+            "hidden_idx": [
+              0,
+              5
+            ],
+            "answer": "ys",
             "distractors": [
               "q",
-              "z",
-              "b"
+              "f",
+              "x"
             ]
           },
           {
@@ -1321,13 +1397,14 @@
             "image": "Unit09/image/yo_yos.png",
             "audio": "Unit09/audio/word_yo_yos.mp3",
             "hidden_idx": [
-              0
+              3,
+              5
             ],
-            "answer": "y",
+            "answer": "ys",
             "distractors": [
-              "b",
-              "h",
-              "m"
+              "c",
+              "e",
+              "h"
             ]
           },
           {
@@ -1336,28 +1413,14 @@
             "image": "Unit09/image/yo_yos.png",
             "audio": "Unit09/audio/word_yo_yos.mp3",
             "hidden_idx": [
-              1
+              1,
+              4
             ],
-            "answer": "o",
+            "answer": "oo",
             "distractors": [
-              "b",
-              "h",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W027",
-            "word": "yo-yos",
-            "image": "Unit09/image/yo_yos.png",
-            "audio": "Unit09/audio/word_yo_yos.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "-",
-            "distractors": [
-              "b",
-              "h",
-              "m"
+              "p",
+              "r",
+              "u"
             ]
           }
         ]
@@ -1423,13 +1486,14 @@
             "image": "Unit10/image/zebu.png",
             "audio": "Unit10/audio/word_zebu.mp3",
             "hidden_idx": [
-              0
+              0,
+              1
             ],
-            "answer": "z",
+            "answer": "ze",
             "distractors": [
-              "r",
-              "d",
-              "n"
+              "t",
+              "c",
+              "i"
             ]
           },
           {
@@ -1438,13 +1502,14 @@
             "image": "Unit10/image/zebu.png",
             "audio": "Unit10/audio/word_zebu.mp3",
             "hidden_idx": [
-              1
+              2,
+              3
             ],
-            "answer": "e",
+            "answer": "bu",
             "distractors": [
-              "r",
-              "d",
-              "n"
+              "g",
+              "x",
+              "a"
             ]
           },
           {
@@ -1453,12 +1518,13 @@
             "image": "Unit10/image/zebu.png",
             "audio": "Unit10/audio/word_zebu.mp3",
             "hidden_idx": [
-              2
+              1,
+              3
             ],
-            "answer": "b",
+            "answer": "eu",
             "distractors": [
-              "r",
-              "d",
+              "c",
+              "i",
               "n"
             ]
           },
@@ -1468,13 +1534,14 @@
             "image": "Unit10/image/zebra.png",
             "audio": "Unit10/audio/word_zebra.mp3",
             "hidden_idx": [
-              0
+              0,
+              3
             ],
-            "answer": "z",
+            "answer": "zr",
             "distractors": [
-              "n",
-              "c",
-              "v"
+              "o",
+              "h",
+              "b"
             ]
           },
           {
@@ -1483,13 +1550,14 @@
             "image": "Unit10/image/zebra.png",
             "audio": "Unit10/audio/word_zebra.mp3",
             "hidden_idx": [
-              1
+              1,
+              3
             ],
-            "answer": "e",
+            "answer": "er",
             "distractors": [
-              "n",
-              "c",
-              "v"
+              "b",
+              "f",
+              "j"
             ]
           },
           {
@@ -1498,13 +1566,14 @@
             "image": "Unit10/image/zebra.png",
             "audio": "Unit10/audio/word_zebra.mp3",
             "hidden_idx": [
+              1,
               2
             ],
-            "answer": "b",
+            "answer": "eb",
             "distractors": [
-              "n",
-              "c",
-              "v"
+              "l",
+              "q",
+              "s"
             ]
           }
         ]
@@ -1525,13 +1594,14 @@
             "image": "Unit11/image/sliding.png",
             "audio": "Unit11/audio/word_sliding.mp3",
             "hidden_idx": [
-              2
+              2,
+              3
             ],
-            "answer": "i",
+            "answer": "id",
             "distractors": [
-              "k",
-              "b",
-              "w"
+              "e",
+              "c",
+              "l"
             ]
           },
           {
@@ -1540,13 +1610,14 @@
             "image": "Unit11/image/sliding.png",
             "audio": "Unit11/audio/word_sliding.mp3",
             "hidden_idx": [
-              0
+              0,
+              3
             ],
-            "answer": "s",
+            "answer": "sd",
             "distractors": [
-              "k",
-              "b",
-              "w"
+              "e",
+              "o",
+              "k"
             ]
           },
           {
@@ -1555,12 +1626,13 @@
             "image": "Unit11/image/sliding.png",
             "audio": "Unit11/audio/word_sliding.mp3",
             "hidden_idx": [
-              1
+              1,
+              3
             ],
-            "answer": "l",
+            "answer": "ld",
             "distractors": [
-              "k",
-              "b",
+              "v",
+              "x",
               "w"
             ]
           },
@@ -1570,13 +1642,14 @@
             "image": "Unit11/image/riding.png",
             "audio": "Unit11/audio/word_riding.mp3",
             "hidden_idx": [
-              1
+              1,
+              5
             ],
-            "answer": "i",
+            "answer": "ig",
             "distractors": [
-              "o",
-              "t",
-              "p"
+              "q",
+              "s",
+              "e"
             ]
           },
           {
@@ -1585,13 +1658,14 @@
             "image": "Unit11/image/riding.png",
             "audio": "Unit11/audio/word_riding.mp3",
             "hidden_idx": [
-              0
+              2,
+              4
             ],
-            "answer": "r",
+            "answer": "dn",
             "distractors": [
-              "o",
-              "t",
-              "p"
+              "s",
+              "b",
+              "a"
             ]
           },
           {
@@ -1600,13 +1674,46 @@
             "image": "Unit11/image/riding.png",
             "audio": "Unit11/audio/word_riding.mp3",
             "hidden_idx": [
-              2
+              0,
+              4
             ],
-            "answer": "d",
+            "answer": "rn",
             "distractors": [
-              "o",
+              "p",
+              "l",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W033",
+            "word": "driving",
+            "image": "Unit11/image/driving.png",
+            "audio": "Unit11/audio/word_driving.mp3",
+            "hidden_idx": [
+              2,
+              4
+            ],
+            "answer": "ii",
+            "distractors": [
+              "j",
+              "b",
+              "a"
+            ]
+          },
+          {
+            "word_id": "W033",
+            "word": "driving",
+            "image": "Unit11/image/driving.png",
+            "audio": "Unit11/audio/word_driving.mp3",
+            "hidden_idx": [
+              5,
+              6
+            ],
+            "answer": "ng",
+            "distractors": [
               "t",
-              "p"
+              "u",
+              "c"
             ]
           },
           {
@@ -1615,43 +1722,14 @@
             "image": "Unit11/image/driving.png",
             "audio": "Unit11/audio/word_driving.mp3",
             "hidden_idx": [
-              2
+              1,
+              3
             ],
-            "answer": "i",
+            "answer": "rv",
             "distractors": [
-              "s",
-              "x",
-              "h"
-            ]
-          },
-          {
-            "word_id": "W033",
-            "word": "driving",
-            "image": "Unit11/image/driving.png",
-            "audio": "Unit11/audio/word_driving.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "d",
-            "distractors": [
-              "s",
-              "x",
-              "h"
-            ]
-          },
-          {
-            "word_id": "W033",
-            "word": "driving",
-            "image": "Unit11/image/driving.png",
-            "audio": "Unit11/audio/word_driving.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "r",
-            "distractors": [
-              "s",
-              "x",
-              "h"
+              "p",
+              "c",
+              "x"
             ]
           }
         ]
@@ -1672,13 +1750,14 @@
             "image": "Unit12/image/grapes.png",
             "audio": "Unit12/audio/word_grapes.mp3",
             "hidden_idx": [
-              2
+              2,
+              5
             ],
-            "answer": "a",
+            "answer": "as",
             "distractors": [
-              "m",
-              "d",
-              "x"
+              "j",
+              "k",
+              "e"
             ]
           },
           {
@@ -1687,13 +1766,14 @@
             "image": "Unit12/image/grapes.png",
             "audio": "Unit12/audio/word_grapes.mp3",
             "hidden_idx": [
-              0
+              1,
+              3
             ],
-            "answer": "g",
+            "answer": "rp",
             "distractors": [
-              "m",
-              "d",
-              "x"
+              "c",
+              "o",
+              "l"
             ]
           },
           {
@@ -1702,58 +1782,94 @@
             "image": "Unit12/image/grapes.png",
             "audio": "Unit12/audio/word_grapes.mp3",
             "hidden_idx": [
+              3,
+              5
+            ],
+            "answer": "ps",
+            "distractors": [
+              "x",
+              "b",
+              "w"
+            ]
+          },
+          {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3",
+            "hidden_idx": [
+              0,
               1
             ],
-            "answer": "r",
+            "answer": "ca",
             "distractors": [
+              "e",
+              "z",
+              "k"
+            ]
+          },
+          {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3",
+            "hidden_idx": [
+              2,
+              3
+            ],
+            "answer": "ke",
+            "distractors": [
+              "l",
+              "c",
+              "v"
+            ]
+          },
+          {
+            "word_id": "W035",
+            "word": "cake",
+            "image": "Unit12/image/cake.png",
+            "audio": "Unit12/audio/word_cake.mp3",
+            "hidden_idx": [
+              0,
+              2
+            ],
+            "answer": "ck",
+            "distractors": [
+              "p",
+              "n",
+              "z"
+            ]
+          },
+          {
+            "word_id": "W036",
+            "word": "table",
+            "image": "Unit12/image/table.png",
+            "audio": "Unit12/audio/word_table.mp3",
+            "hidden_idx": [
+              1,
+              4
+            ],
+            "answer": "ae",
+            "distractors": [
+              "p",
+              "s",
+              "t"
+            ]
+          },
+          {
+            "word_id": "W036",
+            "word": "table",
+            "image": "Unit12/image/table.png",
+            "audio": "Unit12/audio/word_table.mp3",
+            "hidden_idx": [
+              0,
+              3
+            ],
+            "answer": "tl",
+            "distractors": [
+              "v",
               "m",
-              "d",
-              "x"
-            ]
-          },
-          {
-            "word_id": "W035",
-            "word": "cake",
-            "image": "Unit12/image/cake.png",
-            "audio": "Unit12/audio/word_cake.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "a",
-            "distractors": [
-              "o",
-              "f",
-              "t"
-            ]
-          },
-          {
-            "word_id": "W035",
-            "word": "cake",
-            "image": "Unit12/image/cake.png",
-            "audio": "Unit12/audio/word_cake.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "c",
-            "distractors": [
-              "o",
-              "f",
-              "t"
-            ]
-          },
-          {
-            "word_id": "W035",
-            "word": "cake",
-            "image": "Unit12/image/cake.png",
-            "audio": "Unit12/audio/word_cake.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "k",
-            "distractors": [
-              "o",
-              "f",
-              "t"
+              "s"
             ]
           },
           {
@@ -1762,43 +1878,14 @@
             "image": "Unit12/image/table.png",
             "audio": "Unit12/audio/word_table.mp3",
             "hidden_idx": [
-              1
+              3,
+              4
             ],
-            "answer": "a",
+            "answer": "le",
             "distractors": [
-              "r",
-              "c",
-              "f"
-            ]
-          },
-          {
-            "word_id": "W036",
-            "word": "table",
-            "image": "Unit12/image/table.png",
-            "audio": "Unit12/audio/word_table.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "t",
-            "distractors": [
-              "r",
-              "c",
-              "f"
-            ]
-          },
-          {
-            "word_id": "W036",
-            "word": "table",
-            "image": "Unit12/image/table.png",
-            "audio": "Unit12/audio/word_table.mp3",
-            "hidden_idx": [
-              2
-            ],
-            "answer": "b",
-            "distractors": [
-              "r",
-              "c",
-              "f"
+              "a",
+              "t",
+              "c"
             ]
           }
         ]
@@ -1819,13 +1906,14 @@
             "image": "Unit13/image/eleven.png",
             "audio": "Unit13/audio/word_eleven.mp3",
             "hidden_idx": [
+              0,
               5
             ],
-            "answer": "n",
+            "answer": "en",
             "distractors": [
-              "f",
-              "a",
-              "w"
+              "c",
+              "u",
+              "d"
             ]
           },
           {
@@ -1834,13 +1922,14 @@
             "image": "Unit13/image/eleven.png",
             "audio": "Unit13/audio/word_eleven.mp3",
             "hidden_idx": [
-              0
+              2,
+              4
             ],
-            "answer": "e",
+            "answer": "ee",
             "distractors": [
-              "f",
-              "a",
-              "w"
+              "i",
+              "n",
+              "x"
             ]
           },
           {
@@ -1849,58 +1938,94 @@
             "image": "Unit13/image/eleven.png",
             "audio": "Unit13/audio/word_eleven.mp3",
             "hidden_idx": [
+              0,
               1
             ],
-            "answer": "l",
+            "answer": "el",
             "distractors": [
-              "f",
+              "k",
+              "m",
+              "x"
+            ]
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3",
+            "hidden_idx": [
+              0,
+              7
+            ],
+            "answer": "tn",
+            "distractors": [
+              "w",
+              "s",
+              "o"
+            ]
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3",
+            "hidden_idx": [
+              0,
+              5
+            ],
+            "answer": "te",
+            "distractors": [
+              "o",
+              "r",
+              "c"
+            ]
+          },
+          {
+            "word_id": "W038",
+            "word": "thirteen",
+            "image": "Unit13/image/thirteen.png",
+            "audio": "Unit13/audio/word_thirteen.mp3",
+            "hidden_idx": [
+              0,
+              3
+            ],
+            "answer": "tr",
+            "distractors": [
+              "q",
+              "y",
+              "a"
+            ]
+          },
+          {
+            "word_id": "W039",
+            "word": "fourteen",
+            "image": "Unit13/image/fourteen.png",
+            "audio": "Unit13/audio/word_fourteen.mp3",
+            "hidden_idx": [
+              2,
+              7
+            ],
+            "answer": "un",
+            "distractors": [
+              "j",
+              "t",
+              "c"
+            ]
+          },
+          {
+            "word_id": "W039",
+            "word": "fourteen",
+            "image": "Unit13/image/fourteen.png",
+            "audio": "Unit13/audio/word_fourteen.mp3",
+            "hidden_idx": [
+              2,
+              5
+            ],
+            "answer": "ue",
+            "distractors": [
+              "p",
               "a",
-              "w"
-            ]
-          },
-          {
-            "word_id": "W038",
-            "word": "thirteen",
-            "image": "Unit13/image/thirteen.png",
-            "audio": "Unit13/audio/word_thirteen.mp3",
-            "hidden_idx": [
-              7
-            ],
-            "answer": "n",
-            "distractors": [
-              "u",
-              "c",
-              "w"
-            ]
-          },
-          {
-            "word_id": "W038",
-            "word": "thirteen",
-            "image": "Unit13/image/thirteen.png",
-            "audio": "Unit13/audio/word_thirteen.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "t",
-            "distractors": [
-              "u",
-              "c",
-              "w"
-            ]
-          },
-          {
-            "word_id": "W038",
-            "word": "thirteen",
-            "image": "Unit13/image/thirteen.png",
-            "audio": "Unit13/audio/word_thirteen.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "h",
-            "distractors": [
-              "u",
-              "c",
-              "w"
+              "h"
             ]
           },
           {
@@ -1909,43 +2034,14 @@
             "image": "Unit13/image/fourteen.png",
             "audio": "Unit13/audio/word_fourteen.mp3",
             "hidden_idx": [
-              7
+              4,
+              5
             ],
-            "answer": "n",
+            "answer": "te",
             "distractors": [
-              "j",
-              "k",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W039",
-            "word": "fourteen",
-            "image": "Unit13/image/fourteen.png",
-            "audio": "Unit13/audio/word_fourteen.mp3",
-            "hidden_idx": [
-              0
-            ],
-            "answer": "f",
-            "distractors": [
-              "j",
-              "k",
-              "m"
-            ]
-          },
-          {
-            "word_id": "W039",
-            "word": "fourteen",
-            "image": "Unit13/image/fourteen.png",
-            "audio": "Unit13/audio/word_fourteen.mp3",
-            "hidden_idx": [
-              1
-            ],
-            "answer": "o",
-            "distractors": [
-              "j",
-              "k",
-              "m"
+              "w",
+              "d",
+              "p"
             ]
           },
           {
@@ -1954,13 +2050,14 @@
             "image": "Unit13/image/fifteen.png",
             "audio": "Unit13/audio/word_fifteen.mp3",
             "hidden_idx": [
+              5,
               6
             ],
-            "answer": "n",
+            "answer": "en",
             "distractors": [
-              "u",
-              "v",
-              "s"
+              "y",
+              "t",
+              "v"
             ]
           },
           {
@@ -1969,13 +2066,14 @@
             "image": "Unit13/image/fifteen.png",
             "audio": "Unit13/audio/word_fifteen.mp3",
             "hidden_idx": [
-              0
+              4,
+              5
             ],
-            "answer": "f",
+            "answer": "ee",
             "distractors": [
-              "u",
-              "v",
-              "s"
+              "p",
+              "i",
+              "a"
             ]
           },
           {
@@ -1984,13 +2082,14 @@
             "image": "Unit13/image/fifteen.png",
             "audio": "Unit13/audio/word_fifteen.mp3",
             "hidden_idx": [
-              1
+              1,
+              5
             ],
-            "answer": "i",
+            "answer": "ie",
             "distractors": [
-              "u",
-              "v",
-              "s"
+              "l",
+              "j",
+              "v"
             ]
           }
         ]
@@ -2011,14 +2110,15 @@
             "image": "Unit14/image/brother.png",
             "audio": "Unit14/audio/word_brother.mp3",
             "hidden_idx": [
+              1,
               5,
               6
             ],
-            "answer": "er",
+            "answer": "rer",
             "distractors": [
-              "wh",
-              "ng",
-              "sh"
+              "t",
+              "g",
+              "q"
             ]
           },
           {
@@ -2027,13 +2127,14 @@
             "image": "Unit14/image/brother.png",
             "audio": "Unit14/audio/word_brother.mp3",
             "hidden_idx": [
-              0
+              0,
+              2
             ],
-            "answer": "b",
+            "answer": "bo",
             "distractors": [
-              "wh",
-              "ng",
-              "sh"
+              "f",
+              "y",
+              "k"
             ]
           },
           {
@@ -2042,13 +2143,14 @@
             "image": "Unit14/image/brother.png",
             "audio": "Unit14/audio/word_brother.mp3",
             "hidden_idx": [
-              1
+              2,
+              4
             ],
-            "answer": "r",
+            "answer": "oh",
             "distractors": [
-              "wh",
-              "ng",
-              "sh"
+              "v",
+              "p",
+              "k"
             ]
           },
           {
@@ -2057,14 +2159,15 @@
             "image": "Unit14/image/sister.png",
             "audio": "Unit14/audio/word_sister.mp3",
             "hidden_idx": [
+              2,
               4,
               5
             ],
-            "answer": "er",
+            "answer": "ser",
             "distractors": [
-              "ck",
-              "ch",
-              "ph"
+              "m",
+              "v",
+              "i"
             ]
           },
           {
@@ -2073,13 +2176,14 @@
             "image": "Unit14/image/sister.png",
             "audio": "Unit14/audio/word_sister.mp3",
             "hidden_idx": [
-              0
+              0,
+              3
             ],
-            "answer": "s",
+            "answer": "st",
             "distractors": [
-              "ck",
-              "ch",
-              "ph"
+              "g",
+              "u",
+              "n"
             ]
           },
           {
@@ -2088,13 +2192,14 @@
             "image": "Unit14/image/sister.png",
             "audio": "Unit14/audio/word_sister.mp3",
             "hidden_idx": [
+              0,
               1
             ],
-            "answer": "i",
+            "answer": "si",
             "distractors": [
-              "ck",
-              "ch",
-              "ph"
+              "z",
+              "y",
+              "g"
             ]
           },
           {
@@ -2103,14 +2208,15 @@
             "image": "Unit14/image/grandmother.png",
             "audio": "Unit14/audio/word_grandmother.mp3",
             "hidden_idx": [
+              6,
               9,
               10
             ],
-            "answer": "er",
+            "answer": "oer",
             "distractors": [
-              "ph",
-              "ng",
-              "wh"
+              "g",
+              "m",
+              "h"
             ]
           },
           {
@@ -2119,13 +2225,14 @@
             "image": "Unit14/image/grandmother.png",
             "audio": "Unit14/audio/word_grandmother.mp3",
             "hidden_idx": [
-              0
+              2,
+              4
             ],
-            "answer": "g",
+            "answer": "ad",
             "distractors": [
-              "ph",
-              "ng",
-              "wh"
+              "s",
+              "k",
+              "g"
             ]
           },
           {
@@ -2134,13 +2241,14 @@
             "image": "Unit14/image/grandmother.png",
             "audio": "Unit14/audio/word_grandmother.mp3",
             "hidden_idx": [
-              1
+              0,
+              5
             ],
-            "answer": "r",
+            "answer": "gm",
             "distractors": [
-              "ph",
-              "ng",
-              "wh"
+              "e",
+              "p",
+              "l"
             ]
           }
         ]
@@ -2162,28 +2270,14 @@
             "audio": "Unit15/audio/word_shirts.mp3",
             "hidden_idx": [
               0,
-              1
-            ],
-            "answer": "sh",
-            "distractors": [
-              "ch",
-              "wh",
-              "er"
-            ]
-          },
-          {
-            "word_id": "W044",
-            "word": "shirts",
-            "image": "Unit15/image/shirts.png",
-            "audio": "Unit15/audio/word_shirts.mp3",
-            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "i",
+            "answer": "shi",
             "distractors": [
-              "ch",
-              "wh",
-              "er"
+              "b",
+              "w",
+              "c"
             ]
           },
           {
@@ -2192,13 +2286,30 @@
             "image": "Unit15/image/shirts.png",
             "audio": "Unit15/audio/word_shirts.mp3",
             "hidden_idx": [
-              3
+              4,
+              5
             ],
-            "answer": "r",
+            "answer": "ts",
             "distractors": [
-              "ch",
-              "wh",
-              "er"
+              "i",
+              "f",
+              "d"
+            ]
+          },
+          {
+            "word_id": "W044",
+            "word": "shirts",
+            "image": "Unit15/image/shirts.png",
+            "audio": "Unit15/audio/word_shirts.mp3",
+            "hidden_idx": [
+              3,
+              5
+            ],
+            "answer": "rs",
+            "distractors": [
+              "o",
+              "p",
+              "i"
             ]
           },
           {
@@ -2208,28 +2319,14 @@
             "audio": "Unit15/audio/word_shoes.mp3",
             "hidden_idx": [
               0,
-              1
-            ],
-            "answer": "sh",
-            "distractors": [
-              "ck",
-              "ch",
-              "ph"
-            ]
-          },
-          {
-            "word_id": "W045",
-            "word": "shoes",
-            "image": "Unit15/image/shoes.png",
-            "audio": "Unit15/audio/word_shoes.mp3",
-            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "o",
+            "answer": "sho",
             "distractors": [
-              "ck",
-              "ch",
-              "ph"
+              "g",
+              "n",
+              "m"
             ]
           },
           {
@@ -2238,13 +2335,30 @@
             "image": "Unit15/image/shoes.png",
             "audio": "Unit15/audio/word_shoes.mp3",
             "hidden_idx": [
-              3
+              2,
+              4
             ],
-            "answer": "e",
+            "answer": "os",
             "distractors": [
-              "ck",
-              "ch",
-              "ph"
+              "u",
+              "q",
+              "p"
+            ]
+          },
+          {
+            "word_id": "W045",
+            "word": "shoes",
+            "image": "Unit15/image/shoes.png",
+            "audio": "Unit15/audio/word_shoes.mp3",
+            "hidden_idx": [
+              3,
+              4
+            ],
+            "answer": "es",
+            "distractors": [
+              "v",
+              "k",
+              "w"
             ]
           },
           {
@@ -2254,13 +2368,14 @@
             "audio": "Unit15/audio/word_shorts.mp3",
             "hidden_idx": [
               0,
-              1
+              1,
+              5
             ],
-            "answer": "sh",
+            "answer": "shs",
             "distractors": [
-              "th",
-              "wh",
-              "er"
+              "t",
+              "o",
+              "k"
             ]
           },
           {
@@ -2269,13 +2384,14 @@
             "image": "Unit15/image/shorts.png",
             "audio": "Unit15/audio/word_shorts.mp3",
             "hidden_idx": [
-              2
+              3,
+              5
             ],
-            "answer": "o",
+            "answer": "rs",
             "distractors": [
-              "th",
-              "wh",
-              "er"
+              "c",
+              "b",
+              "i"
             ]
           },
           {
@@ -2284,13 +2400,14 @@
             "image": "Unit15/image/shorts.png",
             "audio": "Unit15/audio/word_shorts.mp3",
             "hidden_idx": [
-              3
+              2,
+              4
             ],
-            "answer": "r",
+            "answer": "ot",
             "distractors": [
-              "th",
-              "wh",
-              "er"
+              "b",
+              "v",
+              "w"
             ]
           }
         ]
@@ -2311,12 +2428,29 @@
             "image": "Unit16/image/tent.png",
             "audio": "Unit16/audio/word_tent.mp3",
             "hidden_idx": [
-              0
+              0,
+              2
             ],
-            "answer": "t",
+            "answer": "tn",
             "distractors": [
-              "x",
-              "c",
+              "i",
+              "s",
+              "l"
+            ]
+          },
+          {
+            "word_id": "W047",
+            "word": "tent",
+            "image": "Unit16/image/tent.png",
+            "audio": "Unit16/audio/word_tent.mp3",
+            "hidden_idx": [
+              2,
+              3
+            ],
+            "answer": "nt",
+            "distractors": [
+              "j",
+              "u",
               "z"
             ]
           },
@@ -2326,28 +2460,14 @@
             "image": "Unit16/image/tent.png",
             "audio": "Unit16/audio/word_tent.mp3",
             "hidden_idx": [
-              1
-            ],
-            "answer": "e",
-            "distractors": [
-              "x",
-              "c",
-              "z"
-            ]
-          },
-          {
-            "word_id": "W047",
-            "word": "tent",
-            "image": "Unit16/image/tent.png",
-            "audio": "Unit16/audio/word_tent.mp3",
-            "hidden_idx": [
+              1,
               2
             ],
-            "answer": "n",
+            "answer": "en",
             "distractors": [
-              "x",
-              "c",
-              "z"
+              "s",
+              "a",
+              "u"
             ]
           },
           {
@@ -2356,28 +2476,14 @@
             "image": "Unit16/image/teapot.png",
             "audio": "Unit16/audio/word_teapot.mp3",
             "hidden_idx": [
-              0
-            ],
-            "answer": "t",
-            "distractors": [
-              "m",
-              "n",
-              "b"
-            ]
-          },
-          {
-            "word_id": "W048",
-            "word": "teapot",
-            "image": "Unit16/image/teapot.png",
-            "audio": "Unit16/audio/word_teapot.mp3",
-            "hidden_idx": [
+              0,
               1
             ],
-            "answer": "e",
+            "answer": "te",
             "distractors": [
               "m",
-              "n",
-              "b"
+              "o",
+              "g"
             ]
           },
           {
@@ -2386,13 +2492,30 @@
             "image": "Unit16/image/teapot.png",
             "audio": "Unit16/audio/word_teapot.mp3",
             "hidden_idx": [
-              2
+              1,
+              3
             ],
-            "answer": "a",
+            "answer": "ep",
             "distractors": [
-              "m",
-              "n",
-              "b"
+              "a",
+              "y",
+              "i"
+            ]
+          },
+          {
+            "word_id": "W048",
+            "word": "teapot",
+            "image": "Unit16/image/teapot.png",
+            "audio": "Unit16/audio/word_teapot.mp3",
+            "hidden_idx": [
+              2,
+              5
+            ],
+            "answer": "at",
+            "distractors": [
+              "h",
+              "y",
+              "e"
             ]
           },
           {
@@ -2401,13 +2524,14 @@
             "image": "Unit16/image/blanket.png",
             "audio": "Unit16/audio/word_blanket.mp3",
             "hidden_idx": [
+              3,
               6
             ],
-            "answer": "t",
+            "answer": "nt",
             "distractors": [
-              "d",
-              "c",
-              "g"
+              "z",
+              "b",
+              "u"
             ]
           },
           {
@@ -2416,13 +2540,14 @@
             "image": "Unit16/image/blanket.png",
             "audio": "Unit16/audio/word_blanket.mp3",
             "hidden_idx": [
-              0
+              4,
+              5
             ],
-            "answer": "b",
+            "answer": "ke",
             "distractors": [
               "d",
-              "c",
-              "g"
+              "o",
+              "u"
             ]
           },
           {
@@ -2431,13 +2556,14 @@
             "image": "Unit16/image/blanket.png",
             "audio": "Unit16/audio/word_blanket.mp3",
             "hidden_idx": [
-              1
+              1,
+              2
             ],
-            "answer": "l",
+            "answer": "la",
             "distractors": [
-              "d",
-              "c",
-              "g"
+              "r",
+              "u",
+              "z"
             ]
           }
         ]

@@ -35,6 +35,10 @@ Khi xử lý xong một mục: cập nhật Trạng thái + điền "Cách xử 
 | CR-017 | CR | G05: đổi nút "Nghe câu mẫu"→"Gợi ý" + bỏ tự động phát âm thanh (giống CR-012 của G06) | Thấp | Đã sửa (chưa xác nhận) | 2026-07-23 |
 | CR-018 | CR | G08: màu xanh đậm hơn + bỏ tự chấm sao, thay bằng nhận diện giọng nói tự động so khớp đáp án ra %/điểm/âm thanh cảnh báo | Cao | Đã sửa (chưa xác nhận) | 2026-07-23 |
 | CR-019 | CR | Sprint 3: thêm G09 Fun Time, G10 Săn chữ, G12 Boss Quiz + huy hiệu (G11 truyện vẫn pending) | Cao | Đã sửa (chưa xác nhận) | 2026-07-23 |
+| CR-020 | CR | G03 (1-2 ô theo độ dài từ), G08 (nút đỏ khi nghe + 3s + chờ chấm điểm), G10 (đổi hẳn sang nghe & chọn từ vựng) | Cao | Đã sửa (chưa xác nhận) | 2026-07-26 |
+| CR-021 | CR | Rà soát Sprint 3: bổ sung độ khó Dễ (xem trước 4s) còn thiếu cho G09 Fun Time | Thấp | Đã sửa (chưa xác nhận) | 2026-07-26 |
+| CR-022 | Bug+CR | G08: sửa màu đỏ CR-020 không hiện thật (bug disabled-color), chặn trần chờ kết quả; G10: khôi phục "săn chữ có thưởng" (F11) | Cao | Đã sửa (chưa xác nhận) | 2026-07-26 |
+| CR-023 | CR | G08 (nút Dừng thủ công, bỏ tự tắt 3s), G09 (đổi tên Lật thẻ, lưới to, khóa chặt hơn, sao dễ hơn), G03 (tách đáp án từng chữ cái), G10 (2 đáp án/dòng), G12 (chống tràn chữ) | Cao | Đã sửa (chưa xác nhận) | 2026-07-26 |
 
 ---
 
@@ -729,3 +733,252 @@ Khi xử lý xong một mục: cập nhật Trạng thái + điền "Cách xử 
   xác nhận hồ sơ/sao cũ vẫn còn sau khi mở app bản mới. Ngoài ra cần test: Fun Time 4 (14 thẻ, nhiều
   hơn bình thường) không bị tràn/cắt hình trên máy thật, ô chữ digraph Unit 14/15 hiển thị ổn, tile
   Fun Time/Boss Quiz thực sự khóa khi unit gắn nó chưa xong 4 game lõi dù unit đã mở được.
+
+---
+
+## CR-020 — G03 (1-2 ô theo độ dài từ), G08 (nút đỏ + 3s + chờ chấm điểm), G10 (đổi hẳn cơ chế)
+
+- **Yêu cầu (theo người dùng, 2026-07-26)**: 3 màn hình độc lập, gộp 1 CR vì cùng 1 đợt yêu cầu.
+
+**1. G03 Điền chữ**: "Mỗi lần điền nếu từ vựng dưới 4 chữ cái điền 1 từ. Nếu từ vựng trên 4 chữ cái
+điền 2 từ 1 lúc. Chữ cái bị thiếu có thể lộn xộn các vị trí trong từ."
+- **Cách hiểu**: từ <4 chữ cái giữ nguyên quy tắc cũ (CR-010, 1 ô/lượt); từ ≥4 chữ cái (đã chọn mốc
+  "≥4" thay vì chỉ ">4" để không bỏ sót đúng từ 4 chữ cái — báo lại nếu ý người dùng là mốc khác) đổi
+  sang ẩn **2 ô cùng lúc trong 1 lượt**, vị trí 2 ô chọn ngẫu nhiên trong số các ô của từ (digraph
+  `er`/`sh` vẫn tính 1 ô như quy ước cũ) — **có thể liền nhau hoặc cách nhau** ("lộn xộn"), không còn
+  đảm bảo lấy tuần tự trái-sang-phải như CR-010. Vẫn giữ **3 lượt/từ**: lượt 1 = ô phonics của unit +
+  1 ô khác ngẫu nhiên; lượt 2-3 = 2 tổ hợp khác nhau rút từ các ô KHÔNG phải ô phonics (giữ tinh thần
+  "lượt sau thử chữ khác" của CR-010, không lặp lại đúng ô phonics 3 lần).
+- **Cách xử lý**: viết script sinh lại `g03_fill_letter.json` — 7 từ <4 chữ cái (sea, box, fox, ox,
+  jam, van, zoo) copy nguyên y hệt bản cũ (quy tắc không đổi); 42 từ ≥4 chữ cái sinh lại theo quy tắc
+  2-ô-ngẫu-nhiên trên, `distractors` sinh riêng theo từng lượt (khác quy ước cũ "dùng chung distractors
+  cho cả 3 lượt" — không giữ được nữa vì độ dài đáp án có thể khác nhau giữa các lượt của từ có
+  digraph, vd "brother" lượt 1 = "rer" 3 ký tự, lượt 2/3 = 2 ký tự). Đã kiểm tra tự động: 146/146 mục
+  `hidden_idx` khớp đúng ký tự thật, không mục nào đáp án trùng nhiễu, độ dài nhiễu luôn khớp đáp án.
+  **Sửa `fill_letter_screen.dart`**: cách hiển thị cũ (`prefix + slot + suffix`) giả định `hidden_idx`
+  luôn là 1 dải liền nhau — SAI khi 2 ô cách nhau (vd ẩn vị trí 0 và 3 của "table" sẽ làm mất chữ "ab"
+  ở giữa). Đổi sang `_wordSpans()` ghép từng ký tự riêng theo đúng vị trí, không giả định liền dải.
+- **Trạng thái**: Đã sửa (chưa xác nhận).
+
+**2. G08 Ghi âm**:
+1. "Button ở trạng thái 'đang nghe' Background button màu đỏ nhẹ."
+2. "Chuyển thời gian tự động tắt lên 3s nếu không nhận được âm thanh."
+3. "Cải thiện performance khi trả lại kết quả... thêm loading: Đang chấm điểm, để tránh click button
+   'ghi âm' khi chưa có kết quả."
+- **Cách xử lý**:
+  1. Nút "Ghi âm" đổi nền sang `AppColors.error` (đỏ nhạt, đã dùng cho hiệu ứng sai — CR-009 gọi đây
+     là "đỏ nhạt") khi `_isListening`, kèm `foregroundColor: AppColors.textPrimary` (chữ tối) theo
+     đúng quy ước tương phản CR-009 vì nền sáng màu; trở lại `infoDark`/chữ trắng khi không nghe.
+  2. `pauseFor` trong `SpeechListenOptions` đổi từ `Duration(seconds: 2)` → `Duration(seconds: 3)`.
+  3. **Khảo sát nguyên nhân**: `speech_to_text` báo trạng thái `done`/`notListening` (tắt
+     `_isListening`) **độc lập** với lúc kết quả cuối (`onResult(finalResult: true)`) thực sự về —
+     độ trễ giữa 2 mốc này (do xử lý nhận diện, có thể qua mạng) chính là khoảng "xử lý lâu" người
+     dùng thấy, và trước đây nút "Ghi âm" bật lại ngay khi `_isListening=false` dù chưa có điểm, cho
+     phép bấm ghi âm lượt mới đè lên lượt đang chờ kết quả. Thêm cờ `_isScoring` (true từ lúc status
+     done/notListening cho tới lúc `_finishAttempt` tính xong điểm; reset ở `onError`/chuyển từ để
+     không kẹt mãi) — khóa nút + hiện text "Đang chấm điểm..." trong lúc này.
+- **Trạng thái**: Đã sửa (chưa xác nhận) — đây là latency thật của engine nhận diện giọng nói
+  (không phải bug xử lý chậm phía app), giải pháp là chặn UI + báo trạng thái rõ ràng chứ không rút
+  ngắn được thời gian chờ thật; cần bạn test xem độ trễ thực tế trên máy có chấp nhận được không.
+
+**3. G10 Săn chữ — đổi hẳn cơ chế** (không còn "săn chữ cái theo phonics" nữa):
+- "Từ để nghe là từ vựng trong bài đó." / "Khi vào màn hình là nghe luôn." / đổi text "Tìm chữ: x"
+  thành "Lựa chọn đáp án đúng với từ đã nghe" / "Đáp án chọn... là từ vựng của bài đó" / "Số lượng
+  đáp án... là 6 đáp án. Trong đó có đáp án là những từ đang học của unit + những từ đã học trước đó"
+  (Unit 1 dùng You/He/She thay "unit trước").
+- **Xác nhận số liệu trước khi code**: đếm lại từ `vocabulary.json` — mọi unit đều có ĐỦ ≥6 từ trong
+  "unit hiện tại + unit liền trước" (kể cả 7 từ mở rộng không audio, dùng được làm nhiễu chữ vì đáp
+  án ở đây chỉ là CHỮ không cần audio riêng) để luôn đủ 5 nhiễu + 1 đúng, **không có unit nào thiếu
+  đáp án** (mốc chật nhất: Unit 1 đúng 6 từ kể cả 3 đại từ, Unit 16 dư ra 6 từ nhiễu khả dụng).
+- **Cách xử lý — đây là đổi cơ chế hoàn toàn, không phải sửa nhỏ trên máy cũ**:
+  - Bỏ hẳn model `HuntLetterItem` (config phẳng 1 mục/unit, chữ cái đơn lẻ) — thay bằng
+    `WordHuntQuestion` (`models.dart`): `{word_id, word, prompt_audio, options[], answer_idx}`, giống
+    hệt shape `ListenQuestion` (G02) nhưng `options` là CHỮ (`List<String>`) thay vì hình. Đổi
+    `huntByUnit` từ `Map<int,HuntLetterItem>` sang `Map<int,List<WordHuntQuestion>>` (cùng shape
+    List như mọi game khác, không còn ngoại lệ "config phẳng").
+  - Sinh lại toàn bộ `g10_letter_hunt.json` bằng script: mỗi từ CÓ AUDIO trong unit = 1 "lượt"
+    (round) — không còn cố định "5 lượt" UI-side như bản cũ, số lượt = số từ có audio của unit đó (3
+    hoặc 4 tùy unit, giống G02). Với mỗi lượt: `options` = từ đúng + 5 từ nhiễu rút ngẫu nhiên từ
+    (toàn bộ từ unit hiện tại + toàn bộ từ unit liền trước, kể cả từ mở rộng không audio); Unit 1
+    dùng `['You','He','She']` thay cho "unit trước" (không có unit 0). Đã kiểm tra tự động: 49/49
+    lượt có đúng 6 đáp án không trùng nhau, `answer_idx` trỏ đúng từ đã nghe.
+  - Viết lại toàn bộ `letter_hunt_screen.dart` theo đúng mẫu `listen_pick_screen.dart` (G02): tự
+    phát audio khi vào màn hình (`initState` + `addPostFrameCallback`, giống G02, khác quy ước "im
+    lặng mặc định" của G05/G06 vì G10 vốn đã tự phát từ bản cũ), nút "Nghe lại", text tĩnh "Lựa chọn
+    đáp án đúng với từ đã nghe" (không còn hiện chữ mục tiêu — sẽ lộ đáp án), lưới `Wrap` các ô CHỮ
+    (không phải hình) — chấm ngay + xáo trộn khi sai + chốt chặn BUG-003, độ khó Dễ loại 1 nhiễu,
+    y hệt mẫu chuẩn của app. **Bỏ hẳn cơ chế "bắt 5 lượt rồi mở hình thưởng"** của bản cũ — không còn
+    hợp lý khi mọi từ trong unit đã lần lượt là "mục tiêu" của 1 lượt (không còn khái niệm phần
+    thưởng RIÊNG ngoài các từ đã test). Giữ nguyên **sao tối đa 2** (theo catalog gốc, không đổi) —
+    công thức đổi từ "misses==0?2:1" sang chuẩn 2 mức theo tỉ lệ đúng/tổng giống G02/G03 (thu gọn về
+    thang 2 sao).
+  - `game_defs.dart`: `countFor`/`countSuffix`/`buildScreen` của `g10` đổi theo shape List mới
+    (trước đây đếm `containsKey` vì chỉ có 1 mục/unit).
+  - **Giữ nguyên không đổi**: tên game "Săn chữ", icon `search_rounded`, màu `secondaryDark`, vị trí
+    trong `kGameTypeOrder`/`kUnitGames`, mốc sao tối đa 2 — chỉ đổi cơ chế bên trong theo đúng yêu cầu.
+- **Trạng thái**: Đã sửa (chưa xác nhận) — cần test: âm phát đúng ngay khi vào màn hình, 6 đáp án đọc
+  rõ không bị tràn khi có từ dài (vd "grandmother", "volleyball"), Unit 1 hiển thị đúng You/He/She.
+
+---
+
+## CR-021 — Rà soát Sprint 3: bổ sung độ khó Dễ còn thiếu cho G09 Fun Time
+
+- **Yêu cầu (theo người dùng, 2026-07-26)**: "Kiểm tra sprint 3 còn chức năng nào chưa đối ứng thì
+  đối ứng hoàn tất luôn."
+- **Rà soát**: đọc lại `CLAUDE.md`/`SPRINT3_PLAN.md`/`BUGS_CR.md`, grep `TODO` trong `lib/` (không có
+  mục nào), kiểm tra từng game Sprint 3 (G09/G10/G12) đối chiếu 2 mẫu độ khó chuẩn của app. Kết quả:
+  - **G09 Fun Time — thiếu độ khó Dễ**: `memory_match_screen.dart` không có bất kỳ chỗ nào đọc
+    `SettingsService.instance.isEasy` (xác nhận bằng grep) — đúng như CLAUDE.md §6 đã ghi nhận từ
+    CR-019 là "ngoại lệ chưa xử lý, để trống có chủ ý".
+  - **G10 Săn chữ, G12 Boss Quiz — đã có độ khó Dễ đầy đủ** (kể cả sau khi G10 đổi cơ chế ở CR-020,
+    đã giữ nguyên cơ chế loại 1 đáp án nhiễu khi viết lại `letter_hunt_screen.dart`).
+  - **Huy hiệu (badge_defs.dart) — chức năng đầy đủ**, chỉ tên/icon là placeholder nội dung (đã ghi
+    nhận từ CR-019, không phải chức năng thiếu).
+  - **G11 truyện tương tác — vẫn pending, KHÔNG đối ứng được**: khác các mục trên (thiếu code/cơ
+    chế), G11 thiếu NỘI DUNG NGUỒN thật (lời thoại + ảnh trang truyện) — không nằm trong bất kỳ file
+    Excel/`04_image+audio/` nào, chỉ có khả năng nằm trong `01_Document/book.pdf` (117MB, không đọc
+    được trong môi trường Claude Code). Không phải việc có thể "code cho xong" — cần người mở file đó
+    và cung cấp nội dung trước (xem CLAUDE.md §8/§9 mục "Việc cần con người" trong `HANDOVER.md`).
+  - (Ngoài phạm vi Sprint 3 nhưng liên quan: **G07 karaoke** cũng đang pending cùng lý do — thiếu
+    timing lyrics, không phải thiếu code.)
+- **Cách xử lý (G09)**: G09 không khớp 2 mẫu độ khó chuẩn (không có "lựa chọn sai" để làm mờ như
+  G02/G03/G06/G10/G12, không có "ô/token" để điền sẵn như G04/G05) nên thêm cơ chế thứ 3 phù hợp hơn
+  với bản chất trò nhớ vị trí: cờ `_previewing` (true khi Dễ, trong 4 giây đầu lúc `_prepare()`) — mọi
+  thẻ hiện lật ngửa (`faceUp` luôn `true`), chạm không có tác dụng (`_tap` return sớm), header đổi
+  thành "Ghi nhớ vị trí các cặp nhé!"; hết 4 giây tự úp xuống, vào chơi bình thường. Khó = không đổi
+  (không xem trước). Không đổi công thức tính sao (Dễ vẫn có thể dễ đạt 3 sao hơn nhờ đã xem trước —
+  nhất quán với cách các game khác không hạ sao khi dùng gợi ý Dễ).
+- **Trạng thái**: Đã sửa (chưa xác nhận). `flutter analyze` sạch, build APK debug thành công (xem
+  đường dẫn APK mới nhất trong `HANDOVER.md`) — cần test: 4 giây xem trước đủ để không gây khó chịu
+  (không quá ngắn/dài), thẻ úp xuống đúng lúc và chơi bình thường sau đó.
+
+---
+
+## CR-022 — G08: sửa bug màu đỏ CR-020 không hiện + chặn trần chờ kết quả; G10: khôi phục "có thưởng"
+
+- **Yêu cầu (theo người dùng, 2026-07-26)**: yêu cầu "đối ứng các chức năng F11, F12, F13" + báo lại
+  G08 "chưa đối ứng triệt để": (1) nền đỏ nhạt lúc đang nghe chưa thấy hiện, (2) nhắc lại mốc 3s
+  ("4s thì lâu quá" — xem khảo sát bên dưới), (3) "Trả lại kết quả rất lâu" — nhấn mạnh lại yêu cầu
+  cải thiện performance.
+
+**G08 — mục (1), bug thật, không phải chưa code**: đọc lại `record_screen.dart`, phát hiện
+`PrimaryButton` "Ghi âm" set `color: AppColors.error` khi `_isListening` NHƯNG `onPressed` cũng
+**null (disabled) đúng lúc đó** (`(_isListening || _isScoring) ? null : _startListening`). Flutter's
+`ElevatedButton` khi bị disabled **tự vẽ màu xám mặc định, PHỚT LỜ `backgroundColor`/`foregroundColor`
+đã set**, trừ khi truyền riêng `disabledBackgroundColor`/`disabledForegroundColor` — CR-020 không hề
+truyền 2 tham số này nên màu đỏ không bao giờ thực sự hiện ra trên máy, đúng như người dùng báo. **Cách
+xử lý**: thêm 2 tham số `disabledColor`/`disabledForegroundColor` vào `PrimaryButton`
+(`common_widgets.dart`, mặc định `null` — giữ nguyên hành vi xám mặc định cho MỌI nút khác trong app,
+không đổi diện mạo chỗ nào khác); `record_screen.dart` truyền `disabledColor: AppColors.error` +
+`disabledForegroundColor: AppColors.textPrimary` khi `_isListening`.
+
+**G08 — mục (2), `pauseFor` đã đúng 3s từ CR-020, không đổi**: khả năng "(4s thì lâu quá)" là do tổng
+thời gian CẢM NHẬN (3s im lặng + thời gian engine xử lý xong sau đó) dài hơn con số 3s cấu hình —
+đúng là vấn đề của mục (3) bên dưới, không phải `pauseFor` sai.
+
+**G08 — mục (3), cải thiện thật sự (không chỉ che bằng loading)**: khảo sát sâu hơn — CR-020 chỉ thêm
+loading "Đang chấm điểm..." nhưng vẫn CHỜ VÔ THỜI HẠN `onResult(finalResult: true)` thật sự về, độ trễ
+này là của engine nhận diện (có thể qua mạng), không có trần. **Cách xử lý**: thêm hằng số
+`_resultGraceWindow = Duration(milliseconds: 1500)` — ngay khi status `done`/`notListening` báo hết
+nghe, hẹn giờ 1.5s; nếu sau đó vẫn chưa có `finalResult` thật, **chấm luôn bằng bản ghi nhận từng
+phần (partial) gần nhất** (`_recognized`, đã được cập nhật liên tục suốt lúc nói nhờ
+`partialResults: true` có sẵn) thay vì tiếp tục chờ. Có chốt `roundIndex` để không chấm nhầm từ nếu
+trẻ đã chuyển từ khác trong lúc chờ. Kết quả: trần thời gian chờ tối đa sau khi im lặng ≈ 3s (pauseFor)
++ 1.5s (grace) = 4.5s, thay vì "chờ đến khi nào engine trả lời xong" như trước — bị động theo mạng/
+máy có thể lâu hơn nhiều.
+
+**Đối ứng F11 (Memory match & Săn chữ, G09+G10) — rà lại đúng tiêu chí trong
+`01_Tai_lieu/TaiLieu_Phat_Trien_App.xlsx` sheet `03_Mô tả tính năng`**: "Cặp đúng biến mất; đếm lượt/
+điểm; **săn chữ có thưởng**". Phát hiện: CR-020 khi đổi cơ chế G10 đã **bỏ hẳn** cơ chế thưởng cũ
+("Bỏ hẳn cơ chế 'bắt 5 lượt rồi mở hình thưởng'... không còn hợp lý") — đúng về mặt UX cho mẫu mới,
+nhưng vô tình bỏ luôn 1 tiêu chí hoàn thành đã ghi trong tài liệu gốc. **Cách xử lý**: khôi phục bằng
+cách thêm field `image` vào `WordHuntQuestion` (`models.dart`, sinh lại `g10_letter_hunt.json`) và
+hiện hình + phát lại audio của **câu hỏi đầu tiên trong unit** (giữ đúng quy ước "thưởng = từ đầu
+unit" của bản cũ) như 1 mục "Phần thưởng cho bạn! 🎁" ngay trong dialog hoàn thành (không tách dialog
+riêng như bản cũ, gộp chung cho gọn) — `_showResult()` trong `letter_hunt_screen.dart`.
+G09 (đã kiểm tra "cặp đúng biến mất" — đúng ra là "không còn thao tác được nữa + tô màu khác", không
+literally biến mất khỏi lưới, cách hiểu hợp lý và phổ biến cho game memory, không sửa) và "đếm lượt"
+(đã có `_attempts`) đạt yêu cầu, không cần sửa thêm.
+
+**Đối ứng F13 (Boss Quiz & Huy hiệu, G12) — rà lại tiêu chí**: "Trộn nhiều dạng; tính điểm; trao & lưu
+huy hiệu". Xác nhận đã đạt đủ 3 ý — không cần sửa gì thêm.
+
+**Đối ứng F12 (Truyện tương tác, G11)** — xem CR-019/CR-021: xác nhận qua đọc lại xlsx, F12 chính là
+G11 (dữ liệu cần: `{pages[{img, bubbles[{text, audio}]}]}`). Đây KHÔNG phải trường hợp thiếu code như
+G09 — **hoàn toàn không có nội dung nguồn**: không 1 ảnh trang truyện, không 1 dòng lời thoại nào
+trong 2 file Excel hay `04_image+audio/`; chỉ có 4 track audio Review (22/45/68/91) nguyên vẹn CHƯA
+cắt theo bóng thoại. Không tự bịa nội dung truyện được vì đây là nội dung chương trình học thật (khác
+huy hiệu G12 — nơi tài liệu gốc cho phép "App tự định nghĩa"). Đã hỏi lại người dùng hướng xử lý (dựng
+khung màn hình/cơ chế trước không nội dung thật, hay chờ có nội dung mới bắt đầu) — **người dùng chọn
+"Chờ nội dung thật"** (2026-07-26): KHÔNG viết code G11 lúc này (kể cả khung/cơ chế placeholder),
+chờ đến khi người dùng tự mở `01_Document/book.pdf` và cung cấp lời thoại + ảnh 4 trang Review
+(20/37/54/71) thì mới bắt đầu code G11. Phiên sau: đừng tự ý dựng khung G11 nếu chưa có nội dung thật
+kèm theo yêu cầu.
+- **Trạng thái**: Đã sửa (chưa xác nhận) — G08/G10 cần test: màu đỏ đã hiện đúng, độ trễ trả kết quả
+  có cải thiện rõ rệt so với trước, phần thưởng G10 hiện đúng hình/audio/tên từ.
+
+---
+
+## CR-023 — G08 (nút Dừng), G09 (đổi tên/lưới to/khóa chặt/sao dễ), G03 (tách từng chữ), G10/G12 (layout)
+
+- **Yêu cầu (theo người dùng, 2026-07-26)**: 5 mục trên các màn hình G08/G09/G03/G10, cộng "Code luôn
+  G10 và G12" (hiểu là: cứ triển khai luôn, không cần hỏi lại; đồng thời rà thêm G12 xem có cùng vấn
+  đề layout với G10 không).
+
+**1. G08 Ghi âm — "Thêm button dừng ghi âm. (Bỏ chức năng không nghe 3s tự tắt)"**:
+- Bỏ hẳn cơ chế tự dừng khi im lặng: `pauseFor` đổi từ 3s → bằng `listenFor` (8s), để im lặng giữa
+  chừng không còn tự kích hoạt dừng — `listenFor` giữ nguyên 8s làm trần an toàn nếu trẻ quên bấm nút.
+- Thêm nút "Dừng ghi âm" thật: tái dùng CHÍNH nút "Ghi âm" (đổi label/icon thành "Dừng ghi âm"/
+  `stop_circle_rounded`, nền đỏ nhạt giữ nguyên từ CR-020/022) — khi đang nghe, nút giờ **bấm được**
+  (gọi `_stopListening()` → `_speech.stop()`) thay vì bị khóa như trước; nhờ vậy màu đỏ hiện đúng qua
+  màu nền bình thường của nút (không cần `disabledColor` nữa cho nhánh này — chỉ trạng thái "Đang
+  chấm điểm..." mới thực sự khóa nút, dùng màu xám mặc định là đủ). Logic chờ kết quả/`_isScoring`/
+  trần 1.5s của CR-022 giữ nguyên không đổi — vẫn áp dụng dù dừng bằng tay hay bằng an toàn 8s.
+
+**2. G09 Fun Time → "Lật thẻ"**:
+- Đổi `baseLabel` trong `checkpoints.dart` + AppBar title trong `memory_match_screen.dart` từ
+  "Fun Time" sang "Lật thẻ".
+- **Lưới thẻ to gần lấp đầy màn hình**: `GridView.count` mặc định tính ô vuông theo bề rộng, để
+  trống nhiều khoảng trắng phía dưới nếu số hàng ít hơn chiều cao khả dụng. Đổi sang `LayoutBuilder`
+  đo đúng kích thước khung chứa thật, tính `childAspectRatio` để ô kéo giãn lấp cả 2 chiều. Icon "?"
+  và chữ trên thẻ cũng phóng to theo (28→40, 14→20 + bọc `FittedBox` cho từ dài).
+- **"Chỉ được chơi sau khi hoàn tất các bài học trước đó"**: rà lại code thấy `isCheckpointUnlocked`
+  (dùng chung với Boss Quiz) chỉ đòi hỏi 4 game lõi (G01-G04) của CHÍNH unit gắn checkpoint — về mặt
+  toán học đã đảm bảo unit trước đó cũng xong 4 game lõi (vì unit sau chỉ mở khi unit trước xong 4
+  game lõi), nhưng KHÔNG đòi hỏi các game khác (G05/G06/G08/G10) của 2 unit trong phạm vi ôn tập.
+  Hiểu "hoàn tất các bài học" theo nghĩa rộng hơn (mọi game, không chỉ 4 game lõi) — thêm
+  `isFunTimeUnlocked(progress, fromUnit, toUnit)` riêng (`progress_repository.dart`) đòi hỏi MỌI
+  game trong `kGameTypeOrder` đạt ≥1 sao ở CẢ 2 unit (`cp.fromUnit`/`cp.toUnit`) — **không đụng
+  `isCheckpointUnlocked`/Boss Quiz**, chỉ áp dụng riêng cho Lật thẻ.
+- **Sao dễ hơn**: công thức cũ `attempts<=pairs` mới được 3 sao gần như đòi hỏi chơi hoàn hảo tuyệt
+  đối (không sai 1 lượt nào) — nới lên 1 bậc: `attempts<=pairs*2` → 3 sao, `<=pairs*3` → 2 sao,
+  còn lại 1 sao.
+
+**3. G03 Điền chữ — "Tách đáp án ra mỗi đáp án 1 chữ cái"**:
+- Bản CR-020 (từ ≥4 chữ cái ẩn 2 ô cùng lúc) cho chạm 1 ô GỘP (2 ký tự) để điền cả 2 ô 1 lượt — nay
+  đổi lại: mỗi ô trống điền RIÊNG bằng 1 lượt chạm 1 chữ cái, giống cách G03 vốn hoạt động khi chỉ có
+  1 ô. Khay chữ giờ là 1 pool CHỮ ĐƠN dùng chung cho cả 1-2 ô của lượt (đáp án tách từng ký tự +
+  distractor, tổng distractor sinh lại thành chữ đơn thay vì chuỗi cùng độ dài — xem script
+  `gen_g03_v2`, 126 mục cập nhật). Chạm đúng chữ mục tiêu của ô trống ĐẦU TIÊN (trái sang phải) mới
+  tính, xong ô đó chuyển mục tiêu sang ô kế; sai thì xáo trộn lại các ô CÒN LẠI (không xáo ô đã điền
+  đúng). Viết lại toàn bộ `fill_letter_screen.dart`: `_filledCount` (số ô đã điền đúng, thay `_filled`
+  bool cũ) + `_order`/`_usedPositions` (index thật, tách khỏi vị trí hiển thị — giống mẫu
+  `listen_pick_screen.dart` — để xáo trộn không làm lệch chữ nào đã dùng/bị loại độ khó Dễ).
+- **Chú ý xử lý trùng chữ**: nếu 2 ô trống cùng lượt có CÙNG 1 chữ cái đúng (vd "eleven" ẩn 2 vị trí
+  đều là "e"), pool vẫn chứa đủ 2 bản sao chữ đó (không dedupe) để chạm đủ 2 lần.
+
+**4. G10 Săn chữ — "Nhỏ đáp án lại để 2 đáp án cùng nằm trên 1 dòng"**:
+- Đổi từ `Wrap` (mỗi từ dài chiếm hẳn 1 dòng do rộng gần hết màn hình) sang `GridView.count
+  (crossAxisCount: 2)` cố định — luôn đúng 2 đáp án/dòng bất kể độ dài từ, giống mẫu G04 (CR-006)/G12.
+  Chữ trong ô bọc `FittedBox(fit: scaleDown)` để tự co lại vừa ô thay vì tràn (vd "grandmother"），
+  không cần quy tắc riêng cho từ ngắn/dài.
+
+**5. G12 Boss Quiz — rà thêm theo yêu cầu "code luôn G10 và G12"**:
+- Lưới đáp án G12 vốn ĐÃ là `GridView.builder(crossAxisCount: 2)` (không có vấn đề cấu trúc như G10's
+  `Wrap`), nhưng phần chữ (`option.text`, dùng cho câu hỏi nguồn G03/G05) là `Text` trần không chống
+  tràn — câu nguồn G05 (lắp câu) có thể khá dài trên ô vuông cố định. Bọc thêm `FittedBox(fit:
+  scaleDown)` cho nhất quán với cách xử lý G10, phòng tràn/cắt chữ.
+- **Trạng thái**: Đã sửa (chưa xác nhận). `flutter analyze` sạch, build APK debug thành công — cần
+  test: G08 bấm "Dừng" đúng lúc dừng mic, G09 tên/lưới/khóa/sao đúng như mô tả (đặc biệt: thử vào Lật
+  thẻ khi mới xong 4 game lõi nhưng CHƯA làm G05/G06/G08/G10 — phải vẫn khóa), G03 tách 2 ô riêng biệt
+  đúng thứ tự trái-phải, G10/G12 hiển thị chữ không tràn/không vỡ dòng.

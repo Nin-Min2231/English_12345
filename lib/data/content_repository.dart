@@ -18,8 +18,9 @@ class ContentRepository {
   // Sprint 3 — key = unit checkpoint gắn Fun Time (2/6/10/14, xem
   // checkpoints.dart), không phải mọi unit.
   final Map<int, List<MemoryPairItem>> funTimeByUnit;
-  // Sprint 3 — G10 chỉ có 1 mục/unit (không phải List), xem models.dart.
-  final Map<int, HuntLetterItem> huntByUnit;
+  // G10 (đổi mới, CR-020) — nghe & chọn từ vựng đúng, cùng shape List như mọi
+  // game khác (đã bỏ shape "config phẳng 1 mục/unit" cũ, xem models.dart).
+  final Map<int, List<WordHuntQuestion>> huntByUnit;
   // Sprint 3 — key = unit checkpoint gắn Boss Quiz (4/8/12/16).
   final Map<int, List<BossQuizQuestion>> bossQuizByUnit;
 
@@ -122,12 +123,14 @@ class ContentRepository {
           .toList();
     }
 
-    final hunt = <int, HuntLetterItem>{};
+    final hunt = <int, List<WordHuntQuestion>>{};
     final g10 = await _read('assets/data/games/g10_letter_hunt.json');
     for (final inst in (g10['instances'] as List)) {
       final m = inst as Map<String, dynamic>;
       final cfg = m['config'] as Map<String, dynamic>;
-      hunt[m['unit_id'] as int] = HuntLetterItem.fromJson(cfg);
+      hunt[m['unit_id'] as int] = (cfg['questions'] as List)
+          .map((e) => WordHuntQuestion.fromJson(e as Map<String, dynamic>))
+          .toList();
     }
 
     final bossQuiz = <int, List<BossQuizQuestion>>{};

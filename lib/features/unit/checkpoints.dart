@@ -42,12 +42,17 @@ const kBossQuizCheckpoints = [
 
 GameDef _funTimeGameDef(Checkpoint cp) => GameDef(
       gameType: 'g09',
-      baseLabel: 'Fun Time',
+      // Đổi tên "Fun Time" -> "Lật thẻ" theo yêu cầu người dùng (CR-023).
+      baseLabel: 'Lật thẻ',
       countSuffix: (n) => '($n cặp)',
       icon: Icons.grid_view_rounded,
       color: AppColors.successDark,
+      // CR-023: yêu cầu chặt hơn isCheckpointUnlocked (chỉ 4 game lõi của 1
+      // unit) — Lật thẻ (ôn tập) cần CẢ 2 unit trong phạm vi ôn tập
+      // (cp.fromUnit/toUnit) đã hoàn tất MỌI game (kGameTypeOrder), không chỉ
+      // 4 game lõi. Không đụng Boss Quiz — vẫn dùng isCheckpointUnlocked.
       isUnlockedOverride: (repo, progress, unitId) =>
-          repo.isCheckpointUnlocked(progress, unitId),
+          repo.isFunTimeUnlocked(progress, cp.fromUnit, cp.toUnit),
       countFor: (repo, unitId) => repo.funTimeByUnit[unitId]?.length ?? 0,
       buildScreen: (context, repo, unit) => MemoryMatchScreen(
         unit: unit,

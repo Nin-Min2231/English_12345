@@ -41,6 +41,54 @@ trong `01_Document/book.pdf` chưa đọc được. Build APK debug
 biệt cần test cài như bản CẬP NHẬT (không gỡ cài lại) để xác nhận migration không mất hồ sơ/tiến độ
 cũ**.
 
+**CR-020 (2026-07-26)** — 3 màn hình chỉnh nội dung theo yêu cầu người dùng, chi tiết đầy đủ
+`BUGS_CR.md`: **G03 Điền chữ** đổi mốc ẩn chữ theo độ dài từ (< 4 chữ cái ẩn 1 ô như cũ, ≥4 chữ cái
+ẩn **2 ô cùng lúc**, vị trí ngẫu nhiên có thể không liền nhau) — sinh lại `g03_fill_letter.json` +
+sửa `fill_letter_screen.dart` (cách hiển thị cũ giả định `hidden_idx` luôn liền dải, sai với 2 ô cách
+nhau). **G08 Ghi âm**: nút "Ghi âm" nền đỏ nhạt khi đang nghe, `pauseFor` 2s→3s, thêm cờ `_isScoring`
+chặn bấm ghi âm lượt mới trong lúc chờ kết quả nhận diện (độ trễ thật của engine, không phải app xử
+lý chậm). **G10 Săn chữ — đổi hẳn cơ chế** (không còn "săn chữ cái phonics"): giờ là nghe 1 từ vựng →
+chọn đúng từ đó trong 6 đáp án CHỮ (gộp từ vựng unit hiện tại + unit liền trước, Unit 1 dùng
+You/He/She) — thay hẳn model `HuntLetterItem` bằng `WordHuntQuestion` (cùng shape `ListenQuestion`),
+sinh lại `g10_letter_hunt.json` (giờ nhiều lượt/unit như G02, không còn 1 mục phẳng), viết lại
+`letter_hunt_screen.dart` theo mẫu `listen_pick_screen.dart`. Build APK debug mới (xem mục "Lệnh
+chuẩn" để build lại), **chưa test trên điện thoại thật**.
+
+**CR-021 (2026-07-26)** — theo yêu cầu người dùng rà lại Sprint 3 xem còn chức năng nào chưa đối ứng:
+phát hiện **G09 Fun Time chưa có độ khó Dễ** (CLAUDE.md §6 đã ghi nhận là ngoại lệ chưa xử lý từ
+CR-019) — đã bổ sung cơ chế riêng (không khớp 2 mẫu độ khó chuẩn): xem trước toàn bộ thẻ lật ngửa 4
+giây lúc mới vào màn hình rồi mới úp xuống chơi bình thường. Rà lại toàn bộ Sprint 3 không thấy chức
+năng nào khác còn thiếu — **G11 truyện vẫn pending** (không đổi, vẫn chặn bởi thiếu nội dung nguồn
+thật trong `01_Document/book.pdf`, không phải thứ có thể tự code xong được).
+
+**CR-022 (2026-07-26)** — người dùng yêu cầu "đối ứng F11, F12, F13" + báo G08 chưa đối ứng triệt để.
+**G08**: tìm ra bug thật (không phải thiếu code) — màu đỏ CR-020 không hề hiện vì nút đang bị
+`disabled` đúng lúc đó, Flutter tự vẽ xám mặc định đè lên trừ khi truyền riêng
+`disabledBackgroundColor` — đã thêm `disabledColor`/`disabledForegroundColor` vào `PrimaryButton`.
+Thêm trần chờ kết quả 1.5s sau khi hết nghe (`_resultGraceWindow`) — hết hạn mà chưa có `finalResult`
+thật thì chấm luôn bằng bản ghi nhận từng phần gần nhất, chặn hẳn việc chờ vô thời hạn. **F11 (G09+
+G10)**: rà theo đúng tiêu chí xlsx sheet `03_Mô tả tính năng`, phát hiện CR-020 đã vô tình bỏ tiêu chí
+"săn chữ có thưởng" khi đổi cơ chế G10 — khôi phục bằng cách hiện hình+audio câu hỏi đầu tiên của unit
+làm "phần thưởng" trong dialog hoàn thành. **F13 (G12)**: rà lại, xác nhận đã đạt đủ tiêu chí, không
+cần sửa. **F12 (G11 truyện)**: xác nhận qua xlsx đây chính là "Truyện tương tác" — vẫn hoàn toàn không
+có nội dung nguồn (khác các gap khác, không phải thiếu code); đã hỏi lại người dùng, **chọn "Chờ nội
+dung thật"** — không viết code/khung màn hình G11 cho tới khi người dùng tự cung cấp nội dung từ
+`01_Document/book.pdf` (xem BUGS_CR.md CR-022).
+
+**CR-023 (2026-07-26)** — 5 màn hình theo yêu cầu tiếp của người dùng. **G08**: bỏ hẳn tự dừng khi im
+lặng (`pauseFor` = `listenFor` = 8s), thêm nút "Dừng ghi âm" thật (tái dùng nút Ghi âm, giờ bấm được
+lúc đang nghe để gọi `_speech.stop()`). **G09 đổi tên "Fun Time" → "Lật thẻ"** (`checkpoints.dart` +
+`memory_match_screen.dart`); lưới thẻ phóng to lấp đầy màn hình qua `LayoutBuilder` tính
+`childAspectRatio`; mở khóa chặt hơn — `isFunTimeUnlocked` (mới, `progress_repository.dart`) đòi hỏi
+MỌI game (`kGameTypeOrder`) của CẢ 2 unit trong phạm vi ôn tập, không chỉ 4 game lõi như
+`isCheckpointUnlocked` (Boss Quiz không đổi); công thức sao nới rộng 1 bậc để dễ đạt 3 sao hơn. **G03
+Điền chữ**: tách 2-ô-gộp (CR-020) thành điền RIÊNG từng chữ cái 1 lượt — viết lại toàn bộ
+`fill_letter_screen.dart` (`_filledCount` thay `_filled` bool, `_order`/`_usedPositions` tách khỏi vị
+trí hiển thị giống mẫu `listen_pick_screen.dart`), sinh lại `distractors` thành chữ đơn (126 mục).
+**G10**: đổi `Wrap` → `GridView.count(crossAxisCount: 2)` + `FittedBox` để 2 đáp án luôn cùng dòng dù
+từ dài. **G12**: bọc thêm `FittedBox` cho chữ (đã là lưới 2 cột sẵn, chỉ thiếu chống tràn). Chi tiết
+đầy đủ: `BUGS_CR.md` CR-023.
+
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
 - Luồng đầy đủ: **ProfileSelect** (F02, tạo/chọn hồ sơ trẻ) → **Home** (F01, bản đồ 16 unit có sao + khóa) → **Unit** (F03, 3 game mở tuần tự) → 3 game P0 (G01 Flashcard, G02 Nghe chọn hình, G03 Điền chữ) → trả sao về lưu **Drift** (F14).
@@ -102,9 +150,11 @@ lib/
   core/widgets/parent_gate.dart # F15 — showParentGate(), confirmDeleteProfile() (2026-07-23)
   data/models/models.dart      # UnitInfo, FlashCard, ListenQuestion, FillItem, ScrambleItem,
                                 # SentenceItem, MindmapOption, MindmapItem, MemoryPairItem (G09),
-                                # HuntLetterItem (G10), BossQuizQuestion/Option (G12) (content JSON)
-  data/content_repository.dart # nạp JSON -> map theo unit_id (huntByUnit là Map<int,T> không phải
-                                # Map<int,List<T>> — chỉ G10 có 1 mục/unit, xem mục 5)
+                                # WordHuntQuestion (G10, đổi từ HuntLetterItem — CR-020),
+                                # BossQuizQuestion/Option (G12) (content JSON)
+  data/content_repository.dart # nạp JSON -> map theo unit_id (huntByUnit đổi sang
+                                # Map<int,List<WordHuntQuestion>> — CR-020, trước đây là Map<int,T>
+                                # phẳng 1 mục/unit, giờ cùng shape List như mọi game khác)
   data/db/app_database.dart    # Drift: Profiles, LessonProgressTable, EarnedBadges (Sprint 3,
                                 # schemaVersion 2 — migration đầu tiên) (+ .g.dart sinh ra)
   data/repositories/
@@ -112,7 +162,8 @@ lib/
                                 # delete() xóa cả EarnedBadges từ Sprint 3)
     progress_repository.dart   # kGameTypeOrder (đổi tên công khai từ _gameTypes, Sprint 3),
                                 # reportResult(), isUnitUnlocked, isGameUnlocked,
-                                # isCheckpointUnlocked (Sprint 3 — Fun Time/Boss Quiz)
+                                # isCheckpointUnlocked (Boss Quiz), isFunTimeUnlocked (Lật thẻ,
+                                # CR-023 — chặt hơn, đòi hỏi mọi game của cả 2 unit ôn tập)
     badge_repository.dart      # Sprint 3 — watchForProfile(), award() huy hiệu
   services/audio_service.dart  # just_audio, singleton, kiểm tra SettingsService.soundOn
   services/settings_service.dart  # F15 — âm thanh on/off, độ khó easy/hard (2026-07-23)
@@ -122,12 +173,12 @@ lib/
     badges/badge_defs.dart, badges_screen.dart  # Sprint 3 — F13/G12, xem huy hiệu đã/chưa đạt
     home/  flashcard/
     unit/unit_screen.dart, game_defs.dart  # F03; kUnitGames = danh sách game/unit (mọi unit)
-    unit/checkpoints.dart  # Sprint 3 — Fun Time/Boss Quiz chỉ gắn 1 unit cụ thể, không phải
+    unit/checkpoints.dart  # Sprint 3 — Lật thẻ/Boss Quiz chỉ gắn 1 unit cụ thể, không phải
                             # kUnitGames; extraGamesForUnit()
     games/listen_pick/  games/fill_letter/  games/scramble/
     games/sentence_build/  games/mindmap/  # G05, G06 (Sprint 2 Phase 2, 2026-07-23)
     games/record/record_screen.dart  # G08 ghi âm + nhận diện giọng nói tự chấm điểm (CR-018)
-    games/memory_match/memory_match_screen.dart  # Sprint 3 — G09 Fun Time
+    games/memory_match/memory_match_screen.dart  # Sprint 3 — G09 "Lật thẻ" (đổi tên từ Fun Time, CR-023)
     games/letter_hunt/letter_hunt_screen.dart    # Sprint 3 — G10 Săn chữ
     games/boss_quiz/boss_quiz_screen.dart        # Sprint 3 — G12, bản sao listen_pick_screen.dart
 assets/
@@ -155,12 +206,21 @@ DB tiến độ/hồ sơ (SQLite qua Drift) nằm trong app documents dir của 
 
 - `g01_flashcard.json`: `instances[].config.cards[]` = `{word_id, word, ipa, meaning_vi, image, audio}`.
 - `g02_listen_pick.json`: `instances[].config.questions[]` = `{word_id, prompt_audio, options[{word_id,image}], answer_idx}`.
-- `g03_fill_letter.json`: `instances[].config.items[]` = `{word_id, word, image, audio, hidden_idx[], answer, distractors[]}` (digraph `sh`/`er` = 2 index liền nhau, answer 2 ký tự). **Mỗi từ có 3 lượt liên tiếp** (2026-07-23, CR-010) — 3 `items` cùng `word_id`/`word` nhưng `hidden_idx`/`answer` khác nhau (3 vị trí "ô" khác nhau, digraph tính 1 ô; từ ≤2 ô như "ox" chỉ có 2 lượt); `distractors` giữ nguyên như nhau cho cả 3 lượt của cùng 1 từ.
+- `g03_fill_letter.json`: `instances[].config.items[]` = `{word_id, word, image, audio, hidden_idx[], answer, distractors[]}` (digraph `sh`/`er` tính 1 "ô" nhưng vẫn chiếm 2 index liền nhau trong `hidden_idx`). **Mỗi từ có 3 lượt liên tiếp** (2026-07-23, CR-010). **Số ô ẩn theo độ dài từ** (2026-07-26, CR-020): từ <4 chữ cái ẩn 1 ô/lượt (như cũ); từ ≥4 chữ cái ẩn **2 ô cùng lúc/lượt**, vị trí 2 ô chọn ngẫu nhiên trong các ô của từ nên **`hidden_idx` có thể KHÔNG liền nhau** (vd `[2,4]`) — `answer`/`distractors` khi đó dài 2-3 ký tự tùy có dính ô digraph hay không; `distractors` sinh riêng theo từng lượt (không còn dùng chung cho cả 3 lượt như từ <4 chữ cái, vì độ dài có thể khác nhau giữa các lượt) và LUÔN là chữ đơn (2026-07-26, CR-023 — trước đó CR-020 từng dùng chuỗi cùng độ dài với `answer` cho 1 lượt chạm gộp, nay `fill_letter_screen.dart` cho điền RIÊNG từng ký tự 1 lượt chạm nên khay chữ phải là chữ đơn: `answer.split('') + distractors`). `fill_letter_screen.dart` ghép hiển thị theo từng ký tự (`_wordSpans`), không giả định `hidden_idx` liền dải; `_filledCount` theo dõi đã điền đúng bao nhiêu ô (trái sang phải).
 - `g04_scramble.json`: `instances[].config.items[]` = `{word_id, word, image, audio}` — xáo chữ cái của `word` (digraph gộp 1 ô, giống G03).
 - `g05_sentence.json`: `instances[].config.items[]` = `{sentence, tokens[], audio}` — `tokens[]` là word-split (dấu câu dính vào từ trước, không tách riêng); `audio` là `Unit NN/audio/sentence_pattern.mp3` **dùng chung cho cả unit** (Track "Mẫu câu" nguyên track, không cắt riêng từng câu — xem mục 9).
 - `g06_mindmap.json`: `instances[].config.items[]` = `{word_id, pattern, options[{word_id,word,image,audio}], answer_idx, audio}` — `pattern` là câu ví dụ đã khuyết đúng từ đang test (`___`), tính theo từng câu (không phải 1 pattern tĩnh cho cả unit vì có unit đổi cả động từ theo chủ ngữ, vd Unit 5). `options` khi từ đó đã có audio thì tái dùng nguyên từ câu hỏi tương ứng trong `g02_listen_pick.json` (cùng hình + cùng thứ tự xáo trộn); khi từ không có audio (`twelve`, `nineteen`, `sixteen`) thì tự dựng từ các từ còn lại cùng unit, `audio: null` cho lựa chọn đó (không chặn hiển thị hình, chỉ tắt nút loa). `audio` ở cấp item (thêm 2026-07-23, CR-004) là audio "Mẫu câu" dùng chung cả unit, giống `g05_sentence.json`.
 - `g09_memory.json` (Sprint 3, CR-019): `instances[].config.pairs[]` = `{word_id, word, image, audio}` — `unit_id` của instance là unit **gắn checkpoint** (2/6/10/14), không phải unit chứa từ vựng; `pairs[]` gộp từ 2 unit trong phạm vi Fun Time đó (vd Fun Time sau Unit 2 = từ Unit 1+2). Sinh từ `g01_flashcard.json` nhưng **phải tự lọc `audio != null`** — khác giả định ban đầu, G01 (không như G02/G03) KHÔNG tự loại bỏ 7 từ mở rộng chưa có audio.
-- `g10_letter_hunt.json` (Sprint 3, CR-019): **duy nhất `config` là object phẳng, không phải list** — `instances[].config` = `{target_letter, distractors[], reward_word_id, reward_word, reward_image, reward_audio}`. `target_letter` = copy thẳng `units.json.phonics` (digraph `er`/`sh` giữ chuỗi 2 ký tự, giống G03/G04). "5 lượt bắt chữ" là UI lặp lại, không phải 5 dòng dữ liệu.
+- `g10_letter_hunt.json` (đổi hẳn cơ chế 2026-07-26, CR-020 — không còn "săn chữ cái phonics" của
+  Sprint 3/CR-019): `instances[].config.questions[]` = `{word_id, word, image, prompt_audio,
+  options[], answer_idx}`, cùng shape `g02_listen_pick.json` nhưng `options` là **CHỮ** (`List<String>`,
+  từ vựng) thay vì hình. 1 câu hỏi/từ CÓ AUDIO trong unit (số câu hỏi/unit = 3-4 tùy unit, không còn
+  cố định "5 lượt" như bản cũ). `options` = từ đúng + 5 từ nhiễu rút ngẫu nhiên từ (mọi từ của unit
+  hiện tại + mọi từ của unit liền trước, kể cả từ mở rộng không audio — chỉ cần CHỮ, không cần phát
+  âm được); Unit 1 dùng `["You","He","She"]` thay cho "unit trước" (không có unit 0). `image`
+  (CR-022) chỉ dùng cho màn "phần thưởng" cuối bài (lấy từ câu hỏi đầu tiên) — khôi phục tiêu chí F11
+  "săn chữ có thưởng" mà CR-020 vô tình bỏ. Model cũ `HuntLetterItem` (config phẳng, chỉ 1 mục/unit,
+  `target_letter`) đã bỏ hẳn.
 - `g12_boss_quiz.json` (Sprint 3, CR-019): `instances[].config.questions[]` = `{source_game, unit_id, prompt_text?, prompt_audio?, prompt_image?, options[{image?,text?}], answer_idx}` — `unit_id` của instance là unit gắn Boss Quiz (4/8/12/16); mỗi câu hỏi có `unit_id` riêng (unit gốc câu hỏi đó, để tham khảo). Trộn từ dữ liệu **đã có sẵn** của G02 (giữ nguyên)/G03 (dedupe 1 lượt/từ, đổi thành trắc nghiệm chữ)/G05 (đổi thành trắc nghiệm, câu nhiễu = xáo token của chính câu đúng). Không nạp mới content — sinh 1 lần bằng script, review tay trước khi dùng.
 
 Sinh lại config: xem `../03_Assets/data_json/README_data.md`. Script sinh G01-G04 đọc từ `04_image+audio/manifest.csv`; G05/G06 đọc trực tiếp từ `02_Phan_tich/…xlsx` sheet `02_Giáo trình chi tiết` cột F + tái dùng `g02_listen_pick.json`/`vocabulary.json` (không có manifest riêng, xem lịch sử `SPRINT2_PLAN.md` Phase 2 nếu cần sinh lại); G09/G10/G12 (Sprint 3) đọc trực tiếp từ `units.json`/`g01_flashcard.json`/`g02_listen_pick.json`/`g03_fill_letter.json`/`g05_sentence.json` đã có sẵn trong app, không cần tài liệu Excel gốc nữa (xem `SPRINT3_PLAN.md` từng phase). Sau khi sinh, **copy** vào `assets/data/` và `assets/data/games/`.
@@ -192,9 +252,9 @@ Sinh lại config: xem `../03_Assets/data_json/README_data.md`. Script sinh G01-
   "Kiểm tra" chấm toàn bộ 1 lần (đúng thì `AnswerFeedbackOverlay.correct` + mở "Tiếp theo", sai thì
   `.wrong` **nhưng giữ nguyên cách xếp**, không tự xóa/xáo — để trẻ tự sửa); nút "Làm lại" (bên trái
   "Kiểm tra") reset về trạng thái ban đầu + xáo lại khay chọn. Không dùng cơ chế "xáo trộn khi chọn
-  sai" của mẫu chấm-ngay ở trên. (G10 săn chữ cuối cùng KHÔNG dùng mẫu này — mỗi lượt chỉ có 1 chữ
-  mục tiêu, không có gì để "lắp ráp"; đã đơn giản hóa thành mẫu chấm-ngay lặp lại 5 vòng, xem
-  `letter_hunt_screen.dart` + `SPRINT3_PLAN.md` Phase 2.)
+  sai" của mẫu chấm-ngay ở trên. (G10 săn chữ KHÔNG dùng mẫu này — dùng đúng mẫu chấm-ngay chuẩn ở
+  trên, gần như bản sao `listen_pick_screen.dart` từ khi đổi cơ chế sang nghe & chọn từ vựng, xem
+  `letter_hunt_screen.dart` + CR-020 `BUGS_CR.md`.)
 - **Nút nền sáng màu (vd `AppColors.warning` vàng, `AppColors.error` đỏ nhạt) phải dùng chữ tối**:
   `PrimaryButton` có tham số `foregroundColor` (mặc định `Colors.white`, hợp nền primary/secondary/
   info/success hiện có) — truyền `AppColors.textPrimary` khi nền sáng màu để đủ tương phản cho trẻ
@@ -203,20 +263,25 @@ Sinh lại config: xem `../03_Assets/data_json/README_data.md`. Script sinh G01-
 - **Độ khó (F15, `SettingsService.instance.isEasy`, xem CR-015 `BUGS_CR.md`)**: game chọn-đáp-án
   (G02/G03/G06/G10/G12) làm mờ + vô hiệu 1 lựa chọn SAI khi Dễ; game lắp-ráp (G04/G05) tự điền sẵn
   ô/token đầu tiên khi Dễ (kể cả sau khi bấm "Làm lại"). Khó = hành vi gốc, không gợi ý thêm. **G09
-  memory là ngoại lệ chưa xử lý** — không khớp 1 trong 2 mẫu trên (không có "lựa chọn sai" để làm mờ,
-  không có "ô/token" để điền sẵn), để trống có chủ ý, xem mục 9. Game mới sau này nên theo đúng 1
-  trong 2 mẫu chuẩn thay vì nghĩ ra cơ chế gợi ý riêng, trừ khi thật sự không khớp như G09.
+  memory không khớp 2 mẫu trên** (không có "lựa chọn sai" để làm mờ, không có "ô/token" để điền sẵn)
+  nên dùng cơ chế thứ 3 riêng (CR-021): Dễ = xem trước toàn bộ thẻ lật ngửa 4 giây lúc mới vào màn
+  hình rồi mới úp xuống cho chơi bình thường (`_previewing` trong `memory_match_screen.dart`). Game
+  mới sau này nên theo đúng 1 trong các mẫu chuẩn đã có thay vì nghĩ ra cơ chế gợi ý riêng, trừ khi
+  thật sự không khớp như G09.
 - **Hết màu vai trò cho game mới**: 6 màu bảng sheet 09 (primary/secondary/success/warning/error/
   info) đã dùng hết cho G01-G06; game sau dùng lại 1 trong 6 màu nhưng tông đậm hơn (kỹ thuật
   `AppColors.xxxDark`, bắt đầu từ `infoDark` cho G08 — CR-018) thay vì hardcode hex mới, phân biệt
   bằng icon/nhãn/sắc độ: G09 `successDark`, G10 `secondaryDark`, G12 `errorDark` (Sprint 3).
-- **Game "checkpoint" gắn 1 unit cụ thể (không phải mọi unit)** — Sprint 3, G09 Fun Time (sau Unit
-  2/6/10/14) và G12 Boss Quiz (sau Unit 4/8/12/16): khai báo trong `checkpoints.dart`
+- **Game "checkpoint" gắn 1 unit cụ thể (không phải mọi unit)** — Sprint 3, G09 "Lật thẻ" (sau Unit
+  2/6/10/14, đổi tên từ "Fun Time" ở CR-023) và G12 Boss Quiz (sau Unit 4/8/12/16): khai báo trong
+  `checkpoints.dart`
   (`Checkpoint`/`kFunTimeCheckpoints`/`kBossQuizCheckpoints`/`extraGamesForUnit()`), KHÔNG thêm vào
   `kGameTypeOrder` (`progress_repository.dart`) vì game trong danh sách đó coi là xuất hiện ở MỌI
-  unit. Dùng `GameDef.isUnlockedOverride` (gọi `ProgressRepository.isCheckpointUnlocked` — cần
-  CHÍNH unit gắn checkpoint xong 4 game lõi, không phải unit trước) thay vì `isGameUnlocked` mặc
-  định. `UnitScreen` render qua vòng lặp riêng `extraGamesForUnit(unit.unitId)`, không sửa
+  unit. Dùng `GameDef.isUnlockedOverride` thay vì `isGameUnlocked` mặc định — Boss Quiz gọi
+  `ProgressRepository.isCheckpointUnlocked` (cần CHÍNH unit gắn checkpoint xong 4 game lõi, không
+  phải unit trước); Lật thẻ gọi `isFunTimeUnlocked` (CR-023, chặt hơn — cần CẢ 2 unit trong phạm vi
+  ôn tập xong MỌI game, không chỉ 4 game lõi). `UnitScreen` render qua vòng lặp riêng
+  `extraGamesForUnit(unit.unitId)`, không sửa
   `kUnitGames`.
 - **`kUnitGames` (`game_defs.dart`) và `kGameTypeOrder` (`progress_repository.dart`)**: từ Sprint 3,
   `kUnitGames` **suy ra** từ `kGameTypeOrder` (map `gameDefsByType`), không còn là 2 danh sách độc
@@ -265,10 +330,12 @@ CR-019 `BUGS_CR.md`). **Sửa số game**: tài liệu gốc gọi Boss Quiz là
 — "G13" ở các ghi chú trước đây là gõ nhầm.
 - ✅ **G09 Fun Time (memory match) — XONG** (2026-07-23): không cần nội dung mới, `g09_memory.json`
   sinh từ `g01_flashcard.json` (unit trong phạm vi Fun Time, đã lọc bỏ từ không có audio). Gắn sau
-  Unit 2/6/10/14 qua cơ chế checkpoint (mục 6), không phải game của riêng 1 unit.
-- ✅ **G10 Săn chữ — XONG** (2026-07-23): không cần nội dung mới, `target_letter` copy thẳng
-  `units.json.phonics`. Đơn giản hóa có chủ ý thành mẫu chấm-ngay lặp 5 vòng (không phải chữ
-  rơi/di chuyển thật) — xem mục 6.
+  Unit 2/6/10/14 qua cơ chế checkpoint (mục 6), không phải game của riêng 1 unit. **Độ khó Dễ đã bổ
+  sung sau (2026-07-26, CR-021)** — xem tường trước 4 giây, mục 6.
+- ✅ **G10 Săn chữ — XONG** (2026-07-23, code ban đầu); **đổi hẳn cơ chế 2026-07-26 (CR-020)**: không
+  còn "săn chữ cái phonics" — giờ nghe 1 từ vựng rồi chọn đúng từ đó trong 6 đáp án chữ (gộp từ vựng
+  unit hiện tại + unit liền trước). Mẫu chấm-ngay chuẩn (gần như bản sao G02) — xem mục 5/6 và
+  CR-020 `BUGS_CR.md`.
 - ✅ **G12 Boss Quiz + huy hiệu — XONG** (2026-07-23): câu hỏi trộn từ G02/G03/G05 đã có sẵn, không
   cần nội dung mới. Huy hiệu là nội dung app tự nghĩ (tài liệu gốc ghi "App tự định nghĩa") — 4 huy
   hiệu, tên/icon hiện là placeholder (xem `badge_defs.dart`), đổi được bất cứ lúc nào không cần sửa
@@ -348,6 +415,6 @@ ro theo quyết định ghi trong `SPRINT2_PLAN.md` Context).
   Sprint 3) — khác G02/G03/G05/G06 vốn đều đã lọc sẵn. Bất kỳ script nào sau này đọc `cards[]` từ
   file này để lấy danh sách "từ có audio" của 1 unit phải tự lọc `audio != null`, không giả định
   file đã lọc sẵn.
-- Phonics digraph `er`/`sh` (chuỗi 2 ký tự, không phải 1 char) áp dụng cho cả `hidden_idx` (G03),
-  xáo chữ (G04) **và `target_letter` (G10, Sprint 3)** — cùng 1 quy tắc dùng lại, không phải 3 quy
-  tắc riêng.
+- Phonics digraph `er`/`sh` (chuỗi 2 ký tự, không phải 1 char) áp dụng cho cả `hidden_idx` (G03) và
+  xáo chữ (G04) — cùng 1 quy tắc dùng lại. (G10 không còn liên quan từ CR-020 — đổi hẳn sang nghe &
+  chọn từ vựng, không còn khái niệm chữ cái/digraph riêng lẻ.)

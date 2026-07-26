@@ -8,40 +8,46 @@ import '../../../data/models/models.dart';
 import '../../../services/audio_service.dart';
 import '../../../services/settings_service.dart';
 
-/// F11 / G10 — Săn chữ: tìm đúng chữ mục tiêu (âm phonics của unit) giữa các
-/// chữ nhiễu, lặp lại 5 lượt (bắt đủ 5 lần đúng) để mở khóa hình thưởng. Theo
-/// mẫu chọn-đáp-án chuẩn (giống G02) — không phải chữ rơi/di chuyển thật như
-/// mô tả gốc, đơn giản hóa có chủ ý để tránh thêm animation/va chạm mới (xem
-/// SPRINT3_PLAN.md Phase 2). Nút "Nghe gợi ý" phát audio từ thưởng (âm đầu từ
-/// gần đúng âm phonics, không phải phát âm tách biệt — chưa có audio phonics
-/// riêng lẻ).
+/// F11 / G10 — Săn chữ (đổi mới, CR-020): nghe 1 từ vựng → chọn đúng từ đó
+/// trong 6 đáp án CHỮ (không phải hình như G02, không phải chữ cái đơn lẻ
+/// như bản cũ). `options[]` gộp từ vựng unit hiện tại + unit liền trước
+/// (Unit 1 dùng 3 đại từ You/He/She, xem WordHuntQuestion/content_repository).
+/// Vào màn hình tự phát audio ngay + có nút "Nghe lại". Mẫu chọn-đáp-án chuẩn
+/// (chấm ngay, xáo trộn khi sai, chốt chặn BUG-003) — giống hệt
+/// listen_pick_screen.dart (G02), chỉ khác hiển thị chữ thay vì hình.
+/// CR-022: F11 (`03_Mô tả tính năng.xlsx`) yêu cầu "săn chữ có thưởng" — CR-020
+/// đã bỏ hẳn cơ chế thưởng cũ khi đổi mẫu. Khôi phục bằng cách hiện hình +
+/// audio của câu hỏi ĐẦU TIÊN trong unit (giống quy ước "thưởng = từ đầu unit"
+/// của bản cũ) như 1 phần thưởng nhỏ trong dialog hoàn thành.
 class LetterHuntScreen extends StatefulWidget {
   final UnitInfo unit;
-  final HuntLetterItem item;
+  final List<WordHuntQuestion> questions;
 
-  const LetterHuntScreen({super.key, required this.unit, required this.item});
+  const LetterHuntScreen(
+      {super.key, required this.unit, required this.questions});
 
   @override
   State<LetterHuntScreen> createState() => _LetterHuntScreenState();
 }
 
 class _LetterHuntScreenState extends State<LetterHuntScreen> {
-  static const _target = 5;
-
-  late List<String> _options;
-  int _caught = 0;
-  int _misses = 0;
-  int? _wrongPick;
-  bool _done = false;
+  int _index = 0;
+  // Từ đã trả lời đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
+  final Set<int> _correctIndices = {};
+  int? _wrongPick; // vị trí (display) vừa chọn sai
+  bool _answered = false;
   AnswerFeedback? _feedback;
-  int? _eliminatedPos;
-
-  HuntLetterItem get _item => widget.item;
+  // Vị trí hiển thị -> index thật trong _q.options (xáo trộn khi vào câu mới
+  // hoặc sau khi chọn sai) — giống hệt listen_pick_screen.dart.
+  List<int> _order = [];
+  // Độ khó Dễ: bớt 1 lựa chọn sai (vị trí hiển thị) làm gợi ý.
+  int? _eliminatedDisplayPos;
 
   @override
   void initState() {
     super.initState();
-    _prepareOptions();
+    _prepareOrder();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _playPrompt());
   }
 
   @override
@@ -50,54 +56,51 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
     super.dispose();
   }
 
-  void _prepareOptions() {
-    _options = [_item.targetLetter, ..._item.distractors]..shuffle(Random());
+  WordHuntQuestion get _q => widget.questions[_index];
+
+  void _prepareOrder() {
+    _order = List<int>.generate(_q.options.length, (i) => i)..shuffle(Random());
     _recomputeEliminated();
   }
 
-  /// Độ khó Dễ: loại 1 chữ nhiễu — xem listen_pick_screen.dart cùng cơ chế.
+  /// Độ khó Dễ: chọn 1 vị trí hiển thị đang giữ lựa chọn SAI để loại bớt.
+  /// Phải gọi lại mỗi khi `_order` đổi — xem listen_pick_screen.dart.
   void _recomputeEliminated() {
-    _eliminatedPos = null;
-    if (SettingsService.instance.isEasy) {
+    _eliminatedDisplayPos = null;
+    if (SettingsService.instance.isEasy && _order.length > 2) {
       final wrongPositions = [
-        for (var i = 0; i < _options.length; i++)
-          if (_options[i] != _item.targetLetter) i
+        for (var i = 0; i < _order.length; i++)
+          if (_order[i] != _q.answerIdx) i
       ]..shuffle(Random());
-      _eliminatedPos = wrongPositions.first;
+      _eliminatedDisplayPos = wrongPositions.first;
     }
   }
 
-  void _playHint() => AudioService.instance.play(_item.rewardAudio);
+  void _playPrompt() => AudioService.instance.play(_q.promptAudio);
 
-  void _pick(int pos) {
-    if (_done || _feedback == AnswerFeedback.wrong || pos == _eliminatedPos) {
+  void _pick(int displayPos) {
+    if (_answered ||
+        _feedback == AnswerFeedback.wrong ||
+        displayPos == _eliminatedDisplayPos) {
       return;
     }
-    final isCorrect = _options[pos] == _item.targetLetter;
-    if (isCorrect) {
+    final actualIdx = _order[displayPos];
+    if (actualIdx == _q.answerIdx) {
       setState(() {
+        _answered = true;
         _wrongPick = null;
-        _caught++;
+        _correctIndices.add(_index);
         _feedback = AnswerFeedback.correct;
       });
+      AudioService.instance.play(_q.promptAudio);
       AudioService.instance.playSfx('correct.mp3');
-      Future.delayed(const Duration(milliseconds: 900), () {
+      Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
-        final finished = _caught >= _target;
-        setState(() {
-          _feedback = null;
-          if (finished) {
-            _done = true;
-          } else {
-            _prepareOptions();
-          }
-        });
-        if (finished) _showResult();
+        setState(() => _feedback = null);
       });
     } else {
       setState(() {
-        _wrongPick = pos;
-        _misses++;
+        _wrongPick = displayPos;
         _feedback = AnswerFeedback.wrong;
       });
       AudioService.instance.playSfx('wrong.mp3');
@@ -106,41 +109,76 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
         setState(() {
           _feedback = null;
           _wrongPick = null;
-          _options.shuffle(Random());
+          _order.shuffle(Random());
           _recomputeEliminated();
         });
       });
     }
   }
 
+  void _goTo(int newIndex) {
+    setState(() {
+      _index = newIndex;
+      _answered = _correctIndices.contains(newIndex);
+      _wrongPick = null;
+      _feedback = null;
+      _prepareOrder();
+    });
+    _playPrompt();
+  }
+
+  void _goBack() {
+    if (_index > 0) _goTo(_index - 1);
+  }
+
+  void _goNext() {
+    if (_index + 1 >= widget.questions.length) {
+      _showResult();
+      return;
+    }
+    _goTo(_index + 1);
+  }
+
   void _showResult() {
-    final stars = _misses == 0 ? 2 : 1;
-    AudioService.instance.play(_item.rewardAudio);
+    final total = widget.questions.length;
+    final correct = _correctIndices.length;
+    // G10 tối đa 2 sao (không phải 3) theo catalog gốc — xem
+    // progress_repository.dart _maxStarsByGameType.
+    final stars = correct >= total ? 2 : 1;
+    // Phần thưởng (CR-022, khôi phục tiêu chí F11 "săn chữ có thưởng") — từ
+    // đầu tiên của unit, giống quy ước thưởng của bản cũ trước CR-020.
+    final reward = widget.questions.first;
+    AudioService.instance.play(reward.promptAudio);
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
-        title: const Text('Mở khóa phần thưởng! 🎉'),
+        title: const Text('Hoàn thành! 🎉'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-                height: 120, child: WordImage(relativePath: _item.rewardImage)),
-            const SizedBox(height: AppSpacing.sm),
-            Text(_item.rewardWord,
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            Text('Đúng $correct/$total từ',
+                style: const TextStyle(fontSize: 18)),
             const SizedBox(height: AppSpacing.md),
             StarBar(stars: stars, size: 40),
+            const SizedBox(height: AppSpacing.lg),
+            const Text('Phần thưởng cho bạn! 🎁',
+                style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: 100, child: WordImage(relativePath: reward.image)),
+            const SizedBox(height: AppSpacing.xs),
+            Text(reward.word,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop(stars);
+              Navigator.of(context).pop(); // đóng dialog
+              Navigator.of(context).pop(stars); // trả sao cho UnitScreen
             },
             child: const Text('Xong'),
           ),
@@ -164,33 +202,67 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(AppSpacing.md),
-                child: Text('Đã bắt: $_caught/$_target',
+                child: Text('Từ ${_index + 1}/${widget.questions.length}',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: PrimaryButton(
-                  label: 'Nghe gợi ý',
+                  label: 'Nghe lại',
                   icon: Icons.volume_up_rounded,
                   color: AppColors.secondaryDark,
-                  onPressed: _playHint,
+                  onPressed: _playPrompt,
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
-              Text('Tìm chữ: ${_item.targetLetter.toUpperCase()}',
-                  style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold)),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: Text(
+                  'Lựa chọn đáp án đúng với từ đã nghe',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
               Expanded(
-                child: GridView.builder(
+                child: Padding(
                   padding: const EdgeInsets.all(AppSpacing.lg),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                  // CR-023: đổi từ Wrap (mỗi từ dài chiếm hẳn 1 dòng) sang
+                  // lưới 2 cột cố định, giống G04/G12 — chữ tự co lại
+                  // (FittedBox trong _optionTile) để 2 đáp án luôn nằm cùng
+                  // 1 dòng dù từ dài (vd "grandmother").
+                  child: GridView.count(
+                    crossAxisCount: 2,
                     crossAxisSpacing: AppSpacing.md,
                     mainAxisSpacing: AppSpacing.md,
+                    childAspectRatio: 2.4,
+                    children:
+                        List.generate(_q.options.length, (i) => _optionTile(i)),
                   ),
-                  itemCount: _options.length,
-                  itemBuilder: (context, i) => _optionTile(i),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SecondaryButton(
+                        label: 'Quay lại',
+                        icon: Icons.arrow_back_rounded,
+                        onPressed: _index > 0 ? _goBack : null,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: PrimaryButton(
+                        label: 'Tiếp theo',
+                        icon: Icons.arrow_forward_rounded,
+                        color: AppColors.secondaryDark,
+                        onPressed: _answered ? _goNext : null,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -201,29 +273,44 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
     );
   }
 
-  Widget _optionTile(int pos) {
-    final letter = _options[pos];
-    final eliminated = pos == _eliminatedPos;
-    Color border = Colors.transparent;
-    if (_wrongPick == pos) border = AppColors.error;
+  Widget _optionTile(int displayPos) {
+    final actualIdx = _order[displayPos];
+    final word = _q.options[actualIdx];
+    final isAnswer = actualIdx == _q.answerIdx;
+    final eliminated = displayPos == _eliminatedDisplayPos;
+    Color bg = AppColors.surface;
+    if (_answered && isAnswer) {
+      bg = AppColors.success;
+    } else if (_wrongPick == displayPos) {
+      bg = AppColors.error;
+    }
+    final light = (_answered && isAnswer) || _wrongPick == displayPos;
     return Opacity(
       opacity: eliminated ? 0.3 : 1,
       child: Material(
-        color: AppColors.surface,
+        color: bg,
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         elevation: 2,
         child: InkWell(
           borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          onTap: eliminated ? null : () => _pick(pos),
+          onTap: eliminated ? null : () => _pick(displayPos),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              border: Border.all(color: border, width: 4),
-            ),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md, vertical: AppSpacing.sm),
             alignment: Alignment.center,
-            child: Text(
-              letter.toUpperCase(),
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            // FittedBox co chữ lại cho vừa ô — cần thiết vì lưới 2 cột cố
+            // định chiều rộng trong khi từ vựng dài ngắn khác nhau nhiều
+            // (vd "he" so với "grandmother").
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                word,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: light ? Colors.white : AppColors.textPrimary,
+                ),
+              ),
             ),
           ),
         ),

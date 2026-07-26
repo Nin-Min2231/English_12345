@@ -150,15 +150,15 @@ final Map<String, GameDef> gameDefsByType = {
   'g10': GameDef(
     gameType: 'g10',
     baseLabel: 'Săn chữ',
-    countSuffix: (n) => n > 0 ? '(5 lượt)' : '',
+    countSuffix: (n) => '($n từ)',
     icon: Icons.search_rounded,
     color: AppColors.secondaryDark,
     // Sao tối đa 2 (không phải 3) theo catalog gốc — xem
     // progress_repository.dart _maxStarsByGameType.
-    countFor: (repo, unitId) => repo.huntByUnit.containsKey(unitId) ? 1 : 0,
+    countFor: (repo, unitId) => repo.huntByUnit[unitId]?.length ?? 0,
     buildScreen: (context, repo, unit) => LetterHuntScreen(
       unit: unit,
-      item: repo.huntByUnit[unit.unitId]!,
+      questions: repo.huntByUnit[unit.unitId] ?? const [],
     ),
   ),
 };
