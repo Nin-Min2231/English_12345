@@ -24,10 +24,22 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   drift_dev: ^2.16.0
   build_runner: ^2.4.9
+  flutter_launcher_icons: ^0.14.3
+
+# CR-026: icon app (nhân vật "Nin" cầm sách sao, nguồn `03_Art_cu/icon_app.webp`
+# — ảnh gốc nằm ngoài repo, chỉ 2 file đã crop/dựng sẵn trong assets/icon/ mới
+# thuộc repo). Sinh icon: `dart run flutter_launcher_icons`.
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/icon/icon_flat.png"
+  adaptive_icon_background: "#FF8A3D"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true
   assets:
+    - assets/icon/
     - assets/data/
     - assets/data/games/
     - assets/sfx/

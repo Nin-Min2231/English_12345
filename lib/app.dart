@@ -14,7 +14,7 @@ class Lop2App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tiếng Anh Lớp 2 — Global Success',
+      title: "Nin&Min's English",
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       home: ProfileSelectScreen(repo: repo, db: db),

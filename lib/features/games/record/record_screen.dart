@@ -24,6 +24,14 @@ import '../../../services/audio_service.dart';
 /// xong (`_stopListening`, gọi `_speech.stop()`); `pauseFor` đặt bằng
 /// `listenFor` để im lặng giữa chừng không còn tự ngắt (chỉ còn `listenFor`
 /// làm trần an toàn nếu trẻ quên bấm Dừng).
+/// CR-024: thêm banner hướng dẫn thao tác ở đầu màn hình + đổi trạng thái
+/// `_isScoring` từ text nhỏ inline sang `_ScoringOverlay` che toàn màn hình
+/// (dễ nhận biết hơn cho trẻ, chặn luôn thao tác trong lúc chờ điểm).
+/// CR-025: `_startListening` xóa điểm lượt trước của từ hiện tại
+/// (`_scores[_index] = null`) — sửa bug ghi âm lại không tính điểm mới/không
+/// hiện loading (nguyên nhân: `onStatus` dựa vào `_scores[_index] != null`
+/// để biết lượt đã có điểm, điểm CŨ còn sót lại làm nó tưởng lượt MỚI xong
+/// rồi); banner hướng dẫn đổi màu `infoDark` đậm + in đậm cho dễ đọc.
 class RecordScreen extends StatefulWidget {
   final UnitInfo unit;
   final List<FlashCard> items;
@@ -137,6 +145,11 @@ class _RecordScreenState extends State<RecordScreen> {
     }
     setState(() {
       _recognized = '';
+      // CR-025: xóa điểm lượt trước của TỪ NÀY — nếu không xóa, `onStatus`
+      // bên dưới thấy `_scores[_index] != null` (điểm CŨ) sẽ tưởng lượt ghi
+      // âm MỚI này đã có điểm rồi, bỏ qua cả `_isScoring`/loading lẫn cơ chế
+      // chờ kết quả (grace window) — khiến ghi âm lại không tính điểm mới.
+      _scores[_index] = null;
       _isListening = true;
       _isScoring = false;
     });
@@ -247,108 +260,178 @@ class _RecordScreenState extends State<RecordScreen> {
         foregroundColor: Colors.white,
         title: Text('Ghi âm • Unit ${widget.unit.unitId}'),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(AppSpacing.md),
-            child: Text('Từ ${_index + 1}/${widget.items.length}',
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          ),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-              child: WordImage(relativePath: _it.image),
-            ),
-          ),
-          Text(_it.word,
-              style:
-                  const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
-          const SizedBox(height: AppSpacing.lg),
-          if (_micError != null) _MicErrorBanner(kind: _micError!),
-          const SizedBox(height: AppSpacing.sm),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: PrimaryButton(
-              label: 'Nghe mẫu',
-              icon: Icons.volume_up_rounded,
-              color: AppColors.infoDark,
-              onPressed: _isListening ? null : _playModel,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: PrimaryButton(
-              label: _isListening
-                  ? 'Dừng ghi âm'
-                  : (_isScoring ? 'Đang chấm điểm...' : 'Ghi âm'),
-              icon: _isListening
-                  ? Icons.stop_circle_rounded
-                  : (_isScoring
-                      ? Icons.hourglass_top_rounded
-                      : Icons.mic_rounded),
-              // Nền đỏ nhạt khi đang nghe để dễ phân biệt trạng thái (CR-020)
-              // — chữ tối để đủ tương phản trên nền sáng màu (quy ước CR-009).
-              // CR-023: nút này giờ LUÔN bấm được lúc đang nghe (để dừng thủ
-              // công) nên không còn cần disabledColor cho nhánh đó — chỉ lúc
-              // "Đang chấm điểm..." mới thực sự disabled, dùng màu xám mặc
-              // định của Flutter là đủ (nhất quán với các nút chờ khác trong
-              // app, vd "Tiếp theo" lúc chưa trả lời).
-              color: _isListening ? AppColors.error : AppColors.infoDark,
-              foregroundColor:
-                  _isListening ? AppColors.textPrimary : Colors.white,
-              onPressed: _isListening
-                  ? _stopListening
-                  : (_isScoring ? null : _startListening),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          if (_isListening)
-            const Text('Đang nghe... nói từ vừa nghe, xong thì bấm "Dừng"!',
-                style: TextStyle(fontSize: 14, color: AppColors.textSecondary))
-          else if (_isScoring)
-            const Text('Đang chấm điểm, chờ chút nhé...',
-                style: TextStyle(fontSize: 14, color: AppColors.textSecondary))
-          else if (score != null) ...[
-            if (_recognized.isNotEmpty)
-              Text('Bé nói: "$_recognized"',
-                  style: const TextStyle(
-                      fontSize: 14, color: AppColors.textSecondary)),
-            const SizedBox(height: AppSpacing.xs),
-            Text('$score điểm — ${tier!.label}',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: tier.color)),
-          ],
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-                AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
-            child: Row(
-              children: [
-                Expanded(
-                  child: SecondaryButton(
-                    label: 'Quay lại',
-                    icon: Icons.arrow_back_rounded,
-                    onPressed: _index > 0 ? _goBack : null,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.lg, AppSpacing.md, AppSpacing.lg, 0),
+                child: Container(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  decoration: BoxDecoration(
+                    color: AppColors.infoDark.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.info_outline_rounded,
+                          color: AppColors.infoDark),
+                      SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: Text(
+                          'Hãy bấm "Ghi âm" sau đó đọc 1 lần duy nhất rồi bấm '
+                          '"Dừng ghi âm".',
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.infoDark),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: AppSpacing.md),
-                Expanded(
-                  child: PrimaryButton(
-                    label: 'Tiếp theo',
-                    icon: Icons.arrow_forward_rounded,
-                    color: AppColors.infoDark,
-                    onPressed: score != null ? _goNext : null,
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Text('Từ ${_index + 1}/${widget.items.length}',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+                  child: WordImage(relativePath: _it.image),
+                ),
+              ),
+              Text(_it.word,
+                  style: const TextStyle(
+                      fontSize: 26, fontWeight: FontWeight.bold)),
+              const SizedBox(height: AppSpacing.lg),
+              if (_micError != null) _MicErrorBanner(kind: _micError!),
+              const SizedBox(height: AppSpacing.sm),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: PrimaryButton(
+                  label: 'Nghe mẫu',
+                  icon: Icons.volume_up_rounded,
+                  color: AppColors.infoDark,
+                  onPressed: _isListening ? null : _playModel,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: PrimaryButton(
+                  label: _isListening
+                      ? 'Dừng ghi âm'
+                      : (_isScoring ? 'Đang chấm điểm...' : 'Ghi âm'),
+                  icon: _isListening
+                      ? Icons.stop_circle_rounded
+                      : (_isScoring
+                          ? Icons.hourglass_top_rounded
+                          : Icons.mic_rounded),
+                  // Nền đỏ nhạt khi đang nghe để dễ phân biệt trạng thái (CR-020)
+                  // — chữ tối để đủ tương phản trên nền sáng màu (quy ước CR-009).
+                  // CR-023: nút này giờ LUÔN bấm được lúc đang nghe (để dừng thủ
+                  // công) nên không còn cần disabledColor cho nhánh đó — chỉ lúc
+                  // "Đang chấm điểm..." mới thực sự disabled, dùng màu xám mặc
+                  // định của Flutter là đủ (nhất quán với các nút chờ khác trong
+                  // app, vd "Tiếp theo" lúc chưa trả lời).
+                  color: _isListening ? AppColors.error : AppColors.infoDark,
+                  foregroundColor:
+                      _isListening ? AppColors.textPrimary : Colors.white,
+                  onPressed: _isListening
+                      ? _stopListening
+                      : (_isScoring ? null : _startListening),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              if (_isListening)
+                const Text('Đang nghe... nói từ vừa nghe, xong thì bấm "Dừng"!',
+                    style:
+                        TextStyle(fontSize: 14, color: AppColors.textSecondary))
+              else if (score != null) ...[
+                if (_recognized.isNotEmpty)
+                  Text('Bé nói: "$_recognized"',
+                      style: const TextStyle(
+                          fontSize: 14, color: AppColors.textSecondary)),
+                const SizedBox(height: AppSpacing.xs),
+                Text('$score điểm — ${tier!.label}',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: tier.color)),
+              ],
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SecondaryButton(
+                        label: 'Quay lại',
+                        icon: Icons.arrow_back_rounded,
+                        onPressed: _index > 0 ? _goBack : null,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: PrimaryButton(
+                        label: 'Tiếp theo',
+                        icon: Icons.arrow_forward_rounded,
+                        color: AppColors.infoDark,
+                        onPressed: score != null ? _goNext : null,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          if (_isScoring) const _ScoringOverlay(),
+        ],
+      ),
+    );
+  }
+}
+
+/// Màn hình loading toàn màn hình khi chờ kết quả nhận diện giọng nói sau khi
+/// bé bấm "Dừng ghi âm" — chặn hết thao tác (Container có màu nên tự chặn hit
+/// test cho các widget bên dưới trong Stack) cho tới khi có điểm.
+class _ScoringOverlay extends StatelessWidget {
+  const _ScoringOverlay();
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Container(
+        color: Colors.black.withValues(alpha: 0.55),
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+            ),
+            child: const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(color: AppColors.infoDark),
+                SizedBox(height: AppSpacing.md),
+                Text(
+                  'Hệ thống đang chấm điểm cho bé, vui lòng chờ tý nhé!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

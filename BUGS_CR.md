@@ -982,3 +982,87 @@ kèm theo yêu cầu.
   test: G08 bấm "Dừng" đúng lúc dừng mic, G09 tên/lưới/khóa/sao đúng như mô tả (đặc biệt: thử vào Lật
   thẻ khi mới xong 4 game lõi nhưng CHƯA làm G05/G06/G08/G10 — phải vẫn khóa), G03 tách 2 ô riêng biệt
   đúng thứ tự trái-phải, G10/G12 hiển thị chữ không tràn/không vỡ dòng.
+
+## CR-024 — G08 (SCR-12): banner hướng dẫn thao tác + màn hình loading khi chấm điểm
+
+- **Yêu cầu (theo người dùng, 2026-08-21)**: 2 mục trên màn G08 Ghi âm (`record_screen.dart`).
+
+**1. Banner hướng dẫn thao tác**:
+- Thêm 1 banner (icon `info_outline` + nền `infoDark` nhạt 12% alpha, giống kiểu `_MicErrorBanner`)
+  ngay đầu màn hình, trên cả dòng "Từ x/y": `Hãy bấm "Ghi âm" sau đó đọc 1 lần duy nhất rồi bấm
+  "Dừng ghi âm".` — chỉ là chữ tĩnh hướng dẫn, không đổi logic ghi âm.
+
+**2. Màn hình loading khi đang chấm điểm**:
+- Trước đây trạng thái `_isScoring` chỉ hiện 1 dòng chữ nhỏ "Đang chấm điểm, chờ chút nhé..." xen giữa
+  nội dung màn hình (dễ bị bỏ qua). Đổi sang `_ScoringOverlay` — 1 lớp phủ toàn màn hình (`Positioned.
+  fill` trong `Stack` bọc ngoài `Column` cũ, `body` đổi từ `Column` sang `Stack` để chứa cả 2) với nền
+  đen mờ 55% alpha + thẻ trắng bo góc ở giữa chứa `CircularProgressIndicator` + chữ: `Hệ thống đang
+  chấm điểm cho bé, vui lòng chờ tý nhé!`. Container có màu nên tự chặn hit-test xuống các nút bên
+  dưới (không cần `IgnorePointer`/`AbsorbPointer` riêng) — nhất quán với lý do khóa nút "Ghi âm" đã có
+  từ CR-020/CR-022 (chặn bấm ghi âm lượt mới trong lúc chờ kết quả nhận diện). Bỏ dòng chữ inline cũ
+  vì đã được thay thế hoàn toàn bởi overlay.
+- **Trạng thái**: Đã sửa. `flutter analyze` sạch (cả file lẫn toàn project), `dart format` đã chạy —
+  chưa build lại APK / chưa test trên điện thoại thật, cần xác nhận: overlay hiện đúng lúc bấm "Dừng
+  ghi âm" và tự tắt khi có điểm, banner hướng dẫn không che khuất/đẩy lệch layout ảnh minh họa.
+
+## CR-025 — G08: sửa bug ghi âm lại không tính điểm mới/không hiện loading + màu banner dễ đọc hơn
+
+- **Yêu cầu (theo người dùng test bản CR-024, 2026-08-21)**: 2 mục.
+
+**1. Bug thật — ghi âm lại (đọc lại lần 2+ cho CÙNG 1 từ) không được tính điểm mới, không có loading,
+vẫn hiện kết quả lần đầu**:
+- Nguyên nhân: `onStatus` (callback của `_speech`, trong `_initSpeech`) dùng
+  `final alreadyScored = _scores[roundIndex] != null;` để quyết định có bật `_isScoring`/hẹn giờ
+  `_resultGraceWindow` hay không — nhưng `_scores[roundIndex]` là điểm của LẦN GHI ÂM TRƯỚC, không bị
+  xóa khi bấm "Ghi âm" lại. Vì vậy ngay khi bắt đầu lượt ghi âm MỚI, `alreadyScored` đã là `true` từ
+  điểm CŨ → bỏ qua cả `_isScoring` (không có overlay loading của CR-024) lẫn hẹn giờ chờ kết quả — chỉ
+  còn đường duy nhất cập nhật điểm là `_onResult` nhận được `finalResult: true` thật từ engine, thứ
+  không đảm bảo luôn xảy ra (lý do ban đầu CR-022 phải thêm cơ chế "chờ rồi chấm bằng partial" này).
+- Sửa: `_startListening` xóa `_scores[_index] = null` ngay khi bắt đầu lượt ghi âm mới (cùng lúc với
+  reset `_recognized`) — nhờ vậy `onStatus` coi lượt mới như lượt ĐẦU (giống hệt hành vi lần ghi âm thứ
+  nhất): `_isScoring` bật đúng (hiện `_ScoringOverlay`), hẹn giờ `_resultGraceWindow` được lên lịch lại,
+  điểm cũ biến mất khỏi màn hình ngay khi bắt đầu nói (đúng yêu cầu "Clear kết quả lần 1, lấy kết quả
+  ghi âm lần mới nhất").
+
+**2. Màu chữ banner hướng dẫn (CR-024) khó nhìn**:
+- Đổi từ `AppColors.textSecondary` (xám nhạt) sang `AppColors.infoDark` (xanh đậm, màu chủ đạo của
+  màn G08) + `FontWeight.w700` — nổi rõ trên nền banner nhạt màu, không cần thêm màu mới ngoài bảng
+  màu đã có.
+- **Trạng thái**: Đã sửa, `flutter analyze`/`dart format` sạch, đã build lại APK debug
+  (`lop2_english_app-debug-2026-08-21-2.apk`) — **chưa test trên điện thoại thật**, cần xác nhận: ghi
+  âm lại nhiều lần liên tiếp cho cùng 1 từ đều hiện loading + ra điểm mới đúng theo lần đọc gần nhất.
+
+## CR-026 — Đổi tên app + đổi icon app
+
+- **Yêu cầu (theo người dùng, 2026-08-21)**: đặt tên app "Nin&Min's English"; dùng ảnh trong
+  `03_Art_cu/` (ngoài repo, ngang hàng `05_App/`) làm icon.
+
+**1. Đổi tên**: `android:label` trong `AndroidManifest.xml` (tên hiển thị dưới icon ngoài màn hình
+chính) và `title` của `MaterialApp` trong `app.dart` (tên hiện trong màn hình đa nhiệm/task switcher)
+— cả 2 đổi từ "Tiếng Anh Lớp 2"/"Tiếng Anh Lớp 2 — Global Success" sang `Nin&Min's English`
+(`&` viết `&amp;` trong XML). Không đổi `name:` trong `pubspec.yaml` (package name Dart nội bộ,
+không hiển thị cho người dùng, đổi sẽ phải sửa lại import xuyên suốt `lib/` không cần thiết).
+
+**2. Icon app**: nguồn duy nhất tìm thấy trong `03_Art_cu/` là `icon_app.svg`/`icon_app.webp` — cùng 1
+nhân vật "Nin" (theo `<title>` trong SVG: "Nin cầm sách ngôi sao"), bản webp có nền trong suốt
+(619x1024, ảnh full-bleed, chạm đủ 4 cạnh). Vì icon launcher cần vuông và ký tự nhỏ ở kích thước icon
+thật (48-192px) nên **không dùng nguyên cả người** (chân/quần sẽ quá nhỏ để nhận ra) — đã cắt lấy phần
+đầu + tay chỉ lên trời + cuốn sách có sao (phần dễ nhận diện + màu sắc nhất), scale lại còn ~76% chiều
+cao khung vuông 1024x1024 rồi canh giữa, chừa lề đều 4 phía để không bị cắt mất khi launcher tự bo
+tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới, trong repo — ảnh nguồn gốc
+`03_Art_cu/` KHÔNG copy vào repo):
+  - `icon_foreground.png` — nhân vật nền trong suốt, dùng cho `adaptive_icon_foreground`.
+  - `icon_flat.png` — nhân vật ghép sẵn lên nền cam `#FF8A3D` (đúng `AppColors.secondary` sẵn có,
+    không thêm màu mới), dùng cho `image_path` (icon dẹt cho Android <8/preview) và
+    `adaptive_icon_background` dùng luôn màu hex thay vì file ảnh riêng.
+- Sinh icon bằng package `flutter_launcher_icons` (thêm `dev_dependencies`, cấu hình trong
+  `pubspec.yaml` mục `flutter_launcher_icons:`) — chạy `dart run flutter_launcher_icons`, tự động ghi
+  đè `android/app/src/main/res/mipmap-*/ic_launcher.png` + tạo `mipmap-anydpi-v26/ic_launcher.xml` +
+  `drawable-*/ic_launcher_foreground.png` + `values/colors.xml` (màu nền adaptive icon).
+- **Trạng thái**: Đã sửa, `flutter analyze` sạch, đã build lại APK debug
+  (`lop2_english_app-debug-2026-08-21-2.apk`) — **chưa test trên điện thoại thật**, cần xác nhận: tên
+  app hiện đúng "Nin&Min's English" dưới icon, icon hiện đúng hình bé Nin trên nền cam (kể cả kiểu
+  icon tròn/vuông tùy launcher của điện thoại). **Cài như bản cập nhật (đè lên bản cũ, KHÔNG gỡ cài
+  lại)** — giống mọi bản build trước, để không mất hồ sơ/tiến độ trong DB. Vài launcher Android có thể
+  cache icon cũ vài giây/vài phút sau khi cài đè — nếu icon chưa đổi ngay, đợi hoặc khởi động lại màn
+  hình chính (không phải gỡ app) trước khi kết luận có lỗi.

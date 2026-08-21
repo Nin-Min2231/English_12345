@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
     <application
-        android:label="Tiếng Anh Lớp 2"
+        android:label="Nin&amp;Min's English"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
