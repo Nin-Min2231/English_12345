@@ -119,16 +119,22 @@ class _UnitScreenState extends State<UnitScreen> {
                   style: const TextStyle(
                       fontSize: 16, color: AppColors.textSecondary)),
               const SizedBox(height: AppSpacing.xl),
-              for (final game in kUnitGames) ...[
-                _gameRowFor(context, game, progress, unit),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+              // Sprint 4 — đa lớp: game CHƯA CÓ dữ liệu cho unit/lớp này (vd
+              // G06 "Hoàn thành câu" chưa phát triển cho Lớp 1, xem BUGS_CR.md
+              // CR-028) bị ẩn hẳn khỏi danh sách — "bỏ ra khỏi chương trình"
+              // đúng nghĩa, không hiện dòng khóa vĩnh viễn gây hiểu nhầm.
+              for (final game in kUnitGames)
+                if (game.countFor(widget.repo, unit.unitId) > 0) ...[
+                  _gameRowFor(context, game, progress, unit),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
               // Sprint 3 — Fun Time (G09) / Boss Quiz (G12) chỉ xuất hiện
               // trên đúng 1 unit checkpoint, xem checkpoints.dart.
-              for (final game in extraGamesForUnit(unit.unitId)) ...[
-                _gameRowFor(context, game, progress, unit),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+              for (final game in extraGamesForUnit(unit.unitId))
+                if (game.countFor(widget.repo, unit.unitId) > 0) ...[
+                  _gameRowFor(context, game, progress, unit),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
             ],
           );
         },
@@ -141,7 +147,9 @@ class _UnitScreenState extends State<UnitScreen> {
     final stars = _progressRepo.starsFor(progress, unit.unitId, game.gameType);
     final unlocked =
         game.isUnlockedOverride?.call(_progressRepo, progress, unit.unitId) ??
-            _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType);
+            _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType,
+                hasContent: (t) =>
+                    gameDefsByType[t]!.countFor(widget.repo, unit.unitId) > 0);
     final count = game.countFor(widget.repo, unit.unitId);
 
     return _gameRow(

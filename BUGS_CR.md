@@ -1137,3 +1137,42 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   4. Đổi lớp 2 chiều (Home Lớp 2 → "Đổi lớp" → Lớp 1 → Home Lớp 1 → "Đổi lớp" → Lớp 2) giữ đúng tiến
      độ riêng từng lớp, không lẫn sao.
   5. Chạm nhanh 2 lần vào ô "Lớp 1" không mở 2 Home chồng nhau (cờ `_loading` trong `GradeSelectScreen`).
+
+## CR-028 — Lớp 1: G06 "Hoàn thành câu" khóa cứng vĩnh viễn G08 "Ghi âm" — bỏ G06 khỏi chương trình Lớp 1
+
+- **Người dùng báo (2026-08-21, sau khi test bản Sprint 4 CR-027)**: "Kiểm tra lớp 1, game 'Hoàn thành
+  câu' có phát triển không. Nếu không hãy bỏ ra khỏi chương trình lớp 1. Hiện tại khi test thì disable
+  'Hoàn thành câu' không chơi được nên không thể qua phần 'Ghi âm'."
+- **Xác nhận**: G06 (Hoàn thành câu) đúng là **chưa phát triển cho Lớp 1** — quyết định có chủ ý từ
+  CR-027 (Excel Unit 1 Lớp 1 chỉ có hội thoại tên riêng "Hi, I'm Bill...", không có mẫu câu khuyết
+  `___` nào áp dụng được cho ball/bike/book), không phải thiếu sót.
+- **Nguyên nhân bug thật (không phải chỉ là "còn thiếu nội dung")**: `kGameTypeOrder` (dùng CHUNG mọi
+  lớp) có thứ tự `[..., g05, g06, g08, g10]` — `isGameUnlocked('g08')` đòi hỏi "game NGAY TRƯỚC" (g06)
+  đạt ≥1 sao. Vì G06 không có dữ liệu cho Lớp 1 (`count == 0` → nút luôn `disabled`, không ai chơi
+  được), **không ai bao giờ earn được sao của G06** → G08 bị khóa **vĩnh viễn**, không phải tạm thời.
+  Đây là hệ quả tất yếu của quyết định "bỏ dữ liệu G06 cho Lớp 1" ở CR-027 mà lúc đó chưa lường tới
+  (chỉ audit + build tĩnh, chưa test tương tác thật trên thiết bị/luồng chơi).
+- **Sửa (tổng quát, không hardcode riêng "G06 + Lớp 1")**:
+  1. `progress_repository.dart` — `isGameUnlocked()` thêm tham số tùy chọn `hasContent(gameType) →
+     bool`: khi tìm "game ngay trước" trong `kGameTypeOrder`, bỏ qua (coi như trong suốt) mọi game
+     KHÔNG có dữ liệu cho unit/lớp đang xét, lùi tiếp về game trước đó nữa cho tới khi gặp 1 game có
+     dữ liệu (hoặc hết danh sách → luôn mở). Không truyền tham số này thì y hệt hành vi cũ (Lớp 2
+     không đổi gì, vì mọi game đều có dữ liệu mọi unit).
+  2. `unit_screen.dart` — 2 vòng lặp hiện danh sách game (`kUnitGames` + `extraGamesForUnit`) chỉ hiện
+     dòng khi `game.countFor(repo, unitId) > 0` — game chưa có dữ liệu bị **ẩn hẳn** khỏi màn hình
+     (đúng nghĩa "bỏ ra khỏi chương trình", không còn dòng khóa vĩnh viễn gây hiểu nhầm là bug); truyền
+     `hasContent: (t) => gameDefsByType[t]!.countFor(repo, unitId) > 0` vào `isGameUnlocked`.
+  - Cách này tổng quát cho MỌI lớp/unit thiếu MỌI loại game sau này (không riêng G06/Lớp1) — Lớp 3/4/5
+    khi bắt đầu chắc chắn cũng sẽ thiếu nhiều game ở Unit đầu, tự động không bị khóa cứng theo kiểu này.
+- **Rủi ro CÙNG LOẠI đã biết nhưng CHƯA sửa (ghi nhận, không chặn release này)**: `isFunTimeUnlocked`
+  (Lật thẻ, G09) đòi hỏi **MỌI** game trong `kGameTypeOrder` (kể cả g06) đạt sao ở cả 2 unit ôn tập —
+  nếu Lớp 1 sau này có dữ liệu G09 cho checkpoint Unit 2 mà G06 vẫn chưa phát triển, Lật thẻ sẽ bị
+  khóa cứng theo đúng cơ chế tương tự (khác G08: game này dùng `isUnlockedOverride` riêng, không đi
+  qua `isGameUnlocked` vừa sửa). Chưa sửa ngay vì Lớp 1 hiện chỉ có Unit 1 (chưa chạm checkpoint nào)
+  — cần nhớ xử lý cùng lúc với việc sinh dữ liệu G09 cho Lớp 1 Unit 2 sau này (thêm `hasContent` vào
+  `GameDef.isUnlockedOverride`, cần `ContentRepository` trong closure — hiện `checkpoints.dart` chỉ có
+  `ProgressRepository`).
+- **Trạng thái**: Đã sửa, `flutter analyze` sạch, build APK debug thành công:
+  `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk` — **chưa test lại trên điện thoại
+  thật**, cần xác nhận: Lớp 1 Unit 1 không còn hiện dòng "Hoàn thành câu", chơi xong G05 (Lắp ráp câu)
+  là vào được thẳng G08 (Ghi âm); Lớp 2 (mọi unit đều có đủ G06) không đổi hành vi gì.

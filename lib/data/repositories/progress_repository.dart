@@ -95,9 +95,24 @@ class ProgressRepository {
       kGameTypeOrder.fold(0, (sum, g) => sum + starsFor(progress, unitId, g));
 
   /// F03 — game đầu tiên (g01) luôn mở; game sau cần game ngay trước đạt ≥1 sao.
+  /// Sprint 4 — đa lớp: [hasContent] (nếu truyền) cho biết loại game nào KHÔNG
+  /// có dữ liệu cho unit/lớp này (vd G06 "Hoàn thành câu" chưa phát triển cho
+  /// Lớp 1) — những game đó bị bỏ qua khi tìm "game ngay trước", coi như trong
+  /// suốt/không tồn tại trong chuỗi mở khóa. Không có tham số này thì y hệt
+  /// hành vi cũ (dùng cho Lớp 2, mọi game đều có dữ liệu mọi unit). Thiếu chốt
+  /// này thì 1 game chưa phát triển sẽ khóa cứng VĨNH VIỄN mọi game phía sau
+  /// nó trong kGameTypeOrder — không ai bao giờ earn được sao của 1 game
+  /// không chơi được.
   bool isGameUnlocked(
-      List<LessonProgress> progress, int unitId, String gameType) {
-    final i = kGameTypeOrder.indexOf(gameType);
+      List<LessonProgress> progress, int unitId, String gameType,
+      {bool Function(String gameType)? hasContent}) {
+    var i = kGameTypeOrder.indexOf(gameType);
+    if (i <= 0) return true;
+    if (hasContent != null) {
+      while (i > 0 && !hasContent(kGameTypeOrder[i - 1])) {
+        i--;
+      }
+    }
     if (i <= 0) return true;
     return starsFor(progress, unitId, kGameTypeOrder[i - 1]) >= 1;
   }
