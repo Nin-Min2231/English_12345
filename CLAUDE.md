@@ -111,8 +111,18 @@ static/global state); asset Lớp 2 di chuyển sang `assets/{content,data}/lop2
 `SettingsScreen` bỏ field `repo` (chưa biết lớp nào lúc đó). G06 cố tình bỏ qua cho Lớp 1 Unit 1 (Excel
 xác nhận pattern là hội thoại tên riêng, không có mẫu điền-từ). Trước khi code đã audit kỹ
 `SPRINT4_PLAN.md` (viết bởi phiên Cowork khác) và vá 2 lỗ hổng kỹ thuật thật (asset() tĩnh sẽ vỡ build;
-đọc file game thiếu sẽ crash lúc chạm "Lớp 1") — xem `BUGS_CR.md` CR-027 để biết chi tiết đầy đủ. Build
-APK debug: `05_Build_APK/lop2_english_app-debug-2026-08-21-3-sprint4.apk`, code trên nhánh
+đọc file game thiếu sẽ crash lúc chạm "Lớp 1") — xem `BUGS_CR.md` CR-027 để biết chi tiết đầy đủ.
+
+**CR-028 (2026-08-21, người dùng test ra ngay)** — G06 (không có dữ liệu cho Lớp 1) đã khóa cứng
+**vĩnh viễn** G08 vì `isGameUnlocked` đòi hỏi game NGAY TRƯỚC trong `kGameTypeOrder` (dùng chung mọi
+lớp) có sao, mà G06 không ai chơi được nên không ai bao giờ earn được sao đó. Sửa tổng quát (không
+riêng G06/Lớp1): `isGameUnlocked` thêm `hasContent` callback để bỏ qua mọi game không có dữ liệu khi
+tìm "game ngay trước" (lùi tiếp về game trước đó nữa); `unit_screen.dart` ẩn hẳn dòng game khi
+`countFor == 0` thay vì hiện khóa vĩnh viễn. Lớp 2 không đổi hành vi (mọi game đều có dữ liệu mọi
+unit). **Rủi ro cùng loại chưa sửa**: `isFunTimeUnlocked` (Lật thẻ) cũng đòi mọi game trong
+`kGameTypeOrder` có sao — sẽ gặp lại vấn đề này khi Lớp 1 có dữ liệu G09 mà G06 vẫn chưa phát triển,
+xem `BUGS_CR.md` CR-028 mục cuối. Build APK debug mới nhất:
+`05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk`, code trên nhánh
 **`sprint-4`** — **chưa test trên điện thoại thật**, đặc biệt quan trọng vì đây là migration DB lần 2
 (xem checklist Verification trong `BUGS_CR.md` CR-027).
 
