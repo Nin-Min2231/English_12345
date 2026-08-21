@@ -119,12 +119,20 @@ lớp) có sao, mà G06 không ai chơi được nên không ai bao giờ earn �
 riêng G06/Lớp1): `isGameUnlocked` thêm `hasContent` callback để bỏ qua mọi game không có dữ liệu khi
 tìm "game ngay trước" (lùi tiếp về game trước đó nữa); `unit_screen.dart` ẩn hẳn dòng game khi
 `countFor == 0` thay vì hiện khóa vĩnh viễn. Lớp 2 không đổi hành vi (mọi game đều có dữ liệu mọi
-unit). **Rủi ro cùng loại chưa sửa**: `isFunTimeUnlocked` (Lật thẻ) cũng đòi mọi game trong
-`kGameTypeOrder` có sao — sẽ gặp lại vấn đề này khi Lớp 1 có dữ liệu G09 mà G06 vẫn chưa phát triển,
-xem `BUGS_CR.md` CR-028 mục cuối. Build APK debug mới nhất:
-`05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk`, code trên nhánh
-**`sprint-4`** — **chưa test trên điện thoại thật**, đặc biệt quan trọng vì đây là migration DB lần 2
-(xem checklist Verification trong `BUGS_CR.md` CR-027).
+unit). **Rủi ro cùng loại chưa sửa — SẼ CHẮC CHẮN GẶP LẠI, không còn là giả thuyết**: `isFunTimeUnlocked`
+(Lật thẻ) cũng đòi mọi game trong `kGameTypeOrder` có sao — ngay khi Lớp 1 có dữ liệu G09 cho
+checkpoint sau Unit 2 (trong lúc làm Unit 2-16) mà G06 vẫn chưa phát triển cho Unit 1, Lật thẻ sẽ bị
+khóa cứng giống hệt bug này — PHẢI sửa `isFunTimeUnlocked`/`GameDef.isUnlockedOverride` theo cùng
+pattern `hasContent` TRƯỚC KHI sinh dữ liệu G09/G12 cho Lớp 1, xem phụ lục cuối `SPRINT4_PLAN.md`
+("Phụ lục ... chuẩn bị cho Unit 2-16") để biết chi tiết đầy đủ + bảng phân tích G06 khả dụng cho
+từng unit 2-16 (không phải cả Lớp 1 đều thiếu G06 như Unit 1 — chỉ 4/16 unit thực sự không có mẫu câu
+khuyết phù hợp).
+
+✅ **ĐÃ TEST OK TRÊN ĐIỆN THOẠI THẬT** (người dùng xác nhận 2026-08-21 đêm, sau CR-028) — migration DB
+lần 2 an toàn, Lớp 2 hồi quy đúng, Lớp 1 Unit 1 chơi được đầy đủ, G08 không còn bị chặn. Build APK
+debug đã test: `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk`, code trên nhánh
+**`sprint-4`** (chưa push/merge — chờ quyết định của người dùng). **Việc tiếp theo: Lớp 1 Unit 2-16**,
+xem phụ lục `SPRINT4_PLAN.md` nói trên + `BUGS_CR.md` CR-027/CR-028.
 
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
@@ -412,19 +420,23 @@ CR-019 `BUGS_CR.md`). **Sửa số game**: tài liệu gốc gọi Boss Quiz là
   (nếu có) nhiều khả năng nằm trong `01_Document/book.pdf` trang 20/37/54/71 — file quá lớn để đọc
   trong môi trường hiện tại, cần người mở tay.
 
-**Sprint 4 (P3) — đa lớp, đã code Phase 0-2 (chỉ Lớp 1 Unit 1), CR-027** (kế hoạch gốc:
-`SPRINT4_PLAN.md`, chi tiết đã code: `BUGS_CR.md` CR-027):
-- ✅ **Multi-grade plumbing (Phase 0) — XONG**: migration DB lần 2 (cột `grade`), `ContentRepository`/
-  `WordImage`/`AudioService` tham số hóa theo lớp, asset Lớp 2 di chuyển sang `lop2/`.
-- ✅ **Màn "Chọn lớp" SCR-00 (Phase 1) — XONG**: `grade_select_screen.dart`, nút "Đổi lớp" trên Home.
-- ✅ **Lớp 1 Unit 1 (Phase 2) — XONG**: G01-G05/G08/G10 chơi được đầy đủ, G06 cố tình bỏ qua.
-- ⏸️ **Lớp 1 Unit 2-16 — CHƯA LÀM** (để sprint sau, lặp lại đúng Phase 2 của `SPRINT4_PLAN.md` cho
-  từng unit — dữ liệu ảnh/audio 16 unit đã có sẵn trong `04_image+audio/01_Lop-1/`, chỉ cần sinh JSON
-  game + copy asset, không cần sửa lại Phase 0/1).
+**Sprint 4 (P3) — đa lớp, đã code + TEST OK Phase 0-2 (chỉ Lớp 1 Unit 1), CR-027/CR-028** (kế hoạch
+gốc: `SPRINT4_PLAN.md` + phụ lục "Unit 2-16" ở cuối file đó, chi tiết đã code:
+`BUGS_CR.md` CR-027/CR-028):
+- ✅ **Multi-grade plumbing (Phase 0) — XONG, đã test OK trên điện thoại thật**: migration DB lần 2
+  (cột `grade`), `ContentRepository`/`WordImage`/`AudioService` tham số hóa theo lớp, asset Lớp 2 di
+  chuyển sang `lop2/`.
+- ✅ **Màn "Chọn lớp" SCR-00 (Phase 1) — XONG, đã test OK**: `grade_select_screen.dart`, nút "Đổi lớp"
+  trên Home.
+- ✅ **Lớp 1 Unit 1 (Phase 2) — XONG, đã test OK**: G01-G05/G08/G10 chơi được đầy đủ, G06 cố tình bỏ
+  qua (CR-028 đã sửa để việc bỏ G06 không khóa cứng G08 — bug thật người dùng test ra ngay hôm đó).
+- ⏸️ **Lớp 1 Unit 2-16 — CHƯA LÀM, việc tiếp theo ưu tiên #1**: đọc kỹ phụ lục cuối `SPRINT4_PLAN.md`
+  trước khi bắt đầu — đã có sẵn bảng phân tích G06 khả dụng cho từng unit (chỉ 4/16 unit thực sự
+  không dùng được G06, KHÔNG phải cả Lớp 1 như Unit 1), và **1 rủi ro PHẢI sửa trước khi sinh dữ liệu
+  G09/G12 cho Lớp 1**: `isFunTimeUnlocked` có cùng loại bug với CR-028 (chưa sửa), sẽ lộ ra ngay khi
+  checkpoint Lật thẻ đầu tiên (sau Unit 2) có dữ liệu.
 - ⏸️ **Lớp 3/4/5 — chưa có giáo trình/dữ liệu nguồn**, kiến trúc đã tổng quát hóa sẵn (`grade: int`
   không hardcode phạm vi, `kGradeOptions` chỉ cần thêm 1 dòng khi có dữ liệu).
-- **Chưa test trên điện thoại thật** — xem checklist Verification đầy đủ trong `BUGS_CR.md` CR-027,
-  đặc biệt: cài đè lên bản có hồ sơ Lớp 2 thật để xác nhận migration lần 2 không mất dữ liệu.
 
 **Nợ kỹ thuật nhỏ chưa xử lý:** chưa có test tự động (`test/` đang trống — SPRINT2_PLAN.md có đề
 xuất thêm vài test cho `progress_repository.dart`/xóa hồ sơ nhưng chưa làm); `flutter build apk

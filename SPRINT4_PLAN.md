@@ -322,3 +322,99 @@ rồi 3, ... 16 — Phase 0/1 chỉ làm đúng 1 lần ở sprint này cho **c�
 3/4/5 sau này **không cần làm lại Phase 0/1** — chỉ lặp lại Phase 2 (dữ liệu) cho lớp mới + thêm đúng
 1 dòng vào `kGradeOptions` (Phase 1), xem mục "Lớp 3/4/5 sau này — plan này đã tính tới chưa?" ở đầu
 file (Context).
+
+---
+
+## Phụ lục (2026-08-21 đêm, sau khi Phase 0-2/Unit 1 đã code + test OK) — chuẩn bị cho Unit 2-16
+
+Phase 0/1 đã xong và **đã test OK trên điện thoại thật** (xem `BUGS_CR.md` CR-027/CR-028 — CR-028 vá
+1 bug thật phát hiện khi test: G06 không có dữ liệu Lớp 1 đã khóa cứng vĩnh viễn G08, đã sửa tổng
+quát bằng `hasContent` callback trong `isGameUnlocked` + ẩn hẳn game thiếu dữ liệu khỏi màn Unit).
+Phụ lục này bổ sung phân tích cụ thể cho Unit 2-16 mà bản Phase 2 gốc (chỉ làm Unit 1) chưa cần tới.
+
+### Xác nhận lại nguồn dữ liệu (đọc trực tiếp, không suy đoán)
+
+- **KHÔNG có audio "Mẫu câu" chung/unit nào cho Lớp 1** (đã kiểm tra `04_image+audio/01_Lop-1/UnitNN/audio/`
+  cho nhiều unit — chỉ có `word_*.mp3`, không có `sentence_pattern.mp3` hay chant/song audio nào cả).
+  **Mọi unit** của Lớp 1, không chỉ Unit 1, sẽ có `g05_sentence.json` với `audio: null` (giống Unit 1) —
+  không phải thiếu sót riêng của Unit 1.
+- **Số từ `core` mỗi unit — hầu hết 4, một số 3** (đọc từ `manifest.json`):
+  U01-U11=4 từ, **U12=3** (lake/leaf/lemons), **U13=3** (bananas/noodles/nuts), U14-U15=4,
+  **U16=3** (wash/water/window). U09 và U16 có thêm từ `extended` (số đếm one-ten) — hầu hết
+  `audio_ready=False` trừ "two" (U09) — lọc theo `type=='core'` khi sinh G01-G04/G08/G10 (G01
+  KHÔNG tự lọc, phải lọc tay, giống lưu ý đã có trong CLAUDE.md §10 cho Lớp 2).
+
+### G06 "Hoàn thành câu" — KHÔNG phải "chưa phát triển cho cả Lớp 1", chỉ Unit 1 mới vậy
+
+Quyết định bỏ G06 ở CR-027 chỉ đúng cho **Unit 1** (hội thoại tên riêng, không có mẫu câu khuyết nào
+áp dụng được cho ball/bike/book). Đã đọc lại cột F (`02_Giáo trình chi tiết`, dòng `U0NL3`) cho ĐỦ 16
+unit — **hầu hết các unit khác CÓ câu mẫu dạng "chủ ngữ + động từ + DANH TỪ" có thể khuyết DANH TỪ
+thành `___` và điền lại bằng từ vựng unit đó**, giống cách Lớp 2 đã làm. Bảng dưới là kết quả đọc thật
+(không suy đoán), CẦN người/phiên sau tự đọc lại câu gốc 1 lần nữa trước khi chốt — đây là gợi ý dựa
+trên phân tích ngữ nghĩa, không phải trích xuất tự động 100% chắc chắn đúng ngữ cảnh sách giáo khoa:
+
+| Unit | Câu mẫu gốc (cột F) | Pattern đề xuất cho G06 | Từ dùng được làm option |
+|------|---------------------|-------------------------|--------------------------|
+| U01 | "Hi, I'm Bill. Bye, Bill." | ❌ Không áp dụng — hội thoại tên riêng | — (đã quyết định bỏ, CR-027) |
+| U02 | "I have a car." | "I have a ___." | cake, car, cat, cup (4/4) |
+| U03 | "This is my bag." | "This is my ___." | apple, bag, can, hat (4/4) |
+| U04 | "This is a dog." | "This is a ___." | desk, dog, door, duck (4/4) |
+| U05 | "I like milk." | "I like ___." | fish, chips, milk, chicken (4/4) |
+| U06 | "It's a red pen." | "It's a red ___." | pencil, pen, bell (3/4 — **"red" là tính từ, không tự điền vào chỗ trống của chính nó**, bỏ khỏi option) |
+| U07 | "There's a garden." | "There's a ___." | garden, gate, girl, goat (4/4) |
+| U08 | "Touch your hair." | "Touch your ___." | hair, head, hand (3/4 — **"horse" không phải bộ phận cơ thể, ngữ nghĩa lệch với "Touch your ___", cần cân nhắc bỏ hoặc đổi pattern**) |
+| U09 | "How many clocks? – Two." | ❌ Không áp dụng trực tiếp — mẫu hỏi-đáp số đếm, không phải khuyết 1 danh từ | — (đề xuất bỏ như U01, hoặc làm pattern riêng khác nếu muốn — KHÔNG bắt buộc sprint này) |
+| U10 | "That's a monkey." | "That's a ___." | monkey, mango, mouse (3/4 — **"mother" là người, "That's a mother" lệch ngữ nghĩa, cân nhắc bỏ**) |
+| U11 | "She's running. / He's running." | ❌ Không áp dụng — câu mẫu là về ĐIỂM NGỮ PHÁP (thì tiếp diễn "running"), không phải khuyết danh từ sun/bus/truck | — (đề xuất bỏ như U01) |
+| U12 | "Look at the lemons." | "Look at the ___." | lake, leaf, lemons (3/3) |
+| U13 | "She's having noodles." | "She's having ___." | noodles, nuts (2/3 — **"bananas" số nhiều, "having bananas" vẫn hợp lý, có thể dùng cả 3/3**) |
+| U14 | "I can see a tiger." | "I can see a ___." | teddy bear, tiger, top, turtle (4/4) |
+| U15 | "Point to your foot." | "Point to your ___." | face, foot (2/4 — **"father"/"football" không fit pattern này, câu gốc chant chỉ nói tới face/foot, cân nhắc bỏ 2 từ này khỏi option hoặc đổi pattern**) |
+| U16 | "How many windows can you see? – I can see six." | ❌ Không áp dụng trực tiếp — mẫu hỏi-đáp số đếm, giống U09 | — (đề xuất bỏ như U01) |
+
+**Tóm tắt khuyến nghị**: làm G06 bình thường cho U02, U03, U04, U05, U07, U12, U14 (mẫu khớp hoàn
+toàn, đủ 3-4 option); làm được nhưng cần bớt option cho U06, U08, U10, U13, U15 (vẫn làm được, chỉ ít
+hơn 4 option — các game khác trong app đã quen xử lý unit ít từ, vd Lớp 2 Unit 13 có 4 từ khác 3, xem
+CLAUDE.md §10); **bỏ hẳn G06** cho U01, U09, U11, U16 (đúng 4 unit, không phải chỉ U01) — nhờ cơ chế
+CR-028 đã sửa, bỏ G06 ở các unit này KHÔNG chặn G08 hay bất kỳ game nào khác, tự động ẩn khỏi màn
+hình, an toàn.
+
+### ⚠️ Rủi ro CHẮC CHẮN sẽ gặp — không còn là "giả thuyết" như lúc CR-028 mới ghi nhận
+
+CR-028 đã ghi nhận (nhưng chưa sửa) rủi ro `isFunTimeUnlocked` (Lật thẻ, G09) đòi **MỌI** game trong
+`kGameTypeOrder` (gồm cả g06) có sao ở cả 2 unit ôn tập. Một khi Unit 2-16 có dữ liệu, checkpoint Lật
+thẻ (sau Unit 2/6/10/14) và Boss Quiz (sau Unit 4/8/12/16) — vốn được khai báo CHUNG cho mọi lớp
+trong `checkpoints.dart` (`kFunTimeCheckpoints`/`kBossQuizCheckpoints`, không phân biệt lớp) — sẽ trở
+nên **có thể chạm tới thật** cho Lớp 1. Vì U01 và U09/U11 (nếu đã làm Unit 2-16 tới đó) không có G06,
+**nếu sinh dữ liệu G09 cho checkpoint sau Unit 2 (phạm vi ôn tập Unit 1-2) mà không sửa
+`isFunTimeUnlocked`, Lật thẻ sẽ bị khóa cứng vĩnh viễn giống hệt bug CR-028** (vì Unit 1 không có G06
+nên không ai earn được sao G06 của Unit 1). **Phải sửa `isFunTimeUnlocked` theo đúng pattern
+`hasContent` của CR-028 TRƯỚC KHI hoặc CÙNG LÚC sinh dữ liệu G09/G12 cho Lớp 1** — không phải sau khi
+người dùng test ra bug thêm 1 lần nữa. Việc sửa cần mở rộng `GameDef.isUnlockedOverride` (hiện chỉ
+nhận `(ProgressRepository, List<LessonProgress>, int unitId)`) để nhận thêm cách kiểm tra "loại game
+X có dữ liệu cho unit Y không" (cần `ContentRepository`, hiện closure trong `checkpoints.dart` chỉ có
+`ProgressRepository`) — xem `unit_screen.dart._gameRowFor` đã có sẵn `widget.repo` trong scope, có thể
+truyền tiếp vào `isUnlockedOverride` nếu đổi signature.
+
+### Việc cần làm cho MỖI unit 2-16 (lặp lại đúng quy trình đã dùng cho Unit 1, xem CR-027)
+
+1. Copy `04_image+audio/01_Lop-1/UnitNN/{image,audio}/` → `assets/content/lop1/UnitNN/{image,audio}/`.
+2. Thêm khai báo `assets/content/lop1/UnitNN/`, `.../audio/`, `.../image/` vào `pubspec.yaml`.
+3. Sinh (APPEND instance mới vào các file JSON hiện có ở `assets/data/lop1/games/`, KHÔNG tạo file
+   mới) — `g01_flashcard.json`, `g02_listen_pick.json`, `g03_fill_letter.json` (theo đúng quy tắc
+   CR-020/023: từ ≥4 chữ ẩn 2 ô/lượt × 3 lượt, distractor chữ đơn), `g04_scramble.json` — chỉ từ
+   `type=='core'` VÀ `audio_ready==True` (với G02/G03/G08/G10 cần audio; G04 xáo chữ không cần audio
+   nên có thể gồm cả từ `audio_ready=False` nếu muốn, xem cách Lớp 2 xử lý 7 từ mở rộng).
+4. G05: câu lấy từ cột F (`Mẫu câu:` + tách câu từ `Song:`), `audio: null` (xác nhận không có audio
+   chung cho mọi unit Lớp 1, xem mục trên).
+5. G06: theo bảng khuyến nghị trên — làm hoặc bỏ tùy unit, đọc lại câu gốc 1 lần trước khi chốt.
+6. G10: `options` gộp từ vựng unit hiện tại + unit LIỀN TRƯỚC (không còn fallback You/He/She — đó chỉ
+   dành riêng Unit 1 vì không có "unit trước").
+7. **Nếu unit này là checkpoint** (2/4/6/8/10/12/14/16): sinh thêm `g09_memory.json`
+   (Fun Time, chỉ ở Unit 2/6/10/14) hoặc `g12_boss_quiz.json` (Boss Quiz, chỉ ở Unit 4/8/12/16) theo
+   đúng cách Lớp 2 đã làm ở Sprint 3 (tái dùng dữ liệu G01/G02/G03/G05 đã sinh, không cần nội dung
+   mới) — nhưng **PHẢI sửa `isFunTimeUnlocked` theo mục rủi ro ở trên TRƯỚC KHI làm bước này**.
+8. `flutter analyze` + `dart format lib/` + build APK debug + test trên điện thoại thật trước khi mở
+   rộng tiếp — người dùng đã xác nhận muốn "test từng bước nhỏ" là cách làm đúng cho dự án này (xem
+   lịch sử Sprint 2/3), có thể làm 1 lượt vài unit rồi test, không cần làm hết 15 unit cùng lúc rồi
+   mới test lần đầu.

@@ -1123,10 +1123,12 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   vì chưa chạm mốc checkpoint nào (2/6/10/14 hoặc 4/8/12/16) — đã xác nhận `_readOptionalGame` xử lý
   an toàn khi Lớp 1 sau này tới các unit đó mà vẫn thiếu file.
 - **Trạng thái**: đã code xong Phase 0-2 (đúng phạm vi `SPRINT4_PLAN.md`, KHÔNG làm Lớp 1 Unit 2-16 —
-  để sprint sau lặp lại Phase 2). `flutter analyze` sạch (0 issue), `dart format lib/` xong, build APK
-  debug thành công: `05_Build_APK/lop2_english_app-debug-2026-08-21-3-sprint4.apk`. Code trên nhánh
-  **`sprint-4`** (tạo từ `sprint-3` sau khi commit riêng các thay đổi CR-024/025/026 tối cùng ngày, xem
-  entry Lịch sử thay đổi) — **chưa test trên điện thoại thật, đặc biệt quan trọng lần này**:
+  để sprint sau lặp lại Phase 2). Code trên nhánh **`sprint-4`** (tạo từ `sprint-3` sau khi commit
+  riêng các thay đổi CR-024/025/026 tối cùng ngày, xem entry Lịch sử thay đổi).
+  - ✅ **ĐÃ TEST TRÊN ĐIỆN THOẠI THẬT — người dùng xác nhận "Đã test OK"** (2026-08-21, sau khi vá thêm
+    CR-028 bên dưới). Không rõ người dùng đã đi qua đủ cả 5 mục checklist dưới hay chỉ xác nhận luồng
+    chính — coi 5 mục dưới là ĐÃ QUA ít nhất phần chính (migration + Lớp 1 Unit 1 chơi được), nhưng nếu
+    phiên sau thấy dấu hiệu lạ ở bất kỳ mục nào, đừng loại trừ khả năng chưa test kỹ hết:
   1. Cài **ĐÈ** lên bản cũ nhất đang có hồ sơ/sao Lớp 2 thật (không gỡ cài lại) — xác nhận cả 2
      migration (`from<2` tạo `EarnedBadges`, `from<3` thêm cột `grade`) chạy xong, hồ sơ/sao/huy hiệu
      Lớp 2 cũ còn nguyên. Nếu máy đang ở bản CHƯA từng có `EarnedBadges` (schemaVersion 1), đây cũng là
@@ -1173,6 +1175,6 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   `GameDef.isUnlockedOverride`, cần `ContentRepository` trong closure — hiện `checkpoints.dart` chỉ có
   `ProgressRepository`).
 - **Trạng thái**: Đã sửa, `flutter analyze` sạch, build APK debug thành công:
-  `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk` — **chưa test lại trên điện thoại
-  thật**, cần xác nhận: Lớp 1 Unit 1 không còn hiện dòng "Hoàn thành câu", chơi xong G05 (Lắp ráp câu)
-  là vào được thẳng G08 (Ghi âm); Lớp 2 (mọi unit đều có đủ G06) không đổi hành vi gì.
+  `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk` — ✅ **ĐÃ TEST OK trên điện thoại
+  thật** (người dùng xác nhận 2026-08-21 đêm): Lớp 1 Unit 1 không còn hiện dòng "Hoàn thành câu", chơi
+  xong G05 (Lắp ráp câu) vào được thẳng G08 (Ghi âm) đúng như mong đợi.
