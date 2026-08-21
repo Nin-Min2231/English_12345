@@ -64,7 +64,8 @@ class _MindmapScreenState extends State<MindmapScreen> {
     }
   }
 
-  void _playPattern() => AudioService.instance.play(_it.audio);
+  void _playPattern() =>
+      AudioService.instance.play(_it.audio, grade: widget.unit.grade);
 
   void _pick(int displayPos) {
     if (_answered ||
@@ -80,7 +81,8 @@ class _MindmapScreenState extends State<MindmapScreen> {
         _correctIndices.add(_index);
         _feedback = AnswerFeedback.correct;
       });
-      AudioService.instance.play(_it.options[actualIdx].audio);
+      AudioService.instance
+          .play(_it.options[actualIdx].audio, grade: widget.unit.grade);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
@@ -272,7 +274,7 @@ class _MindmapScreenState extends State<MindmapScreen> {
             padding: const EdgeInsets.all(AppSpacing.md),
             child: Stack(
               children: [
-                WordImage(relativePath: option.image),
+                WordImage(grade: widget.unit.grade, relativePath: option.image),
                 if (_answered && isAnswer)
                   const Align(
                     alignment: Alignment.topRight,

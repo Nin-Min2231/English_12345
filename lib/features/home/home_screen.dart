@@ -7,6 +7,7 @@ import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/progress_repository.dart';
 import '../badges/badges_screen.dart';
+import '../grade/grade_select_screen.dart';
 import '../profile/profile_select_screen.dart';
 import '../settings/settings_screen.dart';
 import '../unit/unit_screen.dart';
@@ -31,10 +32,20 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         actions: [
           IconButton(
+            tooltip: 'Đổi lớp',
+            onPressed: () => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => GradeSelectScreen(profile: profile, db: db),
+              ),
+            ),
+            icon: const Icon(Icons.swap_horiz_rounded),
+          ),
+          IconButton(
             tooltip: 'Huy hiệu',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => BadgesScreen(db: db, profile: profile),
+                builder: (_) =>
+                    BadgesScreen(db: db, profile: profile, grade: repo.grade),
               ),
             ),
             icon: const Icon(Icons.emoji_events_rounded),
@@ -43,8 +54,7 @@ class HomeScreen extends StatelessWidget {
             tooltip: 'Cài đặt',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) =>
-                    SettingsScreen(repo: repo, db: db, profile: profile),
+                builder: (_) => SettingsScreen(db: db, profile: profile),
               ),
             ),
             icon: const Icon(Icons.settings_rounded),
@@ -53,7 +63,7 @@ class HomeScreen extends StatelessWidget {
             tooltip: profile.name,
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (_) => ProfileSelectScreen(repo: repo, db: db),
+                builder: (_) => ProfileSelectScreen(db: db),
               ),
             ),
             icon:
@@ -62,7 +72,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: StreamBuilder<List<LessonProgress>>(
-        stream: progressRepo.watchForProfile(profile.id),
+        stream: progressRepo.watchForProfile(profile.id, grade: repo.grade),
         builder: (context, snapshot) {
           final progress = snapshot.data ?? const [];
           return GridView.builder(

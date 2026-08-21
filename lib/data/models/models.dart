@@ -4,19 +4,25 @@ library;
 
 class UnitInfo {
   final int unitId;
+  // Sprint 4 — đa lớp (1-5). KHÔNG có trong units.json — do
+  // ContentRepository.load(grade:) gán vào lúc nạp, không phải đọc từ JSON.
+  final int grade;
   final String theme;
   final String phonics;
   final int wordCount;
 
   const UnitInfo({
     required this.unitId,
+    required this.grade,
     required this.theme,
     required this.phonics,
     required this.wordCount,
   });
 
-  factory UnitInfo.fromJson(Map<String, dynamic> j) => UnitInfo(
+  factory UnitInfo.fromJson(Map<String, dynamic> j, {required int grade}) =>
+      UnitInfo(
         unitId: j['unit_id'] as int,
+        grade: grade,
         theme: j['theme'] as String,
         phonics: j['phonics'] as String,
         wordCount: j['word_count'] as int,

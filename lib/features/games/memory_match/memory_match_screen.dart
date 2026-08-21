@@ -120,7 +120,8 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
     });
     if (isMatch) {
       AudioService.instance.playSfx('correct.mp3');
-      AudioService.instance.play(_cards[a].item.audio);
+      AudioService.instance
+          .play(_cards[a].item.audio, grade: widget.unit.grade);
     } else {
       AudioService.instance.playSfx('wrong.mp3');
     }
@@ -257,7 +258,8 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
                 ? const Icon(Icons.help_outline_rounded,
                     color: AppColors.textSecondary, size: 40)
                 : card.kind == _CardKind.image
-                    ? WordImage(relativePath: card.item.image)
+                    ? WordImage(
+                        grade: widget.unit.grade, relativePath: card.item.image)
                     : FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(

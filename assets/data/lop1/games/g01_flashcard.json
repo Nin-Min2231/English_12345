@@ -1,0 +1,39 @@
+{
+ "instances": [
+  {
+   "game_id": "U01_G01",
+   "unit_id": 1,
+   "phonics": "b",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W001",
+      "word": "ball",
+      "ipa": "/bɔːl/",
+      "meaning_vi": "quả bóng",
+      "image": "Unit01/image/ball.png",
+      "audio": "Unit01/audio/word_ball.mp3"
+     },
+     {
+      "word_id": "W002",
+      "word": "bike",
+      "ipa": "/baɪk/",
+      "meaning_vi": "xe đạp",
+      "image": "Unit01/image/bike.png",
+      "audio": "Unit01/audio/word_bike.mp3"
+     },
+     {
+      "word_id": "W003",
+      "word": "book",
+      "ipa": "/bʊk/",
+      "meaning_vi": "quyển sách",
+      "image": "Unit01/image/book.png",
+      "audio": "Unit01/audio/word_book.mp3"
+     }
+    ]
+   }
+  }
+ ]
+}

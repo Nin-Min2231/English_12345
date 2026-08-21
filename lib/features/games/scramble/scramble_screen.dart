@@ -120,7 +120,8 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
     }
   }
 
-  void _playHint() => AudioService.instance.play(_it.audio);
+  void _playHint() =>
+      AudioService.instance.play(_it.audio, grade: widget.unit.grade);
 
   bool get _locked => _isSolved || _feedback == AnswerFeedback.wrong;
 
@@ -163,7 +164,7 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
       if (isCorrect) _correctIndices.add(_index);
     });
     if (isCorrect) {
-      AudioService.instance.play(_it.audio);
+      AudioService.instance.play(_it.audio, grade: widget.unit.grade);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
@@ -277,7 +278,8 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                  child: WordImage(relativePath: _it.image),
+                  child: WordImage(
+                      grade: widget.unit.grade, relativePath: _it.image),
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),

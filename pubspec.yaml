@@ -38,57 +38,65 @@ flutter_launcher_icons:
 
 flutter:
   uses-material-design: true
+  # Sprint 4 — đa lớp: mỗi lớp 1 thư mục con `lopN/` dưới `assets/content/` và
+  # `assets/data/` (xem ContentRepository.load/asset). Lớp 1 hiện chỉ khai
+  # Unit01 — CHƯA khai Unit02-16 vì chưa có file thật (Flutter báo lỗi build
+  # nếu khai 1 thư mục asset rỗng/không tồn tại), thêm dần khi làm tới unit đó.
   assets:
     - assets/icon/
-    - assets/data/
-    - assets/data/games/
     - assets/sfx/
-    - assets/content/
-    - assets/content/Unit01/
-    - assets/content/Unit01/audio/
-    - assets/content/Unit01/image/
-    - assets/content/Unit02/
-    - assets/content/Unit02/audio/
-    - assets/content/Unit02/image/
-    - assets/content/Unit03/
-    - assets/content/Unit03/audio/
-    - assets/content/Unit03/image/
-    - assets/content/Unit04/
-    - assets/content/Unit04/audio/
-    - assets/content/Unit04/image/
-    - assets/content/Unit05/
-    - assets/content/Unit05/audio/
-    - assets/content/Unit05/image/
-    - assets/content/Unit06/
-    - assets/content/Unit06/audio/
-    - assets/content/Unit06/image/
-    - assets/content/Unit07/
-    - assets/content/Unit07/audio/
-    - assets/content/Unit07/image/
-    - assets/content/Unit08/
-    - assets/content/Unit08/audio/
-    - assets/content/Unit08/image/
-    - assets/content/Unit09/
-    - assets/content/Unit09/audio/
-    - assets/content/Unit09/image/
-    - assets/content/Unit10/
-    - assets/content/Unit10/audio/
-    - assets/content/Unit10/image/
-    - assets/content/Unit11/
-    - assets/content/Unit11/audio/
-    - assets/content/Unit11/image/
-    - assets/content/Unit12/
-    - assets/content/Unit12/audio/
-    - assets/content/Unit12/image/
-    - assets/content/Unit13/
-    - assets/content/Unit13/audio/
-    - assets/content/Unit13/image/
-    - assets/content/Unit14/
-    - assets/content/Unit14/audio/
-    - assets/content/Unit14/image/
-    - assets/content/Unit15/
-    - assets/content/Unit15/audio/
-    - assets/content/Unit15/image/
-    - assets/content/Unit16/
-    - assets/content/Unit16/audio/
-    - assets/content/Unit16/image/
+    - assets/data/lop2/
+    - assets/data/lop2/games/
+    - assets/data/lop1/
+    - assets/data/lop1/games/
+    - assets/content/lop2/Unit01/
+    - assets/content/lop2/Unit01/audio/
+    - assets/content/lop2/Unit01/image/
+    - assets/content/lop2/Unit02/
+    - assets/content/lop2/Unit02/audio/
+    - assets/content/lop2/Unit02/image/
+    - assets/content/lop2/Unit03/
+    - assets/content/lop2/Unit03/audio/
+    - assets/content/lop2/Unit03/image/
+    - assets/content/lop2/Unit04/
+    - assets/content/lop2/Unit04/audio/
+    - assets/content/lop2/Unit04/image/
+    - assets/content/lop2/Unit05/
+    - assets/content/lop2/Unit05/audio/
+    - assets/content/lop2/Unit05/image/
+    - assets/content/lop2/Unit06/
+    - assets/content/lop2/Unit06/audio/
+    - assets/content/lop2/Unit06/image/
+    - assets/content/lop2/Unit07/
+    - assets/content/lop2/Unit07/audio/
+    - assets/content/lop2/Unit07/image/
+    - assets/content/lop2/Unit08/
+    - assets/content/lop2/Unit08/audio/
+    - assets/content/lop2/Unit08/image/
+    - assets/content/lop2/Unit09/
+    - assets/content/lop2/Unit09/audio/
+    - assets/content/lop2/Unit09/image/
+    - assets/content/lop2/Unit10/
+    - assets/content/lop2/Unit10/audio/
+    - assets/content/lop2/Unit10/image/
+    - assets/content/lop2/Unit11/
+    - assets/content/lop2/Unit11/audio/
+    - assets/content/lop2/Unit11/image/
+    - assets/content/lop2/Unit12/
+    - assets/content/lop2/Unit12/audio/
+    - assets/content/lop2/Unit12/image/
+    - assets/content/lop2/Unit13/
+    - assets/content/lop2/Unit13/audio/
+    - assets/content/lop2/Unit13/image/
+    - assets/content/lop2/Unit14/
+    - assets/content/lop2/Unit14/audio/
+    - assets/content/lop2/Unit14/image/
+    - assets/content/lop2/Unit15/
+    - assets/content/lop2/Unit15/audio/
+    - assets/content/lop2/Unit15/image/
+    - assets/content/lop2/Unit16/
+    - assets/content/lop2/Unit16/audio/
+    - assets/content/lop2/Unit16/image/
+    - assets/content/lop1/Unit01/
+    - assets/content/lop1/Unit01/audio/
+    - assets/content/lop1/Unit01/image/

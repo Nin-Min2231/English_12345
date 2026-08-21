@@ -1,0 +1,72 @@
+{
+ "instances": [
+  {
+   "game_id": "U01_G02",
+   "unit_id": 1,
+   "phonics": "b",
+   "lesson_no": 2,
+   "order_idx": 1,
+   "config": {
+    "questions": [
+     {
+      "word_id": "W001",
+      "prompt_audio": "Unit01/audio/word_ball.mp3",
+      "options": [
+       {
+        "word_id": "W003",
+        "image": "Unit01/image/book.png"
+       },
+       {
+        "word_id": "W001",
+        "image": "Unit01/image/ball.png"
+       },
+       {
+        "word_id": "W002",
+        "image": "Unit01/image/bike.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "word_id": "W002",
+      "prompt_audio": "Unit01/audio/word_bike.mp3",
+      "options": [
+       {
+        "word_id": "W003",
+        "image": "Unit01/image/book.png"
+       },
+       {
+        "word_id": "W001",
+        "image": "Unit01/image/ball.png"
+       },
+       {
+        "word_id": "W002",
+        "image": "Unit01/image/bike.png"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "word_id": "W003",
+      "prompt_audio": "Unit01/audio/word_book.mp3",
+      "options": [
+       {
+        "word_id": "W002",
+        "image": "Unit01/image/bike.png"
+       },
+       {
+        "word_id": "W003",
+        "image": "Unit01/image/book.png"
+       },
+       {
+        "word_id": "W001",
+        "image": "Unit01/image/ball.png"
+       }
+      ],
+      "answer_idx": 1
+     }
+    ]
+   }
+  }
+ ]
+}

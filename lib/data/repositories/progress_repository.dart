@@ -30,14 +30,21 @@ class ProgressRepository {
 
   const ProgressRepository(this.db);
 
-  Stream<List<LessonProgress>> watchForProfile(int profileId) =>
+  /// Sprint 4 — đa lớp: lọc TẠI QUERY theo `grade` (không phải sau khi lấy
+  /// về) — nhờ vậy list `progress` trả ra CHỈ chứa dòng của đúng 1 lớp, mọi
+  /// hàm thuần bên dưới (starsFor, isUnitUnlocked, ...) không cần biết
+  /// `grade` nữa vì `unitId` trong list này đã hết nhập nhằng giữa 2 lớp.
+  Stream<List<LessonProgress>> watchForProfile(int profileId,
+          {required int grade}) =>
       (db.select(db.lessonProgressTable)
-            ..where((t) => t.profileId.equals(profileId)))
+            ..where(
+                (t) => t.profileId.equals(profileId) & t.grade.equals(grade)))
           .watch();
 
   /// Ghi kết quả 1 game; chỉ tăng sao (không hạ sao khi chơi lại kém hơn).
   Future<void> reportResult({
     required int profileId,
+    required int grade,
     required int unitId,
     required String gameType,
     required int stars,
@@ -45,6 +52,7 @@ class ProgressRepository {
     final existing = await (db.select(db.lessonProgressTable)
           ..where((t) =>
               t.profileId.equals(profileId) &
+              t.grade.equals(grade) &
               t.unitId.equals(unitId) &
               t.gameType.equals(gameType)))
         .getSingleOrNull();
@@ -56,6 +64,7 @@ class ProgressRepository {
               unitId: unitId,
               gameType: gameType,
               stars: Value(stars),
+              grade: Value(grade),
             ),
           );
     } else if (stars > existing.stars) {

@@ -76,7 +76,8 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
     }
   }
 
-  void _playPrompt() => AudioService.instance.play(_q.promptAudio);
+  void _playPrompt() =>
+      AudioService.instance.play(_q.promptAudio, grade: widget.unit.grade);
 
   void _pick(int displayPos) {
     if (_answered ||
@@ -92,7 +93,7 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
         _correctIndices.add(_index);
         _feedback = AnswerFeedback.correct;
       });
-      AudioService.instance.play(_q.promptAudio);
+      AudioService.instance.play(_q.promptAudio, grade: widget.unit.grade);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
@@ -148,7 +149,7 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
     // Phần thưởng (CR-022, khôi phục tiêu chí F11 "săn chữ có thưởng") — từ
     // đầu tiên của unit, giống quy ước thưởng của bản cũ trước CR-020.
     final reward = widget.questions.first;
-    AudioService.instance.play(reward.promptAudio);
+    AudioService.instance.play(reward.promptAudio, grade: widget.unit.grade);
     showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -167,7 +168,10 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
             const Text('Phần thưởng cho bạn! 🎁',
                 style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
             const SizedBox(height: AppSpacing.sm),
-            SizedBox(height: 100, child: WordImage(relativePath: reward.image)),
+            SizedBox(
+                height: 100,
+                child: WordImage(
+                    grade: widget.unit.grade, relativePath: reward.image)),
             const SizedBox(height: AppSpacing.xs),
             Text(reward.word,
                 style:

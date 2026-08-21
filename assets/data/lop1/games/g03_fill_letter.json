@@ -1,0 +1,160 @@
+{
+ "instances": [
+  {
+   "game_id": "U01_G03",
+   "unit_id": 1,
+   "target_phonics": "b",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W001",
+      "word": "ball",
+      "image": "Unit01/image/ball.png",
+      "audio": "Unit01/audio/word_ball.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ll",
+      "distractors": [
+       "b",
+       "r",
+       "g"
+      ]
+     },
+     {
+      "word_id": "W001",
+      "word": "ball",
+      "image": "Unit01/image/ball.png",
+      "audio": "Unit01/audio/word_ball.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "bl",
+      "distractors": [
+       "p",
+       "d",
+       "i"
+      ]
+     },
+     {
+      "word_id": "W001",
+      "word": "ball",
+      "image": "Unit01/image/ball.png",
+      "audio": "Unit01/audio/word_ball.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "bl",
+      "distractors": [
+       "p",
+       "c",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W002",
+      "word": "bike",
+      "image": "Unit01/image/bike.png",
+      "audio": "Unit01/audio/word_bike.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "be",
+      "distractors": [
+       "w",
+       "u",
+       "c"
+      ]
+     },
+     {
+      "word_id": "W002",
+      "word": "bike",
+      "image": "Unit01/image/bike.png",
+      "audio": "Unit01/audio/word_bike.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "be",
+      "distractors": [
+       "j",
+       "c",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W002",
+      "word": "bike",
+      "image": "Unit01/image/bike.png",
+      "audio": "Unit01/audio/word_bike.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ie",
+      "distractors": [
+       "p",
+       "f",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W003",
+      "word": "book",
+      "image": "Unit01/image/book.png",
+      "audio": "Unit01/audio/word_book.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "bo",
+      "distractors": [
+       "k",
+       "t",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W003",
+      "word": "book",
+      "image": "Unit01/image/book.png",
+      "audio": "Unit01/audio/word_book.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "bo",
+      "distractors": [
+       "u",
+       "w",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W003",
+      "word": "book",
+      "image": "Unit01/image/book.png",
+      "audio": "Unit01/audio/word_book.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "bo",
+      "distractors": [
+       "t",
+       "y",
+       "d"
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

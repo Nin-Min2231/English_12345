@@ -1,0 +1,40 @@
+{
+ "instances": [
+  {
+   "game_id": "U01_G05",
+   "unit_id": 1,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "Hi, I'm Bill.",
+      "tokens": [
+       "Hi,",
+       "I'm",
+       "Bill."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Hi, I'm Ba.",
+      "tokens": [
+       "Hi,",
+       "I'm",
+       "Ba."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Bye, Bill.",
+      "tokens": [
+       "Bye,",
+       "Bill."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  }
+ ]
+}

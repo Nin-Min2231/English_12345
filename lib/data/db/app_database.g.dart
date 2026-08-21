@@ -311,9 +311,16 @@ class $LessonProgressTableTable extends LessonProgressTable
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: currentDateAndTime);
+  static const VerificationMeta _gradeMeta = const VerificationMeta('grade');
+  @override
+  late final GeneratedColumn<int> grade = GeneratedColumn<int>(
+      'grade', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(2));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, profileId, unitId, gameType, stars, updatedAt];
+      [id, profileId, unitId, gameType, stars, updatedAt, grade];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -353,6 +360,10 @@ class $LessonProgressTableTable extends LessonProgressTable
       context.handle(_updatedAtMeta,
           updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     }
+    if (data.containsKey('grade')) {
+      context.handle(
+          _gradeMeta, grade.isAcceptableOrUnknown(data['grade']!, _gradeMeta));
+    }
     return context;
   }
 
@@ -374,6 +385,8 @@ class $LessonProgressTableTable extends LessonProgressTable
           .read(DriftSqlType.int, data['${effectivePrefix}stars'])!,
       updatedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+      grade: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}grade'])!,
     );
   }
 
@@ -390,13 +403,15 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
   final String gameType;
   final int stars;
   final DateTime updatedAt;
+  final int grade;
   const LessonProgress(
       {required this.id,
       required this.profileId,
       required this.unitId,
       required this.gameType,
       required this.stars,
-      required this.updatedAt});
+      required this.updatedAt,
+      required this.grade});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -406,6 +421,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
     map['game_type'] = Variable<String>(gameType);
     map['stars'] = Variable<int>(stars);
     map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['grade'] = Variable<int>(grade);
     return map;
   }
 
@@ -417,6 +433,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
       gameType: Value(gameType),
       stars: Value(stars),
       updatedAt: Value(updatedAt),
+      grade: Value(grade),
     );
   }
 
@@ -430,6 +447,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
       gameType: serializer.fromJson<String>(json['gameType']),
       stars: serializer.fromJson<int>(json['stars']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      grade: serializer.fromJson<int>(json['grade']),
     );
   }
   @override
@@ -442,6 +460,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
       'gameType': serializer.toJson<String>(gameType),
       'stars': serializer.toJson<int>(stars),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'grade': serializer.toJson<int>(grade),
     };
   }
 
@@ -451,7 +470,8 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
           int? unitId,
           String? gameType,
           int? stars,
-          DateTime? updatedAt}) =>
+          DateTime? updatedAt,
+          int? grade}) =>
       LessonProgress(
         id: id ?? this.id,
         profileId: profileId ?? this.profileId,
@@ -459,6 +479,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
         gameType: gameType ?? this.gameType,
         stars: stars ?? this.stars,
         updatedAt: updatedAt ?? this.updatedAt,
+        grade: grade ?? this.grade,
       );
   LessonProgress copyWithCompanion(LessonProgressTableCompanion data) {
     return LessonProgress(
@@ -468,6 +489,7 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
       gameType: data.gameType.present ? data.gameType.value : this.gameType,
       stars: data.stars.present ? data.stars.value : this.stars,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      grade: data.grade.present ? data.grade.value : this.grade,
     );
   }
 
@@ -479,14 +501,15 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
           ..write('unitId: $unitId, ')
           ..write('gameType: $gameType, ')
           ..write('stars: $stars, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('grade: $grade')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, profileId, unitId, gameType, stars, updatedAt);
+      Object.hash(id, profileId, unitId, gameType, stars, updatedAt, grade);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -496,7 +519,8 @@ class LessonProgress extends DataClass implements Insertable<LessonProgress> {
           other.unitId == this.unitId &&
           other.gameType == this.gameType &&
           other.stars == this.stars &&
-          other.updatedAt == this.updatedAt);
+          other.updatedAt == this.updatedAt &&
+          other.grade == this.grade);
 }
 
 class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
@@ -506,6 +530,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
   final Value<String> gameType;
   final Value<int> stars;
   final Value<DateTime> updatedAt;
+  final Value<int> grade;
   const LessonProgressTableCompanion({
     this.id = const Value.absent(),
     this.profileId = const Value.absent(),
@@ -513,6 +538,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
     this.gameType = const Value.absent(),
     this.stars = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.grade = const Value.absent(),
   });
   LessonProgressTableCompanion.insert({
     this.id = const Value.absent(),
@@ -521,6 +547,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
     required String gameType,
     this.stars = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.grade = const Value.absent(),
   })  : profileId = Value(profileId),
         unitId = Value(unitId),
         gameType = Value(gameType);
@@ -531,6 +558,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
     Expression<String>? gameType,
     Expression<int>? stars,
     Expression<DateTime>? updatedAt,
+    Expression<int>? grade,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -539,6 +567,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
       if (gameType != null) 'game_type': gameType,
       if (stars != null) 'stars': stars,
       if (updatedAt != null) 'updated_at': updatedAt,
+      if (grade != null) 'grade': grade,
     });
   }
 
@@ -548,7 +577,8 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
       Value<int>? unitId,
       Value<String>? gameType,
       Value<int>? stars,
-      Value<DateTime>? updatedAt}) {
+      Value<DateTime>? updatedAt,
+      Value<int>? grade}) {
     return LessonProgressTableCompanion(
       id: id ?? this.id,
       profileId: profileId ?? this.profileId,
@@ -556,6 +586,7 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
       gameType: gameType ?? this.gameType,
       stars: stars ?? this.stars,
       updatedAt: updatedAt ?? this.updatedAt,
+      grade: grade ?? this.grade,
     );
   }
 
@@ -580,6 +611,9 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
     if (updatedAt.present) {
       map['updated_at'] = Variable<DateTime>(updatedAt.value);
     }
+    if (grade.present) {
+      map['grade'] = Variable<int>(grade.value);
+    }
     return map;
   }
 
@@ -591,7 +625,8 @@ class LessonProgressTableCompanion extends UpdateCompanion<LessonProgress> {
           ..write('unitId: $unitId, ')
           ..write('gameType: $gameType, ')
           ..write('stars: $stars, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('grade: $grade')
           ..write(')'))
         .toString();
   }
@@ -635,8 +670,16 @@ class $EarnedBadgesTable extends EarnedBadges
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: currentDateAndTime);
+  static const VerificationMeta _gradeMeta = const VerificationMeta('grade');
   @override
-  List<GeneratedColumn> get $columns => [id, profileId, badgeId, earnedAt];
+  late final GeneratedColumn<int> grade = GeneratedColumn<int>(
+      'grade', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(2));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, profileId, badgeId, earnedAt, grade];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -666,6 +709,10 @@ class $EarnedBadgesTable extends EarnedBadges
       context.handle(_earnedAtMeta,
           earnedAt.isAcceptableOrUnknown(data['earned_at']!, _earnedAtMeta));
     }
+    if (data.containsKey('grade')) {
+      context.handle(
+          _gradeMeta, grade.isAcceptableOrUnknown(data['grade']!, _gradeMeta));
+    }
     return context;
   }
 
@@ -683,6 +730,8 @@ class $EarnedBadgesTable extends EarnedBadges
           .read(DriftSqlType.string, data['${effectivePrefix}badge_id'])!,
       earnedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}earned_at'])!,
+      grade: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}grade'])!,
     );
   }
 
@@ -697,11 +746,13 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
   final int profileId;
   final String badgeId;
   final DateTime earnedAt;
+  final int grade;
   const EarnedBadge(
       {required this.id,
       required this.profileId,
       required this.badgeId,
-      required this.earnedAt});
+      required this.earnedAt,
+      required this.grade});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -709,6 +760,7 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
     map['profile_id'] = Variable<int>(profileId);
     map['badge_id'] = Variable<String>(badgeId);
     map['earned_at'] = Variable<DateTime>(earnedAt);
+    map['grade'] = Variable<int>(grade);
     return map;
   }
 
@@ -718,6 +770,7 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
       profileId: Value(profileId),
       badgeId: Value(badgeId),
       earnedAt: Value(earnedAt),
+      grade: Value(grade),
     );
   }
 
@@ -729,6 +782,7 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
       profileId: serializer.fromJson<int>(json['profileId']),
       badgeId: serializer.fromJson<String>(json['badgeId']),
       earnedAt: serializer.fromJson<DateTime>(json['earnedAt']),
+      grade: serializer.fromJson<int>(json['grade']),
     );
   }
   @override
@@ -739,16 +793,22 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
       'profileId': serializer.toJson<int>(profileId),
       'badgeId': serializer.toJson<String>(badgeId),
       'earnedAt': serializer.toJson<DateTime>(earnedAt),
+      'grade': serializer.toJson<int>(grade),
     };
   }
 
   EarnedBadge copyWith(
-          {int? id, int? profileId, String? badgeId, DateTime? earnedAt}) =>
+          {int? id,
+          int? profileId,
+          String? badgeId,
+          DateTime? earnedAt,
+          int? grade}) =>
       EarnedBadge(
         id: id ?? this.id,
         profileId: profileId ?? this.profileId,
         badgeId: badgeId ?? this.badgeId,
         earnedAt: earnedAt ?? this.earnedAt,
+        grade: grade ?? this.grade,
       );
   EarnedBadge copyWithCompanion(EarnedBadgesCompanion data) {
     return EarnedBadge(
@@ -756,6 +816,7 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
       profileId: data.profileId.present ? data.profileId.value : this.profileId,
       badgeId: data.badgeId.present ? data.badgeId.value : this.badgeId,
       earnedAt: data.earnedAt.present ? data.earnedAt.value : this.earnedAt,
+      grade: data.grade.present ? data.grade.value : this.grade,
     );
   }
 
@@ -765,13 +826,14 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
           ..write('id: $id, ')
           ..write('profileId: $profileId, ')
           ..write('badgeId: $badgeId, ')
-          ..write('earnedAt: $earnedAt')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('grade: $grade')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, profileId, badgeId, earnedAt);
+  int get hashCode => Object.hash(id, profileId, badgeId, earnedAt, grade);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -779,7 +841,8 @@ class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
           other.id == this.id &&
           other.profileId == this.profileId &&
           other.badgeId == this.badgeId &&
-          other.earnedAt == this.earnedAt);
+          other.earnedAt == this.earnedAt &&
+          other.grade == this.grade);
 }
 
 class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
@@ -787,17 +850,20 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
   final Value<int> profileId;
   final Value<String> badgeId;
   final Value<DateTime> earnedAt;
+  final Value<int> grade;
   const EarnedBadgesCompanion({
     this.id = const Value.absent(),
     this.profileId = const Value.absent(),
     this.badgeId = const Value.absent(),
     this.earnedAt = const Value.absent(),
+    this.grade = const Value.absent(),
   });
   EarnedBadgesCompanion.insert({
     this.id = const Value.absent(),
     required int profileId,
     required String badgeId,
     this.earnedAt = const Value.absent(),
+    this.grade = const Value.absent(),
   })  : profileId = Value(profileId),
         badgeId = Value(badgeId);
   static Insertable<EarnedBadge> custom({
@@ -805,12 +871,14 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
     Expression<int>? profileId,
     Expression<String>? badgeId,
     Expression<DateTime>? earnedAt,
+    Expression<int>? grade,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (profileId != null) 'profile_id': profileId,
       if (badgeId != null) 'badge_id': badgeId,
       if (earnedAt != null) 'earned_at': earnedAt,
+      if (grade != null) 'grade': grade,
     });
   }
 
@@ -818,12 +886,14 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
       {Value<int>? id,
       Value<int>? profileId,
       Value<String>? badgeId,
-      Value<DateTime>? earnedAt}) {
+      Value<DateTime>? earnedAt,
+      Value<int>? grade}) {
     return EarnedBadgesCompanion(
       id: id ?? this.id,
       profileId: profileId ?? this.profileId,
       badgeId: badgeId ?? this.badgeId,
       earnedAt: earnedAt ?? this.earnedAt,
+      grade: grade ?? this.grade,
     );
   }
 
@@ -842,6 +912,9 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
     if (earnedAt.present) {
       map['earned_at'] = Variable<DateTime>(earnedAt.value);
     }
+    if (grade.present) {
+      map['grade'] = Variable<int>(grade.value);
+    }
     return map;
   }
 
@@ -851,7 +924,8 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
           ..write('id: $id, ')
           ..write('profileId: $profileId, ')
           ..write('badgeId: $badgeId, ')
-          ..write('earnedAt: $earnedAt')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('grade: $grade')
           ..write(')'))
         .toString();
   }
@@ -1188,6 +1262,7 @@ typedef $$LessonProgressTableTableCreateCompanionBuilder
   required String gameType,
   Value<int> stars,
   Value<DateTime> updatedAt,
+  Value<int> grade,
 });
 typedef $$LessonProgressTableTableUpdateCompanionBuilder
     = LessonProgressTableCompanion Function({
@@ -1197,6 +1272,7 @@ typedef $$LessonProgressTableTableUpdateCompanionBuilder
   Value<String> gameType,
   Value<int> stars,
   Value<DateTime> updatedAt,
+  Value<int> grade,
 });
 
 final class $$LessonProgressTableTableReferences extends BaseReferences<
@@ -1243,6 +1319,9 @@ class $$LessonProgressTableTableFilterComposer
   ColumnFilters<DateTime> get updatedAt => $composableBuilder(
       column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
+  ColumnFilters<int> get grade => $composableBuilder(
+      column: $table.grade, builder: (column) => ColumnFilters(column));
+
   $$ProfilesTableFilterComposer get profileId {
     final $$ProfilesTableFilterComposer composer = $composerBuilder(
         composer: this,
@@ -1288,6 +1367,9 @@ class $$LessonProgressTableTableOrderingComposer
   ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
       column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<int> get grade => $composableBuilder(
+      column: $table.grade, builder: (column) => ColumnOrderings(column));
+
   $$ProfilesTableOrderingComposer get profileId {
     final $$ProfilesTableOrderingComposer composer = $composerBuilder(
         composer: this,
@@ -1332,6 +1414,9 @@ class $$LessonProgressTableTableAnnotationComposer
 
   GeneratedColumn<DateTime> get updatedAt =>
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<int> get grade =>
+      $composableBuilder(column: $table.grade, builder: (column) => column);
 
   $$ProfilesTableAnnotationComposer get profileId {
     final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
@@ -1386,6 +1471,7 @@ class $$LessonProgressTableTableTableManager extends RootTableManager<
             Value<String> gameType = const Value.absent(),
             Value<int> stars = const Value.absent(),
             Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> grade = const Value.absent(),
           }) =>
               LessonProgressTableCompanion(
             id: id,
@@ -1394,6 +1480,7 @@ class $$LessonProgressTableTableTableManager extends RootTableManager<
             gameType: gameType,
             stars: stars,
             updatedAt: updatedAt,
+            grade: grade,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -1402,6 +1489,7 @@ class $$LessonProgressTableTableTableManager extends RootTableManager<
             required String gameType,
             Value<int> stars = const Value.absent(),
             Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> grade = const Value.absent(),
           }) =>
               LessonProgressTableCompanion.insert(
             id: id,
@@ -1410,6 +1498,7 @@ class $$LessonProgressTableTableTableManager extends RootTableManager<
             gameType: gameType,
             stars: stars,
             updatedAt: updatedAt,
+            grade: grade,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (
@@ -1474,6 +1563,7 @@ typedef $$EarnedBadgesTableCreateCompanionBuilder = EarnedBadgesCompanion
   required int profileId,
   required String badgeId,
   Value<DateTime> earnedAt,
+  Value<int> grade,
 });
 typedef $$EarnedBadgesTableUpdateCompanionBuilder = EarnedBadgesCompanion
     Function({
@@ -1481,6 +1571,7 @@ typedef $$EarnedBadgesTableUpdateCompanionBuilder = EarnedBadgesCompanion
   Value<int> profileId,
   Value<String> badgeId,
   Value<DateTime> earnedAt,
+  Value<int> grade,
 });
 
 final class $$EarnedBadgesTableReferences
@@ -1519,6 +1610,9 @@ class $$EarnedBadgesTableFilterComposer
 
   ColumnFilters<DateTime> get earnedAt => $composableBuilder(
       column: $table.earnedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get grade => $composableBuilder(
+      column: $table.grade, builder: (column) => ColumnFilters(column));
 
   $$ProfilesTableFilterComposer get profileId {
     final $$ProfilesTableFilterComposer composer = $composerBuilder(
@@ -1559,6 +1653,9 @@ class $$EarnedBadgesTableOrderingComposer
   ColumnOrderings<DateTime> get earnedAt => $composableBuilder(
       column: $table.earnedAt, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<int> get grade => $composableBuilder(
+      column: $table.grade, builder: (column) => ColumnOrderings(column));
+
   $$ProfilesTableOrderingComposer get profileId {
     final $$ProfilesTableOrderingComposer composer = $composerBuilder(
         composer: this,
@@ -1597,6 +1694,9 @@ class $$EarnedBadgesTableAnnotationComposer
 
   GeneratedColumn<DateTime> get earnedAt =>
       $composableBuilder(column: $table.earnedAt, builder: (column) => column);
+
+  GeneratedColumn<int> get grade =>
+      $composableBuilder(column: $table.grade, builder: (column) => column);
 
   $$ProfilesTableAnnotationComposer get profileId {
     final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
@@ -1646,24 +1746,28 @@ class $$EarnedBadgesTableTableManager extends RootTableManager<
             Value<int> profileId = const Value.absent(),
             Value<String> badgeId = const Value.absent(),
             Value<DateTime> earnedAt = const Value.absent(),
+            Value<int> grade = const Value.absent(),
           }) =>
               EarnedBadgesCompanion(
             id: id,
             profileId: profileId,
             badgeId: badgeId,
             earnedAt: earnedAt,
+            grade: grade,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required int profileId,
             required String badgeId,
             Value<DateTime> earnedAt = const Value.absent(),
+            Value<int> grade = const Value.absent(),
           }) =>
               EarnedBadgesCompanion.insert(
             id: id,
             profileId: profileId,
             badgeId: badgeId,
             earnedAt: earnedAt,
+            grade: grade,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (

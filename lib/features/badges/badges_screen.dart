@@ -12,8 +12,15 @@ import 'badge_defs.dart';
 class BadgesScreen extends StatelessWidget {
   final AppDatabase db;
   final Profile profile;
+  // Sprint 4 — đa lớp: huy hiệu phân biệt theo lớp (badgeId dùng chung mọi
+  // lớp, cột `grade` trong DB mới là chỗ phân biệt thật).
+  final int grade;
 
-  const BadgesScreen({super.key, required this.db, required this.profile});
+  const BadgesScreen(
+      {super.key,
+      required this.db,
+      required this.profile,
+      required this.grade});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,7 @@ class BadgesScreen extends StatelessWidget {
         title: const Text('Huy hiệu của bé'),
       ),
       body: StreamBuilder<List<EarnedBadge>>(
-        stream: badgeRepo.watchForProfile(profile.id),
+        stream: badgeRepo.watchForProfile(profile.id, grade: grade),
         builder: (context, snapshot) {
           final earnedIds =
               (snapshot.data ?? const []).map((e) => e.badgeId).toSet();

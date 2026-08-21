@@ -17,12 +17,15 @@ class AudioService {
   static const String _sfxBase = 'assets/sfx/';
 
   /// [relativePath] dạng "Unit01/audio/word_pasta.mp3" (như trong JSON).
-  Future<void> play(String? relativePath) async {
+  /// [grade] — Sprint 4, đa lớp: bắt buộc truyền (luôn có sẵn ở nơi gọi qua
+  /// `widget.unit.grade`) để phát đúng file của đúng lớp.
+  Future<void> play(String? relativePath, {required int grade}) async {
     if (relativePath == null || relativePath.isEmpty) return;
     if (!SettingsService.instance.soundOn) return;
     try {
       await _player.stop();
-      await _player.setAsset(ContentRepository.asset(relativePath));
+      await _player.setAsset(
+          ContentRepository.asset(grade: grade, relativePath: relativePath));
       await _player.play();
     } catch (_) {
       // Bỏ qua khi thiếu file audio.

@@ -42,6 +42,7 @@ class _UnitScreenState extends State<UnitScreen> {
     if (result is! int) return;
     await _progressRepo.reportResult(
       profileId: widget.profile.id,
+      grade: widget.unit.grade,
       unitId: widget.unit.unitId,
       gameType: game.gameType,
       stars: result,
@@ -50,7 +51,8 @@ class _UnitScreenState extends State<UnitScreen> {
     // mốc 2 sao dùng cho "khá tốt" ở nơi khác trong app (vd G08 CR-018).
     final badgeId = game.badgeId;
     if (badgeId != null && result >= 2 && mounted) {
-      final isNew = await _badgeRepo.award(widget.profile.id, badgeId);
+      final isNew = await _badgeRepo.award(widget.profile.id, badgeId,
+          grade: widget.unit.grade);
       if (isNew && mounted) await _showBadgeEarnedDialog(badgeId);
     }
   }
@@ -101,7 +103,8 @@ class _UnitScreenState extends State<UnitScreen> {
             style: const TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: StreamBuilder<List<LessonProgress>>(
-        stream: _progressRepo.watchForProfile(widget.profile.id),
+        stream: _progressRepo.watchForProfile(widget.profile.id,
+            grade: widget.unit.grade),
         builder: (context, snapshot) {
           final progress = snapshot.data ?? const [];
 

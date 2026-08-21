@@ -99,7 +99,8 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
     }
   }
 
-  void _playHint() => AudioService.instance.play(_it.audio);
+  void _playHint() =>
+      AudioService.instance.play(_it.audio, grade: widget.unit.grade);
 
   bool get _locked => _isSolved || _feedback == AnswerFeedback.wrong;
 

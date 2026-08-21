@@ -7,7 +7,11 @@ ký Bug/CR đang mở, tránh xử lý sai/trùng/bỏ sót.
 
 ## 1. Dự án là gì
 
-App Android (Flutter, offline-first) luyện tiếng Anh tiểu học theo giáo trình **Global Success**. Giai đoạn 1 = **Lớp 2**: 16 unit, 48 lesson, 56 từ vựng, 12 loại game tái sử dụng (G01–G12). Người dùng: trẻ 7–8 tuổi tự chơi; phụ huynh/giáo viên theo dõi. Triết lý: "học mà chơi", phiên ≤5 phút, dựa vào hình/màu/âm thanh vì trẻ chưa đọc thạo.
+App Android (Flutter, offline-first) luyện tiếng Anh tiểu học theo giáo trình **Global Success**.
+**Sprint 4 (2026-08-21) đã thêm hỗ trợ đa lớp** (1 app, màn "Chọn lớp" SCR-00, xem §2/§4) — Lớp 2
+vẫn đầy đủ nhất (16 unit, 48 lesson, 56 từ vựng, 12 loại game tái sử dụng G01–G12); Lớp 1 mới có
+Unit 1 (3 từ). Người dùng: trẻ 7–8 tuổi tự chơi; phụ huynh/giáo viên theo dõi. Triết lý: "học mà
+chơi", phiên ≤5 phút, dựa vào hình/màu/âm thanh vì trẻ chưa đọc thạo.
 
 Tài liệu gốc (nguồn sự thật, KHÔNG ở trong repo code mà ở thư mục cha):
 - `../01_Tai_lieu/TaiLieu_Phat_Trien_App.xlsx` — 15 sheet: tính năng F01–F15, game G01–G12, tech stack, kiến trúc, DB, design system, lộ trình, rủi ro.
@@ -89,6 +93,29 @@ trí hiển thị giống mẫu `listen_pick_screen.dart`), sinh lại `distract
 từ dài. **G12**: bọc thêm `FittedBox` cho chữ (đã là lưới 2 cột sẵn, chỉ thiếu chống tràn). Chi tiết
 đầy đủ: `BUGS_CR.md` CR-023.
 
+**CR-024/025/026 (2026-08-21)** — 3 việc nhỏ trên G08 + đổi tên/icon app trước khi bắt đầu Sprint 4:
+banner hướng dẫn thao tác + màn hình loading toàn màn hình khi chấm điểm (CR-024); sửa bug ghi âm lại
+cùng 1 từ không tính điểm mới/không hiện loading — do `_scores[index]` cũ không bị xóa khi bấm ghi âm
+lại (CR-025); đổi tên app thành **"Nin&Min's English"** + icon mới (nhân vật "Nin", package
+`flutter_launcher_icons`, CR-026). Chi tiết đầy đủ: `BUGS_CR.md` CR-024/025/026.
+
+**Sprint 4 (P3) — đa lớp (SCR-00 Chọn lớp) + Lớp 1 Unit 1, CR-027 (2026-08-21)** — app từ single-grade
+tuyệt đối (chỉ Lớp 2) đổi sang hỗ trợ nhiều lớp trong CÙNG 1 app (không phải 1 app/lớp như hướng dẫn
+tái sử dụng cũ ở sheet 10 BasicDesign). **Migration DB lần 2**: thêm cột `grade` (default 2, giữ
+tương thích dữ liệu Lớp 2 cũ) vào `LessonProgressTable` + `EarnedBadges`, `schemaVersion` 2→3.
+`ContentRepository`/`WordImage`/`AudioService.play` tham số hóa theo `grade` (hàm thuần, KHÔNG dùng
+static/global state); asset Lớp 2 di chuyển sang `assets/{content,data}/lop2/...`, Lớp 1 mới có
+`assets/{content,data}/lop1/...` (chỉ Unit 1 — ball/bike/book — nội dung thật, Unit 2-16 hiện trên bản
+đồ nhưng khóa vì chưa có dữ liệu). Màn hình mới **SCR-00 "Chọn lớp"**
+(`lib/features/grade/grade_select_screen.dart`, đứng giữa ProfileSelect và Home) — `ProfileSelectScreen`/
+`SettingsScreen` bỏ field `repo` (chưa biết lớp nào lúc đó). G06 cố tình bỏ qua cho Lớp 1 Unit 1 (Excel
+xác nhận pattern là hội thoại tên riêng, không có mẫu điền-từ). Trước khi code đã audit kỹ
+`SPRINT4_PLAN.md` (viết bởi phiên Cowork khác) và vá 2 lỗ hổng kỹ thuật thật (asset() tĩnh sẽ vỡ build;
+đọc file game thiếu sẽ crash lúc chạm "Lớp 1") — xem `BUGS_CR.md` CR-027 để biết chi tiết đầy đủ. Build
+APK debug: `05_Build_APK/lop2_english_app-debug-2026-08-21-3-sprint4.apk`, code trên nhánh
+**`sprint-4`** — **chưa test trên điện thoại thật**, đặc biệt quan trọng vì đây là migration DB lần 2
+(xem checklist Verification trong `BUGS_CR.md` CR-027).
+
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
 - Luồng đầy đủ: **ProfileSelect** (F02, tạo/chọn hồ sơ trẻ) → **Home** (F01, bản đồ 16 unit có sao + khóa) → **Unit** (F03, 3 game mở tuần tự) → 3 game P0 (G01 Flashcard, G02 Nghe chọn hình, G03 Điền chữ) → trả sao về lưu **Drift** (F14).
@@ -143,34 +170,53 @@ $env:PATH = "D:\flutter\bin;$env:JAVA_HOME\bin;" + $env:PATH
 ```
 lib/
   main.dart, app.dart          # khởi động, mở AppDatabase + SettingsService, theme,
-                                # home = ProfileSelectScreen
+                                # home = ProfileSelectScreen (KHÔNG còn eager-load
+                                # ContentRepository — Sprint 4, xem dưới)
   core/theme/app_theme.dart    # AppColors, AppSpacing (design tokens sheet 09)
-  core/widgets/common_widgets.dart  # PrimaryButton, SecondaryButton, StarBar, WordImage,
+  core/widgets/common_widgets.dart  # PrimaryButton, SecondaryButton, StarBar, WordImage
+                                     # (Sprint 4: thêm field `grade` bắt buộc),
                                      # AppScaffold, AnswerFeedbackOverlay (đúng/sai)
   core/widgets/parent_gate.dart # F15 — showParentGate(), confirmDeleteProfile() (2026-07-23)
-  data/models/models.dart      # UnitInfo, FlashCard, ListenQuestion, FillItem, ScrambleItem,
-                                # SentenceItem, MindmapOption, MindmapItem, MemoryPairItem (G09),
-                                # WordHuntQuestion (G10, đổi từ HuntLetterItem — CR-020),
-                                # BossQuizQuestion/Option (G12) (content JSON)
-  data/content_repository.dart # nạp JSON -> map theo unit_id (huntByUnit đổi sang
-                                # Map<int,List<WordHuntQuestion>> — CR-020, trước đây là Map<int,T>
-                                # phẳng 1 mục/unit, giờ cùng shape List như mọi game khác)
-  data/db/app_database.dart    # Drift: Profiles, LessonProgressTable, EarnedBadges (Sprint 3,
-                                # schemaVersion 2 — migration đầu tiên) (+ .g.dart sinh ra)
+  data/models/models.dart      # UnitInfo (Sprint 4: thêm field `grade`, gán bởi loader —
+                                # KHÔNG đọc từ units.json), FlashCard, ListenQuestion, FillItem,
+                                # ScrambleItem, SentenceItem, MindmapOption, MindmapItem,
+                                # MemoryPairItem (G09), WordHuntQuestion (G10, đổi từ
+                                # HuntLetterItem — CR-020), BossQuizQuestion/Option (G12)
+  data/content_repository.dart # Sprint 4: `load({required int grade})` + field `grade` trên
+                                # instance; `asset({grade, relativePath})` là hàm THUẦN (không
+                                # còn static const assetBase) — đọc `assets/data/lop$grade/...`;
+                                # mọi đọc file game (`gNN_*.json`) qua `_readOptionalGame()`
+                                # (file thiếu -> instances rỗng, KHÔNG ném lỗi — bắt buộc vì Lớp
+                                # 1 Unit 1 chưa có g09/g12); nạp JSON -> map theo unit_id
+                                # (huntByUnit là Map<int,List<WordHuntQuestion>> — CR-020)
+  data/db/app_database.dart    # Drift: Profiles, LessonProgressTable, EarnedBadges — cả 2 bảng
+                                # sau có thêm cột `grade` (Sprint 4, default 2, schemaVersion 3)
+                                # (+ .g.dart sinh ra)
   data/repositories/
     profile_repository.dart    # watchProfiles(), create(), update(), delete() (F15, 2026-07-23;
                                 # delete() xóa cả EarnedBadges từ Sprint 3)
     progress_repository.dart   # kGameTypeOrder (đổi tên công khai từ _gameTypes, Sprint 3),
-                                # reportResult(), isUnitUnlocked, isGameUnlocked,
-                                # isCheckpointUnlocked (Boss Quiz), isFunTimeUnlocked (Lật thẻ,
-                                # CR-023 — chặt hơn, đòi hỏi mọi game của cả 2 unit ôn tập)
-    badge_repository.dart      # Sprint 3 — watchForProfile(), award() huy hiệu
-  services/audio_service.dart  # just_audio, singleton, kiểm tra SettingsService.soundOn
+                                # watchForProfile()/reportResult() nhận `grade` (Sprint 4, lọc
+                                # TẠI QUERY) — mọi hàm thuần còn lại (isUnitUnlocked,
+                                # isGameUnlocked, isCheckpointUnlocked, isFunTimeUnlocked,
+                                # starsFor, totalStarsForUnit) KHÔNG cần `grade` vì hoạt động
+                                # trên list `progress` đã được lọc sẵn theo lớp
+    badge_repository.dart      # Sprint 3 — watchForProfile()/award() (Sprint 4: thêm `grade`,
+                                # cùng lý do progress_repository.dart — badgeId dùng chung mọi lớp)
+  services/audio_service.dart  # just_audio, singleton, kiểm tra SettingsService.soundOn;
+                                # `play()` (Sprint 4: nhận `grade`) — `playSfx()` KHÔNG đổi
+                                # (dùng riêng assets/sfx/, không liên quan lớp)
   services/settings_service.dart  # F15 — âm thanh on/off, độ khó easy/hard (2026-07-23)
   features/
-    profile/profile_select_screen.dart   # F02 — chọn/tạo hồ sơ; chạm giữ để sửa/xóa (F15)
-    settings/settings_screen.dart  # F15 — cài đặt + xóa hồ sơ (2026-07-23)
-    badges/badge_defs.dart, badges_screen.dart  # Sprint 3 — F13/G12, xem huy hiệu đã/chưa đạt
+    grade/grade_select_screen.dart  # Sprint 4 — SCR-00 "Chọn lớp", đứng giữa ProfileSelect và
+                                     # Home; GradeOption/kGradeOptions (mô phỏng pattern GameDef)
+    profile/profile_select_screen.dart   # F02 — chọn/tạo hồ sơ; chạm giữ để sửa/xóa (F15).
+                                          # Sprint 4: bỏ field `repo` (chưa có lớp lúc này),
+                                          # `_openProfile` đi tới GradeSelectScreen, không phải Home
+    settings/settings_screen.dart  # F15 — cài đặt + xóa hồ sơ. Sprint 4: bỏ field `repo` (cùng
+                                    # lý do trên)
+    badges/badge_defs.dart, badges_screen.dart  # Sprint 3 — F13/G12, xem huy hiệu đã/chưa đạt.
+                                                 # Sprint 4: BadgesScreen thêm field `grade` bắt buộc
     home/  flashcard/
     unit/unit_screen.dart, game_defs.dart  # F03; kUnitGames = danh sách game/unit (mọi unit)
     unit/checkpoints.dart  # Sprint 3 — Lật thẻ/Boss Quiz chỉ gắn 1 unit cụ thể, không phải
@@ -182,12 +228,20 @@ lib/
     games/letter_hunt/letter_hunt_screen.dart    # Sprint 3 — G10 Săn chữ
     games/boss_quiz/boss_quiz_screen.dart        # Sprint 3 — G12, bản sao listen_pick_screen.dart
 assets/
-  data/{units,vocabulary}.json + data/games/g0{1,2,3,4,5,6,9}_*.json, g10_letter_hunt.json,
-  g12_boss_quiz.json
-  content/UnitNN/{image,audio}/...   # mirror của 04_image+audio; audio/ có thêm
+  # Sprint 4 — đa lớp: mỗi lớp 1 thư mục con `lopN/` (N=1-5) dưới CẢ `content/` lẫn `data/`.
+  data/lop2/{units,vocabulary}.json + data/lop2/games/g0{1,2,3,4,5,6,9}_*.json,
+  g10_letter_hunt.json, g12_boss_quiz.json         # Lớp 2 — đủ 16 unit (di chuyển từ
+                                                    # assets/data/ gốc, nội dung không đổi)
+  data/lop1/units.json (đủ 16 unit) + data/lop1/games/g0{1,2,3,4,5,10}_*.json
+                                                    # Lớp 1 — CHỈ Unit 1 (ball/bike/book), G06 cố
+                                                    # tình bỏ qua (không có mẫu điền-từ cho Unit 1)
+  content/lop2/UnitNN/{image,audio}/...   # mirror của 04_image+audio/02_Lop-2; audio/ có thêm
                                      # sentence_pattern.mp3 (Track "Mẫu câu" mỗi unit, dùng chung
                                      # cho G05/G06 — không phải audio riêng từng câu)
-  sfx/correct.mp3, wrong.mp3          # âm hiệu ứng đúng/sai (đã có 2026-07-23)
+  content/lop1/Unit01/{image,audio}/...   # mirror của 04_image+audio/01_Lop-1/Unit01 — KHÔNG có
+                                     # sentence_pattern.mp3 (G05 Lớp 1 Unit1 audio: null)
+  sfx/correct.mp3, wrong.mp3          # âm hiệu ứng đúng/sai (đã có 2026-07-23) — dùng chung mọi
+                                     # lớp, không nằm trong lopN/
 ```
 
 DB tiến độ/hồ sơ (SQLite qua Drift) nằm trong app documents dir của máy/điện thoại, **không** trong
@@ -195,12 +249,14 @@ DB tiến độ/hồ sơ (SQLite qua Drift) nằm trong app documents dir của 
 **từng hồ sơ** (qua cổng phụ huynh) nhưng **vẫn chưa có export/backup** trước khi xóa — rủi ro đã
 được chấp nhận có chủ ý (xem `SPRINT2_PLAN.md` phần Context), không phải bỏ sót.
 
-Đường dẫn asset trong JSON là **tương đối** (vd `Unit01/image/pasta.png`); prefix bundle = `assets/content/` (hằng `ContentRepository.assetBase`).
+Đường dẫn asset trong JSON là **tương đối** (vd `Unit01/image/pasta.png`); prefix bundle (Sprint 4)
+= `assets/content/lop$grade/` (hàm `ContentRepository.asset({grade, relativePath})` — không còn
+static const `assetBase`, phải truyền `grade` rõ ràng mỗi lần gọi).
 
-**Quan trọng — đồng bộ ảnh/audio (xem CR-001 trong `BUGS_CR.md`)**: `assets/content/` là bản
-**copy thủ công** của `../04_image+audio/`, KHÔNG tự động đồng bộ. Sửa/thay ảnh hoặc audio gốc ở
-`04_image+audio/` xong **PHẢI copy lại đè vào `assets/content/UnitNN/...` tương ứng rồi build lại**
-— nếu không, app vẫn chạy bản cũ dù nguồn đã đổi.
+**Quan trọng — đồng bộ ảnh/audio (xem CR-001 trong `BUGS_CR.md`)**: `assets/content/lopN/` là bản
+**copy thủ công** của `../04_image+audio/0N_Lop-N/`, KHÔNG tự động đồng bộ. Sửa/thay ảnh hoặc audio
+gốc xong **PHẢI copy lại đè vào `assets/content/lopN/UnitNN/...` tương ứng rồi build lại** — nếu
+không, app vẫn chạy bản cũ dù nguồn đã đổi.
 
 ## 5. Định dạng JSON config (quan trọng khi thêm game)
 
@@ -345,6 +401,20 @@ CR-019 `BUGS_CR.md`). **Sửa số game**: tài liệu gốc gọi Boss Quiz là
   chỉ cần trích xuất"). Audio 4 track Review tồn tại nhưng nguyên track, chưa cắt. Nội dung thật
   (nếu có) nhiều khả năng nằm trong `01_Document/book.pdf` trang 20/37/54/71 — file quá lớn để đọc
   trong môi trường hiện tại, cần người mở tay.
+
+**Sprint 4 (P3) — đa lớp, đã code Phase 0-2 (chỉ Lớp 1 Unit 1), CR-027** (kế hoạch gốc:
+`SPRINT4_PLAN.md`, chi tiết đã code: `BUGS_CR.md` CR-027):
+- ✅ **Multi-grade plumbing (Phase 0) — XONG**: migration DB lần 2 (cột `grade`), `ContentRepository`/
+  `WordImage`/`AudioService` tham số hóa theo lớp, asset Lớp 2 di chuyển sang `lop2/`.
+- ✅ **Màn "Chọn lớp" SCR-00 (Phase 1) — XONG**: `grade_select_screen.dart`, nút "Đổi lớp" trên Home.
+- ✅ **Lớp 1 Unit 1 (Phase 2) — XONG**: G01-G05/G08/G10 chơi được đầy đủ, G06 cố tình bỏ qua.
+- ⏸️ **Lớp 1 Unit 2-16 — CHƯA LÀM** (để sprint sau, lặp lại đúng Phase 2 của `SPRINT4_PLAN.md` cho
+  từng unit — dữ liệu ảnh/audio 16 unit đã có sẵn trong `04_image+audio/01_Lop-1/`, chỉ cần sinh JSON
+  game + copy asset, không cần sửa lại Phase 0/1).
+- ⏸️ **Lớp 3/4/5 — chưa có giáo trình/dữ liệu nguồn**, kiến trúc đã tổng quát hóa sẵn (`grade: int`
+  không hardcode phạm vi, `kGradeOptions` chỉ cần thêm 1 dòng khi có dữ liệu).
+- **Chưa test trên điện thoại thật** — xem checklist Verification đầy đủ trong `BUGS_CR.md` CR-027,
+  đặc biệt: cài đè lên bản có hồ sơ Lớp 2 thật để xác nhận migration lần 2 không mất dữ liệu.
 
 **Nợ kỹ thuật nhỏ chưa xử lý:** chưa có test tự động (`test/` đang trống — SPRINT2_PLAN.md có đề
 xuất thêm vài test cho `progress_repository.dart`/xóa hồ sơ nhưng chưa làm); `flutter build apk

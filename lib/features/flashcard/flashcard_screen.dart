@@ -35,7 +35,8 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
     super.dispose();
   }
 
-  void _playCurrent() => AudioService.instance.play(widget.cards[_index].audio);
+  void _playCurrent() => AudioService.instance
+      .play(widget.cards[_index].audio, grade: widget.unit.grade);
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +118,10 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                       key: const ValueKey('front'),
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(child: WordImage(relativePath: c.image)),
+                        Expanded(
+                            child: WordImage(
+                                grade: widget.unit.grade,
+                                relativePath: c.image)),
                         const SizedBox(height: AppSpacing.md),
                         Text(c.word,
                             style: const TextStyle(

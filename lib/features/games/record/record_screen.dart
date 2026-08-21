@@ -134,7 +134,7 @@ class _RecordScreenState extends State<RecordScreen> {
 
   void _playModel() {
     if (_isListening) return;
-    AudioService.instance.play(_it.audio);
+    AudioService.instance.play(_it.audio, grade: widget.unit.grade);
   }
 
   Future<void> _startListening() async {
@@ -303,7 +303,8 @@ class _RecordScreenState extends State<RecordScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                  child: WordImage(relativePath: _it.image),
+                  child: WordImage(
+                      grade: widget.unit.grade, relativePath: _it.image),
                 ),
               ),
               Text(_it.word,

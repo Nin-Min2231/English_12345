@@ -1,0 +1,102 @@
+{
+ "course": "Tiếng Anh 1 - Global Success",
+ "total_units": 16,
+ "units": [
+  {
+   "unit_id": 1,
+   "theme": "In the school playground",
+   "phonics": "b",
+   "word_count": 3
+  },
+  {
+   "unit_id": 2,
+   "theme": "In the dining room",
+   "phonics": "c",
+   "word_count": 4
+  },
+  {
+   "unit_id": 3,
+   "theme": "At the street market",
+   "phonics": "a",
+   "word_count": 4
+  },
+  {
+   "unit_id": 4,
+   "theme": "In the bedroom",
+   "phonics": "d",
+   "word_count": 4
+  },
+  {
+   "unit_id": 5,
+   "theme": "At the fish and chip shop",
+   "phonics": "i",
+   "word_count": 4
+  },
+  {
+   "unit_id": 6,
+   "theme": "In the classroom",
+   "phonics": "e",
+   "word_count": 4
+  },
+  {
+   "unit_id": 7,
+   "theme": "In the garden",
+   "phonics": "g",
+   "word_count": 4
+  },
+  {
+   "unit_id": 8,
+   "theme": "In the park",
+   "phonics": "h",
+   "word_count": 4
+  },
+  {
+   "unit_id": 9,
+   "theme": "In the shop",
+   "phonics": "o",
+   "word_count": 4
+  },
+  {
+   "unit_id": 10,
+   "theme": "At the zoo",
+   "phonics": "m",
+   "word_count": 4
+  },
+  {
+   "unit_id": 11,
+   "theme": "At the bus stop",
+   "phonics": "u",
+   "word_count": 4
+  },
+  {
+   "unit_id": 12,
+   "theme": "At the lake",
+   "phonics": "l",
+   "word_count": 3
+  },
+  {
+   "unit_id": 13,
+   "theme": "In the school canteen",
+   "phonics": "n",
+   "word_count": 3
+  },
+  {
+   "unit_id": 14,
+   "theme": "In the toy shop",
+   "phonics": "t",
+   "word_count": 4
+  },
+  {
+   "unit_id": 15,
+   "theme": "At the football match",
+   "phonics": "f",
+   "word_count": 4
+  },
+  {
+   "unit_id": 16,
+   "theme": "At home",
+   "phonics": "w",
+   "word_count": 3
+  }
+ ]
+}

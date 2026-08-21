@@ -71,7 +71,8 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
     }
   }
 
-  void _playPrompt() => AudioService.instance.play(_q.promptAudio);
+  void _playPrompt() =>
+      AudioService.instance.play(_q.promptAudio, grade: widget.unit.grade);
 
   void _pick(int displayPos) {
     if (_answered ||
@@ -87,7 +88,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
         _correctIndices.add(_index);
         _feedback = AnswerFeedback.correct;
       });
-      AudioService.instance.play(_q.promptAudio);
+      AudioService.instance.play(_q.promptAudio, grade: widget.unit.grade);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
@@ -264,7 +265,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
             padding: const EdgeInsets.all(AppSpacing.md),
             child: Stack(
               children: [
-                WordImage(relativePath: option.image),
+                WordImage(grade: widget.unit.grade, relativePath: option.image),
                 if (_answered && isAnswer)
                   const Align(
                     alignment: Alignment.topRight,

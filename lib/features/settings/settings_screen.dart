@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../core/widgets/parent_gate.dart';
-import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
 import '../../data/repositories/profile_repository.dart';
 import '../../services/settings_service.dart';
@@ -11,13 +10,11 @@ import '../profile/profile_select_screen.dart';
 
 /// F15 — Cài đặt: âm thanh, độ khó, xóa hồ sơ (gate bằng cổng phụ huynh).
 class SettingsScreen extends StatefulWidget {
-  final ContentRepository repo;
   final AppDatabase db;
   final Profile profile;
 
   const SettingsScreen({
     super.key,
-    required this.repo,
     required this.db,
     required this.profile,
   });
@@ -40,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => ProfileSelectScreen(repo: widget.repo, db: widget.db),
+        builder: (_) => ProfileSelectScreen(db: widget.db),
       ),
       (route) => false,
     );

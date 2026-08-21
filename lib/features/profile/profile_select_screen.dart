@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../core/widgets/parent_gate.dart';
-import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
 import '../../data/repositories/profile_repository.dart';
-import '../home/home_screen.dart';
+import '../grade/grade_select_screen.dart';
 
 const _avatarChoices = ['🐶', '🐱', '🐰', '🦊', '🐻', '🐼', '🦁', '🐸'];
 
-/// F02 — Chọn / tạo hồ sơ trẻ trước khi vào Home. Không có mật khẩu,
-/// chỉ tên + avatar vì trẻ chưa đọc thạo.
+/// F02 — Chọn / tạo hồ sơ trẻ trước khi vào màn chọn lớp (SCR-00, Sprint 4).
+/// Không có mật khẩu, chỉ tên + avatar vì trẻ chưa đọc thạo. Đứng trước chọn
+/// lớp vì hồ sơ là danh tính đứa trẻ, độc lập với lớp đang học.
 class ProfileSelectScreen extends StatefulWidget {
-  final ContentRepository repo;
   final AppDatabase db;
 
-  const ProfileSelectScreen({super.key, required this.repo, required this.db});
+  const ProfileSelectScreen({super.key, required this.db});
 
   @override
   State<ProfileSelectScreen> createState() => _ProfileSelectScreenState();
@@ -37,8 +36,7 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
   void _openProfile(Profile p) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) =>
-            HomeScreen(repo: widget.repo, db: widget.db, profile: p),
+        builder: (_) => GradeSelectScreen(profile: p, db: widget.db),
       ),
     );
   }

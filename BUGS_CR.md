@@ -1066,3 +1066,74 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   lại)** — giống mọi bản build trước, để không mất hồ sơ/tiến độ trong DB. Vài launcher Android có thể
   cache icon cũ vài giây/vài phút sau khi cài đè — nếu icon chưa đổi ngay, đợi hoặc khởi động lại màn
   hình chính (không phải gỡ app) trước khi kết luận có lỗi.
+
+## CR-027 — Sprint 4: đa lớp (SCR-00 Chọn lớp) + Lớp 1 Unit 1, vá lại 2 lỗ hổng của `SPRINT4_PLAN.md`
+
+- **Bối cảnh (2026-08-21)**: 1 phiên Cowork khác (không phải Claude Code) đã chuẩn bị xong dữ liệu
+  Lớp 1 (16 unit, 70 từ, ảnh+audio) và viết `SPRINT4_PLAN.md` — kế hoạch thêm hỗ trợ đa lớp. Trước
+  khi code, người dùng yêu cầu kiểm tra kỹ plan đó xem có sai xót gì không (dùng Plan mode, 3 agent
+  Explore độc lập đọc code thật/dữ liệu thật/tài liệu thiết kế + 1 agent Plan thiết kế lại phần thiếu).
+
+**Phát hiện — Phase 0 của `SPRINT4_PLAN.md` có 2 lỗ hổng kỹ thuật thật, đã vá TRƯỚC khi code**:
+1. Plan nói đổi `ContentRepository.assetBase` "từ static const sang field theo instance" nhưng
+   `asset()` vẫn là `static`, gọi TĨNH từ `WordImage` (~10 màn game) và `AudioService.instance.play()`
+   (singleton) — làm y văn bản plan sẽ lỗi build ngay. **Sửa**: `asset()`/`load()` nhận `grade` làm
+   tham số rõ ràng (hàm thuần, không static state); `UnitInfo` thêm field `grade` (do loader gán, không
+   đọc từ JSON) — mọi nơi gọi `WordImage`/`AudioService.play` đều sẵn có `widget.unit.grade` trong
+   scope nên chỉ cần thêm 1 tham số ở mỗi call site, không cần sửa constructor của 10 màn hình.
+2. `ContentRepository.load()` đọc thẳng mọi `gNN_*.json` bằng `rootBundle.loadString` — file KHÔNG
+   TỒN TẠI (Lớp 1 Unit 1 chưa có `g09_memory.json`/`g12_boss_quiz.json`, chưa tới checkpoint) sẽ ném
+   lỗi thẳng, **crash app ngay lần đầu chạm vào "Lớp 1"**. **Sửa**: thêm `_readOptionalGame()` — file
+   thiếu thì trả `{'instances': []}` thay vì ném lỗi, áp dụng cho MỌI game (không chỉ g09/g12) để phòng
+   trước cho Lớp 3/4/5 sau này cũng sẽ thiếu nhiều nội dung lúc mới bắt đầu.
+
+**Đã code toàn bộ Phase 0-2 của `SPRINT4_PLAN.md`** (theo đúng ý đồ gốc, chỉ vá 2 chỗ trên):
+- **DB** (`app_database.dart`): thêm cột `grade` (default 2) vào `LessonProgressTable` VÀ
+  `EarnedBadges`; `schemaVersion` 2→3; migration `if (from < 3) { addColumn(...) }` (giữ nguyên nhánh
+  `from < 2` cũ của Sprint 3) — **migration DB lần 2**. `progress_repository.dart`/`badge_repository.dart`:
+  `watchForProfile`/`reportResult`/`award` nhận `grade`, lọc TẠI QUERY — nhờ vậy list `progress` trả
+  ra CHỈ của đúng 1 lớp, các hàm thuần (`starsFor`, `isUnitUnlocked`, `isGameUnlocked`,
+  `isCheckpointUnlocked`, `isFunTimeUnlocked`, `totalStarsForUnit`) **KHÔNG cần sửa** — `unitId` trong
+  list đã hết nhập nhằng giữa 2 lớp.
+- **Asset**: `git mv` toàn bộ asset Lớp 2 sang `assets/content/lop2/UnitNN/`,
+  `assets/data/lop2/{units.json,vocabulary.json,games/g0*.json}` (không đổi nội dung, chỉ đổi vị trí);
+  copy ảnh/audio Lớp 1 Unit 1 (ball/bike/book) vào `assets/content/lop1/Unit01/`; sửa `pubspec.yaml`
+  khai báo asset khớp đường mới (chỉ khai Lớp 1 Unit01, chưa khai 16 unit rỗng).
+- **Màn hình mới SCR-00 "Chọn lớp"** (`lib/features/grade/grade_select_screen.dart`): `GradeOption`/
+  `kGradeOptions` (mô phỏng pattern `GameDef`/`gameDefsByType` — bật lớp mới sau này chỉ đổi
+  `enabled`/`subtitle`, không sửa layout); cờ `_loading` chặn chạm 2 lần trong lúc `await
+  ContentRepository.load()`. Luồng mới: ProfileSelect → **GradeSelect (mới)** → Home → Unit — hồ sơ
+  đứng trước lớp vì 1 trẻ có thể học nhiều lớp cùng 1 hồ sơ. `ProfileSelectScreen`/`SettingsScreen`
+  **bỏ hẳn field `repo`** (chỉ giữ để chuyển tiếp trước đây, giờ không còn `ContentRepository` nào tồn
+  tại lúc màn Profile hiện ra — grade chưa được chọn). `main.dart` bỏ eager-load
+  `ContentRepository.load()` lúc khởi động app. `HomeScreen` thêm nút "Đổi lớp" (AppBar, cùng mẫu nút
+  đổi hồ sơ). `BadgesScreen` thêm field `grade` bắt buộc (huy hiệu `badgeId` dùng chung mọi lớp, cột
+  `grade` mới trong DB mới là chỗ phân biệt thật — tránh huy hiệu Unit 4 Lớp 1 và Lớp 2 đụng nhau).
+- **Dữ liệu Lớp 1 Unit 1** (`assets/data/lop1/`): `units.json` đủ 16 unit (theme/phonics/word_count từ
+  `manifest.json`, đếm `type=core`) để Unit 2-16 tự hiện trên bản đồ nhưng khóa (không cần code gì
+  thêm — `count==0` tự vô hiệu nút, không crash, đã có sẵn từ Sprint 1). `games/g0{1,2,3,4,5,10}_*.json`
+  chỉ Unit 1 (ball/bike/book) — G01-G04 mirror đúng schema Lớp 2 (G03 theo đúng quy tắc CR-020/023: từ
+  4 chữ cái ẩn 2 ô/lượt × 3 lượt, distractor chữ đơn); G05 lấy 3 câu chào hỏi tự nhiên từ Excel cột F
+  Unit 1 Lớp 1 ("Hi, I'm Bill." / "Hi, I'm Ba." / "Bye, Bill.") — **`audio: null`** vì không có file
+  `sentence_pattern.mp3` cho Lớp 1 (khác Lớp 2), `AudioService.play` đã sẵn xử lý `null` an toàn (im
+  lặng, không crash); G10 dùng đúng fallback "You/He/She" của Unit 1 Lớp 2 (không có "unit trước").
+  **G06 cố tình bỏ qua** (không sinh instance) — xác nhận qua Excel: pattern Unit 1 là hội thoại tên
+  riêng ("Hi, I'm Bill."), không có mẫu điền-từ nào áp dụng được cho ball/bike/book. G08 dùng lại
+  `g01_flashcard.json` (không cần file riêng, giống Lớp 2). G09/G12 (checkpoint) không sinh cho Unit 1
+  vì chưa chạm mốc checkpoint nào (2/6/10/14 hoặc 4/8/12/16) — đã xác nhận `_readOptionalGame` xử lý
+  an toàn khi Lớp 1 sau này tới các unit đó mà vẫn thiếu file.
+- **Trạng thái**: đã code xong Phase 0-2 (đúng phạm vi `SPRINT4_PLAN.md`, KHÔNG làm Lớp 1 Unit 2-16 —
+  để sprint sau lặp lại Phase 2). `flutter analyze` sạch (0 issue), `dart format lib/` xong, build APK
+  debug thành công: `05_Build_APK/lop2_english_app-debug-2026-08-21-3-sprint4.apk`. Code trên nhánh
+  **`sprint-4`** (tạo từ `sprint-3` sau khi commit riêng các thay đổi CR-024/025/026 tối cùng ngày, xem
+  entry Lịch sử thay đổi) — **chưa test trên điện thoại thật, đặc biệt quan trọng lần này**:
+  1. Cài **ĐÈ** lên bản cũ nhất đang có hồ sơ/sao Lớp 2 thật (không gỡ cài lại) — xác nhận cả 2
+     migration (`from<2` tạo `EarnedBadges`, `from<3` thêm cột `grade`) chạy xong, hồ sơ/sao/huy hiệu
+     Lớp 2 cũ còn nguyên. Nếu máy đang ở bản CHƯA từng có `EarnedBadges` (schemaVersion 1), đây cũng là
+     lần đầu tiên migration lần 1 (CR-019) được xác nhận trên máy thật.
+  2. Hồi quy Lớp 2: toàn bộ luồng + 12 game chạy y hệt trước (chỉ thêm 1 bước chọn lớp sau ProfileSelect).
+  3. Lớp 1 Unit 1 chơi được đầy đủ G01/G02/G03/G04/G05/G08/G10 (G06 vắng mặt có chủ ý); bản đồ Lớp 1
+     hiện đủ 16 ô, Unit 2-16 khóa, không crash khi chạm vào ô khóa.
+  4. Đổi lớp 2 chiều (Home Lớp 2 → "Đổi lớp" → Lớp 1 → Home Lớp 1 → "Đổi lớp" → Lớp 2) giữ đúng tiến
+     độ riêng từng lớp, không lẫn sao.
+  5. Chạm nhanh 2 lần vào ô "Lớp 1" không mở 2 Home chồng nhau (cờ `_loading` trong `GradeSelectScreen`).

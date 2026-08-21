@@ -86,7 +86,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
     }
   }
 
-  void _playHint() => AudioService.instance.play(_it.audio);
+  void _playHint() =>
+      AudioService.instance.play(_it.audio, grade: widget.unit.grade);
 
   void _pick(int pos) {
     if (_correctIndices.contains(_index) ||
@@ -109,7 +110,7 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
       });
       AudioService.instance.playSfx('correct.mp3');
       if (completing) {
-        AudioService.instance.play(_it.audio);
+        AudioService.instance.play(_it.audio, grade: widget.unit.grade);
         Future.delayed(const Duration(milliseconds: 1100), () {
           if (!mounted || _feedback != AnswerFeedback.correct) return;
           setState(() => _feedback = null);
@@ -259,7 +260,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                  child: WordImage(relativePath: it.image),
+                  child: WordImage(
+                      grade: widget.unit.grade, relativePath: it.image),
                 ),
               ),
               const SizedBox(height: AppSpacing.md),

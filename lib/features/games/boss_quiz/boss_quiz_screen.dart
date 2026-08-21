@@ -71,7 +71,9 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
   }
 
   void _playPrompt() {
-    if (_q.promptAudio != null) AudioService.instance.play(_q.promptAudio);
+    if (_q.promptAudio != null) {
+      AudioService.instance.play(_q.promptAudio, grade: widget.unit.grade);
+    }
   }
 
   void _pick(int displayPos) {
@@ -235,7 +237,8 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
     if (_q.promptImage != null) {
       children.add(SizedBox(
         height: 100,
-        child: WordImage(relativePath: _q.promptImage!),
+        child:
+            WordImage(grade: widget.unit.grade, relativePath: _q.promptImage!),
       ));
     }
     if (_q.promptText != null) {
@@ -296,7 +299,8 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
               alignment: Alignment.center,
               children: [
                 if (option.image != null)
-                  WordImage(relativePath: option.image!),
+                  WordImage(
+                      grade: widget.unit.grade, relativePath: option.image!),
                 if (option.text != null)
                   // CR-023: FittedBox co chữ lại cho vừa ô — câu hỏi nguồn
                   // G05 (lắp câu) có thể dài hơn nhiều so với 1 chữ nguồn G03,

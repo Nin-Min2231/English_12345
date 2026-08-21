@@ -85,16 +85,23 @@ class StarBar extends StatelessWidget {
 
 /// Ảnh từ vựng an toàn — nếu thiếu file thì hiện placeholder thay vì crash.
 class WordImage extends StatelessWidget {
+  // Sprint 4 — đa lớp: bắt buộc truyền để biết đọc ảnh từ
+  // `assets/content/lop$grade/...` nào. Luôn có sẵn ở nơi gọi qua
+  // `widget.unit.grade`, không cần state/context mới.
+  final int grade;
   final String relativePath;
   final BoxFit fit;
 
   const WordImage(
-      {super.key, required this.relativePath, this.fit = BoxFit.contain});
+      {super.key,
+      required this.grade,
+      required this.relativePath,
+      this.fit = BoxFit.contain});
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      ContentRepository.asset(relativePath),
+      ContentRepository.asset(grade: grade, relativePath: relativePath),
       fit: fit,
       errorBuilder: (_, __, ___) => const Center(
         child: Icon(Icons.image_not_supported_outlined,
