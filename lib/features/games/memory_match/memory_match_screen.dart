@@ -178,7 +178,10 @@ class _MemoryMatchScreenState extends State<MemoryMatchScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.successDark,
         foregroundColor: Colors.white,
-        title: Text('Lật thẻ • Unit ${widget.fromUnit}-${widget.toUnit}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.fromUnit}-${widget.toUnit}',
+            gameName: 'Lật thẻ'),
       ),
       body: Stack(
         children: [

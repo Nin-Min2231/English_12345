@@ -22,7 +22,8 @@ class ListenPickScreen extends StatefulWidget {
   State<ListenPickScreen> createState() => _ListenPickScreenState();
 }
 
-class _ListenPickScreenState extends State<ListenPickScreen> {
+class _ListenPickScreenState extends State<ListenPickScreen>
+    with WrongAnswerLockMixin<ListenPickScreen> {
   int _index = 0;
   // Câu đã trả lời đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
   final Set<int> _correctIndices = {};
@@ -77,11 +78,13 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
   void _pick(int displayPos) {
     if (_answered ||
         _feedback == AnswerFeedback.wrong ||
-        displayPos == _eliminatedDisplayPos) {
+        displayPos == _eliminatedDisplayPos ||
+        answerLockActive) {
       return;
     }
     final actualIdx = _order[displayPos];
     if (actualIdx == _q.answerIdx) {
+      resetWrongStreak();
       setState(() {
         _answered = true;
         _wrongPick = null;
@@ -95,6 +98,7 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       setState(() {
         _wrongPick = displayPos;
         _feedback = AnswerFeedback.wrong;
@@ -175,7 +179,10 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.secondary,
         foregroundColor: Colors.white,
-        title: Text('Nghe chọn hình • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Nghe chọn hình'),
       ),
       body: Stack(
         children: [
@@ -232,6 +239,8 @@ class _ListenPickScreenState extends State<ListenPickScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );

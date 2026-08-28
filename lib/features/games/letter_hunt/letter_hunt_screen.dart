@@ -30,7 +30,8 @@ class LetterHuntScreen extends StatefulWidget {
   State<LetterHuntScreen> createState() => _LetterHuntScreenState();
 }
 
-class _LetterHuntScreenState extends State<LetterHuntScreen> {
+class _LetterHuntScreenState extends State<LetterHuntScreen>
+    with WrongAnswerLockMixin<LetterHuntScreen> {
   int _index = 0;
   // Từ đã trả lời đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
   final Set<int> _correctIndices = {};
@@ -82,11 +83,13 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
   void _pick(int displayPos) {
     if (_answered ||
         _feedback == AnswerFeedback.wrong ||
-        displayPos == _eliminatedDisplayPos) {
+        displayPos == _eliminatedDisplayPos ||
+        answerLockActive) {
       return;
     }
     final actualIdx = _order[displayPos];
     if (actualIdx == _q.answerIdx) {
+      resetWrongStreak();
       setState(() {
         _answered = true;
         _wrongPick = null;
@@ -100,6 +103,7 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       setState(() {
         _wrongPick = displayPos;
         _feedback = AnswerFeedback.wrong;
@@ -198,7 +202,10 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.secondaryDark,
         foregroundColor: Colors.white,
-        title: Text('Săn chữ • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Săn chữ'),
       ),
       body: Stack(
         children: [
@@ -272,6 +279,8 @@ class _LetterHuntScreenState extends State<LetterHuntScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );

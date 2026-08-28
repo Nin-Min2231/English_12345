@@ -13,14 +13,12 @@ class BadgesScreen extends StatelessWidget {
   final AppDatabase db;
   final Profile profile;
   // Sprint 4 — đa lớp: huy hiệu phân biệt theo lớp (badgeId dùng chung mọi
-  // lớp, cột `grade` trong DB mới là chỗ phân biệt thật).
-  final int grade;
+  // lớp, cột `grade` trong DB mới là chỗ phân biệt thật). `null` (gọi từ màn
+  // "Chọn lớp", chưa có lớp cụ thể) = hiện huy hiệu đã đạt ở BẤT KỲ lớp nào.
+  final int? grade;
 
   const BadgesScreen(
-      {super.key,
-      required this.db,
-      required this.profile,
-      required this.grade});
+      {super.key, required this.db, required this.profile, this.grade});
 
   @override
   Widget build(BuildContext context) {

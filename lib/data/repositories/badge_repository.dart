@@ -11,12 +11,17 @@ class BadgeRepository {
 
   // Sprint 4 — đa lớp: `badgeId` (vd 'badge_u4') dùng CHUNG mọi lớp, phân
   // biệt bằng cột `grade` mới — lọc tại query giống progress_repository.dart.
-  Stream<List<EarnedBadge>> watchForProfile(int profileId,
-          {required int grade}) =>
-      (db.select(db.earnedBadges)
-            ..where(
-                (t) => t.profileId.equals(profileId) & t.grade.equals(grade)))
-          .watch();
+  // `grade: null` (màn "Chọn lớp" — chưa chọn lớp cụ thể để lọc) trả về huy
+  // hiệu đã đạt ở BẤT KỲ lớp nào của hồ sơ này (huy hiệu là thành tích của
+  // đứa trẻ, không riêng 1 lớp — xem CR-030 BUGS_CR.md).
+  Stream<List<EarnedBadge>> watchForProfile(int profileId, {int? grade}) {
+    final query = db.select(db.earnedBadges)
+      ..where((t) => t.profileId.equals(profileId));
+    if (grade != null) {
+      query.where((t) => t.grade.equals(grade));
+    }
+    return query.watch();
+  }
 
   /// Trao huy hiệu nếu chưa có (không trao trùng); trả về true nếu vừa trao
   /// mới (để màn hình chỉ ăn mừng đúng 1 lần).

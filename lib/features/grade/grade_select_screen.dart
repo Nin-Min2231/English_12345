@@ -4,7 +4,9 @@ import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../data/content_repository.dart';
 import '../../data/db/app_database.dart';
+import '../badges/badges_screen.dart';
 import '../home/home_screen.dart';
+import '../settings/settings_screen.dart';
 
 /// SCR-00 — Chọn lớp (Sprint 4, đa lớp). Đứng giữa ProfileSelect (SCR-01a/b)
 /// và Home (SCR-02): 1 hồ sơ có thể học nhiều lớp, nên chọn hồ sơ đứng trước
@@ -78,6 +80,43 @@ class _GradeSelectScreenState extends State<GradeSelectScreen> {
         foregroundColor: Colors.white,
         title: const Text('Chọn lớp',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+        // Nút back tự động hiện (Flutter tự thêm vì màn "Hồ sơ của bé" vẫn
+        // còn ở dưới trong stack, xem profile_select_screen.dart._openProfile
+        // — không push thay thế nữa). 3 action còn lại khớp đúng bộ với
+        // HomeScreen ("Chọn bài học") để đồng bộ header xuyên suốt luồng
+        // Hồ sơ -> Chọn lớp -> Chọn bài (CR-030 BUGS_CR.md).
+        actions: [
+          IconButton(
+            tooltip: 'Huy hiệu',
+            // Chưa chọn lớp ở màn này -> hiện huy hiệu đã đạt ở BẤT KỲ lớp
+            // nào của hồ sơ (grade: null, xem badge_repository.dart).
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) =>
+                    BadgesScreen(db: widget.db, profile: widget.profile),
+              ),
+            ),
+            icon: const Icon(Icons.emoji_events_rounded),
+          ),
+          IconButton(
+            tooltip: 'Cài đặt',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) =>
+                    SettingsScreen(db: widget.db, profile: widget.profile),
+              ),
+            ),
+            icon: const Icon(Icons.settings_rounded),
+          ),
+          // Quay lại đúng màn "Hồ sơ của bé" ngay dưới trong stack (không
+          // tạo instance mới) — xem home_screen.dart cho lý do tương tự.
+          IconButton(
+            tooltip: widget.profile.name,
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Text(widget.profile.avatarEmoji,
+                style: const TextStyle(fontSize: 24)),
+          ),
+        ],
       ),
       body: Stack(
         children: [

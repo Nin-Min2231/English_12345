@@ -99,8 +99,7 @@ class _UnitScreenState extends State<UnitScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        title: Text('Unit ${unit.unitId}',
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: GameAppBarTitle(grade: unit.grade, unitLabel: '${unit.unitId}'),
       ),
       body: StreamBuilder<List<LessonProgress>>(
         stream: _progressRepo.watchForProfile(widget.profile.id,

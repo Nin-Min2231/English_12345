@@ -258,7 +258,10 @@ class _RecordScreenState extends State<RecordScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.infoDark,
         foregroundColor: Colors.white,
-        title: Text('Ghi âm • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Ghi âm'),
       ),
       body: Stack(
         children: [

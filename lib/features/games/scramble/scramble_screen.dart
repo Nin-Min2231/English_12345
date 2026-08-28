@@ -24,7 +24,8 @@ class ScrambleScreen extends StatefulWidget {
   State<ScrambleScreen> createState() => _ScrambleScreenState();
 }
 
-class _ScrambleScreenState extends State<ScrambleScreen> {
+class _ScrambleScreenState extends State<ScrambleScreen>
+    with WrongAnswerLockMixin<ScrambleScreen> {
   int _index = 0;
   final Set<int> _correctIndices = {};
   List<String> _answerTiles = [];
@@ -148,7 +149,16 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
   }
 
   void _checkAnswer() {
-    if (!_allFilled || _isSolved) return;
+    // `_feedback == wrong` chặn double-tap "Kiểm tra" trong lúc hiệu ứng sai
+    // còn hiện (700-1100ms) gọi lại `_checkAnswer` 2 lần cho cùng 1 lần bấm —
+    // cùng chốt chặn mẫu chấm-ngay đã dùng ở _pick() các màn khác (CLAUDE.md
+    // §6 BUG-003), phát hiện khi rà soát trước lúc merge CR-029/030/031.
+    if (!_allFilled ||
+        _isSolved ||
+        _feedback == AnswerFeedback.wrong ||
+        answerLockActive) {
+      return;
+    }
     final attempt = [for (final p in _slots) _shuffledTiles[p!]];
     var isCorrect = attempt.length == _answerTiles.length;
     if (isCorrect) {
@@ -164,6 +174,7 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
       if (isCorrect) _correctIndices.add(_index);
     });
     if (isCorrect) {
+      resetWrongStreak();
       AudioService.instance.play(_it.audio, grade: widget.unit.grade);
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
@@ -171,6 +182,7 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       AudioService.instance.playSfx('wrong.mp3');
       Future.delayed(const Duration(milliseconds: 900), () {
         if (!mounted || _feedback != AnswerFeedback.wrong) return;
@@ -180,10 +192,16 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
   }
 
   /// "Làm lại" — xóa hết về trạng thái ban đầu (chưa đặt chữ nào), xáo lại
-  /// khay chọn cho mới.
+  /// khay chọn cho mới. Cho phép bấm cả khi ĐÃ giải đúng (trẻ có thể muốn xếp
+  /// lại cho vui) — nhưng lúc đó BỎ đánh dấu "đã đúng" (`_correctIndices`)
+  /// để bắt buộc bấm "Kiểm tra" đúng lại lần nữa mới mở lại "Tiếp theo", theo
+  /// đúng yêu cầu người dùng (không cho "làm lại" xong bỏ ngang mà vẫn coi
+  /// như đã qua). Quay lại từ mà chưa "Kiểm tra" lại thì hiện đúng trạng thái
+  /// mặc định (chưa làm bài) — không tự điền lại đáp án cũ (xem `_prepare()`,
+  /// nhánh `_isSolved` giờ không còn đúng cho từ này nữa).
   void _resetAttempt() {
-    if (_isSolved) return;
     setState(() {
+      _correctIndices.remove(_index);
       _shuffledTiles = List.of(_answerTiles)..shuffle(Random());
       _placed = List.filled(_shuffledTiles.length, false);
       _slots = List<int?>.filled(_answerTiles.length, null);
@@ -252,7 +270,10 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.success,
         foregroundColor: Colors.white,
-        title: Text('Xếp chữ • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Xếp chữ'),
       ),
       body: Stack(
         children: [
@@ -294,14 +315,19 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
               const SizedBox(height: AppSpacing.lg),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                child: GridView.count(
+                child: GridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: AppSpacing.sm,
-                  crossAxisSpacing: AppSpacing.sm,
-                  childAspectRatio: 2.4,
                   padding: EdgeInsets.zero,
+                  // Từ nhiều ô chữ (vd "volleyball" 10 ô -> 5 hàng) sẽ tự co
+                  // hàng lại theo `tileGridRowHeight` để KHÔNG tràn màn hình
+                  // che nút bấm bên dưới (xem BUGS_CR.md — bug tràn layout).
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: AppSpacing.sm,
+                    crossAxisSpacing: AppSpacing.sm,
+                    mainAxisExtent: tileGridRowHeight(_shuffledTiles.length),
+                  ),
                   children: [
                     for (var i = 0; i < _shuffledTiles.length; i++)
                       _poolTile(i),
@@ -318,7 +344,7 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
                       child: SecondaryButton(
                         label: 'Làm lại',
                         icon: Icons.refresh_rounded,
-                        onPressed: _isSolved ? null : _resetAttempt,
+                        onPressed: _resetAttempt,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.md),
@@ -361,6 +387,8 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );
@@ -413,12 +441,15 @@ class _ScrambleScreenState extends State<ScrambleScreen> {
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-            child: Text(
-              _shuffledTiles[poolIdx],
-              style: const TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                _shuffledTiles[poolIdx],
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ),
           ),

@@ -22,7 +22,8 @@ class MindmapScreen extends StatefulWidget {
   State<MindmapScreen> createState() => _MindmapScreenState();
 }
 
-class _MindmapScreenState extends State<MindmapScreen> {
+class _MindmapScreenState extends State<MindmapScreen>
+    with WrongAnswerLockMixin<MindmapScreen> {
   int _index = 0;
   final Set<int> _correctIndices = {};
   int? _wrongPick;
@@ -70,11 +71,13 @@ class _MindmapScreenState extends State<MindmapScreen> {
   void _pick(int displayPos) {
     if (_answered ||
         _feedback == AnswerFeedback.wrong ||
-        displayPos == _eliminatedDisplayPos) {
+        displayPos == _eliminatedDisplayPos ||
+        answerLockActive) {
       return;
     }
     final actualIdx = _order[displayPos];
     if (actualIdx == _it.answerIdx) {
+      resetWrongStreak();
       setState(() {
         _answered = true;
         _wrongPick = null;
@@ -89,6 +92,7 @@ class _MindmapScreenState extends State<MindmapScreen> {
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       setState(() {
         _wrongPick = displayPos;
         _feedback = AnswerFeedback.wrong;
@@ -168,7 +172,10 @@ class _MindmapScreenState extends State<MindmapScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.error,
         foregroundColor: AppColors.textPrimary,
-        title: Text('Hoàn thành câu • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Hoàn thành câu'),
       ),
       body: Stack(
         children: [
@@ -241,6 +248,8 @@ class _MindmapScreenState extends State<MindmapScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );

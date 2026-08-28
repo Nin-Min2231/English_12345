@@ -31,7 +31,8 @@ class FillLetterScreen extends StatefulWidget {
   State<FillLetterScreen> createState() => _FillLetterScreenState();
 }
 
-class _FillLetterScreenState extends State<FillLetterScreen> {
+class _FillLetterScreenState extends State<FillLetterScreen>
+    with WrongAnswerLockMixin<FillLetterScreen> {
   int _index = 0;
   // Từ đã điền đúng (index) — dùng tính sao, không đếm dồn khi xem lại.
   final Set<int> _correctIndices = {};
@@ -93,11 +94,13 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
     if (_correctIndices.contains(_index) ||
         _feedback == AnswerFeedback.wrong ||
         _usedPositions.contains(pos) ||
-        pos == _eliminatedPos) {
+        pos == _eliminatedPos ||
+        answerLockActive) {
       return;
     }
     final target = _it.answer[_filledCount];
     if (_options[pos] == target) {
+      resetWrongStreak();
       final completing = _filledCount + 1 >= _it.hiddenIdx.length;
       setState(() {
         _usedPositions.add(pos);
@@ -119,6 +122,7 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
         _recomputeEliminated();
       }
     } else {
+      registerWrongAnswer();
       setState(() {
         _wrongPick = pos;
         _feedback = AnswerFeedback.wrong;
@@ -234,7 +238,10 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.info,
         foregroundColor: Colors.white,
-        title: Text('Điền chữ • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Điền chữ'),
       ),
       body: Stack(
         children: [
@@ -312,6 +319,8 @@ class _FillLetterScreenState extends State<FillLetterScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );

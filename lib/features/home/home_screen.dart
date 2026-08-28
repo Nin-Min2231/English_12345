@@ -7,8 +7,6 @@ import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/progress_repository.dart';
 import '../badges/badges_screen.dart';
-import '../grade/grade_select_screen.dart';
-import '../profile/profile_select_screen.dart';
 import '../settings/settings_screen.dart';
 import '../unit/unit_screen.dart';
 
@@ -32,15 +30,6 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         actions: [
           IconButton(
-            tooltip: 'Đổi lớp',
-            onPressed: () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => GradeSelectScreen(profile: profile, db: db),
-              ),
-            ),
-            icon: const Icon(Icons.swap_horiz_rounded),
-          ),
-          IconButton(
             tooltip: 'Huy hiệu',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
@@ -59,13 +48,13 @@ class HomeScreen extends StatelessWidget {
             ),
             icon: const Icon(Icons.settings_rounded),
           ),
+          // Quay lại đúng màn "Hồ sơ của bé" (đáy stack, xem app.dart) thay
+          // vì tạo 1 instance MỚI qua pushReplacement như trước — tránh
+          // ProfileSelectScreen bị lặp trong stack (CR-030 BUGS_CR.md).
           IconButton(
             tooltip: profile.name,
-            onPressed: () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => ProfileSelectScreen(db: db),
-              ),
-            ),
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
             icon:
                 Text(profile.avatarEmoji, style: const TextStyle(fontSize: 24)),
           ),

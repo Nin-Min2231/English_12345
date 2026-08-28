@@ -27,7 +27,8 @@ class SentenceBuildScreen extends StatefulWidget {
   State<SentenceBuildScreen> createState() => _SentenceBuildScreenState();
 }
 
-class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
+class _SentenceBuildScreenState extends State<SentenceBuildScreen>
+    with WrongAnswerLockMixin<SentenceBuildScreen> {
   int _index = 0;
   final Set<int> _correctIndices = {};
   List<String> _answerTokens = [];
@@ -127,7 +128,16 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
   }
 
   void _checkAnswer() {
-    if (!_allFilled || _isSolved) return;
+    // `_feedback == wrong` chặn double-tap "Kiểm tra" trong lúc hiệu ứng sai
+    // còn hiện (700-1100ms) gọi lại `_checkAnswer` 2 lần cho cùng 1 lần bấm —
+    // cùng chốt chặn mẫu chấm-ngay đã dùng ở _pick() các màn khác (CLAUDE.md
+    // §6 BUG-003), phát hiện khi rà soát trước lúc merge CR-029/030/031.
+    if (!_allFilled ||
+        _isSolved ||
+        _feedback == AnswerFeedback.wrong ||
+        answerLockActive) {
+      return;
+    }
     final attempt = [for (final p in _slots) _shuffledTokens[p!]];
     var isCorrect = attempt.length == _answerTokens.length;
     if (isCorrect) {
@@ -143,12 +153,14 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
       if (isCorrect) _correctIndices.add(_index);
     });
     if (isCorrect) {
+      resetWrongStreak();
       AudioService.instance.playSfx('correct.mp3');
       Future.delayed(const Duration(milliseconds: 1100), () {
         if (!mounted || _feedback != AnswerFeedback.correct) return;
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       AudioService.instance.playSfx('wrong.mp3');
       Future.delayed(const Duration(milliseconds: 900), () {
         if (!mounted || _feedback != AnswerFeedback.wrong) return;
@@ -158,10 +170,14 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
   }
 
   /// "Làm lại" — xóa hết về trạng thái ban đầu (chưa đặt token nào), xáo lại
-  /// khay chọn cho mới.
+  /// khay chọn cho mới. Cho phép bấm cả khi ĐÃ giải đúng (trẻ có thể muốn xếp
+  /// lại cho vui, giống G04 scramble_screen.dart) — nhưng BỎ đánh dấu "đã
+  /// đúng" (`_correctIndices`), bắt buộc "Kiểm tra" đúng lại lần nữa mới mở
+  /// lại "Tiếp theo" (theo yêu cầu người dùng); quay lại câu này mà chưa
+  /// "Kiểm tra" lại thì hiện đúng trạng thái mặc định chưa làm bài.
   void _resetAttempt() {
-    if (_isSolved) return;
     setState(() {
+      _correctIndices.remove(_index);
       _shuffledTokens = List.of(_answerTokens)..shuffle(Random());
       _placed = List.filled(_shuffledTokens.length, false);
       _slots = List<int?>.filled(_answerTokens.length, null);
@@ -229,7 +245,10 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.warning,
         foregroundColor: AppColors.textPrimary,
-        title: Text('Lắp ráp câu • Unit ${widget.unit.unitId}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.unit.unitId}',
+            gameName: 'Lắp ráp câu'),
       ),
       body: Stack(
         children: [
@@ -270,14 +289,19 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                child: GridView.count(
+                child: GridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: AppSpacing.sm,
-                  crossAxisSpacing: AppSpacing.sm,
-                  childAspectRatio: 2.8,
                   padding: EdgeInsets.zero,
+                  // Câu nhiều token (nhiều từ) sẽ tự co hàng lại theo
+                  // `tileGridRowHeight` để KHÔNG tràn màn hình che nút bấm
+                  // bên dưới — cùng lỗi/cách sửa với G04 (BUGS_CR.md).
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: AppSpacing.sm,
+                    crossAxisSpacing: AppSpacing.sm,
+                    mainAxisExtent: tileGridRowHeight(_shuffledTokens.length),
+                  ),
                   children: [
                     for (var i = 0; i < _shuffledTokens.length; i++)
                       _poolTile(i),
@@ -294,7 +318,7 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
                       child: SecondaryButton(
                         label: 'Làm lại',
                         icon: Icons.refresh_rounded,
-                        onPressed: _isSolved ? null : _resetAttempt,
+                        onPressed: _resetAttempt,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.md),
@@ -339,6 +363,8 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );
@@ -398,14 +424,17 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen> {
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-            child: Text(
-              _shuffledTokens[poolIdx],
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                _shuffledTokens[poolIdx],
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),

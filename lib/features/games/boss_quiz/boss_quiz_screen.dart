@@ -31,7 +31,8 @@ class BossQuizScreen extends StatefulWidget {
   State<BossQuizScreen> createState() => _BossQuizScreenState();
 }
 
-class _BossQuizScreenState extends State<BossQuizScreen> {
+class _BossQuizScreenState extends State<BossQuizScreen>
+    with WrongAnswerLockMixin<BossQuizScreen> {
   int _index = 0;
   final Set<int> _correctIndices = {};
   int? _wrongPick;
@@ -79,11 +80,13 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
   void _pick(int displayPos) {
     if (_answered ||
         _feedback == AnswerFeedback.wrong ||
-        displayPos == _eliminatedDisplayPos) {
+        displayPos == _eliminatedDisplayPos ||
+        answerLockActive) {
       return;
     }
     final actualIdx = _order[displayPos];
     if (actualIdx == _q.answerIdx) {
+      resetWrongStreak();
       setState(() {
         _answered = true;
         _wrongPick = null;
@@ -96,6 +99,7 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
         setState(() => _feedback = null);
       });
     } else {
+      registerWrongAnswer();
       setState(() {
         _wrongPick = displayPos;
         _feedback = AnswerFeedback.wrong;
@@ -175,7 +179,10 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.errorDark,
         foregroundColor: Colors.white,
-        title: Text('Boss Quiz • Unit ${widget.fromUnit}-${widget.toUnit}'),
+        title: GameAppBarTitle(
+            grade: widget.unit.grade,
+            unitLabel: '${widget.fromUnit}-${widget.toUnit}',
+            gameName: 'Boss Quiz'),
       ),
       body: Stack(
         children: [
@@ -226,6 +233,8 @@ class _BossQuizScreenState extends State<BossQuizScreen> {
             ],
           ),
           AnswerFeedbackOverlay(feedback: _feedback),
+          WrongAnswerLockOverlay(
+              active: answerLockActive, secondsLeft: answerLockCountdown),
         ],
       ),
     );

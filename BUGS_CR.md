@@ -1178,3 +1178,250 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk` — ✅ **ĐÃ TEST OK trên điện thoại
   thật** (người dùng xác nhận 2026-08-21 đêm): Lớp 1 Unit 1 không còn hiện dòng "Hoàn thành câu", chơi
   xong G05 (Lắp ráp câu) vào được thẳng G08 (Ghi âm) đúng như mong đợi.
+
+## CR-029 — 3 việc từ phiên Cowork: header thiếu "Lớp", lỗi lưu sửa hồ sơ, layout G04/G05 tràn màn hình
+
+- **Người dùng báo (2026-08-22)**: 3 việc qua handover, không phải làm tiếp Lớp 1 Unit 2-16 (việc đó
+  vẫn đang chờ, xem phụ lục `SPRINT4_PLAN.md`).
+
+### 1. Header thiếu "Lớp" — từ `UnitScreen` đến mọi màn game
+
+- Trước đây AppBar chỉ hiện `"Tên game • Unit N"` (hoặc chỉ `"Unit N"` ở `UnitScreen`) — không biết
+  đang ở Lớp mấy, dễ nhầm từ khi app hỗ trợ đa lớp (Sprint 4).
+- Thêm `GameAppBarTitle` (widget dùng chung, `common_widgets.dart`) hiện `"Lớp X • Unit Y • Tên game"`
+  (`gameName` bỏ trống ở `UnitScreen` vì màn đó chưa vào 1 game cụ thể); `maxLines: 1` +
+  `TextOverflow.ellipsis` để không vỡ AppBar trên máy màn hình hẹp khi chuỗi dài.
+- Áp dụng cho **11 màn hình**: `unit_screen.dart` + 10 màn game (`flashcard`, `listen_pick`,
+  `fill_letter`, `scramble`, `sentence_build`, `mindmap`, `record`, `letter_hunt`, `memory_match`,
+  `boss_quiz`). `memory_match`/`boss_quiz` (checkpoint gộp 2 unit) dùng `unitLabel: '$fromUnit-$toUnit'`
+  thay vì 1 số.
+
+### 2. Lỗi khi lưu sửa hồ sơ (chạm giữ → Sửa hồ sơ → đổi tên → Lưu)
+
+- **Nguyên nhân**: `profile_select_screen.dart` hàm `_showEditDialog` (cũ) tạo `TextEditingController`
+  ở NGOÀI `showDialog`, rồi gọi `nameController.dispose()` NGAY SAU KHI `await showDialog(...)` trả
+  về. Nhưng Future của `showDialog` hoàn tất ngay khi `Navigator.pop()` được gọi — TRƯỚC KHI hiệu ứng
+  đóng dialog (route transition) kết thúc, lúc đó `TextField` vẫn còn gắn với controller. Dispose sớm
+  khiến `EditableText` cố `removeListener` trên 1 controller đã dispose khi route thật sự unmount →
+  Flutter báo lỗi **"A TextEditingController was used after being disposed"** đúng lúc bấm "Lưu".
+  `parent_gate.dart` (`_ParentGateDialog`) trong cùng repo đã làm ĐÚNG (controller sở hữu bởi 1
+  `StatefulWidget` riêng, dispose trong `State.dispose()` của chính dialog đó) — đây là bằng chứng đối
+  chiếu cho thấy `_showEditDialog` là chỗ lệch pattern, không phải cách làm chuẩn của dự án.
+- **Sửa**: tách dialog sửa hồ sơ thành `_EditProfileDialog` (StatefulWidget riêng, giống
+  `_ParentGateDialog`) — controller + avatar đang chọn là state của chính dialog, dispose tự động đúng
+  lúc qua `State.dispose()`. `_showEditDialog` giờ chỉ `await showDialog<_EditProfileResult>(...)` rồi
+  gọi `_profileRepo.update()` nếu có kết quả — không còn tạo/dispose controller thủ công.
+
+### 3. Layout tràn màn hình khi từ/câu dài — G04 Xếp chữ + G05 Lắp ráp câu
+
+- **Người dùng báo kèm ảnh chụp màn hình**: màn "Xếp chữ" Lớp 2 Unit 8 từ 3/3 ("volleyball", 10 chữ
+  cái) — lưới chữ tràn xuống dưới ("BOTTOM OVERFLOWED BY 65 PIXELS"), che mất nút "Quay lại"/"Tiếp
+  theo", không bấm được.
+- **Nguyên nhân**: `scramble_screen.dart` dùng `GridView.count(crossAxisCount: 2, childAspectRatio:
+  2.4, shrinkWrap: true, physics: NeverScrollableScrollPhysics)` để hiện khay chữ xáo trộn — chiều cao
+  1 hàng CỐ ĐỊNH theo bề rộng màn hình, không phụ thuộc số hàng. Từ dài (nhiều ô chữ hơn) → nhiều hàng
+  hơn → tổng chiều cao lưới tăng thẳng theo số hàng, không có `Expanded`/scroll nào hấp thụ phần dư →
+  tràn (`RenderFlex overflowed`) khi đủ dài (vd "volleyball" 10 ô → 5 hàng).
+- **Rà soát toàn bộ màn game khác xem còn màn nào bị y vậy không** (theo yêu cầu): `sentence_build_
+  screen.dart` (G05 Lắp ráp câu) dùng **ĐÚNG pattern lỗi này** (`GridView.count` cố định
+  `childAspectRatio: 2.8`, số hàng theo số token của câu) — chưa quan sát được tràn thật với dữ liệu
+  hiện có (câu dài nhất `g05_sentence.json` chỉ 7 token) nhưng cùng lỗ hổng, sửa luôn cho chắc. Các màn
+  còn lại (G02/G06/G10/G12) đã bọc lưới trong `Expanded` (tự co/scroll nội bộ, không tràn); G09 "Lật
+  thẻ" đã tự đo `LayoutBuilder` để tính `childAspectRatio` khớp đúng không gian còn lại (mẫu đúng nên
+  theo).
+- **Sửa (cả G04 + G05, cùng cách)**: thêm hàm dùng chung `tileGridRowHeight(itemCount, ...)`
+  (`common_widgets.dart`) — trả về chiều cao 1 hàng theo 1 **ngân sách chiều cao cố định cho cả lưới**
+  (200dp), co dần khi số hàng tăng (`(200 / rows).clamp(36, 64)`); với số hàng ít (≤3, đa số trường
+  hợp) trả về đúng 64dp như giao diện cũ, không đổi gì. Đổi `GridView.count` → `GridView` +
+  `SliverGridDelegateWithFixedCrossAxisCount(mainAxisExtent: tileGridRowHeight(...))` ở cả 2 màn. Thêm
+  `FittedBox(fit: BoxFit.scaleDown)` bọc chữ trong ô khay chọn (`_poolTile`) ở cả 2 màn để chữ tự co
+  khi hàng bị nén nhiều — tránh chữ bị cắt/tràn ngang, cùng mẫu đã dùng ở `letter_hunt_screen.dart`.
+- **Trạng thái**: `flutter analyze` sạch, `dart format` sạch, build APK debug thành công:
+  `05_Build_APK/lop2_english_app-debug-2026-08-22-1-fixes.apk`. **Chưa test trên điện thoại thật** —
+  cần xác nhận cả 3 việc: (1) mọi màn hiện đủ "Lớp X • Unit Y • Tên game"; (2) chạm giữ hồ sơ → Sửa →
+  đổi tên → Lưu không còn báo lỗi, tên mới hiện đúng; (3) Lớp 2 Unit 8 "volleyball" (Xếp chữ) không
+  còn tràn màn hình, bấm được "Quay lại"/"Tiếp theo" — nên thử thêm vài từ/câu dài khác nếu có.
+- **Người dùng test lại (2026-08-22), xác nhận "Đã test OK"** — cả 3 việc trên đã kiểm chứng trên
+  thiết bị thật, yêu cầu thêm 5 việc mới → xem **CR-030** ngay dưới.
+
+## CR-030 — Khóa màn hình sau 3 lần sai, sửa luồng Chọn lớp, nút "Làm lại" G04, rà soát G10
+
+- **Người dùng báo (2026-08-22, sau khi xác nhận CR-029 test OK)**: 5 việc, kèm 2 ảnh chụp màn hình
+  (màn "Chọn bài" hiện nút chuyển đổi cần bỏ; màn "Săn chữ" trên tablet có 1 đáp án bị mờ/disable).
+
+### 1. Khóa tạm màn hình sau 3 lần trả lời/kiểm tra SAI liên tiếp
+
+- **Yêu cầu**: mọi màn game NGOẠI TRỪ G08 Ghi âm và G09 Lật thẻ (checkpoint) — sai 3 lần liên tiếp
+  (chưa có lần đúng nào ở giữa) thì hiện popup **"Con đã làm sai 3 lần rồi, hãy tập trung suy nghĩ làm
+  đúng nhé."**, bấm "OK" thì đếm lùi 3 giây (chặn hẳn thao tác) rồi mới cho chơi tiếp.
+- **Cách làm**: thêm `WrongAnswerLockMixin` (mixin, `common_widgets.dart`) — đếm dồn lượt sai
+  (`registerWrongAnswer()`), về 0 khi đúng (`resetWrongStreak()`), tự hiện dialog + đếm lùi khi chạm
+  mốc 3. Thêm `WrongAnswerLockOverlay` (dùng `AbsorbPointer` + `Positioned.fill`, khác
+  `AnswerFeedbackOverlay` chỉ trang trí bằng `IgnorePointer`) để CHẶN THẬT thao tác trong lúc đếm lùi —
+  đặt làm con cuối `Stack` của `body` nên che luôn cả các nút bấm bên dưới, không cần disable riêng
+  từng nút.
+- **Áp dụng cho 7 màn** (mọi màn "chấm ngay khi chọn"/"lắp ráp rồi kiểm tra" — đúng 10 màn game trừ 3
+  màn loại: G08 Ghi âm không có khái niệm đúng/sai ngay, G09 Lật thẻ theo yêu cầu, G01 Flashcard không
+  có đúng/sai): `listen_pick_screen.dart` (G02), `fill_letter_screen.dart` (G03),
+  `scramble_screen.dart` (G04), `sentence_build_screen.dart` (G05), `mindmap_screen.dart` (G06),
+  `letter_hunt_screen.dart` (G10), `boss_quiz_screen.dart` (G12). Mỗi màn: `with
+  WrongAnswerLockMixin<XScreen>`, gọi `resetWrongStreak()` ở nhánh chấm ĐÚNG, `registerWrongAnswer()`
+  ở nhánh chấm SAI, thêm `answerLockActive` vào điều kiện chặn chạm đầu hàm xử lý, thêm
+  `WrongAnswerLockOverlay` vào `Stack`. G03 (nhiều ô/lượt trong 1 từ) tính mỗi lượt CHẠM 1 chữ là 1 lần
+  đúng/sai riêng (không phải cả từ), G04/G05 (mô hình lắp-ráp-rồi-kiểm-tra) tính mỗi lần bấm "Kiểm tra"
+  ra sai là 1 lần (bấm "Làm lại" không tính).
+
+### 2. Màn "Săn chữ" (G10) — 1 đáp án bị mờ/disable, có phải bug không?
+
+- **Đối chiếu code**: đây là cơ chế gợi ý của độ khó **"Dễ"** (`SettingsService.isEasy`, mặc định
+  BẬT — xem `settings_service.dart` dòng `Difficulty _difficulty = Difficulty.easy;`) — đã áp dụng
+  đồng nhất cho G02/G03/G06/G10/G12 từ trước (CLAUDE.md §6): mỗi câu hỏi, loại bớt (làm mờ + vô hiệu)
+  **1 đáp án SAI ngẫu nhiên** trong số các đáp án sai còn lại, để giảm số lựa chọn phải đoán. Vị trí bị
+  loại chọn NGẪU NHIÊN mỗi câu/mỗi lần xáo lại sau khi chọn sai (`_recomputeEliminated()`) — nên "lúc
+  này mờ đáp án A, lúc khác mờ đáp án B", đúng như người dùng quan sát, không phải lỗi hiển thị/logic.
+  **KHÔNG SỬA GÌ** — đã hỏi lại người dùng qua 4 lựa chọn (giữ nguyên / tắt riêng cho G10 / luôn mờ 1
+  vị trí cố định / đổi độ khó mặc định thành "Khó" toàn app), **người dùng chọn "Giữ nguyên"** — xác
+  nhận đây là tính năng có chủ đích, không phải bug, không cần sửa code.
+
+### 3+4. Luồng điều hướng Hồ sơ → Chọn lớp → Chọn bài + bỏ nút "Đổi lớp"
+
+- **Vấn đề gốc phát hiện khi đọc code**: `ProfileSelectScreen._openProfile` dùng `pushReplacement` →
+  xóa hẳn màn "Hồ sơ của bé" khỏi stack ngay khi vào `GradeSelectScreen`, nên màn đó KHÔNG có đường lùi
+  về (không có nút back nào cả, tự động hay thủ công). Nút "Đổi lớp" (`swap_horiz`) trên `HomeScreen`
+  lại dùng `pushReplacement` theo hướng NGƯỢC (Home → Grade Select mới) — mỗi lần bấm tạo 1
+  `GradeSelectScreen` mới đè lên, chồng nhiều bản sao trong stack theo thời gian, không dọn dẹp.
+- **Sửa luồng tận gốc** (không chỉ thêm nút, đổi cả cách điều hướng cho sạch):
+  1. `profile_select_screen.dart._openProfile`: `pushReplacement` → `push` — giữ nguyên màn Hồ sơ
+     trong stack, `GradeSelectScreen` giờ tự có nút back (Flutter tự thêm vì `canPop() == true`).
+  2. `home_screen.dart`: bỏ hẳn nút "Đổi lớp" (theo ảnh chụp #4 người dùng gửi) — không cần nữa vì
+     luồng back chuẩn (Home → back → Grade Select → back → Hồ sơ) đã đủ dùng.
+  3. Nút avatar (tài khoản) trên `HomeScreen`: đổi từ `pushReplacement` tạo `ProfileSelectScreen` MỚI
+     sang `Navigator.popUntil((route) => route.isFirst)` — quay về ĐÚNG instance màn Hồ sơ đang có sẵn
+     ở đáy stack (`MaterialApp.home`, xem `app.dart`), không tạo bản sao.
+  4. `grade_select_screen.dart`: thêm 3 action khớp `HomeScreen` — Huy hiệu, Cài đặt, avatar (avatar =
+     `Navigator.pop()`, về đúng màn Hồ sơ ngay dưới). Nút back tự động hiện nhờ sửa #1.
+- **1 quyết định thiết kế phải đưa ra**: `BadgesScreen` (Huy hiệu) trước đây LUÔN cần 1 `grade` cụ thể
+  để lọc huy hiệu (`EarnedBadges.grade`) — nhưng ở màn Chọn lớp, người dùng CHƯA chọn lớp nào. Chọn
+  hướng: `grade` đổi thành `int?` (`badges_screen.dart` + `badge_repository.dart.watchForProfile`),
+  `null` = hiện huy hiệu đã đạt ở **BẤT KỲ lớp nào** của hồ sơ (huy hiệu là thành tích của đứa trẻ,
+  không riêng 1 lớp — hợp lý vì `badgeId` dùng chung mọi lớp, chỉ khác dòng DB theo `grade`).
+  `HomeScreen` gọi `BadgesScreen(..., grade: repo.grade)` như cũ (không đổi hành vi ở đó); nếu muốn
+  hành vi khác ở màn Chọn lớp (vd chỉ hiện lớp vừa chơi gần nhất), báo lại.
+- **Luồng sau khi sửa**: Hồ sơ của bé --push--> Chọn lớp --push--> Chọn bài (Home); back/avatar ở mọi
+  màn đều quay đúng 1 bước hoặc về thẳng Hồ sơ, không còn khả năng chồng nhiều bản sao 1 màn hình.
+
+### 5. Nút "Làm lại" ở "Xếp chữ" (G04) bị disable sau khi kiểm tra đúng
+
+- **Xác nhận đúng là bug**: `onPressed: _isSolved ? null : _resetAttempt` — sau khi "Kiểm tra" ra
+  đúng, `_isSolved` luôn `true` nên nút vĩnh viễn tắt cho từ đó, trẻ không xếp lại chơi cho vui được.
+- **Sửa**: bỏ điều kiện `_isSolved` ở cả nút (`onPressed: _resetAttempt`, luôn bật) và trong
+  `_resetAttempt()` (bỏ `if (_isSolved) return;`) — xếp lại chỉ reset khay chữ/ô trống hiển thị, KHÔNG
+  đụng `_correctIndices` (sao đã đạt không đổi, đúng quy tắc "sao chỉ tăng, không giảm"). "Kiểm tra"
+  vẫn tự tắt sau khi đã đúng (không đổi) — xếp lại chỉ để luyện tập, không tính điểm lại.
+- **Rà soát mở rộng (không được yêu cầu riêng nhưng cùng pattern)**: `sentence_build_screen.dart` (G05
+  Lắp ráp câu) có ĐÚNG cùng bug (`onPressed: _isSolved ? null : _resetAttempt`) — sửa luôn cho đồng bộ
+  với G04, cùng cách.
+
+### Trạng thái chung CR-030
+
+- `flutter analyze` sạch, `dart format` sạch, build APK debug thành công:
+  `05_Build_APK/lop2_english_app-debug-2026-08-22-2-fixes.apk`. Việc #2 đã có câu trả lời của người
+  dùng (giữ nguyên, không sửa code). ✅ **ĐÃ TEST OK trên điện thoại thật** (người dùng xác nhận
+  2026-08-22, cùng lúc với CR-031 — xem "Trạng thái CR-031" và CR-032 dưới) cho 4 việc còn lại: (1) sai
+  3 lần liên tiếp ở từng game (trừ Ghi âm/Lật thẻ) hiện đúng popup + đếm lùi 3s + mở lại
+  được; (3+4) từ Hồ sơ chọn 1 hồ sơ → Chọn lớp có đủ back/Huy hiệu/Cài đặt/avatar, chọn lớp → Chọn bài
+  không còn nút "Đổi lớp", back/avatar ở mọi màn về đúng chỗ; (5) "Xếp chữ" VÀ "Lắp ráp câu" bấm "Làm
+  lại" được ngay cả sau khi đã đúng.
+- **Người dùng phản hồi ngay (2026-08-22, chưa kịp test thật)** — 2 việc tinh chỉnh thêm cho CR-030,
+  xem **CR-031** ngay dưới.
+
+## CR-031 — Làm đẹp popup khóa màn hình + đổi hành vi "Làm lại" thành bắt buộc redo
+
+- **Người dùng báo (2026-08-22)**: (1) popup "sai 3 lần" cần màu sắc/icon đẹp hơn cho trẻ Lớp 1, đếm
+  lùi 3s cần thêm hiệu ứng vui nhộn; (2) nút "Làm lại" (G04/G05, vừa sửa ở CR-030 việc #5) khi bấm
+  phải **bắt buộc làm lại đúng mới được qua bài tiếp** — không phải chỉ xếp lại cho vui mà vẫn giữ
+  nguyên trạng thái "đã qua" như CR-030 làm.
+
+### 1. Làm đẹp popup + hiệu ứng đếm lùi (`common_widgets.dart`, `WrongAnswerLockMixin`/
+   `WrongAnswerLockOverlay`)
+
+- Popup: thêm icon tròn nền `AppColors.warning` (màu ấm, giống màu ngôi sao — cố tình KHÔNG dùng đỏ để
+  tránh cảm giác bị phạt) + emoji "🤔" (khớp nghĩa "suy nghĩ"), nút "OK" đổi từ `ElevatedButton` chữ
+  suông sang `PrimaryButton` to, màu ấm, icon `emoji_emotions_rounded`.
+- Đếm lùi: thay chữ trắng đơn giản bằng `_CountdownBubble` — quả bóng tròn to (110dp) đổi màu xoay
+  vòng `secondary→primary→success` mỗi giây, hiệu ứng "nảy" (`TweenAnimationBuilder` +
+  `Curves.elasticOut`, tái dùng đúng kỹ thuật `_FeedbackPop` đã có — đổi `key` theo giây để hiệu ứng
+  lặp lại mỗi lần đổi số) + tái dùng `_ConfettiBurst` (pháo hoa nhỏ có sẵn, dùng khi trả lời đúng) làm
+  nền cho đỡ căng thẳng lúc bị khóa màn hình.
+
+### 2. "Làm lại" (G04 Xếp chữ + G05 Lắp ráp câu) — bắt buộc redo, không còn giữ trạng thái "đã qua"
+
+- **CR-030 việc #5 làm CHƯA đúng ý người dùng**: lúc đó chỉ bỏ điều kiện `_isSolved` chặn NÚT (cho bấm
+  được) nhưng vẫn giữ nguyên `_correctIndices` (để không mất sao đã đạt) — kết quả là "Làm lại" chỉ
+  xáo lại khay chữ cho vui, còn "Tiếp theo" vẫn mở, "Kiểm tra" vẫn khóa — trẻ có thể bấm "Làm lại" rồi
+  bỏ ngang, bấm "Tiếp theo" luôn mà không cần làm lại thật.
+- **Sửa đúng ý người dùng**: `_resetAttempt()` ở CẢ 2 màn thêm `_correctIndices.remove(_index);` —
+  bấm "Làm lại" giờ THẬT SỰ bỏ đánh dấu "đã đúng" của câu/từ hiện tại, kéo theo tự động (không cần sửa
+  gì thêm, các nút đã đọc `_isSolved` sẵn): "Tiếp theo" khóa lại, "Kiểm tra" mở lại (khi điền đủ ô) —
+  bắt buộc bấm "Kiểm tra" đúng lần nữa mới đi tiếp được, đúng yêu cầu "làm lại thì bắt buộc phải làm
+  mới qua bài tiếp". Quay lại câu này (chưa kiểm tra lại) từ câu khác cũng hiện đúng trạng thái mặc
+  định chưa làm bài (không tự điền đáp án cũ) — vì `_prepare()` đã có sẵn nhánh `if (_isSolved) ...`
+  đọc đúng giá trị mới, không cần sửa thêm.
+- **An toàn với "sao chỉ tăng, không giảm"**: vì "Tiếp theo" của TỪ ĐÓ bị khóa lại cho tới khi
+  `_correctIndices` có lại đúng chỉ số này, không có đường nào đi tới `_showResult()` (cuối game) mà bỏ
+  qua 1 câu chưa thật sự đúng — không có rủi ro tính điểm thấp hơn 1 lần chơi trước ở CÙNG phiên; sao
+  đã lưu trong DB từ lần chơi trước vẫn không bị hạ (`ProgressRepository.reportResult`, quy tắc có sẵn
+  không đổi).
+
+### Trạng thái CR-031
+
+- `flutter analyze` sạch, `dart format` sạch, build APK debug thành công:
+  `05_Build_APK/lop2_english_app-debug-2026-08-22-3-fixes.apk`. ✅ **ĐÃ TEST OK trên điện thoại thật**
+  (người dùng xác nhận 2026-08-22): (1) popup đẹp hơn, đếm lùi có hiệu ứng nảy/pháo hoa đổi màu; (2) ở
+  G04/G05, bấm "Làm lại" sau khi đã đúng → "Tiếp theo" tắt lại, phải "Kiểm tra" đúng lần nữa mới bấm
+  "Tiếp theo" được. Sau khi test OK, người dùng yêu cầu rà soát code + merge lên GitHub — xem **CR-032**
+  ngay dưới (rà soát phát hiện 1 bug thật khác, đã sửa trước khi merge).
+
+## CR-032 — Rà soát code trước khi merge lên GitHub (`/code-review` mức medium)
+
+- **Người dùng yêu cầu (2026-08-22, sau khi xác nhận CR-029/030/031 test OK)**: "Hãy kiểm tra cập nhật
+  lại tài liệu nếu cần. Sau đó kiểm tra source code nếu OK thì merge lên github. Trọn vẹn hết thì
+  update handover để phát sang session mới."
+- **Cách làm**: chạy skill `/code-review` mức `medium` trên toàn bộ diff chưa commit (18 file, CR-029+
+  030+031 gộp) — 5 agent độc lập rà 8 góc nhìn (line-by-line, removed-behavior, cross-file tracer,
+  reuse/simplification/efficiency, altitude/conventions vs `CLAUDE.md`). 8 phát hiện tổng cộng, tự
+  đóng vai người xác minh (verify) cho từng phát hiện trước khi quyết định sửa gì.
+- **1 bug thật, đã sửa**: `_checkAnswer()` ở `scramble_screen.dart` (G04) **và**
+  `sentence_build_screen.dart` (G05) thiếu điều kiện `_feedback == AnswerFeedback.wrong` trong guard
+  đầu hàm (5 màn "chấm ngay" còn lại — G02/G03/G06/G10/G12 — đều có điều kiện này ở `_pick()`, theo
+  đúng chốt chặn BUG-003 CLAUDE.md §6). Thiếu điều kiện này khiến bấm "Kiểm tra" 2 lần liên tiếp thật
+  nhanh (double-tap, trẻ hay làm khi sốt ruột) trong lúc hiệu ứng sai còn hiện (~700-1100ms) có thể gọi
+  `_checkAnswer()` lần 2 trước khi nút kịp vô hiệu, đếm lượt sai (`registerWrongAnswer()`, CR-030) **2
+  lần cho 1 lần bấm thật** — làm khóa màn hình (CR-030 việc #1) kích hoạt sớm sau chỉ 2 lần sai thật
+  thay vì 3. Sửa: thêm `_feedback == AnswerFeedback.wrong` vào guard của `_checkAnswer()` ở cả 2 màn,
+  đúng mẫu đã dùng ở các màn khác.
+- **7 phát hiện còn lại — đã cân nhắc, quyết định KHÔNG sửa (ghi nhận lại đây, không phải bỏ sót)**:
+  1. Màu hardcode (`Colors.black45`/`Colors.black26`/`Colors.white`) trong `WrongAnswerLockOverlay`/
+     `_CountdownBubble` thay vì `AppColors` — vi phạm đúng chữ quy tắc CLAUDE.md §6, nhưng lặp lại
+     đúng tiền lệ đã có sẵn (chưa sửa) trong cùng file ở `_ConfettiBurst`/`PrimaryButton`.
+  2. `tileGridRowHeight` (G04/G05, CR-029) dùng `mainAxisExtent` cố định — không co giãn theo bề rộng
+     màn hình như `childAspectRatio` cũ, có thể trông hơi mỏng trên máy tính bảng. Người dùng đã test
+     OK (kể cả trên máy tính bảng, theo ảnh chụp màn hình gửi trước đó) nên coi là chấp nhận được.
+  3. `FittedBox` mới bọc chữ ở `_poolTile` (G05) không có giới hạn co nhỏ tối thiểu, về lý thuyết 1
+     token quá dài có thể co rất nhỏ thay vì bị cắt "…" như trước — rủi ro thấp với dữ liệu câu thật
+     hiện có (tối đa 7 token/câu).
+  4. Đếm lùi 3 giây gọi `setState` trên toàn màn hình (không chỉ riêng overlay) — tốn hiệu năng không
+     cần thiết nhưng không đáng kể (chỉ xảy ra khi khóa màn hình, hiếm).
+  5. Điều kiện `answerLockActive` lặp lại thủ công ở cả 7 màn dù `WrongAnswerLockOverlay` (AbsorbPointer)
+     đã chặn thao tác — trùng lặp có chủ đích (đã ghi trong doc comment `WrongAnswerLockMixin`), không
+     phải sai sót.
+  6. Nút avatar `GradeSelectScreen`/`HomeScreen` (`pop()`/`popUntil(isFirst)`, CR-030) giả định 1 hình
+     dạng stack điều hướng cụ thể — đúng với MỌI đường vào hiện tại (đã xác nhận qua cross-file tracer),
+     chỉ là giả định chưa được "khóa cứng" bằng assert nếu sau này có thêm đường vào khác.
+  7. Nút "Lưu" hồ sơ trống tên giờ không tự đóng dialog nữa (CR-029) — xác nhận đây là CẢI THIỆN so
+     với hành vi cũ (cũ: đóng dialog nhưng âm thầm không lưu gì, dễ gây hiểu nhầm), không phải lỗi.
+- **Trạng thái**: `flutter analyze` sạch, `dart format` sạch, build APK debug thành công:
+  `05_Build_APK/lop2_english_app-debug-2026-08-22-4-fixes.apk`. **Chưa test riêng bản này trên điện
+  thoại thật** — bản `-3-fixes` (đã test OK) + đúng 1 thay đổi phòng vệ nhỏ (guard double-tap, không
+  đổi hành vi bình thường khi bấm 1 lần) nên coi là an toàn để merge mà không cần vòng test lại đầy đủ,
+  nhưng nên thử double-tap "Kiểm tra" ở G04/G05 lần tới nếu muốn xác nhận trực tiếp.

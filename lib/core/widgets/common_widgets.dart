@@ -111,6 +111,64 @@ class WordImage extends StatelessWidget {
   }
 }
 
+/// Header dùng chung cho các màn hình từ danh sách game trong 1 Unit
+/// (`UnitScreen`) đến từng màn hình game bên trong — luôn hiện đủ "Lớp X •
+/// Unit Y • Tên game" để biết ngay chương trình lớp mấy, unit bao nhiêu,
+/// đang chơi game gì (trước đây chỉ có "Tên game • Unit Y", thiếu lớp — dễ
+/// nhầm khi app đã hỗ trợ nhiều lớp từ Sprint 4). `gameName` để trống ở màn
+/// danh sách game (chưa vào 1 game cụ thể). `unitLabel` là chuỗi vì game
+/// checkpoint (Lật thẻ/Boss Quiz) gộp 2 unit liền nhau (vd "2-3").
+/// `overflow`/`maxLines` để không vỡ AppBar trên máy màn hình hẹp khi chuỗi
+/// dài (lớp lớn + unit 2 chữ số + tên game dài).
+class GameAppBarTitle extends StatelessWidget {
+  final int grade;
+  final String unitLabel;
+  final String? gameName;
+
+  const GameAppBarTitle({
+    super.key,
+    required this.grade,
+    required this.unitLabel,
+    this.gameName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final parts = [
+      'Lớp $grade',
+      'Unit $unitLabel',
+      if (gameName != null) gameName!,
+    ];
+    return Text(
+      parts.join(' • '),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+    );
+  }
+}
+
+/// Chiều cao 1 hàng cho lưới ô chọn 2 cột dùng `childAspectRatio`/
+/// `mainAxisExtent` cố định (G04 Xếp chữ, G05 Lắp ráp câu) — khi từ/câu dài
+/// (nhiều ô chữ/token hơn -> nhiều hàng hơn), hàng co nhỏ lại theo 1 ngân
+/// sách chiều cao CỐ ĐỊNH cho cả lưới, để tổng chiều cao KHÔNG BAO GIỜ tăng
+/// theo số hàng và tràn màn hình che nút bấm bên dưới (bug thật gặp ở G04
+/// Lớp 2 Unit 8 "volleyball" — 10 ô chữ -> 5 hàng cao bằng nhau tràn 65px,
+/// khóa nút "Quay lại"/"Tiếp theo" không bấm được). Với số hàng ít (bằng
+/// cách chơi phổ biến, ≤3 hàng) trả về đúng [baseRowHeight] như cũ, không
+/// đổi giao diện.
+double tileGridRowHeight(
+  int itemCount, {
+  int crossAxisCount = 2,
+  double baseRowHeight = 64,
+  double heightBudget = 200,
+  double minRowHeight = 36,
+}) {
+  final rows = (itemCount / crossAxisCount).ceil();
+  if (rows <= 0) return baseRowHeight;
+  return (heightBudget / rows).clamp(minRowHeight, baseRowHeight);
+}
+
 /// Scaffold dùng chung cho MỌI màn hình — bọc sẵn [SafeArea] quanh [body] để
 /// tránh bị thanh điều hướng hệ thống (3 nút hoặc gesture bar) che nội dung/
 /// nút ở đáy màn hình (xem BUGS_CR.md BUG-001). `top` tắt khi có `appBar` vì
@@ -249,6 +307,183 @@ class _FeedbackPop extends StatelessWidget {
                       color: Colors.white),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Khóa tạm 1 màn hình game sau khi trả lời/kiểm tra SAI 3 lần LIÊN TIẾP
+/// (chưa có lần đúng nào ở giữa) — hiện popup nhắc rồi đếm lùi 3 giây, chặn
+/// hẳn thao tác trong lúc đếm (dùng cùng [WrongAnswerLockOverlay]). KHÔNG áp
+/// dụng cho G08 Ghi âm (không có khái niệm đúng/sai ngay khi chọn) và G09
+/// Lật thẻ (checkpoint trí nhớ, theo yêu cầu người dùng) — 2 màn đó không
+/// trộn mixin này.
+///
+/// Cách dùng: `class _XScreenState extends State<XScreen> with
+/// WrongAnswerLockMixin<XScreen>` rồi gọi [registerWrongAnswer] ở nhánh SAI,
+/// [resetWrongStreak] ở nhánh ĐÚNG của hàm chấm điểm; thêm guard
+/// `answerLockActive` vào đầu hàm xử lý chạm; thêm [WrongAnswerLockOverlay]
+/// vào cuối `Stack` của `body` (đè lên [AnswerFeedbackOverlay]).
+mixin WrongAnswerLockMixin<T extends StatefulWidget> on State<T> {
+  int _wrongStreak = 0;
+  bool _answerLockActive = false;
+  int _answerLockCountdown = 0;
+
+  bool get answerLockActive => _answerLockActive;
+  int get answerLockCountdown => _answerLockCountdown;
+
+  /// Gọi ở nhánh trả lời/kiểm tra ĐÚNG — về lại 0 lượt sai liên tiếp.
+  void resetWrongStreak() => _wrongStreak = 0;
+
+  /// Gọi ở nhánh trả lời/kiểm tra SAI — đếm dồn, đủ 3 lần liên tiếp thì khóa
+  /// tạm màn hình: hiện popup (bấm "OK" mới đóng), sau đó đếm lùi 3 giây rồi
+  /// tự mở lại. Không `await` lời gọi này ở nơi gọi — hàm tự quản lý toàn bộ
+  /// bằng `setState`, nơi gọi không cần chờ.
+  Future<void> registerWrongAnswer() async {
+    _wrongStreak++;
+    if (_wrongStreak < 3) return;
+    _wrongStreak = 0;
+    if (!mounted) return;
+    setState(() => _answerLockActive = true);
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+        // Icon tròn màu ấm (warning — cùng màu ngôi sao, không dùng đỏ để
+        // tránh cảm giác bị phạt) + emoji thân thiện thay vì chỉ chữ suông,
+        // dễ nhìn/dễ hiểu hơn với trẻ Lớp 1 chưa đọc thạo.
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 88,
+              height: 88,
+              decoration: BoxDecoration(
+                color: AppColors.warning.withValues(alpha: 0.25),
+                shape: BoxShape.circle,
+              ),
+              alignment: Alignment.center,
+              child: const Text('🤔', style: TextStyle(fontSize: 48)),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            const Text(
+              'Con đã làm sai 3 lần rồi, hãy tập trung suy nghĩ làm đúng nhé.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          SizedBox(
+            width: 180,
+            child: PrimaryButton(
+              label: 'OK',
+              icon: Icons.emoji_emotions_rounded,
+              color: AppColors.warning,
+              foregroundColor: AppColors.textPrimary,
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ],
+      ),
+    );
+    for (var s = 3; s >= 1; s--) {
+      if (!mounted) return;
+      setState(() => _answerLockCountdown = s);
+      await Future.delayed(const Duration(seconds: 1));
+    }
+    if (!mounted) return;
+    setState(() {
+      _answerLockActive = false;
+      _answerLockCountdown = 0;
+    });
+  }
+}
+
+/// Lớp phủ chặn thao tác khi [WrongAnswerLockMixin.answerLockActive] — khác
+/// [AnswerFeedbackOverlay] (chỉ trang trí, dùng `IgnorePointer`), overlay này
+/// dùng `AbsorbPointer` để CHẶN THẬT mọi chạm trong lúc đếm lùi. Đặt làm con
+/// CUỐI CÙNG của `Stack` bọc `body` để nằm trên hết.
+class WrongAnswerLockOverlay extends StatelessWidget {
+  final bool active;
+  final int secondsLeft;
+
+  const WrongAnswerLockOverlay(
+      {super.key, required this.active, required this.secondsLeft});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!active) return const SizedBox.shrink();
+    return Positioned.fill(
+      child: AbsorbPointer(
+        child: Container(
+          color: Colors.black45,
+          alignment: Alignment.center,
+          child: secondsLeft > 0
+              ? _CountdownBubble(
+                  key: ValueKey(secondsLeft), seconds: secondsLeft)
+              : null,
+        ),
+      ),
+    );
+  }
+}
+
+/// Quả bóng đếm lùi nảy vui mắt — tái dùng kỹ thuật "pop" của [_FeedbackPop]
+/// (đổi `key` mỗi giây để hiệu ứng nảy lặp lại) + pháo hoa nhỏ
+/// [_ConfettiBurst], đổi màu xoay vòng mỗi giây cho đỡ căng thẳng lúc trẻ bị
+/// khóa tạm màn hình.
+class _CountdownBubble extends StatelessWidget {
+  final int seconds;
+
+  const _CountdownBubble({super.key, required this.seconds});
+
+  static const _colors = [
+    AppColors.secondary,
+    AppColors.primary,
+    AppColors.success,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final color = _colors[(seconds - 1) % _colors.length];
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.3, end: 1),
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.elasticOut,
+      builder: (context, scale, child) =>
+          Transform.scale(scale: scale, child: child),
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          const _ConfettiBurst(),
+          Container(
+            width: 110,
+            height: 110,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+              boxShadow: const [
+                BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 12,
+                    offset: Offset(0, 4)),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              '$seconds',
+              style: const TextStyle(
+                  fontSize: 56,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
         ],

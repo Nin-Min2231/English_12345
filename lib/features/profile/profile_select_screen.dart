@@ -33,8 +33,12 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
     super.dispose();
   }
 
+  /// `push` (không `pushReplacement`) — giữ `ProfileSelectScreen` này trong
+  /// stack để `GradeSelectScreen` có nút "Quay lại" tự động về đúng lại màn
+  /// hình này (trước đây `pushReplacement` xóa hẳn màn hồ sơ khỏi stack,
+  /// không có đường lùi lại).
   void _openProfile(Profile p) {
-    Navigator.of(context).pushReplacement(
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => GradeSelectScreen(profile: p, db: widget.db),
       ),
@@ -89,55 +93,13 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
   }
 
   Future<void> _showEditDialog(Profile p) async {
-    final nameController = TextEditingController(text: p.name);
-    var avatar = p.avatarEmoji;
-    final saved = await showDialog<bool>(
+    final result = await showDialog<_EditProfileResult>(
       context: context,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setDialogState) => AlertDialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
-          title: const Text('Sửa hồ sơ'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: nameController,
-                textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(border: OutlineInputBorder()),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              Wrap(
-                spacing: AppSpacing.sm,
-                runSpacing: AppSpacing.sm,
-                children: _avatarChoices
-                    .map((a) => _AvatarChoice(
-                          emoji: a,
-                          selected: a == avatar,
-                          onTap: () => setDialogState(() => avatar = a),
-                        ))
-                    .toList(),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Hủy'),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Lưu'),
-            ),
-          ],
-        ),
-      ),
+      builder: (_) => _EditProfileDialog(profile: p),
     );
-    final name = nameController.text.trim();
-    nameController.dispose();
-    if (saved == true && name.isNotEmpty && mounted) {
-      await _profileRepo.update(p.id, name: name, avatarEmoji: avatar);
+    if (result != null && mounted) {
+      await _profileRepo.update(p.id,
+          name: result.name, avatarEmoji: result.avatarEmoji);
     }
   }
 
@@ -252,6 +214,90 @@ class _ProfileSelectScreenState extends State<ProfileSelectScreen> {
           ],
         ],
       ),
+    );
+  }
+}
+
+class _EditProfileResult {
+  final String name;
+  final String avatarEmoji;
+
+  const _EditProfileResult(this.name, this.avatarEmoji);
+}
+
+/// Hộp thoại sửa tên/avatar — tách riêng thành `StatefulWidget` (giống
+/// `_ParentGateDialog` trong `parent_gate.dart`) để `TextEditingController`
+/// được sở hữu và dispose đúng lúc bởi `State.dispose()` của CHÍNH dialog
+/// này. Bản trước dùng `StatefulBuilder` + controller tạo/dispose thủ công
+/// ngay sau `await showDialog(...)` — Future đó hoàn tất ngay khi
+/// `Navigator.pop()` được gọi, TRƯỚC KHI hiệu ứng đóng dialog kết thúc, nên
+/// `dispose()` chạy trong lúc `TextField` vẫn còn gắn với controller ->
+/// Flutter báo lỗi "A TextEditingController was used after being disposed"
+/// đúng lúc bấm "Lưu" (bug thật người dùng báo).
+class _EditProfileDialog extends StatefulWidget {
+  final Profile profile;
+
+  const _EditProfileDialog({required this.profile});
+
+  @override
+  State<_EditProfileDialog> createState() => _EditProfileDialogState();
+}
+
+class _EditProfileDialogState extends State<_EditProfileDialog> {
+  late final _nameController = TextEditingController(text: widget.profile.name);
+  late String _avatar = widget.profile.avatarEmoji;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  void _save() {
+    final name = _nameController.text.trim();
+    if (name.isEmpty) return;
+    Navigator.of(context).pop(_EditProfileResult(name, _avatar));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+      title: const Text('Sửa hồ sơ'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: _nameController,
+            textCapitalization: TextCapitalization.words,
+            decoration: const InputDecoration(border: OutlineInputBorder()),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: _avatarChoices
+                .map((a) => _AvatarChoice(
+                      emoji: a,
+                      selected: a == _avatar,
+                      onTap: () => setState(() => _avatar = a),
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Hủy'),
+        ),
+        ElevatedButton(
+          onPressed: _save,
+          child: const Text('Lưu'),
+        ),
+      ],
     );
   }
 }

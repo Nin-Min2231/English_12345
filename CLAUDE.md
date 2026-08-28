@@ -134,6 +134,59 @@ debug đã test: `05_Build_APK/lop2_english_app-debug-2026-08-21-4-sprint4.apk`,
 **`sprint-4`** (chưa push/merge — chờ quyết định của người dùng). **Việc tiếp theo: Lớp 1 Unit 2-16**,
 xem phụ lục `SPRINT4_PLAN.md` nói trên + `BUGS_CR.md` CR-027/CR-028.
 
+**CR-029 (2026-08-22)** — 3 việc nhỏ không liên quan Lớp 1 Unit 2-16, làm trước khi tiếp tục việc đó:
+(1) header mọi màn từ `UnitScreen` đến 10 màn game đổi thành `"Lớp X • Unit Y • Tên game"` (thêm
+`GameAppBarTitle`, `common_widgets.dart`) — trước chỉ có tên game/"Unit N", không biết đang Lớp mấy;
+(2) sửa bug thật "A TextEditingController was used after being disposed" khi chạm giữ hồ sơ → Sửa →
+Lưu (`profile_select_screen.dart`) — controller cũ tạo/dispose thủ công ngoài `showDialog`, dispose
+sớm hơn lúc route đóng animation xong; tách thành `_EditProfileDialog` (StatefulWidget riêng, giống
+`_ParentGateDialog` trong `parent_gate.dart`) để dispose đúng lúc; (3) sửa layout tràn màn hình ở G04
+Xếp chữ (từ dài như "volleyball" 10 chữ → 5 hàng lưới cố định tràn, che nút bấm) — rà soát phát hiện
+G05 Lắp ráp câu có ĐÚNG lỗi này (chưa quan sát tràn thật vì dữ liệu hiện tại câu ngắn, sửa luôn cho
+chắc), thêm hàm `tileGridRowHeight()` (co hàng theo ngân sách chiều cao cố định) dùng chung cho cả 2
+màn + `FittedBox` bọc chữ trong ô. `flutter analyze`/`dart format` sạch, build APK debug thành công:
+`05_Build_APK/lop2_english_app-debug-2026-08-22-1-fixes.apk` — **chưa test trên điện thoại thật**.
+Chi tiết đầy đủ: `BUGS_CR.md` CR-029. **Người dùng test lại, xác nhận "Đã test OK"**, yêu cầu tiếp
+CR-030.
+
+**CR-030 (2026-08-22)** — 5 việc: (1) `WrongAnswerLockMixin` + `WrongAnswerLockOverlay`
+(`common_widgets.dart`) — khóa tạm màn hình + popup + đếm lùi 3s sau 3 lần sai liên tiếp, áp dụng cho
+7 màn game "chấm ngay"/"lắp-ráp-rồi-kiểm-tra" (G02/G03/G04/G05/G06/G10/G12), KHÔNG áp dụng G01
+Flashcard, G08 Ghi âm, G09 Lật thẻ; (2) rà soát G10 "đáp án bị mờ" — xác nhận là cơ chế gợi ý độ khó
+"Dễ" có chủ đích (mặc định BẬT), không phải bug, không sửa gì; (3+4) sửa luồng điều hướng Hồ sơ→Chọn
+lớp→Chọn bài từ `pushReplacement` sang `push` sạch (không còn chồng nhiều bản sao màn hình), bỏ nút
+"Đổi lớp" ở `HomeScreen`, thêm header Huy hiệu/Cài đặt/avatar cho `GradeSelectScreen` —
+`BadgesScreen.grade`/`BadgeRepository.watchForProfile` đổi thành `int?` (`null` = huy hiệu mọi lớp,
+dùng ở màn Chọn lớp); (5) nút "Làm lại" G04 Xếp chữ (+ G05 Lắp ráp câu, cùng bug) hết bị disable sau
+khi kiểm tra đúng. `flutter analyze`/`dart format` sạch, build APK debug:
+`05_Build_APK/lop2_english_app-debug-2026-08-22-2-fixes.apk` — ✅ **ĐÃ TEST OK trên điện thoại thật**
+(người dùng xác nhận, cùng đợt với CR-031). Chi tiết đầy đủ: `BUGS_CR.md` CR-030.
+
+**CR-031 (2026-08-22)** — người dùng phản hồi ngay CR-030 (chưa kịp test thật): (1) làm đẹp popup
+"sai 3 lần" (icon tròn màu `warning` + emoji 🤔, nút OK thành `PrimaryButton`) và đếm lùi (`_CountdownBubble`
+— quả bóng nảy đổi màu + tái dùng `_ConfettiBurst`) trong `WrongAnswerLockMixin`/`WrongAnswerLockOverlay`;
+(2) sửa lại đúng ý "Làm lại" G04+G05: CR-030 mới chỉ mở NÚT nhưng vẫn giữ `_correctIndices` (không mất
+sao) nên trẻ bấm "Làm lại" xong bỏ ngang vẫn qua bài được — nay `_resetAttempt()` thêm
+`_correctIndices.remove(_index)` để THẬT SỰ bắt buộc "Kiểm tra" đúng lại mới mở "Tiếp theo" (an toàn
+với "sao chỉ tăng, không giảm" vì không có đường bỏ qua `_showResult()` mà chưa đúng lại). `flutter
+analyze`/`dart format` sạch, build APK debug: `05_Build_APK/lop2_english_app-debug-2026-08-22-3-fixes.apk`
+— ✅ **ĐÃ TEST OK trên điện thoại thật** (người dùng xác nhận 2026-08-22). Chi tiết đầy đủ: `BUGS_CR.md`
+CR-031.
+
+**CR-032 (2026-08-22)** — sau khi CR-029/030/031 test OK, người dùng yêu cầu rà soát code + merge lên
+GitHub. Chạy `/code-review` mức medium (5 agent, 8 góc nhìn) trên toàn bộ diff trước khi merge — tìm
+được 1 bug thật: `_checkAnswer()` ở `scramble_screen.dart` (G04) và `sentence_build_screen.dart` (G05)
+thiếu điều kiện `_feedback == AnswerFeedback.wrong` trong guard (5 màn chấm-ngay khác đều có ở
+`_pick()`, đúng chốt chặn BUG-003 cũ) — double-tap "Kiểm tra" nhanh có thể đếm 2 lần sai cho 1 lần bấm,
+làm khóa màn hình (CR-030) kích hoạt sớm sau 2 lần thay vì 3. Đã sửa (thêm điều kiện còn thiếu, đúng
+mẫu). 7 phát hiện khác (màu hardcode trong overlay mới theo đúng tiền lệ có sẵn, `tileGridRowHeight`
+không co theo bề rộng màn hình, `FittedBox` không giới hạn co nhỏ, rebuild toàn màn hình lúc đếm lùi,
+trùng lặp guard có chủ đích, giả định navigation stack chưa khóa cứng, nút Lưu hồ sơ trống tên không tự
+đóng dialog) — đã cân nhắc và quyết định KHÔNG sửa (rủi ro thấp/đã chấp nhận/là cải thiện), chi tiết đầy
+đủ lý do từng cái: `BUGS_CR.md` CR-032. `flutter analyze`/`dart format` sạch, build:
+`05_Build_APK/lop2_english_app-debug-2026-08-22-4-fixes.apk`. Sau đó **đã merge `sprint-4` vào
+`sprint-3` và push lên GitHub** — xem `HANDOVER.md` mục Git để biết trạng thái nhánh mới nhất.
+
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
 - Luồng đầy đủ: **ProfileSelect** (F02, tạo/chọn hồ sơ trẻ) → **Home** (F01, bản đồ 16 unit có sao + khóa) → **Unit** (F03, 3 game mở tuần tự) → 3 game P0 (G01 Flashcard, G02 Nghe chọn hình, G03 Điền chữ) → trả sao về lưu **Drift** (F14).
@@ -193,7 +246,13 @@ lib/
   core/theme/app_theme.dart    # AppColors, AppSpacing (design tokens sheet 09)
   core/widgets/common_widgets.dart  # PrimaryButton, SecondaryButton, StarBar, WordImage
                                      # (Sprint 4: thêm field `grade` bắt buộc),
-                                     # AppScaffold, AnswerFeedbackOverlay (đúng/sai)
+                                     # AppScaffold, AnswerFeedbackOverlay (đúng/sai),
+                                     # GameAppBarTitle ("Lớp X • Unit Y • Tên game", CR-029),
+                                     # tileGridRowHeight() (co hàng lưới 2 cột theo ngân sách
+                                     # chiều cao cố định — dùng ở G04/G05, CR-029),
+                                     # WrongAnswerLockMixin + WrongAnswerLockOverlay (khóa màn
+                                     # hình + đếm lùi sau 3 lần sai liên tiếp, CR-030 — dùng ở
+                                     # G02/G03/G04/G05/G06/G10/G12, KHÔNG dùng ở G01/G08/G09)
   core/widgets/parent_gate.dart # F15 — showParentGate(), confirmDeleteProfile() (2026-07-23)
   data/models/models.dart      # UnitInfo (Sprint 4: thêm field `grade`, gán bởi loader —
                                 # KHÔNG đọc từ units.json), FlashCard, ListenQuestion, FillItem,
@@ -342,6 +401,14 @@ Sinh lại config: xem `../03_Assets/data_json/README_data.md`. Script sinh G01-
   hình rồi mới úp xuống cho chơi bình thường (`_previewing` trong `memory_match_screen.dart`). Game
   mới sau này nên theo đúng 1 trong các mẫu chuẩn đã có thay vì nghĩ ra cơ chế gợi ý riêng, trừ khi
   thật sự không khớp như G09.
+- **Khóa tạm màn hình sau 3 lần sai liên tiếp (CR-030)**: mọi game có đúng/sai (chấm-ngay HOẶC
+  lắp-ráp-rồi-kiểm-tra) đều phải trộn `WrongAnswerLockMixin` (`common_widgets.dart`) — gọi
+  `resetWrongStreak()` ở nhánh ĐÚNG, `registerWrongAnswer()` ở nhánh SAI, thêm `answerLockActive` vào
+  điều kiện chặn đầu hàm xử lý chạm, thêm `WrongAnswerLockOverlay` vào cuối `Stack` của `body`.
+  **Ngoại lệ có chủ ý** (theo yêu cầu người dùng, không áp dụng): G01 Flashcard (không có đúng/sai),
+  G08 Ghi âm (không chấm đúng/sai ngay lúc chọn), G09 Lật thẻ (checkpoint trí nhớ). Game mới thêm sau
+  này thuộc 2 mẫu chấm-ngay/lắp-ráp ở trên thì PHẢI trộn mixin này, trừ khi rơi vào 1 trong 3 ngoại lệ
+  cùng loại trên.
 - **Hết màu vai trò cho game mới**: 6 màu bảng sheet 09 (primary/secondary/success/warning/error/
   info) đã dùng hết cho G01-G06; game sau dùng lại 1 trong 6 màu nhưng tông đậm hơn (kỹ thuật
   `AppColors.xxxDark`, bắt đầu từ `infoDark` cho G08 — CR-018) thay vì hardcode hex mới, phân biệt
