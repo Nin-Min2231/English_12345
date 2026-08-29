@@ -1,0 +1,949 @@
+{
+ "instances": [
+  {
+   "game_id": "CP04_G12",
+   "unit_id": 4,
+   "config": {
+    "questions": [
+     {
+      "source_game": "g02",
+      "unit_id": 1,
+      "prompt_audio": "Unit01/audio/word_ball.mp3",
+      "options": [
+       {
+        "image": "Unit01/image/book.png"
+       },
+       {
+        "image": "Unit01/image/ball.png"
+       },
+       {
+        "image": "Unit01/image/bike.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 1,
+      "prompt_image": "Unit01/image/bike.png",
+      "prompt_text": "_ik_",
+      "options": [
+       {
+        "text": "c"
+       },
+       {
+        "text": "be"
+       },
+       {
+        "text": "w"
+       },
+       {
+        "text": "u"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 1,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "Hi, Bill. I'm"
+       },
+       {
+        "text": "Hi, I'm Bill."
+       },
+       {
+        "text": "I'm Bill. Hi,"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 2,
+      "prompt_audio": "Unit02/audio/word_cake.mp3",
+      "options": [
+       {
+        "image": "Unit02/image/cup.png"
+       },
+       {
+        "image": "Unit02/image/cake.png"
+       },
+       {
+        "image": "Unit02/image/car.png"
+       },
+       {
+        "image": "Unit02/image/cat.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 2,
+      "prompt_image": "Unit02/image/car.png",
+      "prompt_text": "_ar",
+      "options": [
+       {
+        "text": "e"
+       },
+       {
+        "text": "z"
+       },
+       {
+        "text": "w"
+       },
+       {
+        "text": "c"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 2,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "cake. I have a"
+       },
+       {
+        "text": "I have a cake."
+       },
+       {
+        "text": "cake. I a have"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 3,
+      "prompt_audio": "Unit03/audio/word_apple.mp3",
+      "options": [
+       {
+        "image": "Unit03/image/can.png"
+       },
+       {
+        "image": "Unit03/image/hat.png"
+       },
+       {
+        "image": "Unit03/image/apple.png"
+       },
+       {
+        "image": "Unit03/image/bag.png"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 3,
+      "prompt_image": "Unit03/image/bag.png",
+      "prompt_text": "b_g",
+      "options": [
+       {
+        "text": "z"
+       },
+       {
+        "text": "s"
+       },
+       {
+        "text": "b"
+       },
+       {
+        "text": "a"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 3,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "my is This apple."
+       },
+       {
+        "text": "my This is apple."
+       },
+       {
+        "text": "This is my apple."
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 4,
+      "prompt_audio": "Unit04/audio/word_desk.mp3",
+      "options": [
+       {
+        "image": "Unit04/image/dog.png"
+       },
+       {
+        "image": "Unit04/image/door.png"
+       },
+       {
+        "image": "Unit04/image/desk.png"
+       },
+       {
+        "image": "Unit04/image/duck.png"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 4,
+      "prompt_image": "Unit04/image/dog.png",
+      "prompt_text": "_og",
+      "options": [
+       {
+        "text": "e"
+       },
+       {
+        "text": "s"
+       },
+       {
+        "text": "d"
+       },
+       {
+        "text": "z"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 4,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "a is This desk."
+       },
+       {
+        "text": "This is a desk."
+       },
+       {
+        "text": "is desk. a This"
+       }
+      ],
+      "answer_idx": 1
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP08_G12",
+   "unit_id": 8,
+   "config": {
+    "questions": [
+     {
+      "source_game": "g02",
+      "unit_id": 5,
+      "prompt_audio": "Unit05/audio/word_fish.mp3",
+      "options": [
+       {
+        "image": "Unit05/image/fish.png"
+       },
+       {
+        "image": "Unit05/image/chicken.png"
+       },
+       {
+        "image": "Unit05/image/milk.png"
+       },
+       {
+        "image": "Unit05/image/chips.png"
+       }
+      ],
+      "answer_idx": 0
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 5,
+      "prompt_image": "Unit05/image/chips.png",
+      "prompt_text": "_hip_",
+      "options": [
+       {
+        "text": "w"
+       },
+       {
+        "text": "l"
+       },
+       {
+        "text": "e"
+       },
+       {
+        "text": "cs"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 5,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "fish. like I"
+       },
+       {
+        "text": "I like fish."
+       },
+       {
+        "text": "like fish. I"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 6,
+      "prompt_audio": "Unit06/audio/word_red.mp3",
+      "options": [
+       {
+        "image": "Unit06/image/pen.png"
+       },
+       {
+        "image": "Unit06/image/pencil.png"
+       },
+       {
+        "image": "Unit06/image/bell.png"
+       },
+       {
+        "image": "Unit06/image/red.png"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 6,
+      "prompt_image": "Unit06/image/pencil.png",
+      "prompt_text": "pe__il",
+      "options": [
+       {
+        "text": "q"
+       },
+       {
+        "text": "t"
+       },
+       {
+        "text": "b"
+       },
+       {
+        "text": "nc"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 6,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "It's pencil. a red"
+       },
+       {
+        "text": "It's a pencil. red"
+       },
+       {
+        "text": "It's a red pencil."
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 7,
+      "prompt_audio": "Unit07/audio/word_garden.mp3",
+      "options": [
+       {
+        "image": "Unit07/image/garden.png"
+       },
+       {
+        "image": "Unit07/image/girl.png"
+       },
+       {
+        "image": "Unit07/image/gate.png"
+       },
+       {
+        "image": "Unit07/image/goat.png"
+       }
+      ],
+      "answer_idx": 0
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 7,
+      "prompt_image": "Unit07/image/gate.png",
+      "prompt_text": "ga__",
+      "options": [
+       {
+        "text": "te"
+       },
+       {
+        "text": "a"
+       },
+       {
+        "text": "p"
+       },
+       {
+        "text": "l"
+       }
+      ],
+      "answer_idx": 0
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 7,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "garden. a There's"
+       },
+       {
+        "text": "a garden. There's"
+       },
+       {
+        "text": "There's a garden."
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 8,
+      "prompt_audio": "Unit08/audio/word_hair.mp3",
+      "options": [
+       {
+        "image": "Unit08/image/hand.png"
+       },
+       {
+        "image": "Unit08/image/horse.png"
+       },
+       {
+        "image": "Unit08/image/head.png"
+       },
+       {
+        "image": "Unit08/image/hair.png"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 8,
+      "prompt_image": "Unit08/image/hand.png",
+      "prompt_text": "ha__",
+      "options": [
+       {
+        "text": "q"
+       },
+       {
+        "text": "nd"
+       },
+       {
+        "text": "j"
+       },
+       {
+        "text": "e"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 8,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "Touch hair. your"
+       },
+       {
+        "text": "Touch your hair."
+       },
+       {
+        "text": "your hair. Touch"
+       }
+      ],
+      "answer_idx": 1
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP12_G12",
+   "unit_id": 12,
+   "config": {
+    "questions": [
+     {
+      "source_game": "g02",
+      "unit_id": 9,
+      "prompt_audio": "Unit09/audio/word_clock.mp3",
+      "options": [
+       {
+        "image": "Unit09/image/pot.png"
+       },
+       {
+        "image": "Unit09/image/lock.png"
+       },
+       {
+        "image": "Unit09/image/mop.png"
+       },
+       {
+        "image": "Unit09/image/clock.png"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 9,
+      "prompt_image": "Unit09/image/lock.png",
+      "prompt_text": "lo__",
+      "options": [
+       {
+        "text": "l"
+       },
+       {
+        "text": "ck"
+       },
+       {
+        "text": "y"
+       },
+       {
+        "text": "h"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 9,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "There two clocks. are"
+       },
+       {
+        "text": "two are clocks. There"
+       },
+       {
+        "text": "There are two clocks."
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 10,
+      "prompt_audio": "Unit10/audio/word_monkey.mp3",
+      "options": [
+       {
+        "image": "Unit10/image/mouse.png"
+       },
+       {
+        "image": "Unit10/image/mother.png"
+       },
+       {
+        "image": "Unit10/image/mango.png"
+       },
+       {
+        "image": "Unit10/image/monkey.png"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 10,
+      "prompt_image": "Unit10/image/mango.png",
+      "prompt_text": "man__",
+      "options": [
+       {
+        "text": "s"
+       },
+       {
+        "text": "k"
+       },
+       {
+        "text": "go"
+       },
+       {
+        "text": "a"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 10,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "a That's monkey."
+       },
+       {
+        "text": "That's a monkey."
+       },
+       {
+        "text": "That's monkey. a"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 11,
+      "prompt_audio": "Unit11/audio/word_bus.mp3",
+      "options": [
+       {
+        "image": "Unit11/image/truck.png"
+       },
+       {
+        "image": "Unit11/image/bus.png"
+       },
+       {
+        "image": "Unit11/image/running.png"
+       },
+       {
+        "image": "Unit11/image/sun.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 11,
+      "prompt_image": "Unit11/image/running.png",
+      "prompt_text": "ru__ing",
+      "options": [
+       {
+        "text": "y"
+       },
+       {
+        "text": "x"
+       },
+       {
+        "text": "k"
+       },
+       {
+        "text": "nn"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 11,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "She's running."
+       },
+       {
+        "text": "running. She's"
+       }
+      ],
+      "answer_idx": 0
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 12,
+      "prompt_audio": "Unit12/audio/word_lake.mp3",
+      "options": [
+       {
+        "image": "Unit12/image/lemons.png"
+       },
+       {
+        "image": "Unit12/image/leaf.png"
+       },
+       {
+        "image": "Unit12/image/lake.png"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 12,
+      "prompt_image": "Unit12/image/leaf.png",
+      "prompt_text": "__af",
+      "options": [
+       {
+        "text": "d"
+       },
+       {
+        "text": "a"
+       },
+       {
+        "text": "le"
+       },
+       {
+        "text": "m"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 12,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "lake. at the Look"
+       },
+       {
+        "text": "at Look the lake."
+       },
+       {
+        "text": "Look at the lake."
+       }
+      ],
+      "answer_idx": 2
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP16_G12",
+   "unit_id": 16,
+   "config": {
+    "questions": [
+     {
+      "source_game": "g02",
+      "unit_id": 13,
+      "prompt_audio": "Unit13/audio/word_bananas.mp3",
+      "options": [
+       {
+        "image": "Unit13/image/nuts.png"
+       },
+       {
+        "image": "Unit13/image/bananas.png"
+       },
+       {
+        "image": "Unit13/image/noodles.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 13,
+      "prompt_image": "Unit13/image/noodles.png",
+      "prompt_text": "no__les",
+      "options": [
+       {
+        "text": "w"
+       },
+       {
+        "text": "i"
+       },
+       {
+        "text": "od"
+       },
+       {
+        "text": "v"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 13,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "noodles. She's having"
+       },
+       {
+        "text": "She's having noodles."
+       },
+       {
+        "text": "noodles. having She's"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 14,
+      "prompt_audio": "Unit14/audio/word_teddy_bear.mp3",
+      "options": [
+       {
+        "image": "Unit14/image/turtle.png"
+       },
+       {
+        "image": "Unit14/image/teddy_bear.png"
+       },
+       {
+        "image": "Unit14/image/top.png"
+       },
+       {
+        "image": "Unit14/image/tiger.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 14,
+      "prompt_image": "Unit14/image/tiger.png",
+      "prompt_text": "__ger",
+      "options": [
+       {
+        "text": "g"
+       },
+       {
+        "text": "d"
+       },
+       {
+        "text": "e"
+       },
+       {
+        "text": "ti"
+       }
+      ],
+      "answer_idx": 3
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 14,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "see teddy bear. I can a"
+       },
+       {
+        "text": "a see teddy can bear. I"
+       },
+       {
+        "text": "I can see a teddy bear."
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 15,
+      "prompt_audio": "Unit15/audio/word_face.mp3",
+      "options": [
+       {
+        "image": "Unit15/image/father.png"
+       },
+       {
+        "image": "Unit15/image/face.png"
+       },
+       {
+        "image": "Unit15/image/football.png"
+       },
+       {
+        "image": "Unit15/image/foot.png"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 15,
+      "prompt_image": "Unit15/image/father.png",
+      "prompt_text": "fat__r",
+      "options": [
+       {
+        "text": "u"
+       },
+       {
+        "text": "he"
+       },
+       {
+        "text": "t"
+       },
+       {
+        "text": "y"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 15,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "face. Point your to"
+       },
+       {
+        "text": "Point to your face."
+       },
+       {
+        "text": "your Point face. to"
+       }
+      ],
+      "answer_idx": 1
+     },
+     {
+      "source_game": "g02",
+      "unit_id": 16,
+      "prompt_audio": "Unit16/audio/word_wash.mp3",
+      "options": [
+       {
+        "image": "Unit16/image/window.png"
+       },
+       {
+        "image": "Unit16/image/water.png"
+       },
+       {
+        "image": "Unit16/image/wash.png"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g03",
+      "unit_id": 16,
+      "prompt_image": "Unit16/image/water.png",
+      "prompt_text": "wa__r",
+      "options": [
+       {
+        "text": "l"
+       },
+       {
+        "text": "b"
+       },
+       {
+        "text": "te"
+       },
+       {
+        "text": "i"
+       }
+      ],
+      "answer_idx": 2
+     },
+     {
+      "source_game": "g05",
+      "unit_id": 16,
+      "prompt_text": "Câu nào đúng?",
+      "options": [
+       {
+        "text": "Wash your hands."
+       },
+       {
+        "text": "Wash hands. your"
+       },
+       {
+        "text": "your hands. Wash"
+       }
+      ],
+      "answer_idx": 0
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -396,6 +396,11 @@ X có dữ liệu cho unit Y không" (cần `ContentRepository`, hiện closure 
 `ProgressRepository`) — xem `unit_screen.dart._gameRowFor` đã có sẵn `widget.repo` trong scope, có thể
 truyền tiếp vào `isUnlockedOverride` nếu đổi signature.
 
+### ✅ ĐÃ LÀM XONG (CR-034, 2026-08-28) — xem `BUGS_CR.md` CR-034 để biết chi tiết đầy đủ + các quyết
+định cụ thể cho từng unit (G06 loại từ nào, G05 dùng câu gì cho U01/U09/U11/U16, checkpoint G09/G12).
+**Chưa test trên điện thoại thật.** Danh sách bước dưới đây giữ lại làm tài liệu tham khảo quy trình
+đã áp dụng, không phải việc còn phải làm.
+
 ### Việc cần làm cho MỖI unit 2-16 (lặp lại đúng quy trình đã dùng cho Unit 1, xem CR-027)
 
 1. Copy `04_image+audio/01_Lop-1/UnitNN/{image,audio}/` → `assets/content/lop1/UnitNN/{image,audio}/`.

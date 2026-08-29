@@ -35,6 +35,673 @@
      }
     ]
    }
+  },
+  {
+   "game_id": "U02_G05",
+   "unit_id": 2,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "I have a cake.",
+      "tokens": [
+       "I",
+       "have",
+       "a",
+       "cake."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I have a car.",
+      "tokens": [
+       "I",
+       "have",
+       "a",
+       "car."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I have a cat.",
+      "tokens": [
+       "I",
+       "have",
+       "a",
+       "cat."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I have a cup.",
+      "tokens": [
+       "I",
+       "have",
+       "a",
+       "cup."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U03_G05",
+   "unit_id": 3,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "This is my apple.",
+      "tokens": [
+       "This",
+       "is",
+       "my",
+       "apple."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is my bag.",
+      "tokens": [
+       "This",
+       "is",
+       "my",
+       "bag."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is my can.",
+      "tokens": [
+       "This",
+       "is",
+       "my",
+       "can."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is my hat.",
+      "tokens": [
+       "This",
+       "is",
+       "my",
+       "hat."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U04_G05",
+   "unit_id": 4,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "This is a desk.",
+      "tokens": [
+       "This",
+       "is",
+       "a",
+       "desk."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is a dog.",
+      "tokens": [
+       "This",
+       "is",
+       "a",
+       "dog."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is a door.",
+      "tokens": [
+       "This",
+       "is",
+       "a",
+       "door."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "This is a duck.",
+      "tokens": [
+       "This",
+       "is",
+       "a",
+       "duck."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U05_G05",
+   "unit_id": 5,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "I like fish.",
+      "tokens": [
+       "I",
+       "like",
+       "fish."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I like chips.",
+      "tokens": [
+       "I",
+       "like",
+       "chips."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I like milk.",
+      "tokens": [
+       "I",
+       "like",
+       "milk."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I like chicken.",
+      "tokens": [
+       "I",
+       "like",
+       "chicken."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U06_G05",
+   "unit_id": 6,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "It's a red pencil.",
+      "tokens": [
+       "It's",
+       "a",
+       "red",
+       "pencil."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "It's a red pen.",
+      "tokens": [
+       "It's",
+       "a",
+       "red",
+       "pen."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "It's a red bell.",
+      "tokens": [
+       "It's",
+       "a",
+       "red",
+       "bell."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U07_G05",
+   "unit_id": 7,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "There's a garden.",
+      "tokens": [
+       "There's",
+       "a",
+       "garden."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There's a gate.",
+      "tokens": [
+       "There's",
+       "a",
+       "gate."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There's a girl.",
+      "tokens": [
+       "There's",
+       "a",
+       "girl."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There's a goat.",
+      "tokens": [
+       "There's",
+       "a",
+       "goat."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U08_G05",
+   "unit_id": 8,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "Touch your hair.",
+      "tokens": [
+       "Touch",
+       "your",
+       "hair."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Touch your head.",
+      "tokens": [
+       "Touch",
+       "your",
+       "head."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Touch your hand.",
+      "tokens": [
+       "Touch",
+       "your",
+       "hand."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Touch your horse.",
+      "tokens": [
+       "Touch",
+       "your",
+       "horse."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U09_G05",
+   "unit_id": 9,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "There are two clocks.",
+      "tokens": [
+       "There",
+       "are",
+       "two",
+       "clocks."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There are three locks.",
+      "tokens": [
+       "There",
+       "are",
+       "three",
+       "locks."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There are four pots.",
+      "tokens": [
+       "There",
+       "are",
+       "four",
+       "pots."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "There are five mops.",
+      "tokens": [
+       "There",
+       "are",
+       "five",
+       "mops."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U10_G05",
+   "unit_id": 10,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "That's a monkey.",
+      "tokens": [
+       "That's",
+       "a",
+       "monkey."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "That's a mango.",
+      "tokens": [
+       "That's",
+       "a",
+       "mango."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "That's a mouse.",
+      "tokens": [
+       "That's",
+       "a",
+       "mouse."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "That's a mother.",
+      "tokens": [
+       "That's",
+       "a",
+       "mother."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U11_G05",
+   "unit_id": 11,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "She's running.",
+      "tokens": [
+       "She's",
+       "running."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "He's running.",
+      "tokens": [
+       "He's",
+       "running."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "The boy is running in the sun.",
+      "tokens": [
+       "The",
+       "boy",
+       "is",
+       "running",
+       "in",
+       "the",
+       "sun."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U12_G05",
+   "unit_id": 12,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "Look at the lake.",
+      "tokens": [
+       "Look",
+       "at",
+       "the",
+       "lake."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Look at the leaf.",
+      "tokens": [
+       "Look",
+       "at",
+       "the",
+       "leaf."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Look at the lemons.",
+      "tokens": [
+       "Look",
+       "at",
+       "the",
+       "lemons."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U13_G05",
+   "unit_id": 13,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "She's having noodles.",
+      "tokens": [
+       "She's",
+       "having",
+       "noodles."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "She's having nuts.",
+      "tokens": [
+       "She's",
+       "having",
+       "nuts."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "She's having bananas.",
+      "tokens": [
+       "She's",
+       "having",
+       "bananas."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U14_G05",
+   "unit_id": 14,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "I can see a teddy bear.",
+      "tokens": [
+       "I",
+       "can",
+       "see",
+       "a",
+       "teddy",
+       "bear."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I can see a tiger.",
+      "tokens": [
+       "I",
+       "can",
+       "see",
+       "a",
+       "tiger."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I can see a top.",
+      "tokens": [
+       "I",
+       "can",
+       "see",
+       "a",
+       "top."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "I can see a turtle.",
+      "tokens": [
+       "I",
+       "can",
+       "see",
+       "a",
+       "turtle."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U15_G05",
+   "unit_id": 15,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "Point to your face.",
+      "tokens": [
+       "Point",
+       "to",
+       "your",
+       "face."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Point to your foot.",
+      "tokens": [
+       "Point",
+       "to",
+       "your",
+       "foot."
+      ],
+      "audio": null
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U16_G05",
+   "unit_id": 16,
+   "lesson_no": 3,
+   "order_idx": 1,
+   "config": {
+    "items": [
+     {
+      "sentence": "Wash your hands.",
+      "tokens": [
+       "Wash",
+       "your",
+       "hands."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "Wash your hands with water.",
+      "tokens": [
+       "Wash",
+       "your",
+       "hands",
+       "with",
+       "water."
+      ],
+      "audio": null
+     },
+     {
+      "sentence": "How many windows can you see?",
+      "tokens": [
+       "How",
+       "many",
+       "windows",
+       "can",
+       "you",
+       "see?"
+      ],
+      "audio": null
+     }
+    ]
+   }
   }
  ]
 }

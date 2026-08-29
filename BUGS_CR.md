@@ -1425,3 +1425,111 @@ tròn/bo vuông (adaptive icon mask). Dựng 2 file trong `assets/icon/` (mới,
   thoại thật** — bản `-3-fixes` (đã test OK) + đúng 1 thay đổi phòng vệ nhỏ (guard double-tap, không
   đổi hành vi bình thường khi bấm 1 lần) nên coi là an toàn để merge mà không cần vòng test lại đầy đủ,
   nhưng nên thử double-tap "Kiểm tra" ở G04/G05 lần tới nếu muốn xác nhận trực tiếp.
+
+## CR-033 — Sửa `isFunTimeUnlocked` (rủi ro CÙNG LOẠI với CR-028, ghi nhận từ trước) + soát lại
+Lớp 1 Unit 1 sau khi nội dung Lớp 1 được làm lại toàn bộ (2026-08-28)
+
+- **Bối cảnh**: sau khi 1 phiên Cowork riêng làm lại toàn bộ ảnh+audio Lớp 1 (xem
+  `../04_image+audio/01_Lop-1/README_Lop1_FINAL.md`), người dùng yêu cầu (1) sửa `isFunTimeUnlocked`
+  theo đúng cảnh báo đã ghi ở CR-028 và phụ lục `SPRINT4_PLAN.md`, (2) kiểm tra lại audio/ảnh/các phần
+  còn thiếu của Lớp 1 Unit 1 cho hoàn chỉnh.
+- **1. Sửa `isFunTimeUnlocked`** — đúng pattern `hasContent` đã dùng cho `isGameUnlocked` (CR-028),
+  áp dụng cho cả 2 unit trong phạm vi ôn tập (`fromUnit`/`toUnit`) thay vì chỉ 1 unit:
+  - `progress_repository.dart` — `isFunTimeUnlocked()` thêm tham số tùy chọn
+    `hasContent(unitId, gameType) → bool` (khác `isGameUnlocked` chỉ cần theo `gameType` vì luôn xét
+    1 unit — `isFunTimeUnlocked` xét 2 unit nên `hasContent` cần biết unit nào); game không có dữ liệu
+    ở unit đó được coi như "đã qua" (trong suốt) thay vì bắt buộc phải có sao.
+  - `game_defs.dart` — `GameDef.isUnlockedOverride` thêm tham số `ContentRepository contentRepo` (đúng
+    khoảng trống đã ghi chú sẵn ở CR-028: "checkpoints.dart hiện chỉ có ProgressRepository, không đủ để
+    biết game nào thiếu dữ liệu").
+  - `checkpoints.dart` — `_funTimeGameDef` truyền `hasContent: (u, g) =>
+    gameDefsByType[g]!.countFor(contentRepo, u) > 0` vào `isFunTimeUnlocked`; `_bossQuizGameDef` chỉ
+    cập nhật chữ ký cho khớp (không đổi hành vi, vẫn dùng `isCheckpointUnlocked`).
+  - `unit_screen.dart` — điểm gọi `isUnlockedOverride` truyền thêm `widget.repo` (ContentRepository).
+  - Lớp 2 không đổi hành vi (mọi game có dữ liệu mọi unit → `hasContent` luôn `true`). Chưa có dữ liệu
+    G09 cho Lớp 1 nên chưa test được đường nhánh mới bằng tương tác thật — sẽ lộ rõ khi sinh
+    `g09_memory.json` cho checkpoint đầu tiên của Lớp 1 (sau Unit 2).
+- **2. Soát lại Lớp 1 Unit 1 sau khi nội dung được làm lại**:
+  - So khớp MD5 `assets/content/lop1/Unit01/{image,audio}` với
+    `../04_image+audio/01_Lop-1/Unit01/` — **khớp 100% cả 6 file** (3 ảnh + 3 audio), xác nhận bộ mới
+    (vector + audio đã nghe xác nhận thứ tự đúng) đã thực sự nằm trong app, không phải bộ cũ.
+  - Đối chiếu `manifest.csv`: W001/W002/W003 (ball/bike/book) đều `image_ready=True`,
+    `audio_ready=True`.
+  - Đọc lại cả 6 file JSON Lớp 1 Unit 1 (`g01/g02/g03/g04/g05/g10`) — mọi `word_id`/đường dẫn ảnh-audio
+    đều khớp manifest, không có ô câm; `g05_sentence.json` đúng `audio: null` cho cả 3 câu (Unit 1 Lớp
+    1 không có `sentence_pattern.mp3`, đúng như README_Lop1_FINAL.md đã ghi); `pubspec.yaml` đã khai
+    báo đủ 3 thư mục asset Lớp 1 Unit 1. Không phát hiện thiếu sót nào — Unit 1 đã hoàn chỉnh với bộ
+    nội dung mới.
+  - `flutter analyze`/`dart format` sạch, build APK debug mới:
+    `05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk` — **chưa test trên điện
+    thoại thật**. Đây là bản đầu tiên chắc chắn phát ĐÚNG audio Unit 1 (bản `...2026-08-21-4-sprint4`
+    người dùng từng test OK thực ra phát audio cũ sai, xem README_Lop1_FINAL.md) — **cần nghe lại
+    Unit 1 (đặc biệt audio) trên điện thoại thật trước khi coi Lớp 1 Unit 1 là đã kiểm chứng**.
+
+## CR-034 — Người dùng báo audio Unit 1 vẫn sai sau CR-033 + làm hoàn chỉnh Lớp 1 Unit 2-16
+
+- **Người dùng báo (2026-08-28)**: "Unit 1 lớp 1: file âm thanh chưa được cập nhật đúng không? Hiện
+  âm thanh đang sai." + yêu cầu đối ứng hoàn tất các unit còn lại + đặt tên file build theo tên app
+  "Nin&Min's English".
+- **Điều tra lại audio Unit 1 (độc lập với CR-033, dùng công cụ khác)**: dùng `faster-whisper`
+  (speech-to-text chạy offline, model `medium.en`) để tự nhận dạng nội dung 3 file
+  `word_ball.mp3`/`word_book.mp3`/`word_bike.mp3` — kết quả khớp 100% với tên file: "Ball", "Book",
+  "Bike" (model nhỏ hơn `small.en`/`base.en` từng nghe nhầm "ball" thành "bull" do clip quá ngắn
+  ~0.7s không có ngữ cảnh câu, nhưng model chính xác hơn xác nhận đúng). Đối chiếu tiếp: file APK debug
+  bản `...2026-08-28-1-funtime-lop1unit1.apk` (bản đã build ở CR-033) **đã bị người dùng tự đổi tên
+  thành `Nin&Min's Engligh 2026-08-28.apk`** trong `05_Build_APK/` (xác nhận bằng MD5 giống hệt,
+  `b0073b79517e0dbc7b16eae073ba6d70`) — tức người dùng đã test ĐÚNG bản APK mà CR-033 khẳng định là
+  đúng audio, không phải bản cũ hơn. **Chưa xác định được nguyên nhân** vì sao người dùng vẫn nghe
+  thấy sai trong khi cả 2 phương pháp kiểm tra độc lập (người nghe xác nhận `mapping_final.csv` +
+  speech-to-text) đều xác nhận file đúng — có thể là cài đặt trên điện thoại chưa được ghi đè đúng
+  cách (nên gỡ cài đặt hẳn app cũ rồi cài lại thay vì cài đè), hoặc nhầm lẫn từ nào ứng với hình nào.
+  **Cần người dùng cho biết cụ thể nghe thấy gì / mong đợi gì** để điều tra tiếp nếu vẫn còn sai sau
+  khi gỡ cài đặt sạch rồi cài lại bản mới nhất.
+- **Làm hoàn chỉnh Lớp 1 Unit 2-16** (theo đúng quy trình + quyết định đã ghi trong phụ lục
+  `SPRINT4_PLAN.md`, `isFunTimeUnlocked` đã sửa trước ở CR-033):
+  1. Copy `image/`+`audio/` của Unit02-16 từ `04_image+audio/01_Lop-1/` vào
+     `assets/content/lop1/UnitNN/` — đã soát MD5 khớp 100% cho cả 15 unit.
+  2. Khai báo đủ 15 thư mục asset mới vào `pubspec.yaml`.
+  3. Sinh dữ liệu G01/G02/G03/G04/G05/G10 cho Unit 2-16 bằng script Python một lần (không lưu vào
+     repo) đọc trực tiếp `manifest.csv` — chỉ dùng từ `type=='core' và audio_ready==True` (loại hẳn
+     10 từ số `one`-`ten` khỏi mọi game, đúng cảnh báo `README_Lop1_FINAL.md`); riêng G03/G04 (cần xử
+     lý từng ký tự) loại thêm `teddy bear` (Unit 14) vì là từ duy nhất trong 70 từ có dấu cách — quyết
+     định mới, chưa từng gặp ở Lớp 2 — vẫn giữ `teddy bear` trong G01/G02/G05/G10 (không cần tách chữ).
+     G03 theo đúng quy tắc CR-020/023 (từ <4 chữ ẩn 1 ô, ≥4 chữ ẩn 2 ô ngẫu nhiên/lượt, 3 lượt/từ,
+     distractor luôn là chữ đơn). G10 dùng đúng vốn từ unit hiện tại + unit liền trước (không còn
+     fallback You/He/She, chỉ Unit 1 dùng).
+  4. G05 (câu mẫu, `audio: null` mọi unit — đã xác nhận Lớp 1 không có `sentence_pattern.mp3` nào):
+     12 unit có mẫu câu dạng "chủ ngữ + động từ + DANH TỪ" (U02-08,10,12-15) sinh 1 câu/từ vựng bằng
+     cách thay từ vào mẫu câu cột F Excel (giống cách Lớp 2 làm G06); U01 (đã có sẵn)/U09/U11/U16 (mẫu
+     câu là hỏi-đáp số đếm hoặc điểm ngữ pháp, không thay-từ được) dùng nguyên câu có sẵn trong
+     Mẫu câu/Song của SGK (vd U09: "There are two/three/four/five clocks/locks/pots/mops." — mỗi câu
+     ứng đúng 1 trong 4 từ, không cần bịa).
+  5. G06 (Hoàn thành câu) — làm cho 12/16 unit theo đúng bảng khuyến nghị phụ lục `SPRINT4_PLAN.md`,
+     bỏ hẳn U01/U09/U11/U16 (hội thoại tên riêng / hỏi-đáp số đếm / điểm ngữ pháp, không phải mẫu
+     khuyết danh từ): U06 bỏ "red" (tính từ, không tự điền vào chỗ trống của chính nó); U08 bỏ "horse"
+     (không phải bộ phận cơ thể, lệch nghĩa "Touch your ___"); U10 bỏ "mother" (lệch nghĩa "That's a
+     ___"); U13 giữ cả 3 từ (kể cả "bananas", "having bananas" vẫn hợp lý); U15 chỉ giữ face/foot (bỏ
+     father/football, chant gốc chỉ nhắc 2 từ này) — đúng các quyết định phụ lục đã gợi ý, không tự
+     nghĩ thêm.
+  6. Checkpoint: sinh `g09_memory.json` (Lật thẻ, sau Unit 2/6/10/14 — pairs gộp từ G01 của 2 unit
+     trong phạm vi ôn tập) và `g12_boss_quiz.json` (Boss Quiz, sau Unit 4/8/12/16 — mỗi unit trong
+     phạm vi đóng góp 1 câu G02 + 1 câu G03 (dedupe, ưu tiên chọn lượt có `hidden_idx` liền nhau để
+     hiển thị 1 vùng gạch chân duy nhất, không phải lúc nào cũng có sẵn vì Lớp 1 cho phép ẩn 2 ô cách
+     nhau — CR-020) + 1 câu G05 (câu đúng + tối đa 2 hoán vị sai của token, câu 2-từ như "She's
+     running." chỉ có 1 hoán vị sai khả dĩ nên câu đó còn 2 lựa chọn thay vì 3, chấp nhận được) —
+     12 câu/checkpoint, không cần nội dung mới, đúng cách Lớp 2 đã làm ở Sprint 3.
+  7. Viết script Python kiểm tra chéo toàn bộ dữ liệu sinh ra (đường dẫn ảnh/audio tồn tại thật,
+     `answer_idx` trỏ đúng đáp án, không trùng lựa chọn, `hidden_idx` nằm trong độ dài từ, mỗi từ có
+     đúng 3 lượt G03, `g05` tokens ghép lại đúng câu gốc) — **PASS toàn bộ, không lỗi**.
+  8. `flutter analyze` sạch, build APK debug thành công.
+- **Đặt tên file APK theo tên app**: từ nay bản build đặt tên bắt đầu bằng `Nin&Min's English` (đúng
+  `android:label` trong `AndroidManifest.xml`) thay vì `lop2_english_app` — bản mới nhất:
+  `05_Build_APK/Nin&Min's English-debug-2026-08-28-2-lop1-full.apk`.
+- **Trạng thái**: Lớp 1 đủ 16/16 unit có G01/G02/G03/G04/G05/G10 (trừ `teddy bear` không vào G03/G04);
+  G06 có ở 12/16 unit (đúng số liệu phụ lục); G09 ở 4 checkpoint; G12 ở 4 checkpoint. **CHƯA test trên
+  điện thoại thật** — đặc biệt cần xác nhận: (1) sự cố audio Unit 1 người dùng báo ở trên có còn không
+  sau khi gỡ cài đặt sạch; (2) `isFunTimeUnlocked` (CR-033) hoạt động đúng khi chạm Lật thẻ sau Unit 2
+  (lần đầu tiên đường code này được thực thi thật, vì trước đó Lớp 1 chưa có dữ liệu G09); (3) nghe
+  thử vài audio Unit 2-16 để xác nhận không lặp lại lỗi lệch thứ tự như bản cũ (đã soát MD5 khớp
+  nguồn, nhưng chưa nghe bằng tai người cho Unit 2-16 — chỉ Unit 1 đã được người dùng tự nghe xác nhận
+  qua `KiemTra_Audio_Lop1.html`).

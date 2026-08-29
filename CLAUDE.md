@@ -5,18 +5,46 @@ Ngữ cảnh cho Claude Code khi làm việc trong repo này. Đọc kỹ trư�
 **Trước khi sửa bug/thay đổi theo yêu cầu người dùng**: kiểm tra `BUGS_CR.md` (cùng thư mục) — nhật
 ký Bug/CR đang mở, tránh xử lý sai/trùng/bỏ sót.
 
+> ## ⚠️ CẬP NHẬT 2026-08-28 — ĐỌC TRƯỚC KHI LÀM LỚP 1 UNIT 2-16
+>
+> Nội dung Lớp 1 (ảnh + audio) **đã được làm lại toàn bộ** trong một phiên Cowork riêng.
+> **Bắt buộc đọc `../../04_image+audio/01_Lop-1/README_Lop1_FINAL.md` trước khi sinh JSON game.**
+>
+> 1. **Audio Lớp 1 trước đây SAI thứ tự 40/64 slot (62,5%)** — đã sửa xong theo kết quả người dùng
+>    nghe từng file. Bảng đối chiếu: `01_Lop-1/mapping_final.csv`.
+> 2. **`assets/content/lop1/Unit01/` đã bị GHI ĐÈ** (cả `audio/` lẫn `image/`). Bản audio Unit 1
+>    trong app trước đó là bộ cũ 2026-08-20 — tức **APK "đã test OK" ngày 21/8 thực chất phát sai
+>    audio Unit 1**. → **PHẢI BUILD LẠI APK** và nghe lại Unit 1 trước khi kết luận gì.
+>    (CR-033, 2026-08-28: đã soát MD5 khớp 100% với nguồn mới + build lại APK —
+>    `05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk` — **nhưng vẫn CHƯA có
+>    ai nghe thật trên điện thoại**, đây là việc con người còn treo, không phải đã xong.)
+> 3. **Toàn bộ 70 ảnh Lớp 1 là bộ vector mới** (thay bộ cắt từ SGK, hết rủi ro bản quyền).
+>    Tên file không đổi → `manifest.csv` và JSON game không phải sửa.
+> 4. **4 điểm bẫy khi sinh JSON game Lớp 1**:
+>    - Unit 9: băng đọc **số nhiều** (`locks/clocks/mops/pots`) nhưng manifest + ảnh là **số ít** — chưa thống nhất.
+>    - Unit 16: manifest ghi `wash`, băng đọc **"washing"** — cùng loại.
+>    - **10 từ số `one`…`ten` KHÔNG CÓ AUDIO** (SGK không đọc rời số nào) → tuyệt đối không đưa
+>      vào game cần nghe (G02 nghe-chọn-hình, G10), nếu không sẽ có ô câm.
+>    - 4 tên riêng (Bill, Lucy, Nick, Wendy) có trong băng nhưng **không thuộc 70 từ** — bỏ qua.
+> 5. `manifest.csv` cột `image_ready`/`audio_ready` **nay đã đúng thực tế** (70 ảnh / 60 audio),
+>    sinh tự động từ `os.path.exists()` — trước đây ghi tay và sai 100%, giờ tin được.
+> 6. Thư mục nguồn đã dọn: mọi bộ ảnh/audio cũ nằm trong `06_global_success/_XOA_TAY/` — **không
+>    dùng bất cứ thứ gì trong đó**.
+
 ## 1. Dự án là gì
 
 App Android (Flutter, offline-first) luyện tiếng Anh tiểu học theo giáo trình **Global Success**.
 **Sprint 4 (2026-08-21) đã thêm hỗ trợ đa lớp** (1 app, màn "Chọn lớp" SCR-00, xem §2/§4) — Lớp 2
-vẫn đầy đủ nhất (16 unit, 48 lesson, 56 từ vựng, 12 loại game tái sử dụng G01–G12); Lớp 1 mới có
-Unit 1 (3 từ). Người dùng: trẻ 7–8 tuổi tự chơi; phụ huynh/giáo viên theo dõi. Triết lý: "học mà
-chơi", phiên ≤5 phút, dựa vào hình/màu/âm thanh vì trẻ chưa đọc thạo.
+đầy đủ 16 unit (48 lesson, 56 từ vựng); Lớp 1 (CR-034, 2026-08-28) cũng đã đủ 16/16 unit (70 từ, 60
+core có audio) nhưng **chưa test trên điện thoại thật**. Người dùng: trẻ 7–8 tuổi tự chơi; phụ
+huynh/giáo viên theo dõi. Triết lý: "học mà chơi", phiên ≤5 phút, dựa vào hình/màu/âm thanh vì trẻ
+chưa đọc thạo.
 
 Tài liệu gốc (nguồn sự thật, KHÔNG ở trong repo code mà ở thư mục cha):
 - `../01_Tai_lieu/TaiLieu_Phat_Trien_App.xlsx` — 15 sheet: tính năng F01–F15, game G01–G12, tech stack, kiến trúc, DB, design system, lộ trình, rủi ro.
 - `../../02_Phan_tich/TiengAnh2_GiaoTrinh_Game_AppData.xlsx` — phân tích giáo trình, từ vựng, audio, game theo lesson.
-- `../../04_image+audio/` — 56 ảnh + 49 audio gốc + `manifest.csv/json`.
+- `../../04_image+audio/02_Lop-2/` — 56 ảnh + 49 audio Lớp 2 + `manifest.csv/json`.
+- `../../04_image+audio/01_Lop-1/` — **70 ảnh + 60 audio Lớp 1, bản FINAL 2026-08-28** (đọc `README_Lop1_FINAL.md` trong đó trước khi dùng).
 
 ## 2. Trạng thái hiện tại (đã làm)
 
@@ -119,14 +147,13 @@ lớp) có sao, mà G06 không ai chơi được nên không ai bao giờ earn �
 riêng G06/Lớp1): `isGameUnlocked` thêm `hasContent` callback để bỏ qua mọi game không có dữ liệu khi
 tìm "game ngay trước" (lùi tiếp về game trước đó nữa); `unit_screen.dart` ẩn hẳn dòng game khi
 `countFor == 0` thay vì hiện khóa vĩnh viễn. Lớp 2 không đổi hành vi (mọi game đều có dữ liệu mọi
-unit). **Rủi ro cùng loại chưa sửa — SẼ CHẮC CHẮN GẶP LẠI, không còn là giả thuyết**: `isFunTimeUnlocked`
-(Lật thẻ) cũng đòi mọi game trong `kGameTypeOrder` có sao — ngay khi Lớp 1 có dữ liệu G09 cho
-checkpoint sau Unit 2 (trong lúc làm Unit 2-16) mà G06 vẫn chưa phát triển cho Unit 1, Lật thẻ sẽ bị
-khóa cứng giống hệt bug này — PHẢI sửa `isFunTimeUnlocked`/`GameDef.isUnlockedOverride` theo cùng
-pattern `hasContent` TRƯỚC KHI sinh dữ liệu G09/G12 cho Lớp 1, xem phụ lục cuối `SPRINT4_PLAN.md`
-("Phụ lục ... chuẩn bị cho Unit 2-16") để biết chi tiết đầy đủ + bảng phân tích G06 khả dụng cho
-từng unit 2-16 (không phải cả Lớp 1 đều thiếu G06 như Unit 1 — chỉ 4/16 unit thực sự không có mẫu câu
-khuyết phù hợp).
+unit). ~~**Rủi ro cùng loại chưa sửa**~~ — **ĐÃ SỬA ở CR-033 (2026-08-28)**: `isFunTimeUnlocked` (Lật
+thẻ) từng đòi mọi game trong `kGameTypeOrder` có sao ở cả 2 unit ôn tập, cùng lỗi với G08 ở trên; nay
+đã nhận `hasContent(unitId, gameType)` theo đúng pattern này (xem `BUGS_CR.md` CR-033) — ngay khi Lớp 1
+có dữ liệu G09 cho checkpoint sau Unit 2 mà G06 vẫn chưa phát triển cho unit đó, Lật thẻ sẽ tự bỏ qua
+G06 thay vì khóa cứng. Vẫn cần đọc phụ lục cuối `SPRINT4_PLAN.md` ("Phụ lục ... chuẩn bị cho Unit
+2-16") để biết bảng phân tích G06 khả dụng cho từng unit 2-16 (không phải cả Lớp 1 đều thiếu G06 như
+Unit 1 — chỉ 4/16 unit thực sự không có mẫu câu khuyết phù hợp) khi sinh dữ liệu G09/G12 thật.
 
 ✅ **ĐÃ TEST OK TRÊN ĐIỆN THOẠI THẬT** (người dùng xác nhận 2026-08-21 đêm, sau CR-028) — migration DB
 lần 2 an toàn, Lớp 2 hồi quy đúng, Lớp 1 Unit 1 chơi được đầy đủ, G08 không còn bị chặn. Build APK
@@ -186,6 +213,33 @@ trùng lặp guard có chủ đích, giả định navigation stack chưa khóa 
 đủ lý do từng cái: `BUGS_CR.md` CR-032. `flutter analyze`/`dart format` sạch, build:
 `05_Build_APK/lop2_english_app-debug-2026-08-22-4-fixes.apk`. Sau đó **đã merge `sprint-4` vào
 `sprint-3` và push lên GitHub** — xem `HANDOVER.md` mục Git để biết trạng thái nhánh mới nhất.
+
+**CR-033 (2026-08-28)** — sau khi nội dung Lớp 1 được làm lại toàn bộ (xem khối cảnh báo đầu file),
+người dùng yêu cầu 2 việc: (1) sửa `isFunTimeUnlocked` theo đúng rủi ro đã ghi nhận từ CR-028 — thêm
+tham số `hasContent(unitId, gameType)` (khác `isGameUnlocked` chỉ cần `gameType` vì `isFunTimeUnlocked`
+xét CẢ 2 unit trong phạm vi ôn tập); `GameDef.isUnlockedOverride` (`game_defs.dart`) thêm tham số
+`ContentRepository` để `checkpoints.dart` dựng được `hasContent` (đúng khoảng trống đã ghi ở CR-028);
+Lớp 2 không đổi hành vi. (2) soát lại Lớp 1 Unit 1 sau khi ảnh/audio được làm lại: MD5
+`assets/content/lop1/Unit01/` khớp 100% với `04_image+audio/01_Lop-1/Unit01/` mới, manifest + cả 6 file
+JSON game (g01/g02/g03/g04/g05/g10) khớp nhau, không có ô câm — Unit 1 hoàn chỉnh. `flutter
+analyze`/`dart format` sạch, build APK debug mới (bản ĐẦU TIÊN chắc chắn phát đúng audio Unit 1):
+`05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk` — **chưa test trên điện thoại
+thật**, cần nghe lại Unit 1 trước khi coi là đã kiểm chứng. Chi tiết đầy đủ: `BUGS_CR.md` CR-033.
+
+**CR-034 (2026-08-28)** — người dùng báo audio Unit 1 "vẫn sai" sau CR-033; điều tra bằng
+`faster-whisper` (speech-to-text độc lập, model `medium.en`) xác nhận `word_ball/bike/book.mp3` đọc
+đúng nội dung, và phát hiện người dùng đã tự đổi tên bản APK của CR-033 (MD5 khớp) — **chưa rõ nguyên
+nhân**, có thể do cài đè thay vì gỡ-cài-lại; cần người dùng mô tả cụ thể hơn để điều tra tiếp. Đồng
+thời **làm hoàn chỉnh Lớp 1 Unit 2-16** (việc lớn còn treo từ Sprint 4): copy asset 15 unit (MD5 khớp
+nguồn), khai báo `pubspec.yaml`, sinh G01-G05/G10 bằng script (chỉ từ `core`+`audio_ready`, loại thêm
+`teddy bear` khỏi G03/G04 vì là từ duy nhất có dấu cách), G06 cho 12/16 unit theo đúng bảng khuyến
+nghị `SPRINT4_PLAN.md` phụ lục (bỏ U01/U09/U11/U16), G09/G12 cho cả 4 checkpoint mỗi loại (tái dùng
+G01/G02/G03/G05 đã sinh). Script kiểm tra chéo (đường dẫn file, answer_idx, hidden_idx, số lượt G03,
+token G05) PASS toàn bộ. Đổi quy ước đặt tên file build sang bắt đầu bằng tên app `Nin&Min's English`
+(theo `android:label`) thay vì `lop2_english_app`. `flutter analyze` sạch, build:
+`05_Build_APK/Nin&Min's English-debug-2026-08-28-2-lop1-full.apk` — **CHƯA test trên điện thoại thật**,
+đặc biệt cần xác nhận `isFunTimeUnlocked` (CR-033) hoạt động đúng khi Lật thẻ sau Unit 2 lần đầu có dữ
+liệu thật. Chi tiết đầy đủ: `BUGS_CR.md` CR-034.
 
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
@@ -310,13 +364,17 @@ assets/
   g10_letter_hunt.json, g12_boss_quiz.json         # Lớp 2 — đủ 16 unit (di chuyển từ
                                                     # assets/data/ gốc, nội dung không đổi)
   data/lop1/units.json (đủ 16 unit) + data/lop1/games/g0{1,2,3,4,5,10}_*.json
-                                                    # Lớp 1 — CHỈ Unit 1 (ball/bike/book), G06 cố
-                                                    # tình bỏ qua (không có mẫu điền-từ cho Unit 1)
+                                                    # Lớp 1 — CR-034 (2026-08-28): đủ 16/16 unit
+                                                    # (trước đó chỉ Unit 1); g06_mindmap.json chỉ có
+                                                    # 12/16 unit (bỏ U01/U09/U11/U16, không có mẫu
+                                                    # khuyết-danh-từ phù hợp); g09_memory.json/
+                                                    # g12_boss_quiz.json đủ 4 checkpoint mỗi loại
   content/lop2/UnitNN/{image,audio}/...   # mirror của 04_image+audio/02_Lop-2; audio/ có thêm
                                      # sentence_pattern.mp3 (Track "Mẫu câu" mỗi unit, dùng chung
                                      # cho G05/G06 — không phải audio riêng từng câu)
-  content/lop1/Unit01/{image,audio}/...   # mirror của 04_image+audio/01_Lop-1/Unit01 — KHÔNG có
-                                     # sentence_pattern.mp3 (G05 Lớp 1 Unit1 audio: null)
+  content/lop1/UnitNN/{image,audio}/...   # mirror của 04_image+audio/01_Lop-1/UnitNN, đủ 16 unit
+                                     # (CR-034) — KHÔNG unit nào có sentence_pattern.mp3 (G05 Lớp 1
+                                     # audio: null mọi unit, đã xác nhận không phải thiếu riêng Unit1)
   sfx/correct.mp3, wrong.mp3          # âm hiệu ứng đúng/sai (đã có 2026-07-23) — dùng chung mọi
                                      # lớp, không nằm trong lopN/
 ```

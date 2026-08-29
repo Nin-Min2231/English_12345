@@ -30,9 +30,11 @@ class GameDef {
   // Sprint 3 — game checkpoint (Fun Time/Boss Quiz, xem checkpoints.dart)
   // không nằm trong kGameTypeOrder nên cần điều kiện mở khóa riêng thay vì
   // ProgressRepository.isGameUnlocked mặc định. null = dùng isGameUnlocked.
-  final bool Function(
-          ProgressRepository repo, List<LessonProgress> progress, int unitId)?
-      isUnlockedOverride;
+  // Tham số `ContentRepository` (thêm CR-028 phần 2) để closure có thể tự
+  // xây `hasContent` (xem isFunTimeUnlocked) — checkpoints.dart trước đó chỉ
+  // có ProgressRepository, không đủ để biết game nào thiếu dữ liệu.
+  final bool Function(ProgressRepository repo, ContentRepository contentRepo,
+      List<LessonProgress> progress, int unitId)? isUnlockedOverride;
   // Sprint 3 — chỉ set cho 4 checkpoint Boss Quiz; UnitScreen dùng để trao
   // huy hiệu sau khi hoàn thành đạt ngưỡng (xem unit_screen.dart).
   final String? badgeId;

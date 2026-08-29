@@ -144,11 +144,11 @@ class _UnitScreenState extends State<UnitScreen> {
   Widget _gameRowFor(BuildContext context, GameDef game,
       List<LessonProgress> progress, UnitInfo unit) {
     final stars = _progressRepo.starsFor(progress, unit.unitId, game.gameType);
-    final unlocked =
-        game.isUnlockedOverride?.call(_progressRepo, progress, unit.unitId) ??
-            _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType,
-                hasContent: (t) =>
-                    gameDefsByType[t]!.countFor(widget.repo, unit.unitId) > 0);
+    final unlocked = game.isUnlockedOverride
+            ?.call(_progressRepo, widget.repo, progress, unit.unitId) ??
+        _progressRepo.isGameUnlocked(progress, unit.unitId, game.gameType,
+            hasContent: (t) =>
+                gameDefsByType[t]!.countFor(widget.repo, unit.unitId) > 0);
     final count = game.countFor(widget.repo, unit.unitId);
 
     return _gameRow(

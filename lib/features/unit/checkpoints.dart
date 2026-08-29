@@ -51,8 +51,13 @@ GameDef _funTimeGameDef(Checkpoint cp) => GameDef(
       // unit) — Lật thẻ (ôn tập) cần CẢ 2 unit trong phạm vi ôn tập
       // (cp.fromUnit/toUnit) đã hoàn tất MỌI game (kGameTypeOrder), không chỉ
       // 4 game lõi. Không đụng Boss Quiz — vẫn dùng isCheckpointUnlocked.
-      isUnlockedOverride: (repo, progress, unitId) =>
-          repo.isFunTimeUnlocked(progress, cp.fromUnit, cp.toUnit),
+      // hasContent (CR-028 phần 2) bỏ qua game chưa có dữ liệu ở unit đó (vd
+      // G06 Lớp 1) — thiếu chốt này Lật thẻ sẽ khóa cứng vĩnh viễn giống bug
+      // G08 cũ, xem BUGS_CR.md CR-028.
+      isUnlockedOverride: (repo, contentRepo, progress, unitId) =>
+          repo.isFunTimeUnlocked(progress, cp.fromUnit, cp.toUnit,
+              hasContent: (u, g) =>
+                  gameDefsByType[g]!.countFor(contentRepo, u) > 0),
       countFor: (repo, unitId) => repo.funTimeByUnit[unitId]?.length ?? 0,
       buildScreen: (context, repo, unit) => MemoryMatchScreen(
         unit: unit,
@@ -68,7 +73,7 @@ GameDef _bossQuizGameDef(Checkpoint cp) => GameDef(
       countSuffix: (n) => '($n câu)',
       icon: Icons.emoji_events_rounded,
       color: AppColors.errorDark,
-      isUnlockedOverride: (repo, progress, unitId) =>
+      isUnlockedOverride: (repo, contentRepo, progress, unitId) =>
           repo.isCheckpointUnlocked(progress, unitId),
       badgeId: cp.badgeId,
       countFor: (repo, unitId) => repo.bossQuizByUnit[unitId]?.length ?? 0,

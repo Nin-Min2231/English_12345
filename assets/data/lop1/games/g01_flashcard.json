@@ -34,6 +34,627 @@
      }
     ]
    }
+  },
+  {
+   "game_id": "U02_G01",
+   "unit_id": 2,
+   "phonics": "c",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W004",
+      "word": "cake",
+      "ipa": "/keɪk/",
+      "meaning_vi": "bánh ngọt",
+      "image": "Unit02/image/cake.png",
+      "audio": "Unit02/audio/word_cake.mp3"
+     },
+     {
+      "word_id": "W005",
+      "word": "car",
+      "ipa": "/kɑː/",
+      "meaning_vi": "xe ô tô",
+      "image": "Unit02/image/car.png",
+      "audio": "Unit02/audio/word_car.mp3"
+     },
+     {
+      "word_id": "W006",
+      "word": "cat",
+      "ipa": "/kæt/",
+      "meaning_vi": "con mèo",
+      "image": "Unit02/image/cat.png",
+      "audio": "Unit02/audio/word_cat.mp3"
+     },
+     {
+      "word_id": "W007",
+      "word": "cup",
+      "ipa": "/kʌp/",
+      "meaning_vi": "cái cốc",
+      "image": "Unit02/image/cup.png",
+      "audio": "Unit02/audio/word_cup.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U03_G01",
+   "unit_id": 3,
+   "phonics": "a",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W008",
+      "word": "apple",
+      "ipa": "/ˈæpl/",
+      "meaning_vi": "quả táo",
+      "image": "Unit03/image/apple.png",
+      "audio": "Unit03/audio/word_apple.mp3"
+     },
+     {
+      "word_id": "W009",
+      "word": "bag",
+      "ipa": "/bæg/",
+      "meaning_vi": "cái túi",
+      "image": "Unit03/image/bag.png",
+      "audio": "Unit03/audio/word_bag.mp3"
+     },
+     {
+      "word_id": "W010",
+      "word": "can",
+      "ipa": "/kæn/",
+      "meaning_vi": "lon nước",
+      "image": "Unit03/image/can.png",
+      "audio": "Unit03/audio/word_can.mp3"
+     },
+     {
+      "word_id": "W011",
+      "word": "hat",
+      "ipa": "/hæt/",
+      "meaning_vi": "cái mũ",
+      "image": "Unit03/image/hat.png",
+      "audio": "Unit03/audio/word_hat.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U04_G01",
+   "unit_id": 4,
+   "phonics": "d",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W012",
+      "word": "desk",
+      "ipa": "/desk/",
+      "meaning_vi": "bàn học",
+      "image": "Unit04/image/desk.png",
+      "audio": "Unit04/audio/word_desk.mp3"
+     },
+     {
+      "word_id": "W013",
+      "word": "dog",
+      "ipa": "/dɒg/",
+      "meaning_vi": "con chó",
+      "image": "Unit04/image/dog.png",
+      "audio": "Unit04/audio/word_dog.mp3"
+     },
+     {
+      "word_id": "W014",
+      "word": "door",
+      "ipa": "/dɔː/",
+      "meaning_vi": "cái cửa",
+      "image": "Unit04/image/door.png",
+      "audio": "Unit04/audio/word_door.mp3"
+     },
+     {
+      "word_id": "W015",
+      "word": "duck",
+      "ipa": "/dʌk/",
+      "meaning_vi": "con vịt",
+      "image": "Unit04/image/duck.png",
+      "audio": "Unit04/audio/word_duck.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U05_G01",
+   "unit_id": 5,
+   "phonics": "i",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W016",
+      "word": "fish",
+      "ipa": "/fɪʃ/",
+      "meaning_vi": "cá",
+      "image": "Unit05/image/fish.png",
+      "audio": "Unit05/audio/word_fish.mp3"
+     },
+     {
+      "word_id": "W017",
+      "word": "chips",
+      "ipa": "/tʃɪps/",
+      "meaning_vi": "khoai tây chiên",
+      "image": "Unit05/image/chips.png",
+      "audio": "Unit05/audio/word_chips.mp3"
+     },
+     {
+      "word_id": "W018",
+      "word": "milk",
+      "ipa": "/mɪlk/",
+      "meaning_vi": "sữa",
+      "image": "Unit05/image/milk.png",
+      "audio": "Unit05/audio/word_milk.mp3"
+     },
+     {
+      "word_id": "W019",
+      "word": "chicken",
+      "ipa": "/ˈtʃɪkɪn/",
+      "meaning_vi": "thịt gà",
+      "image": "Unit05/image/chicken.png",
+      "audio": "Unit05/audio/word_chicken.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U06_G01",
+   "unit_id": 6,
+   "phonics": "e",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W020",
+      "word": "red",
+      "ipa": "/red/",
+      "meaning_vi": "màu đỏ",
+      "image": "Unit06/image/red.png",
+      "audio": "Unit06/audio/word_red.mp3"
+     },
+     {
+      "word_id": "W021",
+      "word": "pencil",
+      "ipa": "/ˈpensl/",
+      "meaning_vi": "bút chì",
+      "image": "Unit06/image/pencil.png",
+      "audio": "Unit06/audio/word_pencil.mp3"
+     },
+     {
+      "word_id": "W022",
+      "word": "pen",
+      "ipa": "/pen/",
+      "meaning_vi": "bút mực",
+      "image": "Unit06/image/pen.png",
+      "audio": "Unit06/audio/word_pen.mp3"
+     },
+     {
+      "word_id": "W023",
+      "word": "bell",
+      "ipa": "/bel/",
+      "meaning_vi": "cái chuông",
+      "image": "Unit06/image/bell.png",
+      "audio": "Unit06/audio/word_bell.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U07_G01",
+   "unit_id": 7,
+   "phonics": "g",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W024",
+      "word": "garden",
+      "ipa": "/ˈgɑːdn/",
+      "meaning_vi": "khu vườn",
+      "image": "Unit07/image/garden.png",
+      "audio": "Unit07/audio/word_garden.mp3"
+     },
+     {
+      "word_id": "W025",
+      "word": "gate",
+      "ipa": "/geɪt/",
+      "meaning_vi": "cổng",
+      "image": "Unit07/image/gate.png",
+      "audio": "Unit07/audio/word_gate.mp3"
+     },
+     {
+      "word_id": "W026",
+      "word": "girl",
+      "ipa": "/gɜːl/",
+      "meaning_vi": "bạn gái",
+      "image": "Unit07/image/girl.png",
+      "audio": "Unit07/audio/word_girl.mp3"
+     },
+     {
+      "word_id": "W027",
+      "word": "goat",
+      "ipa": "/gəʊt/",
+      "meaning_vi": "con dê",
+      "image": "Unit07/image/goat.png",
+      "audio": "Unit07/audio/word_goat.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U08_G01",
+   "unit_id": 8,
+   "phonics": "h",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W028",
+      "word": "hair",
+      "ipa": "/heə/",
+      "meaning_vi": "tóc",
+      "image": "Unit08/image/hair.png",
+      "audio": "Unit08/audio/word_hair.mp3"
+     },
+     {
+      "word_id": "W029",
+      "word": "hand",
+      "ipa": "/hænd/",
+      "meaning_vi": "bàn tay",
+      "image": "Unit08/image/hand.png",
+      "audio": "Unit08/audio/word_hand.mp3"
+     },
+     {
+      "word_id": "W030",
+      "word": "head",
+      "ipa": "/hed/",
+      "meaning_vi": "cái đầu",
+      "image": "Unit08/image/head.png",
+      "audio": "Unit08/audio/word_head.mp3"
+     },
+     {
+      "word_id": "W031",
+      "word": "horse",
+      "ipa": "/hɔːs/",
+      "meaning_vi": "con ngựa",
+      "image": "Unit08/image/horse.png",
+      "audio": "Unit08/audio/word_horse.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U09_G01",
+   "unit_id": 9,
+   "phonics": "o",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W032",
+      "word": "clock",
+      "ipa": "/klɒk/",
+      "meaning_vi": "đồng hồ",
+      "image": "Unit09/image/clock.png",
+      "audio": "Unit09/audio/word_clock.mp3"
+     },
+     {
+      "word_id": "W033",
+      "word": "lock",
+      "ipa": "/lɒk/",
+      "meaning_vi": "cái khóa",
+      "image": "Unit09/image/lock.png",
+      "audio": "Unit09/audio/word_lock.mp3"
+     },
+     {
+      "word_id": "W034",
+      "word": "mop",
+      "ipa": "/mɒp/",
+      "meaning_vi": "cây lau nhà",
+      "image": "Unit09/image/mop.png",
+      "audio": "Unit09/audio/word_mop.mp3"
+     },
+     {
+      "word_id": "W035",
+      "word": "pot",
+      "ipa": "/pɒt/",
+      "meaning_vi": "cái nồi",
+      "image": "Unit09/image/pot.png",
+      "audio": "Unit09/audio/word_pot.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U10_G01",
+   "unit_id": 10,
+   "phonics": "m",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W036",
+      "word": "monkey",
+      "ipa": "/ˈmʌŋki/",
+      "meaning_vi": "con khỉ",
+      "image": "Unit10/image/monkey.png",
+      "audio": "Unit10/audio/word_monkey.mp3"
+     },
+     {
+      "word_id": "W037",
+      "word": "mango",
+      "ipa": "/ˈmæŋgəʊ/",
+      "meaning_vi": "quả xoài",
+      "image": "Unit10/image/mango.png",
+      "audio": "Unit10/audio/word_mango.mp3"
+     },
+     {
+      "word_id": "W038",
+      "word": "mother",
+      "ipa": "/ˈmʌðə/",
+      "meaning_vi": "mẹ",
+      "image": "Unit10/image/mother.png",
+      "audio": "Unit10/audio/word_mother.mp3"
+     },
+     {
+      "word_id": "W039",
+      "word": "mouse",
+      "ipa": "/maʊs/",
+      "meaning_vi": "con chuột",
+      "image": "Unit10/image/mouse.png",
+      "audio": "Unit10/audio/word_mouse.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U11_G01",
+   "unit_id": 11,
+   "phonics": "u",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W040",
+      "word": "bus",
+      "ipa": "/bʌs/",
+      "meaning_vi": "xe buýt",
+      "image": "Unit11/image/bus.png",
+      "audio": "Unit11/audio/word_bus.mp3"
+     },
+     {
+      "word_id": "W041",
+      "word": "running",
+      "ipa": "/ˈrʌnɪŋ/",
+      "meaning_vi": "đang chạy",
+      "image": "Unit11/image/running.png",
+      "audio": "Unit11/audio/word_running.mp3"
+     },
+     {
+      "word_id": "W042",
+      "word": "sun",
+      "ipa": "/sʌn/",
+      "meaning_vi": "mặt trời",
+      "image": "Unit11/image/sun.png",
+      "audio": "Unit11/audio/word_sun.mp3"
+     },
+     {
+      "word_id": "W043",
+      "word": "truck",
+      "ipa": "/trʌk/",
+      "meaning_vi": "xe tải",
+      "image": "Unit11/image/truck.png",
+      "audio": "Unit11/audio/word_truck.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U12_G01",
+   "unit_id": 12,
+   "phonics": "l",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W044",
+      "word": "lake",
+      "ipa": "/leɪk/",
+      "meaning_vi": "hồ nước",
+      "image": "Unit12/image/lake.png",
+      "audio": "Unit12/audio/word_lake.mp3"
+     },
+     {
+      "word_id": "W045",
+      "word": "leaf",
+      "ipa": "/liːf/",
+      "meaning_vi": "chiếc lá",
+      "image": "Unit12/image/leaf.png",
+      "audio": "Unit12/audio/word_leaf.mp3"
+     },
+     {
+      "word_id": "W046",
+      "word": "lemons",
+      "ipa": "/ˈlemənz/",
+      "meaning_vi": "quả chanh",
+      "image": "Unit12/image/lemons.png",
+      "audio": "Unit12/audio/word_lemons.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U13_G01",
+   "unit_id": 13,
+   "phonics": "n",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W047",
+      "word": "bananas",
+      "ipa": "/bəˈnɑːnəz/",
+      "meaning_vi": "quả chuối",
+      "image": "Unit13/image/bananas.png",
+      "audio": "Unit13/audio/word_bananas.mp3"
+     },
+     {
+      "word_id": "W048",
+      "word": "noodles",
+      "ipa": "/ˈnuːdlz/",
+      "meaning_vi": "mì",
+      "image": "Unit13/image/noodles.png",
+      "audio": "Unit13/audio/word_noodles.mp3"
+     },
+     {
+      "word_id": "W049",
+      "word": "nuts",
+      "ipa": "/nʌts/",
+      "meaning_vi": "hạt",
+      "image": "Unit13/image/nuts.png",
+      "audio": "Unit13/audio/word_nuts.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U14_G01",
+   "unit_id": 14,
+   "phonics": "t",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W050",
+      "word": "teddy bear",
+      "ipa": "/ˈtedi beə/",
+      "meaning_vi": "gấu bông",
+      "image": "Unit14/image/teddy_bear.png",
+      "audio": "Unit14/audio/word_teddy_bear.mp3"
+     },
+     {
+      "word_id": "W051",
+      "word": "tiger",
+      "ipa": "/ˈtaɪgə/",
+      "meaning_vi": "con hổ",
+      "image": "Unit14/image/tiger.png",
+      "audio": "Unit14/audio/word_tiger.mp3"
+     },
+     {
+      "word_id": "W052",
+      "word": "top",
+      "ipa": "/tɒp/",
+      "meaning_vi": "con quay",
+      "image": "Unit14/image/top.png",
+      "audio": "Unit14/audio/word_top.mp3"
+     },
+     {
+      "word_id": "W053",
+      "word": "turtle",
+      "ipa": "/ˈtɜːtl/",
+      "meaning_vi": "con rùa",
+      "image": "Unit14/image/turtle.png",
+      "audio": "Unit14/audio/word_turtle.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U15_G01",
+   "unit_id": 15,
+   "phonics": "f",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W054",
+      "word": "face",
+      "ipa": "/feɪs/",
+      "meaning_vi": "khuôn mặt",
+      "image": "Unit15/image/face.png",
+      "audio": "Unit15/audio/word_face.mp3"
+     },
+     {
+      "word_id": "W055",
+      "word": "father",
+      "ipa": "/ˈfɑːðə/",
+      "meaning_vi": "bố",
+      "image": "Unit15/image/father.png",
+      "audio": "Unit15/audio/word_father.mp3"
+     },
+     {
+      "word_id": "W056",
+      "word": "foot",
+      "ipa": "/fʊt/",
+      "meaning_vi": "bàn chân",
+      "image": "Unit15/image/foot.png",
+      "audio": "Unit15/audio/word_foot.mp3"
+     },
+     {
+      "word_id": "W057",
+      "word": "football",
+      "ipa": "/ˈfʊtbɔːl/",
+      "meaning_vi": "bóng đá",
+      "image": "Unit15/image/football.png",
+      "audio": "Unit15/audio/word_football.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U16_G01",
+   "unit_id": 16,
+   "phonics": "w",
+   "lesson_no": 1,
+   "order_idx": 1,
+   "config": {
+    "cards": [
+     {
+      "word_id": "W058",
+      "word": "wash",
+      "ipa": "/wɒʃ/",
+      "meaning_vi": "rửa/giặt",
+      "image": "Unit16/image/wash.png",
+      "audio": "Unit16/audio/word_wash.mp3"
+     },
+     {
+      "word_id": "W059",
+      "word": "water",
+      "ipa": "/ˈwɔːtə/",
+      "meaning_vi": "nước",
+      "image": "Unit16/image/water.png",
+      "audio": "Unit16/audio/word_water.mp3"
+     },
+     {
+      "word_id": "W060",
+      "word": "window",
+      "ipa": "/ˈwɪndəʊ/",
+      "meaning_vi": "cửa sổ",
+      "image": "Unit16/image/window.png",
+      "audio": "Unit16/audio/word_window.mp3"
+     }
+    ]
+   }
   }
  ]
 }

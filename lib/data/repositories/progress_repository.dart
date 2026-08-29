@@ -137,8 +137,17 @@ class ProgressRepository {
   /// game lõi) của CẢ 2 unit trong phạm vi ôn tập (`fromUnit`/`toUnit` của
   /// Checkpoint, xem checkpoints.dart). Không ảnh hưởng Boss Quiz (G12) —
   /// game đó vẫn dùng [isCheckpointUnlocked] như cũ.
+  /// Cùng bug/cùng cách sửa với [isGameUnlocked] (CR-028): [hasContent] (nếu
+  /// truyền) cho biết loại game nào KHÔNG có dữ liệu ở 1 unit cụ thể — game đó
+  /// bị bỏ qua khi xét điều kiện "hoàn tất mọi game", coi như trong suốt.
+  /// Thiếu chốt này thì 1 game chưa phát triển ở fromUnit/toUnit (vd G06 Lớp
+  /// 1) sẽ khóa cứng Lật thẻ VĨNH VIỄN, giống hệt bug G08 ở CR-028. Không
+  /// truyền tham số này thì y hệt hành vi cũ (Lớp 2, mọi game có dữ liệu mọi
+  /// unit).
   bool isFunTimeUnlocked(
-          List<LessonProgress> progress, int fromUnit, int toUnit) =>
-      [fromUnit, toUnit].every(
-          (u) => kGameTypeOrder.every((g) => starsFor(progress, u, g) >= 1));
+          List<LessonProgress> progress, int fromUnit, int toUnit,
+          {bool Function(int unitId, String gameType)? hasContent}) =>
+      [fromUnit, toUnit].every((u) => kGameTypeOrder.every((g) =>
+          (hasContent != null && !hasContent(u, g)) ||
+          starsFor(progress, u, g) >= 1));
 }

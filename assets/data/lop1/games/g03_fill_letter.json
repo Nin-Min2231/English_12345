@@ -155,6 +155,2832 @@
      }
     ]
    }
+  },
+  {
+   "game_id": "U02_G03",
+   "unit_id": 2,
+   "target_phonics": "c",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W004",
+      "word": "cake",
+      "image": "Unit02/image/cake.png",
+      "audio": "Unit02/audio/word_cake.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "ck",
+      "distractors": [
+       "h",
+       "u",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W004",
+      "word": "cake",
+      "image": "Unit02/image/cake.png",
+      "audio": "Unit02/audio/word_cake.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "ck",
+      "distractors": [
+       "p",
+       "n",
+       "i"
+      ]
+     },
+     {
+      "word_id": "W004",
+      "word": "cake",
+      "image": "Unit02/image/cake.png",
+      "audio": "Unit02/audio/word_cake.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ak",
+      "distractors": [
+       "y",
+       "z",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W005",
+      "word": "car",
+      "image": "Unit02/image/car.png",
+      "audio": "Unit02/audio/word_car.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "w",
+       "z",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W005",
+      "word": "car",
+      "image": "Unit02/image/car.png",
+      "audio": "Unit02/audio/word_car.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "v",
+       "q",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W005",
+      "word": "car",
+      "image": "Unit02/image/car.png",
+      "audio": "Unit02/audio/word_car.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "a",
+      "distractors": [
+       "u",
+       "y",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W006",
+      "word": "cat",
+      "image": "Unit02/image/cat.png",
+      "audio": "Unit02/audio/word_cat.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "u",
+       "t",
+       "g"
+      ]
+     },
+     {
+      "word_id": "W006",
+      "word": "cat",
+      "image": "Unit02/image/cat.png",
+      "audio": "Unit02/audio/word_cat.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "a",
+       "b",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W006",
+      "word": "cat",
+      "image": "Unit02/image/cat.png",
+      "audio": "Unit02/audio/word_cat.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "v",
+       "y",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W007",
+      "word": "cup",
+      "image": "Unit02/image/cup.png",
+      "audio": "Unit02/audio/word_cup.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "t",
+       "p",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W007",
+      "word": "cup",
+      "image": "Unit02/image/cup.png",
+      "audio": "Unit02/audio/word_cup.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "u",
+      "distractors": [
+       "z",
+       "e",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W007",
+      "word": "cup",
+      "image": "Unit02/image/cup.png",
+      "audio": "Unit02/audio/word_cup.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "p",
+      "distractors": [
+       "o",
+       "w",
+       "b"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U03_G03",
+   "unit_id": 3,
+   "target_phonics": "a",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W008",
+      "word": "apple",
+      "image": "Unit03/image/apple.png",
+      "audio": "Unit03/audio/word_apple.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "ae",
+      "distractors": [
+       "z",
+       "j",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W008",
+      "word": "apple",
+      "image": "Unit03/image/apple.png",
+      "audio": "Unit03/audio/word_apple.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "ap",
+      "distractors": [
+       "h",
+       "s",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W008",
+      "word": "apple",
+      "image": "Unit03/image/apple.png",
+      "audio": "Unit03/audio/word_apple.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "le",
+      "distractors": [
+       "t",
+       "v",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W009",
+      "word": "bag",
+      "image": "Unit03/image/bag.png",
+      "audio": "Unit03/audio/word_bag.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "a",
+      "distractors": [
+       "z",
+       "b",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W009",
+      "word": "bag",
+      "image": "Unit03/image/bag.png",
+      "audio": "Unit03/audio/word_bag.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "g",
+      "distractors": [
+       "a",
+       "t",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W009",
+      "word": "bag",
+      "image": "Unit03/image/bag.png",
+      "audio": "Unit03/audio/word_bag.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "g",
+      "distractors": [
+       "s",
+       "q",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W010",
+      "word": "can",
+      "image": "Unit03/image/can.png",
+      "audio": "Unit03/audio/word_can.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "n",
+      "distractors": [
+       "y",
+       "e",
+       "z"
+      ]
+     },
+     {
+      "word_id": "W010",
+      "word": "can",
+      "image": "Unit03/image/can.png",
+      "audio": "Unit03/audio/word_can.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "a",
+      "distractors": [
+       "w",
+       "x",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W010",
+      "word": "can",
+      "image": "Unit03/image/can.png",
+      "audio": "Unit03/audio/word_can.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "c",
+      "distractors": [
+       "j",
+       "o",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W011",
+      "word": "hat",
+      "image": "Unit03/image/hat.png",
+      "audio": "Unit03/audio/word_hat.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "a",
+      "distractors": [
+       "m",
+       "w",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W011",
+      "word": "hat",
+      "image": "Unit03/image/hat.png",
+      "audio": "Unit03/audio/word_hat.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "a",
+      "distractors": [
+       "x",
+       "e",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W011",
+      "word": "hat",
+      "image": "Unit03/image/hat.png",
+      "audio": "Unit03/audio/word_hat.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "h",
+      "distractors": [
+       "j",
+       "l",
+       "e"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U04_G03",
+   "unit_id": 4,
+   "target_phonics": "d",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W012",
+      "word": "desk",
+      "image": "Unit04/image/desk.png",
+      "audio": "Unit04/audio/word_desk.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "es",
+      "distractors": [
+       "m",
+       "d",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W012",
+      "word": "desk",
+      "image": "Unit04/image/desk.png",
+      "audio": "Unit04/audio/word_desk.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "sk",
+      "distractors": [
+       "p",
+       "e",
+       "o"
+      ]
+     },
+     {
+      "word_id": "W012",
+      "word": "desk",
+      "image": "Unit04/image/desk.png",
+      "audio": "Unit04/audio/word_desk.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "dk",
+      "distractors": [
+       "e",
+       "h",
+       "n"
+      ]
+     },
+     {
+      "word_id": "W013",
+      "word": "dog",
+      "image": "Unit04/image/dog.png",
+      "audio": "Unit04/audio/word_dog.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "d",
+      "distractors": [
+       "s",
+       "z",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W013",
+      "word": "dog",
+      "image": "Unit04/image/dog.png",
+      "audio": "Unit04/audio/word_dog.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "g",
+      "distractors": [
+       "k",
+       "t",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W013",
+      "word": "dog",
+      "image": "Unit04/image/dog.png",
+      "audio": "Unit04/audio/word_dog.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "d",
+      "distractors": [
+       "e",
+       "n",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W014",
+      "word": "door",
+      "image": "Unit04/image/door.png",
+      "audio": "Unit04/audio/word_door.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "do",
+      "distractors": [
+       "y",
+       "b",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W014",
+      "word": "door",
+      "image": "Unit04/image/door.png",
+      "audio": "Unit04/audio/word_door.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "do",
+      "distractors": [
+       "c",
+       "h",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W014",
+      "word": "door",
+      "image": "Unit04/image/door.png",
+      "audio": "Unit04/audio/word_door.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "do",
+      "distractors": [
+       "k",
+       "s",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W015",
+      "word": "duck",
+      "image": "Unit04/image/duck.png",
+      "audio": "Unit04/audio/word_duck.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "dk",
+      "distractors": [
+       "n",
+       "e",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W015",
+      "word": "duck",
+      "image": "Unit04/image/duck.png",
+      "audio": "Unit04/audio/word_duck.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "uc",
+      "distractors": [
+       "a",
+       "d",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W015",
+      "word": "duck",
+      "image": "Unit04/image/duck.png",
+      "audio": "Unit04/audio/word_duck.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "dk",
+      "distractors": [
+       "v",
+       "g",
+       "o"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U05_G03",
+   "unit_id": 5,
+   "target_phonics": "i",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W016",
+      "word": "fish",
+      "image": "Unit05/image/fish.png",
+      "audio": "Unit05/audio/word_fish.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "fh",
+      "distractors": [
+       "n",
+       "r",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W016",
+      "word": "fish",
+      "image": "Unit05/image/fish.png",
+      "audio": "Unit05/audio/word_fish.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "fh",
+      "distractors": [
+       "a",
+       "t",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W016",
+      "word": "fish",
+      "image": "Unit05/image/fish.png",
+      "audio": "Unit05/audio/word_fish.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ih",
+      "distractors": [
+       "t",
+       "r",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W017",
+      "word": "chips",
+      "image": "Unit05/image/chips.png",
+      "audio": "Unit05/audio/word_chips.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "cs",
+      "distractors": [
+       "l",
+       "w",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W017",
+      "word": "chips",
+      "image": "Unit05/image/chips.png",
+      "audio": "Unit05/audio/word_chips.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "is",
+      "distractors": [
+       "p",
+       "q",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W017",
+      "word": "chips",
+      "image": "Unit05/image/chips.png",
+      "audio": "Unit05/audio/word_chips.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "hp",
+      "distractors": [
+       "t",
+       "c",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W018",
+      "word": "milk",
+      "image": "Unit05/image/milk.png",
+      "audio": "Unit05/audio/word_milk.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ik",
+      "distractors": [
+       "g",
+       "v",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W018",
+      "word": "milk",
+      "image": "Unit05/image/milk.png",
+      "audio": "Unit05/audio/word_milk.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "lk",
+      "distractors": [
+       "n",
+       "b",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W018",
+      "word": "milk",
+      "image": "Unit05/image/milk.png",
+      "audio": "Unit05/audio/word_milk.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "il",
+      "distractors": [
+       "v",
+       "h",
+       "z"
+      ]
+     },
+     {
+      "word_id": "W019",
+      "word": "chicken",
+      "image": "Unit05/image/chicken.png",
+      "audio": "Unit05/audio/word_chicken.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "ck",
+      "distractors": [
+       "z",
+       "x",
+       "r"
+      ]
+     },
+     {
+      "word_id": "W019",
+      "word": "chicken",
+      "image": "Unit05/image/chicken.png",
+      "audio": "Unit05/audio/word_chicken.mp3",
+      "hidden_idx": [
+       1,
+       5
+      ],
+      "answer": "he",
+      "distractors": [
+       "v",
+       "a",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W019",
+      "word": "chicken",
+      "image": "Unit05/image/chicken.png",
+      "audio": "Unit05/audio/word_chicken.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "ci",
+      "distractors": [
+       "v",
+       "e",
+       "x"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U06_G03",
+   "unit_id": 6,
+   "target_phonics": "e",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W020",
+      "word": "red",
+      "image": "Unit06/image/red.png",
+      "audio": "Unit06/audio/word_red.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "r",
+      "distractors": [
+       "c",
+       "f",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W020",
+      "word": "red",
+      "image": "Unit06/image/red.png",
+      "audio": "Unit06/audio/word_red.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "d",
+      "distractors": [
+       "b",
+       "m",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W020",
+      "word": "red",
+      "image": "Unit06/image/red.png",
+      "audio": "Unit06/audio/word_red.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "r",
+      "distractors": [
+       "a",
+       "w",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W021",
+      "word": "pencil",
+      "image": "Unit06/image/pencil.png",
+      "audio": "Unit06/audio/word_pencil.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "pn",
+      "distractors": [
+       "i",
+       "r",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W021",
+      "word": "pencil",
+      "image": "Unit06/image/pencil.png",
+      "audio": "Unit06/audio/word_pencil.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "nc",
+      "distractors": [
+       "q",
+       "b",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W021",
+      "word": "pencil",
+      "image": "Unit06/image/pencil.png",
+      "audio": "Unit06/audio/word_pencil.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "en",
+      "distractors": [
+       "u",
+       "f",
+       "o"
+      ]
+     },
+     {
+      "word_id": "W022",
+      "word": "pen",
+      "image": "Unit06/image/pen.png",
+      "audio": "Unit06/audio/word_pen.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "p",
+      "distractors": [
+       "z",
+       "e",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W022",
+      "word": "pen",
+      "image": "Unit06/image/pen.png",
+      "audio": "Unit06/audio/word_pen.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "n",
+      "distractors": [
+       "o",
+       "s",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W022",
+      "word": "pen",
+      "image": "Unit06/image/pen.png",
+      "audio": "Unit06/audio/word_pen.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "n",
+      "distractors": [
+       "w",
+       "f",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W023",
+      "word": "bell",
+      "image": "Unit06/image/bell.png",
+      "audio": "Unit06/audio/word_bell.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ll",
+      "distractors": [
+       "p",
+       "b",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W023",
+      "word": "bell",
+      "image": "Unit06/image/bell.png",
+      "audio": "Unit06/audio/word_bell.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "be",
+      "distractors": [
+       "l",
+       "m",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W023",
+      "word": "bell",
+      "image": "Unit06/image/bell.png",
+      "audio": "Unit06/audio/word_bell.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ll",
+      "distractors": [
+       "u",
+       "k",
+       "z"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U07_G03",
+   "unit_id": 7,
+   "target_phonics": "g",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W024",
+      "word": "garden",
+      "image": "Unit07/image/garden.png",
+      "audio": "Unit07/audio/word_garden.mp3",
+      "hidden_idx": [
+       0,
+       5
+      ],
+      "answer": "gn",
+      "distractors": [
+       "j",
+       "a",
+       "r"
+      ]
+     },
+     {
+      "word_id": "W024",
+      "word": "garden",
+      "image": "Unit07/image/garden.png",
+      "audio": "Unit07/audio/word_garden.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "ge",
+      "distractors": [
+       "i",
+       "y",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W024",
+      "word": "garden",
+      "image": "Unit07/image/garden.png",
+      "audio": "Unit07/audio/word_garden.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "re",
+      "distractors": [
+       "g",
+       "d",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W025",
+      "word": "gate",
+      "image": "Unit07/image/gate.png",
+      "audio": "Unit07/audio/word_gate.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "te",
+      "distractors": [
+       "l",
+       "p",
+       "a"
+      ]
+     },
+     {
+      "word_id": "W025",
+      "word": "gate",
+      "image": "Unit07/image/gate.png",
+      "audio": "Unit07/audio/word_gate.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ae",
+      "distractors": [
+       "g",
+       "j",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W025",
+      "word": "gate",
+      "image": "Unit07/image/gate.png",
+      "audio": "Unit07/audio/word_gate.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "gt",
+      "distractors": [
+       "b",
+       "q",
+       "a"
+      ]
+     },
+     {
+      "word_id": "W026",
+      "word": "girl",
+      "image": "Unit07/image/girl.png",
+      "audio": "Unit07/audio/word_girl.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "il",
+      "distractors": [
+       "w",
+       "c",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W026",
+      "word": "girl",
+      "image": "Unit07/image/girl.png",
+      "audio": "Unit07/audio/word_girl.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "il",
+      "distractors": [
+       "a",
+       "f",
+       "n"
+      ]
+     },
+     {
+      "word_id": "W026",
+      "word": "girl",
+      "image": "Unit07/image/girl.png",
+      "audio": "Unit07/audio/word_girl.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ir",
+      "distractors": [
+       "n",
+       "h",
+       "g"
+      ]
+     },
+     {
+      "word_id": "W027",
+      "word": "goat",
+      "image": "Unit07/image/goat.png",
+      "audio": "Unit07/audio/word_goat.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "at",
+      "distractors": [
+       "s",
+       "o",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W027",
+      "word": "goat",
+      "image": "Unit07/image/goat.png",
+      "audio": "Unit07/audio/word_goat.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ot",
+      "distractors": [
+       "r",
+       "g",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W027",
+      "word": "goat",
+      "image": "Unit07/image/goat.png",
+      "audio": "Unit07/audio/word_goat.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "at",
+      "distractors": [
+       "z",
+       "g",
+       "r"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U08_G03",
+   "unit_id": 8,
+   "target_phonics": "h",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W028",
+      "word": "hair",
+      "image": "Unit08/image/hair.png",
+      "audio": "Unit08/audio/word_hair.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ar",
+      "distractors": [
+       "q",
+       "s",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W028",
+      "word": "hair",
+      "image": "Unit08/image/hair.png",
+      "audio": "Unit08/audio/word_hair.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "hr",
+      "distractors": [
+       "b",
+       "y",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W028",
+      "word": "hair",
+      "image": "Unit08/image/hair.png",
+      "audio": "Unit08/audio/word_hair.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "hr",
+      "distractors": [
+       "v",
+       "t",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W029",
+      "word": "hand",
+      "image": "Unit08/image/hand.png",
+      "audio": "Unit08/audio/word_hand.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "hd",
+      "distractors": [
+       "w",
+       "c",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W029",
+      "word": "hand",
+      "image": "Unit08/image/hand.png",
+      "audio": "Unit08/audio/word_hand.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "hn",
+      "distractors": [
+       "y",
+       "i",
+       "a"
+      ]
+     },
+     {
+      "word_id": "W029",
+      "word": "hand",
+      "image": "Unit08/image/hand.png",
+      "audio": "Unit08/audio/word_hand.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "nd",
+      "distractors": [
+       "j",
+       "q",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W030",
+      "word": "head",
+      "image": "Unit08/image/head.png",
+      "audio": "Unit08/audio/word_head.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ea",
+      "distractors": [
+       "z",
+       "u",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W030",
+      "word": "head",
+      "image": "Unit08/image/head.png",
+      "audio": "Unit08/audio/word_head.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "ha",
+      "distractors": [
+       "i",
+       "x",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W030",
+      "word": "head",
+      "image": "Unit08/image/head.png",
+      "audio": "Unit08/audio/word_head.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ad",
+      "distractors": [
+       "s",
+       "y",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W031",
+      "word": "horse",
+      "image": "Unit08/image/horse.png",
+      "audio": "Unit08/audio/word_horse.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "or",
+      "distractors": [
+       "v",
+       "j",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W031",
+      "word": "horse",
+      "image": "Unit08/image/horse.png",
+      "audio": "Unit08/audio/word_horse.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "hs",
+      "distractors": [
+       "o",
+       "p",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W031",
+      "word": "horse",
+      "image": "Unit08/image/horse.png",
+      "audio": "Unit08/audio/word_horse.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "se",
+      "distractors": [
+       "r",
+       "i",
+       "z"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U09_G03",
+   "unit_id": 9,
+   "target_phonics": "o",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W032",
+      "word": "clock",
+      "image": "Unit09/image/clock.png",
+      "audio": "Unit09/audio/word_clock.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "cc",
+      "distractors": [
+       "y",
+       "i",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W032",
+      "word": "clock",
+      "image": "Unit09/image/clock.png",
+      "audio": "Unit09/audio/word_clock.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "ok",
+      "distractors": [
+       "c",
+       "z",
+       "a"
+      ]
+     },
+     {
+      "word_id": "W032",
+      "word": "clock",
+      "image": "Unit09/image/clock.png",
+      "audio": "Unit09/audio/word_clock.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "oc",
+      "distractors": [
+       "f",
+       "d",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W033",
+      "word": "lock",
+      "image": "Unit09/image/lock.png",
+      "audio": "Unit09/audio/word_lock.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "lk",
+      "distractors": [
+       "u",
+       "y",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W033",
+      "word": "lock",
+      "image": "Unit09/image/lock.png",
+      "audio": "Unit09/audio/word_lock.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ck",
+      "distractors": [
+       "y",
+       "l",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W033",
+      "word": "lock",
+      "image": "Unit09/image/lock.png",
+      "audio": "Unit09/audio/word_lock.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ck",
+      "distractors": [
+       "u",
+       "s",
+       "v"
+      ]
+     },
+     {
+      "word_id": "W034",
+      "word": "mop",
+      "image": "Unit09/image/mop.png",
+      "audio": "Unit09/audio/word_mop.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "p",
+      "distractors": [
+       "f",
+       "w",
+       "c"
+      ]
+     },
+     {
+      "word_id": "W034",
+      "word": "mop",
+      "image": "Unit09/image/mop.png",
+      "audio": "Unit09/audio/word_mop.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "p",
+      "distractors": [
+       "d",
+       "o",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W034",
+      "word": "mop",
+      "image": "Unit09/image/mop.png",
+      "audio": "Unit09/audio/word_mop.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "p",
+      "distractors": [
+       "z",
+       "c",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W035",
+      "word": "pot",
+      "image": "Unit09/image/pot.png",
+      "audio": "Unit09/audio/word_pot.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "p",
+      "distractors": [
+       "q",
+       "l",
+       "n"
+      ]
+     },
+     {
+      "word_id": "W035",
+      "word": "pot",
+      "image": "Unit09/image/pot.png",
+      "audio": "Unit09/audio/word_pot.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "p",
+      "distractors": [
+       "x",
+       "d",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W035",
+      "word": "pot",
+      "image": "Unit09/image/pot.png",
+      "audio": "Unit09/audio/word_pot.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "o",
+      "distractors": [
+       "h",
+       "m",
+       "y"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U10_G03",
+   "unit_id": 10,
+   "target_phonics": "m",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W036",
+      "word": "monkey",
+      "image": "Unit10/image/monkey.png",
+      "audio": "Unit10/audio/word_monkey.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "ke",
+      "distractors": [
+       "y",
+       "z",
+       "o"
+      ]
+     },
+     {
+      "word_id": "W036",
+      "word": "monkey",
+      "image": "Unit10/image/monkey.png",
+      "audio": "Unit10/audio/word_monkey.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "nk",
+      "distractors": [
+       "l",
+       "o",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W036",
+      "word": "monkey",
+      "image": "Unit10/image/monkey.png",
+      "audio": "Unit10/audio/word_monkey.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "ke",
+      "distractors": [
+       "m",
+       "i",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W037",
+      "word": "mango",
+      "image": "Unit10/image/mango.png",
+      "audio": "Unit10/audio/word_mango.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "go",
+      "distractors": [
+       "k",
+       "a",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W037",
+      "word": "mango",
+      "image": "Unit10/image/mango.png",
+      "audio": "Unit10/audio/word_mango.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ng",
+      "distractors": [
+       "x",
+       "w",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W037",
+      "word": "mango",
+      "image": "Unit10/image/mango.png",
+      "audio": "Unit10/audio/word_mango.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "mo",
+      "distractors": [
+       "v",
+       "k",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W038",
+      "word": "mother",
+      "image": "Unit10/image/mother.png",
+      "audio": "Unit10/audio/word_mother.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "th",
+      "distractors": [
+       "n",
+       "z",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W038",
+      "word": "mother",
+      "image": "Unit10/image/mother.png",
+      "audio": "Unit10/audio/word_mother.mp3",
+      "hidden_idx": [
+       0,
+       5
+      ],
+      "answer": "mr",
+      "distractors": [
+       "s",
+       "d",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W038",
+      "word": "mother",
+      "image": "Unit10/image/mother.png",
+      "audio": "Unit10/audio/word_mother.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "te",
+      "distractors": [
+       "x",
+       "n",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W039",
+      "word": "mouse",
+      "image": "Unit10/image/mouse.png",
+      "audio": "Unit10/audio/word_mouse.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "mo",
+      "distractors": [
+       "t",
+       "w",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W039",
+      "word": "mouse",
+      "image": "Unit10/image/mouse.png",
+      "audio": "Unit10/audio/word_mouse.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ou",
+      "distractors": [
+       "f",
+       "s",
+       "n"
+      ]
+     },
+     {
+      "word_id": "W039",
+      "word": "mouse",
+      "image": "Unit10/image/mouse.png",
+      "audio": "Unit10/audio/word_mouse.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "me",
+      "distractors": [
+       "s",
+       "i",
+       "w"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U11_G03",
+   "unit_id": 11,
+   "target_phonics": "u",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W040",
+      "word": "bus",
+      "image": "Unit11/image/bus.png",
+      "audio": "Unit11/audio/word_bus.mp3",
+      "hidden_idx": [
+       0
+      ],
+      "answer": "b",
+      "distractors": [
+       "o",
+       "q",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W040",
+      "word": "bus",
+      "image": "Unit11/image/bus.png",
+      "audio": "Unit11/audio/word_bus.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "s",
+      "distractors": [
+       "r",
+       "y",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W040",
+      "word": "bus",
+      "image": "Unit11/image/bus.png",
+      "audio": "Unit11/audio/word_bus.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "u",
+      "distractors": [
+       "j",
+       "p",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W041",
+      "word": "running",
+      "image": "Unit11/image/running.png",
+      "audio": "Unit11/audio/word_running.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "un",
+      "distractors": [
+       "e",
+       "m",
+       "c"
+      ]
+     },
+     {
+      "word_id": "W041",
+      "word": "running",
+      "image": "Unit11/image/running.png",
+      "audio": "Unit11/audio/word_running.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "rn",
+      "distractors": [
+       "u",
+       "f",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W041",
+      "word": "running",
+      "image": "Unit11/image/running.png",
+      "audio": "Unit11/audio/word_running.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "nn",
+      "distractors": [
+       "k",
+       "x",
+       "y"
+      ]
+     },
+     {
+      "word_id": "W042",
+      "word": "sun",
+      "image": "Unit11/image/sun.png",
+      "audio": "Unit11/audio/word_sun.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "u",
+      "distractors": [
+       "j",
+       "q",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W042",
+      "word": "sun",
+      "image": "Unit11/image/sun.png",
+      "audio": "Unit11/audio/word_sun.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "u",
+      "distractors": [
+       "o",
+       "j",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W042",
+      "word": "sun",
+      "image": "Unit11/image/sun.png",
+      "audio": "Unit11/audio/word_sun.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "u",
+      "distractors": [
+       "y",
+       "o",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W043",
+      "word": "truck",
+      "image": "Unit11/image/truck.png",
+      "audio": "Unit11/audio/word_truck.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "uk",
+      "distractors": [
+       "e",
+       "w",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W043",
+      "word": "truck",
+      "image": "Unit11/image/truck.png",
+      "audio": "Unit11/audio/word_truck.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "rc",
+      "distractors": [
+       "a",
+       "u",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W043",
+      "word": "truck",
+      "image": "Unit11/image/truck.png",
+      "audio": "Unit11/audio/word_truck.mp3",
+      "hidden_idx": [
+       1,
+       4
+      ],
+      "answer": "rk",
+      "distractors": [
+       "t",
+       "f",
+       "s"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U12_G03",
+   "unit_id": 12,
+   "target_phonics": "l",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W044",
+      "word": "lake",
+      "image": "Unit12/image/lake.png",
+      "audio": "Unit12/audio/word_lake.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ak",
+      "distractors": [
+       "b",
+       "v",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W044",
+      "word": "lake",
+      "image": "Unit12/image/lake.png",
+      "audio": "Unit12/audio/word_lake.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "ke",
+      "distractors": [
+       "l",
+       "g",
+       "v"
+      ]
+     },
+     {
+      "word_id": "W044",
+      "word": "lake",
+      "image": "Unit12/image/lake.png",
+      "audio": "Unit12/audio/word_lake.mp3",
+      "hidden_idx": [
+       0,
+       2
+      ],
+      "answer": "lk",
+      "distractors": [
+       "q",
+       "v",
+       "w"
+      ]
+     },
+     {
+      "word_id": "W045",
+      "word": "leaf",
+      "image": "Unit12/image/leaf.png",
+      "audio": "Unit12/audio/word_leaf.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ef",
+      "distractors": [
+       "o",
+       "g",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W045",
+      "word": "leaf",
+      "image": "Unit12/image/leaf.png",
+      "audio": "Unit12/audio/word_leaf.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "lf",
+      "distractors": [
+       "n",
+       "i",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W045",
+      "word": "leaf",
+      "image": "Unit12/image/leaf.png",
+      "audio": "Unit12/audio/word_leaf.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "le",
+      "distractors": [
+       "m",
+       "a",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W046",
+      "word": "lemons",
+      "image": "Unit12/image/lemons.png",
+      "audio": "Unit12/audio/word_lemons.mp3",
+      "hidden_idx": [
+       0,
+       5
+      ],
+      "answer": "ls",
+      "distractors": [
+       "h",
+       "m",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W046",
+      "word": "lemons",
+      "image": "Unit12/image/lemons.png",
+      "audio": "Unit12/audio/word_lemons.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "le",
+      "distractors": [
+       "u",
+       "w",
+       "v"
+      ]
+     },
+     {
+      "word_id": "W046",
+      "word": "lemons",
+      "image": "Unit12/image/lemons.png",
+      "audio": "Unit12/audio/word_lemons.mp3",
+      "hidden_idx": [
+       1,
+       5
+      ],
+      "answer": "es",
+      "distractors": [
+       "c",
+       "x",
+       "b"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U13_G03",
+   "unit_id": 13,
+   "target_phonics": "n",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W047",
+      "word": "bananas",
+      "image": "Unit13/image/bananas.png",
+      "audio": "Unit13/audio/word_bananas.mp3",
+      "hidden_idx": [
+       0,
+       5
+      ],
+      "answer": "ba",
+      "distractors": [
+       "i",
+       "n",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W047",
+      "word": "bananas",
+      "image": "Unit13/image/bananas.png",
+      "audio": "Unit13/audio/word_bananas.mp3",
+      "hidden_idx": [
+       3,
+       5
+      ],
+      "answer": "aa",
+      "distractors": [
+       "b",
+       "t",
+       "g"
+      ]
+     },
+     {
+      "word_id": "W047",
+      "word": "bananas",
+      "image": "Unit13/image/bananas.png",
+      "audio": "Unit13/audio/word_bananas.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "an",
+      "distractors": [
+       "c",
+       "l",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W048",
+      "word": "noodles",
+      "image": "Unit13/image/noodles.png",
+      "audio": "Unit13/audio/word_noodles.mp3",
+      "hidden_idx": [
+       4,
+       6
+      ],
+      "answer": "ls",
+      "distractors": [
+       "i",
+       "d",
+       "y"
+      ]
+     },
+     {
+      "word_id": "W048",
+      "word": "noodles",
+      "image": "Unit13/image/noodles.png",
+      "audio": "Unit13/audio/word_noodles.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "od",
+      "distractors": [
+       "w",
+       "v",
+       "i"
+      ]
+     },
+     {
+      "word_id": "W048",
+      "word": "noodles",
+      "image": "Unit13/image/noodles.png",
+      "audio": "Unit13/audio/word_noodles.mp3",
+      "hidden_idx": [
+       3,
+       6
+      ],
+      "answer": "ds",
+      "distractors": [
+       "x",
+       "j",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W049",
+      "word": "nuts",
+      "image": "Unit13/image/nuts.png",
+      "audio": "Unit13/audio/word_nuts.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "ns",
+      "distractors": [
+       "y",
+       "z",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W049",
+      "word": "nuts",
+      "image": "Unit13/image/nuts.png",
+      "audio": "Unit13/audio/word_nuts.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "ns",
+      "distractors": [
+       "z",
+       "r",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W049",
+      "word": "nuts",
+      "image": "Unit13/image/nuts.png",
+      "audio": "Unit13/audio/word_nuts.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "ns",
+      "distractors": [
+       "b",
+       "g",
+       "v"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U14_G03",
+   "unit_id": 14,
+   "target_phonics": "t",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W051",
+      "word": "tiger",
+      "image": "Unit14/image/tiger.png",
+      "audio": "Unit14/audio/word_tiger.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "ti",
+      "distractors": [
+       "e",
+       "d",
+       "g"
+      ]
+     },
+     {
+      "word_id": "W051",
+      "word": "tiger",
+      "image": "Unit14/image/tiger.png",
+      "audio": "Unit14/audio/word_tiger.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "ti",
+      "distractors": [
+       "l",
+       "y",
+       "d"
+      ]
+     },
+     {
+      "word_id": "W051",
+      "word": "tiger",
+      "image": "Unit14/image/tiger.png",
+      "audio": "Unit14/audio/word_tiger.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "tr",
+      "distractors": [
+       "x",
+       "q",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W052",
+      "word": "top",
+      "image": "Unit14/image/top.png",
+      "audio": "Unit14/audio/word_top.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "o",
+      "distractors": [
+       "f",
+       "c",
+       "k"
+      ]
+     },
+     {
+      "word_id": "W052",
+      "word": "top",
+      "image": "Unit14/image/top.png",
+      "audio": "Unit14/audio/word_top.mp3",
+      "hidden_idx": [
+       1
+      ],
+      "answer": "o",
+      "distractors": [
+       "x",
+       "n",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W052",
+      "word": "top",
+      "image": "Unit14/image/top.png",
+      "audio": "Unit14/audio/word_top.mp3",
+      "hidden_idx": [
+       2
+      ],
+      "answer": "p",
+      "distractors": [
+       "g",
+       "m",
+       "n"
+      ]
+     },
+     {
+      "word_id": "W053",
+      "word": "turtle",
+      "image": "Unit14/image/turtle.png",
+      "audio": "Unit14/audio/word_turtle.mp3",
+      "hidden_idx": [
+       2,
+       4
+      ],
+      "answer": "rl",
+      "distractors": [
+       "z",
+       "e",
+       "h"
+      ]
+     },
+     {
+      "word_id": "W053",
+      "word": "turtle",
+      "image": "Unit14/image/turtle.png",
+      "audio": "Unit14/audio/word_turtle.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ur",
+      "distractors": [
+       "m",
+       "h",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W053",
+      "word": "turtle",
+      "image": "Unit14/image/turtle.png",
+      "audio": "Unit14/audio/word_turtle.mp3",
+      "hidden_idx": [
+       3,
+       5
+      ],
+      "answer": "te",
+      "distractors": [
+       "j",
+       "b",
+       "d"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U15_G03",
+   "unit_id": 15,
+   "target_phonics": "f",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W054",
+      "word": "face",
+      "image": "Unit15/image/face.png",
+      "audio": "Unit15/audio/word_face.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "fa",
+      "distractors": [
+       "d",
+       "q",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W054",
+      "word": "face",
+      "image": "Unit15/image/face.png",
+      "audio": "Unit15/audio/word_face.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "ac",
+      "distractors": [
+       "s",
+       "o",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W054",
+      "word": "face",
+      "image": "Unit15/image/face.png",
+      "audio": "Unit15/audio/word_face.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "fe",
+      "distractors": [
+       "l",
+       "h",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W055",
+      "word": "father",
+      "image": "Unit15/image/father.png",
+      "audio": "Unit15/audio/word_father.mp3",
+      "hidden_idx": [
+       0,
+       5
+      ],
+      "answer": "fr",
+      "distractors": [
+       "b",
+       "a",
+       "u"
+      ]
+     },
+     {
+      "word_id": "W055",
+      "word": "father",
+      "image": "Unit15/image/father.png",
+      "audio": "Unit15/audio/word_father.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "he",
+      "distractors": [
+       "t",
+       "u",
+       "y"
+      ]
+     },
+     {
+      "word_id": "W055",
+      "word": "father",
+      "image": "Unit15/image/father.png",
+      "audio": "Unit15/audio/word_father.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ah",
+      "distractors": [
+       "i",
+       "j",
+       "q"
+      ]
+     },
+     {
+      "word_id": "W056",
+      "word": "foot",
+      "image": "Unit15/image/foot.png",
+      "audio": "Unit15/audio/word_foot.mp3",
+      "hidden_idx": [
+       0,
+       1
+      ],
+      "answer": "fo",
+      "distractors": [
+       "v",
+       "b",
+       "t"
+      ]
+     },
+     {
+      "word_id": "W056",
+      "word": "foot",
+      "image": "Unit15/image/foot.png",
+      "audio": "Unit15/audio/word_foot.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "oo",
+      "distractors": [
+       "c",
+       "y",
+       "s"
+      ]
+     },
+     {
+      "word_id": "W056",
+      "word": "foot",
+      "image": "Unit15/image/foot.png",
+      "audio": "Unit15/audio/word_foot.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "oo",
+      "distractors": [
+       "c",
+       "i",
+       "p"
+      ]
+     },
+     {
+      "word_id": "W057",
+      "word": "football",
+      "image": "Unit15/image/football.png",
+      "audio": "Unit15/audio/word_football.mp3",
+      "hidden_idx": [
+       3,
+       6
+      ],
+      "answer": "tl",
+      "distractors": [
+       "v",
+       "c",
+       "e"
+      ]
+     },
+     {
+      "word_id": "W057",
+      "word": "football",
+      "image": "Unit15/image/football.png",
+      "audio": "Unit15/audio/word_football.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ot",
+      "distractors": [
+       "k",
+       "d",
+       "j"
+      ]
+     },
+     {
+      "word_id": "W057",
+      "word": "football",
+      "image": "Unit15/image/football.png",
+      "audio": "Unit15/audio/word_football.mp3",
+      "hidden_idx": [
+       5,
+       6
+      ],
+      "answer": "al",
+      "distractors": [
+       "o",
+       "q",
+       "v"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "U16_G03",
+   "unit_id": 16,
+   "target_phonics": "w",
+   "is_digraph": false,
+   "lesson_no": 2,
+   "order_idx": 2,
+   "config": {
+    "items": [
+     {
+      "word_id": "W058",
+      "word": "wash",
+      "image": "Unit16/image/wash.png",
+      "audio": "Unit16/audio/word_wash.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "wh",
+      "distractors": [
+       "y",
+       "b",
+       "l"
+      ]
+     },
+     {
+      "word_id": "W058",
+      "word": "wash",
+      "image": "Unit16/image/wash.png",
+      "audio": "Unit16/audio/word_wash.mp3",
+      "hidden_idx": [
+       1,
+       2
+      ],
+      "answer": "as",
+      "distractors": [
+       "k",
+       "l",
+       "x"
+      ]
+     },
+     {
+      "word_id": "W058",
+      "word": "wash",
+      "image": "Unit16/image/wash.png",
+      "audio": "Unit16/audio/word_wash.mp3",
+      "hidden_idx": [
+       1,
+       3
+      ],
+      "answer": "ah",
+      "distractors": [
+       "x",
+       "d",
+       "v"
+      ]
+     },
+     {
+      "word_id": "W059",
+      "word": "water",
+      "image": "Unit16/image/water.png",
+      "audio": "Unit16/audio/word_water.mp3",
+      "hidden_idx": [
+       0,
+       3
+      ],
+      "answer": "we",
+      "distractors": [
+       "i",
+       "g",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W059",
+      "word": "water",
+      "image": "Unit16/image/water.png",
+      "audio": "Unit16/audio/word_water.mp3",
+      "hidden_idx": [
+       0,
+       4
+      ],
+      "answer": "wr",
+      "distractors": [
+       "q",
+       "i",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W059",
+      "word": "water",
+      "image": "Unit16/image/water.png",
+      "audio": "Unit16/audio/word_water.mp3",
+      "hidden_idx": [
+       2,
+       3
+      ],
+      "answer": "te",
+      "distractors": [
+       "i",
+       "l",
+       "b"
+      ]
+     },
+     {
+      "word_id": "W060",
+      "word": "window",
+      "image": "Unit16/image/window.png",
+      "audio": "Unit16/audio/word_window.mp3",
+      "hidden_idx": [
+       4,
+       5
+      ],
+      "answer": "ow",
+      "distractors": [
+       "c",
+       "i",
+       "m"
+      ]
+     },
+     {
+      "word_id": "W060",
+      "word": "window",
+      "image": "Unit16/image/window.png",
+      "audio": "Unit16/audio/word_window.mp3",
+      "hidden_idx": [
+       3,
+       4
+      ],
+      "answer": "do",
+      "distractors": [
+       "n",
+       "t",
+       "f"
+      ]
+     },
+     {
+      "word_id": "W060",
+      "word": "window",
+      "image": "Unit16/image/window.png",
+      "audio": "Unit16/audio/word_window.mp3",
+      "hidden_idx": [
+       3,
+       5
+      ],
+      "answer": "dw",
+      "distractors": [
+       "f",
+       "i",
+       "u"
+      ]
+     }
+    ]
+   }
   }
  ]
 }

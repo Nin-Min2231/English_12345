@@ -1,0 +1,216 @@
+{
+ "instances": [
+  {
+   "game_id": "CP02_G09",
+   "unit_id": 2,
+   "config": {
+    "pairs": [
+     {
+      "word_id": "W001",
+      "word": "ball",
+      "image": "Unit01/image/ball.png",
+      "audio": "Unit01/audio/word_ball.mp3"
+     },
+     {
+      "word_id": "W002",
+      "word": "bike",
+      "image": "Unit01/image/bike.png",
+      "audio": "Unit01/audio/word_bike.mp3"
+     },
+     {
+      "word_id": "W003",
+      "word": "book",
+      "image": "Unit01/image/book.png",
+      "audio": "Unit01/audio/word_book.mp3"
+     },
+     {
+      "word_id": "W004",
+      "word": "cake",
+      "image": "Unit02/image/cake.png",
+      "audio": "Unit02/audio/word_cake.mp3"
+     },
+     {
+      "word_id": "W005",
+      "word": "car",
+      "image": "Unit02/image/car.png",
+      "audio": "Unit02/audio/word_car.mp3"
+     },
+     {
+      "word_id": "W006",
+      "word": "cat",
+      "image": "Unit02/image/cat.png",
+      "audio": "Unit02/audio/word_cat.mp3"
+     },
+     {
+      "word_id": "W007",
+      "word": "cup",
+      "image": "Unit02/image/cup.png",
+      "audio": "Unit02/audio/word_cup.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP06_G09",
+   "unit_id": 6,
+   "config": {
+    "pairs": [
+     {
+      "word_id": "W016",
+      "word": "fish",
+      "image": "Unit05/image/fish.png",
+      "audio": "Unit05/audio/word_fish.mp3"
+     },
+     {
+      "word_id": "W017",
+      "word": "chips",
+      "image": "Unit05/image/chips.png",
+      "audio": "Unit05/audio/word_chips.mp3"
+     },
+     {
+      "word_id": "W018",
+      "word": "milk",
+      "image": "Unit05/image/milk.png",
+      "audio": "Unit05/audio/word_milk.mp3"
+     },
+     {
+      "word_id": "W019",
+      "word": "chicken",
+      "image": "Unit05/image/chicken.png",
+      "audio": "Unit05/audio/word_chicken.mp3"
+     },
+     {
+      "word_id": "W020",
+      "word": "red",
+      "image": "Unit06/image/red.png",
+      "audio": "Unit06/audio/word_red.mp3"
+     },
+     {
+      "word_id": "W021",
+      "word": "pencil",
+      "image": "Unit06/image/pencil.png",
+      "audio": "Unit06/audio/word_pencil.mp3"
+     },
+     {
+      "word_id": "W022",
+      "word": "pen",
+      "image": "Unit06/image/pen.png",
+      "audio": "Unit06/audio/word_pen.mp3"
+     },
+     {
+      "word_id": "W023",
+      "word": "bell",
+      "image": "Unit06/image/bell.png",
+      "audio": "Unit06/audio/word_bell.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP10_G09",
+   "unit_id": 10,
+   "config": {
+    "pairs": [
+     {
+      "word_id": "W032",
+      "word": "clock",
+      "image": "Unit09/image/clock.png",
+      "audio": "Unit09/audio/word_clock.mp3"
+     },
+     {
+      "word_id": "W033",
+      "word": "lock",
+      "image": "Unit09/image/lock.png",
+      "audio": "Unit09/audio/word_lock.mp3"
+     },
+     {
+      "word_id": "W034",
+      "word": "mop",
+      "image": "Unit09/image/mop.png",
+      "audio": "Unit09/audio/word_mop.mp3"
+     },
+     {
+      "word_id": "W035",
+      "word": "pot",
+      "image": "Unit09/image/pot.png",
+      "audio": "Unit09/audio/word_pot.mp3"
+     },
+     {
+      "word_id": "W036",
+      "word": "monkey",
+      "image": "Unit10/image/monkey.png",
+      "audio": "Unit10/audio/word_monkey.mp3"
+     },
+     {
+      "word_id": "W037",
+      "word": "mango",
+      "image": "Unit10/image/mango.png",
+      "audio": "Unit10/audio/word_mango.mp3"
+     },
+     {
+      "word_id": "W038",
+      "word": "mother",
+      "image": "Unit10/image/mother.png",
+      "audio": "Unit10/audio/word_mother.mp3"
+     },
+     {
+      "word_id": "W039",
+      "word": "mouse",
+      "image": "Unit10/image/mouse.png",
+      "audio": "Unit10/audio/word_mouse.mp3"
+     }
+    ]
+   }
+  },
+  {
+   "game_id": "CP14_G09",
+   "unit_id": 14,
+   "config": {
+    "pairs": [
+     {
+      "word_id": "W047",
+      "word": "bananas",
+      "image": "Unit13/image/bananas.png",
+      "audio": "Unit13/audio/word_bananas.mp3"
+     },
+     {
+      "word_id": "W048",
+      "word": "noodles",
+      "image": "Unit13/image/noodles.png",
+      "audio": "Unit13/audio/word_noodles.mp3"
+     },
+     {
+      "word_id": "W049",
+      "word": "nuts",
+      "image": "Unit13/image/nuts.png",
+      "audio": "Unit13/audio/word_nuts.mp3"
+     },
+     {
+      "word_id": "W050",
+      "word": "teddy bear",
+      "image": "Unit14/image/teddy_bear.png",
+      "audio": "Unit14/audio/word_teddy_bear.mp3"
+     },
+     {
+      "word_id": "W051",
+      "word": "tiger",
+      "image": "Unit14/image/tiger.png",
+      "audio": "Unit14/audio/word_tiger.mp3"
+     },
+     {
+      "word_id": "W052",
+      "word": "top",
+      "image": "Unit14/image/top.png",
+      "audio": "Unit14/audio/word_top.mp3"
+     },
+     {
+      "word_id": "W053",
+      "word": "turtle",
+      "image": "Unit14/image/turtle.png",
+      "audio": "Unit14/audio/word_turtle.mp3"
+     }
+    ]
+   }
+  }
+ ]
+}
