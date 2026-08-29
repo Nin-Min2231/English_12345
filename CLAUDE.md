@@ -5,38 +5,27 @@ Ngữ cảnh cho Claude Code khi làm việc trong repo này. Đọc kỹ trư�
 **Trước khi sửa bug/thay đổi theo yêu cầu người dùng**: kiểm tra `BUGS_CR.md` (cùng thư mục) — nhật
 ký Bug/CR đang mở, tránh xử lý sai/trùng/bỏ sót.
 
-> ## ⚠️ CẬP NHẬT 2026-08-28 — ĐỌC TRƯỚC KHI LÀM LỚP 1 UNIT 2-16
+> ## ⚠️ Lớp 1 — 2 điểm chưa thống nhất, vẫn còn nguyên (đọc trước khi đụng Unit 9/16 của Lớp 1)
 >
-> Nội dung Lớp 1 (ảnh + audio) **đã được làm lại toàn bộ** trong một phiên Cowork riêng.
-> **Bắt buộc đọc `../../04_image+audio/01_Lop-1/README_Lop1_FINAL.md` trước khi sinh JSON game.**
+> Nội dung Lớp 1 (ảnh + audio, đủ 16/16 unit) đã làm xong và **ĐÃ TEST OK trên điện thoại thật**
+> (2026-08-28, CR-033/034 — xem §2). Chỉ còn 2 điểm chưa thống nhất từ khi làm lại nội dung, xem đầy đủ
+> ở `../../04_image+audio/01_Lop-1/README_Lop1_FINAL.md`:
 >
-> 1. **Audio Lớp 1 trước đây SAI thứ tự 40/64 slot (62,5%)** — đã sửa xong theo kết quả người dùng
->    nghe từng file. Bảng đối chiếu: `01_Lop-1/mapping_final.csv`.
-> 2. **`assets/content/lop1/Unit01/` đã bị GHI ĐÈ** (cả `audio/` lẫn `image/`). Bản audio Unit 1
->    trong app trước đó là bộ cũ 2026-08-20 — tức **APK "đã test OK" ngày 21/8 thực chất phát sai
->    audio Unit 1**. → **PHẢI BUILD LẠI APK** và nghe lại Unit 1 trước khi kết luận gì.
->    (CR-033, 2026-08-28: đã soát MD5 khớp 100% với nguồn mới + build lại APK —
->    `05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk` — **nhưng vẫn CHƯA có
->    ai nghe thật trên điện thoại**, đây là việc con người còn treo, không phải đã xong.)
-> 3. **Toàn bộ 70 ảnh Lớp 1 là bộ vector mới** (thay bộ cắt từ SGK, hết rủi ro bản quyền).
->    Tên file không đổi → `manifest.csv` và JSON game không phải sửa.
-> 4. **4 điểm bẫy khi sinh JSON game Lớp 1**:
->    - Unit 9: băng đọc **số nhiều** (`locks/clocks/mops/pots`) nhưng manifest + ảnh là **số ít** — chưa thống nhất.
->    - Unit 16: manifest ghi `wash`, băng đọc **"washing"** — cùng loại.
->    - **10 từ số `one`…`ten` KHÔNG CÓ AUDIO** (SGK không đọc rời số nào) → tuyệt đối không đưa
->      vào game cần nghe (G02 nghe-chọn-hình, G10), nếu không sẽ có ô câm.
->    - 4 tên riêng (Bill, Lucy, Nick, Wendy) có trong băng nhưng **không thuộc 70 từ** — bỏ qua.
-> 5. `manifest.csv` cột `image_ready`/`audio_ready` **nay đã đúng thực tế** (70 ảnh / 60 audio),
->    sinh tự động từ `os.path.exists()` — trước đây ghi tay và sai 100%, giờ tin được.
-> 6. Thư mục nguồn đã dọn: mọi bộ ảnh/audio cũ nằm trong `06_global_success/_XOA_TAY/` — **không
->    dùng bất cứ thứ gì trong đó**.
+> - **Unit 9**: băng đọc **số nhiều** (`locks/clocks/mops/pots`) nhưng manifest + ảnh + JSON game đang
+>   dùng **số ít**. Nếu đổi sang số nhiều thì phải sửa cả: manifest, tên file ảnh + audio, và JSON game
+>   (g01-g05/g10) đã sinh cho unit này.
+> - **Unit 16**: manifest ghi `wash`, băng đọc **"washing"** — cùng loại vấn đề.
+> - **10 từ số `one`…`ten` vẫn KHÔNG CÓ AUDIO** (SGK không đọc rời số nào) — đã loại hẳn khỏi mọi game
+>   (G01-G05/G08/G10) từ CR-034, không phải "còn thiếu sót" mà là quyết định có chủ ý.
+> - Thư mục nguồn đã dọn: mọi bộ ảnh/audio cũ nằm trong `06_global_success/_XOA_TAY/` — **không dùng
+>   bất cứ thứ gì trong đó**.
 
 ## 1. Dự án là gì
 
 App Android (Flutter, offline-first) luyện tiếng Anh tiểu học theo giáo trình **Global Success**.
 **Sprint 4 (2026-08-21) đã thêm hỗ trợ đa lớp** (1 app, màn "Chọn lớp" SCR-00, xem §2/§4) — Lớp 2
 đầy đủ 16 unit (48 lesson, 56 từ vựng); Lớp 1 (CR-034, 2026-08-28) cũng đã đủ 16/16 unit (70 từ, 60
-core có audio) nhưng **chưa test trên điện thoại thật**. Người dùng: trẻ 7–8 tuổi tự chơi; phụ
+core có audio) — **ĐÃ TEST OK trên điện thoại thật** (2026-08-28). Người dùng: trẻ 7–8 tuổi tự chơi; phụ
 huynh/giáo viên theo dõi. Triết lý: "học mà chơi", phiên ≤5 phút, dựa vào hình/màu/âm thanh vì trẻ
 chưa đọc thạo.
 
@@ -223,8 +212,8 @@ Lớp 2 không đổi hành vi. (2) soát lại Lớp 1 Unit 1 sau khi ảnh/aud
 `assets/content/lop1/Unit01/` khớp 100% với `04_image+audio/01_Lop-1/Unit01/` mới, manifest + cả 6 file
 JSON game (g01/g02/g03/g04/g05/g10) khớp nhau, không có ô câm — Unit 1 hoàn chỉnh. `flutter
 analyze`/`dart format` sạch, build APK debug mới (bản ĐẦU TIÊN chắc chắn phát đúng audio Unit 1):
-`05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk` — **chưa test trên điện thoại
-thật**, cần nghe lại Unit 1 trước khi coi là đã kiểm chứng. Chi tiết đầy đủ: `BUGS_CR.md` CR-033.
+`05_Build_APK/lop2_english_app-debug-2026-08-28-1-funtime-lop1unit1.apk`. Chi tiết đầy đủ:
+`BUGS_CR.md` CR-033.
 
 **CR-034 (2026-08-28)** — người dùng báo audio Unit 1 "vẫn sai" sau CR-033; điều tra bằng
 `faster-whisper` (speech-to-text độc lập, model `medium.en`) xác nhận `word_ball/bike/book.mp3` đọc
@@ -237,9 +226,9 @@ nghị `SPRINT4_PLAN.md` phụ lục (bỏ U01/U09/U11/U16), G09/G12 cho cả 4 
 G01/G02/G03/G05 đã sinh). Script kiểm tra chéo (đường dẫn file, answer_idx, hidden_idx, số lượt G03,
 token G05) PASS toàn bộ. Đổi quy ước đặt tên file build sang bắt đầu bằng tên app `Nin&Min's English`
 (theo `android:label`) thay vì `lop2_english_app`. `flutter analyze` sạch, build:
-`05_Build_APK/Nin&Min's English-debug-2026-08-28-2-lop1-full.apk` — **CHƯA test trên điện thoại thật**,
-đặc biệt cần xác nhận `isFunTimeUnlocked` (CR-033) hoạt động đúng khi Lật thẻ sau Unit 2 lần đầu có dữ
-liệu thật. Chi tiết đầy đủ: `BUGS_CR.md` CR-034.
+`05_Build_APK/Nin&Min's English-debug-2026-08-28-2-lop1-full.apk` — ✅ **ĐÃ TEST OK trên điện thoại
+thật** (người dùng xác nhận 2026-08-28, gồm cả audio Unit 1, Unit 2-16, và Lật thẻ sau Unit 2 với
+`isFunTimeUnlocked` mới). Lớp 1 coi như hoàn tất. Chi tiết đầy đủ: `BUGS_CR.md` CR-034.
 
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.

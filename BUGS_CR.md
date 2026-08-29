@@ -1526,10 +1526,10 @@ Lớp 1 Unit 1 sau khi nội dung Lớp 1 được làm lại toàn bộ (2026-0
   `android:label` trong `AndroidManifest.xml`) thay vì `lop2_english_app` — bản mới nhất:
   `05_Build_APK/Nin&Min's English-debug-2026-08-28-2-lop1-full.apk`.
 - **Trạng thái**: Lớp 1 đủ 16/16 unit có G01/G02/G03/G04/G05/G10 (trừ `teddy bear` không vào G03/G04);
-  G06 có ở 12/16 unit (đúng số liệu phụ lục); G09 ở 4 checkpoint; G12 ở 4 checkpoint. **CHƯA test trên
-  điện thoại thật** — đặc biệt cần xác nhận: (1) sự cố audio Unit 1 người dùng báo ở trên có còn không
-  sau khi gỡ cài đặt sạch; (2) `isFunTimeUnlocked` (CR-033) hoạt động đúng khi chạm Lật thẻ sau Unit 2
-  (lần đầu tiên đường code này được thực thi thật, vì trước đó Lớp 1 chưa có dữ liệu G09); (3) nghe
-  thử vài audio Unit 2-16 để xác nhận không lặp lại lỗi lệch thứ tự như bản cũ (đã soát MD5 khớp
-  nguồn, nhưng chưa nghe bằng tai người cho Unit 2-16 — chỉ Unit 1 đã được người dùng tự nghe xác nhận
-  qua `KiemTra_Audio_Lop1.html`).
+  G06 có ở 12/16 unit (đúng số liệu phụ lục); G09 ở 4 checkpoint; G12 ở 4 checkpoint. ✅ **ĐÃ TEST OK
+  trên điện thoại thật** (người dùng xác nhận 2026-08-28) — audio Unit 1 (sự cố báo ở trên không còn
+  tái diễn), `isFunTimeUnlocked` hoạt động đúng khi chạm Lật thẻ sau Unit 2 (lần đầu đường code này
+  chạy thật với dữ liệu G09 của Lớp 1), audio Unit 2-16 nghe đúng. **Lớp 1 (Unit 1-16, G01-G05/G08/G10
+  đủ 16 unit + G06/G09/G12 theo đúng phạm vi thiết kế) coi như hoàn tất** — 2 điểm chưa thống nhất còn
+  lại (Unit 9 số ít/nhiều, Unit 16 `wash`/"washing") là quyết định nội dung chưa chốt, không phải lỗi
+  chặn release, xem `README_Lop1_FINAL.md`.
