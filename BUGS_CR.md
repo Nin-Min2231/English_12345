@@ -1533,3 +1533,73 @@ Lớp 1 Unit 1 sau khi nội dung Lớp 1 được làm lại toàn bộ (2026-0
   đủ 16 unit + G06/G09/G12 theo đúng phạm vi thiết kế) coi như hoàn tất** — 2 điểm chưa thống nhất còn
   lại (Unit 9 số ít/nhiều, Unit 16 `wash`/"washing") là quyết định nội dung chưa chốt, không phải lỗi
   chặn release, xem `README_Lop1_FINAL.md`.
+
+## CR-035 (2026-09-01) — Bỏ hẳn G06 "Hoàn thành câu" khỏi Lớp 1 + ẩn nút "Gợi ý" G05 khi không có audio
+
+- **Người dùng yêu cầu**: thay vì đi theo hướng đã chuẩn bị sẵn ở khối "MỚI 28/8" (`CLAUDE.md` đầu
+  file, `SPEC_Audio_MauCau_G05_G06.md`) — vá 2 file JSON để nút "Gợi ý" G05/G06 Lớp 1 phát đúng audio
+  mẫu câu — người dùng chọn hướng khác: (1) **bỏ hẳn** game G06 "Hoàn thành câu" khỏi Lớp 1; (2) **bỏ
+  nút "Gợi ý"** ở G05 "Lắp ráp câu" vì không có audio để phát. Không đụng gì tới Lớp 2 (G05/G06 Lớp 2
+  đã có audio thật, đang chạy đúng, đã test OK từ trước).
+- **(1) G06 Lớp 1 — chỉ sửa dữ liệu, KHÔNG sửa code**: `assets/data/lop1/games/g06_mindmap.json` đổi
+  thành `{"instances": []}` (trước đó có dữ liệu cho 12/16 unit, theo bảng khuyến nghị CR-034).
+  `countFor` (game_defs.dart, đọc từ `mindmapByUnit`) nay trả về 0 cho MỌI unit Lớp 1 — 2 cơ chế đã có
+  sẵn từ CR-028/CR-033 tự động xử lý đúng, không cần code thêm:
+  - `unit_screen.dart` dòng "for (final game in kUnitGames) if (game.countFor(...) > 0)" — ẩn hẳn
+    dòng G06 khỏi màn Unit của MỌI unit Lớp 1 (đúng nghĩa "bỏ ra khỏi chương trình", không phải khóa
+    vĩnh viễn).
+  - `hasContent` trong `_gameRowFor` (unit_screen.dart) — khi tính điều kiện mở khóa game NGAY SAU
+    G06 trong `kGameTypeOrder` (là G08 Ghi âm), `isGameUnlocked` tự lùi qua G06 (không có dữ liệu) để
+    xét game trước đó nữa (G05) — **không hề khóa cứng G08**, đúng lo ngại "phạm vi ảnh hưởng liên
+    quan mở khóa game tiếp theo" mà người dùng nêu, cùng loại bug đã sửa ở CR-028 (khi đó G06 Lớp 1
+    Unit 1 thiếu dữ liệu cũng đã khóa cứng G08, phải thêm callback `hasContent` để sửa).
+  - `hasContent` trong `_funTimeGameDef` (checkpoints.dart) — điều kiện mở "Lật thẻ" (G09, sau Unit
+    2/6/10/14) đòi mọi game trong `kGameTypeOrder` có sao ở cả 2 unit ôn tập; G06 giờ luôn "không có
+    dữ liệu" ở Lớp 1 nên bị bỏ qua (coi như trong suốt) — không khóa cứng Lật thẻ, đúng cơ chế đã sửa
+    ở CR-033.
+  - G12 Boss Quiz không dùng dữ liệu G06 (chỉ trộn G02/G03/G05) nên không ảnh hưởng.
+  - **Lưu ý còn tồn tại (không sửa, chấp nhận được)**: `ProgressRepository.maxStarsPerUnit` là hằng số
+    dùng chung mọi lớp (cộng sao tối đa của MỌI gameType trong `kGameTypeOrder`, gồm cả G06) — với Lớp
+    1 giờ G06 không chơi được ở unit nào nữa, tổng sao tối đa hiển thị (nếu có nơi dùng để chia %) sẽ
+    tính dư 3 sao/unit không bao giờ đạt được. Đây là tình trạng **đã tồn tại từ trước** (đúng y hệt
+    với 4 unit U01/U09/U11/U16 vốn đã không có G06 từ CR-034) — mở rộng ra cả 16 unit không phải lỗi
+    mới, cùng 1 quyết định đã chấp nhận, không sửa trong CR này.
+- **(2) Nút "Gợi ý" G05 "Lắp ráp câu"**: `sentence_build_screen.dart` — bọc nút trong
+  `if (_it.audio != null)` (thay vì hiện cố định) — ẩn theo TỪNG CÂU dựa vào dữ liệu thật, không
+  hardcode theo lớp. Lớp 1: `g05_sentence.json` có `"audio": null` ở 100% câu (mọi unit) → nút luôn ẩn
+  (đúng ý người dùng). Lớp 2: mọi câu có `"Unit NN/audio/sentence_pattern.mp3"` → nút vẫn hiện + hoạt
+  động như cũ, không đổi hành vi đã test OK trước đó. Không đụng `mindmap_screen.dart` (nút "Gợi ý"
+  G06) vì G06 đã bỏ hẳn khỏi Lớp 1 ở mục (1), còn Lớp 2 vẫn dùng bình thường.
+- `flutter analyze`/`dart format` sạch. Build APK debug mới:
+  `05_Build_APK/Nin&Min's English-debug-2026-09-01-1-cr035.apk` — **chưa test trên điện thoại thật**,
+  cần người dùng xác nhận: (a) Lớp 1 không còn thấy dòng "Hoàn thành câu" ở bất kỳ unit nào + Lật thẻ
+  sau Unit 2 vẫn mở được bình thường; (b) G05 Lớp 1 không còn nút "Gợi ý"; (c) hồi quy Lớp 2 — G05/G06
+  vẫn còn nút "Gợi ý" và vẫn phát đúng audio như trước.
+
+## CR-036 (2026-09-01) — G08 Ghi âm: "Dừng ghi âm" bấm nhiều lần gây khó hiểu cho bé, mọi lớp
+
+- **Người dùng báo**: màn hình loading "Đang kiểm tra bé chờ tý nhé" (thực ra là `_ScoringOverlay`,
+  text "Hệ thống đang chấm điểm cho bé, vui lòng chờ tý nhé!") sau khi bấm "Dừng ghi âm" **có vẻ**
+  không còn hiện nữa; nếu đúng vậy thì thêm lại — hiện tại bấm "Dừng ghi âm" nhiều lần gây khó hiểu cho
+  bé. Yêu cầu đối ứng cho **mọi lớp có G08** (đúng 1 file `record_screen.dart` dùng chung mọi lớp qua
+  `widget.unit.grade`, không cần sửa riêng từng lớp).
+- **Điều tra**: `_ScoringOverlay` **vẫn còn nguyên trong code**, không hề bị xóa/thiếu — nhưng `_isScoring`
+  (cờ hiện overlay này) **chỉ được bật bên trong callback bất đồng bộ `onStatus` của package
+  `speech_to_text`** (dòng ~81-107), tức là chỉ sau khi bé bấm "Dừng ghi âm" một khoảng trễ — trễ nhiều
+  hay ít tùy thiết bị/engine STT, có lúc gần như tức thì (không kịp thấy overlay), có lúc vài giây. Đây
+  là gốc của CẢ 2 hiện tượng người dùng báo — không phải "tính năng đã bị gỡ" mà là **race condition đã
+  tồn tại từ CR-022/CR-024** (`_stopListening()` cũ chỉ gọi `_speech.stop()`, không tự đổi trạng thái
+  UI): trong lúc chờ callback, nút vẫn hiện "Dừng ghi âm" và **vẫn bấm được** — bé không thấy phản hồi
+  ngay nên bấm lại nhiều lần.
+- **Sửa**: `_stopListening()` (`record_screen.dart`) tự `setState(_isListening=false, _isScoring=true)`
+  **NGAY** khi bấm, không chờ `onStatus` — khóa nút (chuyển label "Dừng ghi âm" → "Đang chấm điểm...",
+  `onPressed: null`) + hiện `_ScoringOverlay` (chặn toàn màn hình) tức thì, đảm bảo loading LUÔN hiện
+  ngay khi bấm thay vì phụ thuộc tốc độ trả kết quả của STT engine, đồng thời khiến nút không còn bấm
+  được lần 2 (giải quyết cả 2 ý người dùng nêu bằng 1 chỗ sửa). `onStatus`/`_onResult` phía dưới không
+  đổi — vẫn chạy như cũ để lấy điểm thật khi có (setState lặp lại cùng giá trị lúc đó là vô hại).
+  Do dùng chung 1 file cho mọi lớp, fix áp dụng ngay cho cả Lớp 1 lẫn Lớp 2 (mọi unit có G08) — không
+  cần sửa gì thêm ở data/lớp khác.
+- `flutter analyze`/`dart format` sạch. Build APK debug mới:
+  `05_Build_APK/Nin&Min's English-debug-2026-09-01-2-cr036.apk` — **chưa test trên điện thoại thật**,
+  cần người dùng xác nhận: bấm "Dừng ghi âm" hiện loading NGAY (không có khoảng trễ bấm-được-lại), thử
+  bấm nhanh nhiều lần không còn gây lỗi/nhầm lẫn, điểm số vẫn ra đúng như trước (Lớp 1 lẫn Lớp 2).

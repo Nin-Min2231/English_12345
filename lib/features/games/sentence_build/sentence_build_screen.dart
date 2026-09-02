@@ -260,16 +260,22 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen>
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                child: PrimaryButton(
-                  label: 'Gợi ý',
-                  icon: Icons.volume_up_rounded,
-                  color: AppColors.warning,
-                  foregroundColor: AppColors.textPrimary,
-                  onPressed: _playHint,
+              // Ẩn hẳn nút "Gợi ý" khi câu này không có audio (Lớp 1: 100% câu
+              // "audio": null trong g05_sentence.json, chưa cắt được audio mẫu
+              // câu — xem CLAUDE.md khối cảnh báo đầu file) — thay vì hiện 1
+              // nút không phát ra tiếng gì khi bấm.
+              if (_it.audio != null)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                  child: PrimaryButton(
+                    label: 'Gợi ý',
+                    icon: Icons.volume_up_rounded,
+                    color: AppColors.warning,
+                    foregroundColor: AppColors.textPrimary,
+                    onPressed: _playHint,
+                  ),
                 ),
-              ),
               Expanded(
                 child: Center(
                   child: Padding(

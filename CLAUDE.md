@@ -17,6 +17,13 @@ ký Bug/CR đang mở, tránh xử lý sai/trùng/bỏ sót.
 > - **Unit 16**: manifest ghi `wash`, băng đọc **"washing"** — cùng loại vấn đề.
 > - **10 từ số `one`…`ten` vẫn KHÔNG CÓ AUDIO** (SGK không đọc rời số nào) — đã loại hẳn khỏi mọi game
 >   (G01-G05/G08/G10) từ CR-034, không phải "còn thiếu sót" mà là quyết định có chủ ý.
+> - ✅ **ĐÃ XỬ LÝ (2026-09-01, CR-035)** — vấn đề nút "Gợi ý" G05/G06 Lớp 1 không kêu (vì
+>   `g05_sentence.json`/`g06_mindmap.json` Lớp 1 có `"audio": null` 100% item, xem CR-034/BUGS_CR.md
+>   để biết gốc vấn đề). Người dùng chọn KHÔNG vá audio theo `SPEC_Audio_MauCau_G05_G06.md` (16 file
+>   `sentence_pattern.mp3` đã cắt sẵn ở đó **vẫn chưa dùng tới**, còn để dành nếu sau này đổi ý) — thay
+>   vào đó: **bỏ hẳn G06 "Hoàn thành câu" khỏi Lớp 1** (`g06_mindmap.json` Lớp 1 rỗng, xem §4/§6 game
+>   checkpoint) + **ẩn nút "Gợi ý" G05** khi câu không có audio (mọi câu Lớp 1). Lớp 2 không đổi gì
+>   (audio thật, nút vẫn hoạt động). Chi tiết đầy đủ: `BUGS_CR.md` CR-035.
 > - Thư mục nguồn đã dọn: mọi bộ ảnh/audio cũ nằm trong `06_global_success/_XOA_TAY/` — **không dùng
 >   bất cứ thứ gì trong đó**.
 
@@ -354,9 +361,10 @@ assets/
                                                     # assets/data/ gốc, nội dung không đổi)
   data/lop1/units.json (đủ 16 unit) + data/lop1/games/g0{1,2,3,4,5,10}_*.json
                                                     # Lớp 1 — CR-034 (2026-08-28): đủ 16/16 unit
-                                                    # (trước đó chỉ Unit 1); g06_mindmap.json chỉ có
-                                                    # 12/16 unit (bỏ U01/U09/U11/U16, không có mẫu
-                                                    # khuyết-danh-từ phù hợp); g09_memory.json/
+                                                    # (trước đó chỉ Unit 1); g06_mindmap.json RỖNG
+                                                    # (`{"instances": []}`) từ CR-035 (2026-09-01) —
+                                                    # người dùng chọn bỏ hẳn G06 khỏi Lớp 1 thay vì vá
+                                                    # audio null (trước đó có 12/16 unit); g09_memory.json/
                                                     # g12_boss_quiz.json đủ 4 checkpoint mỗi loại
   content/lop2/UnitNN/{image,audio}/...   # mirror của 04_image+audio/02_Lop-2; audio/ có thêm
                                      # sentence_pattern.mp3 (Track "Mẫu câu" mỗi unit, dùng chung

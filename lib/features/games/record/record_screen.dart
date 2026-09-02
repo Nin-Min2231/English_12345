@@ -32,6 +32,11 @@ import '../../../services/audio_service.dart';
 /// hiện loading (nguyên nhân: `onStatus` dựa vào `_scores[_index] != null`
 /// để biết lượt đã có điểm, điểm CŨ còn sót lại làm nó tưởng lượt MỚI xong
 /// rồi); banner hướng dẫn đổi màu `infoDark` đậm + in đậm cho dễ đọc.
+/// CR-036: `_stopListening` tự chuyển `_isListening=false`/`_isScoring=true`
+/// NGAY khi bấm "Dừng ghi âm", không chờ callback `onStatus` (có thể trễ vài
+/// giây) mới báo — trước đó trong lúc chờ, nút vẫn hiện "Dừng ghi âm" và vẫn
+/// bấm được nên bé bấm lại nhiều lần vì tưởng chưa ăn; `onStatus`/`_onResult`
+/// vẫn chạy như cũ để lấy điểm thật khi có.
 class RecordScreen extends StatefulWidget {
   final UnitInfo unit;
   final List<FlashCard> items;
@@ -169,6 +174,16 @@ class _RecordScreenState extends State<RecordScreen> {
 
   void _stopListening() {
     if (!_isListening) return;
+    // Chuyển trạng thái NGAY khi bé bấm "Dừng ghi âm" — không chờ callback
+    // bất đồng bộ `onStatus` của speech_to_text (có thể trễ vài giây, xem
+    // class doc comment) mới báo. Thiếu bước này thì trong lúc chờ, nút vẫn
+    // hiện "Dừng ghi âm" và vẫn bấm được — bé không thấy phản hồi gì nên bấm
+    // lại nhiều lần (CR-036). Khóa nút + hiện `_ScoringOverlay` ngay lập tức;
+    // `onStatus`/`_onResult` phía dưới vẫn chạy bình thường để lấy điểm thật.
+    setState(() {
+      _isListening = false;
+      _isScoring = true;
+    });
     _speech.stop();
   }
 
