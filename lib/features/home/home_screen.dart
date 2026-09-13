@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
               final unlocked = progressRepo.isUnitUnlocked(progress, u.unitId,
                   sequential: !isTopic);
               final stars = progressRepo.totalStarsForUnit(progress, u.unitId);
-              // CR-036: Chủ đề bỏ G06 nên mẫu số phải tính theo game CÓ dữ liệu.
+              // CR-037: Chủ đề bỏ G06 nên mẫu số phải tính theo game CÓ dữ liệu.
               final maxStars = isTopic
                   ? progressRepo.maxStarsForUnit(
                       (t) => gameDefsByType[t]!.countFor(repo, u.unitId) > 0)

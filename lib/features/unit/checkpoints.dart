@@ -87,7 +87,7 @@ GameDef _bossQuizGameDef(Checkpoint cp) => GameDef(
       ),
     );
 
-/// CR-036 — Lật thẻ cho CHỦ ĐỀ: điều kiện mở khoá dùng [isCheckpointUnlocked]
+/// CR-037 — Lật thẻ cho CHỦ ĐỀ: điều kiện mở khoá dùng [isCheckpointUnlocked]
 /// (4 game lõi của CHÍNH chủ đề đó), KHÔNG dùng [isFunTimeUnlocked] như lớp
 /// 1-5. Lý do: isFunTimeUnlocked đòi hỏi hoàn tất MỌI game của CẢ 2 unit trong
 /// phạm vi ôn tập — chủ đề học tự do, không có "chủ đề liền trước" nên điều
@@ -112,7 +112,7 @@ GameDef _topicFunTimeGameDef(Checkpoint cp) => GameDef(
 /// Game bổ sung (nếu có) cho 1 unit cụ thể, ngoài [kUnitGames] (danh sách
 /// dùng chung cho mọi unit). afterUnit của Fun Time (2/6/10/14) và Boss Quiz
 /// (4/8/12/16) không bao giờ trùng nhau nên 1 unit chỉ có tối đa 1 checkpoint.
-/// CR-036 — thêm tham số [grade]. Lớp 1-5 giữ nguyên 100% hành vi cũ.
+/// CR-037 — thêm tham số [grade]. Lớp 1-5 giữ nguyên 100% hành vi cũ.
 List<GameDef> extraGamesForUnit(int grade, int unitId) {
   if (isTopicCourse(grade)) {
     // MỌI chủ đề đều có Lật thẻ + Boss Quiz của CHÍNH nó (fromUnit == toUnit).

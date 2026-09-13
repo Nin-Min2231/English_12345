@@ -20,7 +20,7 @@ class GradeOption {
   final String subtitle;
   final bool enabled;
 
-  /// CR-036 — icon riêng cho từng mục; mặc định = icon sách như cũ nên 5 mục
+  /// CR-037 — icon riêng cho từng mục; mặc định = icon sách như cũ nên 5 mục
   /// Lớp 1-5 không phải sửa gì.
   final IconData icon;
 
@@ -47,7 +47,7 @@ const kGradeOptions = [
   GradeOption(grade: 3, label: 'Lớp 3', subtitle: 'Sắp ra mắt', enabled: false),
   GradeOption(grade: 4, label: 'Lớp 4', subtitle: 'Sắp ra mắt', enabled: false),
   GradeOption(grade: 5, label: 'Lớp 5', subtitle: 'Sắp ra mắt', enabled: false),
-  // CR-036 — ĐỒNG CẤP với các lớp (yêu cầu PM), đặt cuối lưới để 5 lớp giữ
+  // CR-037 — ĐỒNG CẤP với các lớp (yêu cầu PM), đặt cuối lưới để 5 lớp giữ
   // nguyên vị trí quen thuộc.
   GradeOption(
       grade: kTopicCourseId,

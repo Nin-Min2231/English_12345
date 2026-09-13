@@ -1,4 +1,4 @@
-/// Định danh "khoá học" — Sprint 5 (CR-036, luồng "Chủ đề").
+/// Định danh "khoá học" — Sprint 5 (CR-037, luồng "Chủ đề").
 ///
 /// App khoá mọi thứ theo `int grade` từ Sprint 4 (đường dẫn asset/data, cột DB
 /// `grade` của tiến độ + huy hiệu, tham số của AudioService/WordImage). "Chủ đề"

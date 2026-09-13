@@ -13,7 +13,7 @@ class UnitInfo {
   final String phonics; // Chủ đề: CHUỖI RỖNG (không học theo âm)
   final int wordCount;
 
-  /// CR-036 — ảnh bìa chủ đề (vd "Topic01/image/_cover.png").
+  /// CR-037 — ảnh bìa chủ đề (vd "Topic01/image/_cover.png").
   /// Lớp 1-5 KHÔNG có trường này trong units.json ⇒ null. Đường dẫn tương đối
   /// giống mọi asset khác, ghép prefix bằng ContentRepository.asset().
   final String? cover;

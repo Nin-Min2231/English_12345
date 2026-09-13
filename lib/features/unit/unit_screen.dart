@@ -114,7 +114,7 @@ class _UnitScreenState extends State<UnitScreen> {
                   style: const TextStyle(
                       fontSize: 26, fontWeight: FontWeight.bold)),
               const SizedBox(height: AppSpacing.xs),
-              // CR-036: Chủ đề không có âm phonics -> hiện số từ thay vì dòng âm.
+              // CR-037: Chủ đề không có âm phonics -> hiện số từ thay vì dòng âm.
               Text(
                   unit.phonics.isEmpty
                       ? '${unit.wordCount} từ vựng trong chủ đề này'
@@ -133,7 +133,7 @@ class _UnitScreenState extends State<UnitScreen> {
                 ],
               // Sprint 3 — Fun Time (G09) / Boss Quiz (G12) chỉ xuất hiện
               // trên đúng 1 unit checkpoint, xem checkpoints.dart.
-              // CR-036: truyền thêm grade để biết lấy checkpoint của lớp hay của chủ đề
+              // CR-037: truyền thêm grade để biết lấy checkpoint của lớp hay của chủ đề
               for (final game in extraGamesForUnit(unit.grade, unit.unitId))
                 if (game.countFor(widget.repo, unit.unitId) > 0) ...[
                   _gameRowFor(context, game, progress, unit),

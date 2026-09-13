@@ -49,7 +49,7 @@ flutter:
     - assets/data/lop2/games/
     - assets/data/lop1/
     - assets/data/lop1/games/
-    # CR-036 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart).
+    # CR-037 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart).
     - assets/data/chude/
     - assets/data/chude/games/
     - assets/content/lop2/Unit01/
@@ -148,7 +148,7 @@ flutter:
     - assets/content/lop1/Unit16/
     - assets/content/lop1/Unit16/audio/
     - assets/content/lop1/Unit16/image/
-    # CR-036 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart). Đủ 3 dòng
+    # CR-037 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart). Đủ 3 dòng
     # mỗi chủ đề (thư mục gốc + audio/ + image/) giống đúng quy ước lop1/lop2.
     - assets/content/chude/Topic01/
     - assets/content/chude/Topic01/image/

@@ -13,7 +13,7 @@ class BadgeDef {
   final IconData icon;
   final int afterUnit;
 
-  /// CR-036 — null = huy hiệu của chương trình lớp (1-5, hiện "Sau Unit N");
+  /// CR-037 — null = huy hiệu của chương trình lớp (1-5, hiện "Sau Unit N");
   /// kTopicCourseId = huy hiệu của luồng Chủ đề.
   final int? courseId;
 
@@ -65,7 +65,7 @@ const kBadgeDefs = [
     icon: Icons.auto_awesome_rounded,
     afterUnit: 16,
   ),
-  // ---- CR-036: 15 huy hiệu Chủ đề
+  // ---- CR-037: 15 huy hiệu Chủ đề
   BadgeDef(
       badgeId: 'badge_topic_01',
       name: 'Hoạ Sĩ Nhí',
