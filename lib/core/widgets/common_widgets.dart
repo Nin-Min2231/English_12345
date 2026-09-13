@@ -136,10 +136,10 @@ class GameAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // CR-036: luồng Chủ đề hiện "Chủ đề • <tên chủ đề>" thay cho "Lớp N • Unit N".
-    final topic = isTopicCourse(grade);
+    final isTopic = isTopicCourse(grade);
     final parts = [
       courseLabel(grade),
-      topic ? unitLabel : 'Unit $unitLabel',
+      isTopic ? unitLabel : 'Unit $unitLabel',
       if (gameName != null) gameName!,
     ];
     return Text(

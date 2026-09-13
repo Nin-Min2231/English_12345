@@ -240,7 +240,7 @@ class _FillLetterScreenState extends State<FillLetterScreen>
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Điền chữ'),
       ),
       body: Stack(

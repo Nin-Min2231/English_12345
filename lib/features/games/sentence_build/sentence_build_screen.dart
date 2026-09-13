@@ -247,7 +247,7 @@ class _SentenceBuildScreenState extends State<SentenceBuildScreen>
         foregroundColor: AppColors.textPrimary,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Lắp ráp câu'),
       ),
       body: Stack(

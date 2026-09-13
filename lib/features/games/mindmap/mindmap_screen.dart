@@ -174,7 +174,7 @@ class _MindmapScreenState extends State<MindmapScreen>
         foregroundColor: AppColors.textPrimary,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Hoàn thành câu'),
       ),
       body: Stack(

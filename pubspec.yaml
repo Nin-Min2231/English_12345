@@ -148,34 +148,50 @@ flutter:
     - assets/content/lop1/Unit16/
     - assets/content/lop1/Unit16/audio/
     - assets/content/lop1/Unit16/image/
-    # CR-036 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart).
+    # CR-036 — luồng "Chủ đề" (15 chủ đề, xem lib/data/course.dart). Đủ 3 dòng
+    # mỗi chủ đề (thư mục gốc + audio/ + image/) giống đúng quy ước lop1/lop2.
+    - assets/content/chude/Topic01/
     - assets/content/chude/Topic01/image/
     - assets/content/chude/Topic01/audio/
+    - assets/content/chude/Topic02/
     - assets/content/chude/Topic02/image/
     - assets/content/chude/Topic02/audio/
+    - assets/content/chude/Topic03/
     - assets/content/chude/Topic03/image/
     - assets/content/chude/Topic03/audio/
+    - assets/content/chude/Topic04/
     - assets/content/chude/Topic04/image/
     - assets/content/chude/Topic04/audio/
+    - assets/content/chude/Topic05/
     - assets/content/chude/Topic05/image/
     - assets/content/chude/Topic05/audio/
+    - assets/content/chude/Topic06/
     - assets/content/chude/Topic06/image/
     - assets/content/chude/Topic06/audio/
+    - assets/content/chude/Topic07/
     - assets/content/chude/Topic07/image/
     - assets/content/chude/Topic07/audio/
+    - assets/content/chude/Topic08/
     - assets/content/chude/Topic08/image/
     - assets/content/chude/Topic08/audio/
+    - assets/content/chude/Topic09/
     - assets/content/chude/Topic09/image/
     - assets/content/chude/Topic09/audio/
+    - assets/content/chude/Topic10/
     - assets/content/chude/Topic10/image/
     - assets/content/chude/Topic10/audio/
+    - assets/content/chude/Topic11/
     - assets/content/chude/Topic11/image/
     - assets/content/chude/Topic11/audio/
+    - assets/content/chude/Topic12/
     - assets/content/chude/Topic12/image/
     - assets/content/chude/Topic12/audio/
+    - assets/content/chude/Topic13/
     - assets/content/chude/Topic13/image/
     - assets/content/chude/Topic13/audio/
+    - assets/content/chude/Topic14/
     - assets/content/chude/Topic14/image/
     - assets/content/chude/Topic14/audio/
+    - assets/content/chude/Topic15/
     - assets/content/chude/Topic15/image/
     - assets/content/chude/Topic15/audio/

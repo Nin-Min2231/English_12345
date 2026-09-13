@@ -181,7 +181,7 @@ class _ListenPickScreenState extends State<ListenPickScreen>
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Nghe chọn hình'),
       ),
       body: Stack(

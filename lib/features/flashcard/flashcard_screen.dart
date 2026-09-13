@@ -47,7 +47,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Flashcard'),
         actions: [
           // Flashcard không có đúng/sai — hoàn thành = 3 sao cố định.

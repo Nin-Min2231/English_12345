@@ -94,7 +94,12 @@ class _BadgeCard extends StatelessWidget {
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               const SizedBox(height: AppSpacing.xs),
+              // CR-036: subtitle chủ đề dài hơn hẳn "Sau Unit N" cũ (vd "Chủ đề
+              // Thứ, ngày, tháng") — chặn tràn 2 dòng, giống mẫu _UnitCard.
               Text(badge.caption,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontSize: 12, color: AppColors.textSecondary)),
             ],

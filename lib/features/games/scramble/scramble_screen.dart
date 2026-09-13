@@ -272,7 +272,7 @@ class _ScrambleScreenState extends State<ScrambleScreen>
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Xếp chữ'),
       ),
       body: Stack(
