@@ -1603,3 +1603,111 @@ Lớp 1 Unit 1 sau khi nội dung Lớp 1 được làm lại toàn bộ (2026-0
   `05_Build_APK/Nin&Min's English-debug-2026-09-01-2-cr036.apk` — **chưa test trên điện thoại thật**,
   cần người dùng xác nhận: bấm "Dừng ghi âm" hiện loading NGAY (không có khoảng trễ bấm-được-lại), thử
   bấm nhanh nhiều lần không còn gây lỗi/nhầm lẫn, điểm số vẫn ra đúng như trước (Lớp 1 lẫn Lớp 2).
+
+## CR-037 (2026-09-13) — Thêm luồng học "Chủ đề" (15 chủ đề, 238 từ), đồng cấp với Lớp 1-5
+
+> ⚠️ **Lưu ý số CR**: tài liệu yêu cầu gốc — `02_Phan_tich/00_Chu_de/SPEC_ChuDe_ClaudeCode.md` — tự
+> đặt tên là "CR-036" (viết bởi 1 phiên Cowork khác, không đối chiếu lại `BUGS_CR.md` trước khi đặt
+> số). Số đó **đã dùng** cho CR-036 ở trên (fix G08 "Dừng ghi âm", 2026-09-01, có trước). Toàn bộ
+> code/tài liệu app dùng **CR-037** cho luồng Chủ đề để khỏi 2 CR khác nhau trùng số — tài liệu SPEC
+> gốc giữ nguyên tên cũ, chỉ thêm 1 dòng changelog ghi chú số thật đã dùng (xem mục 12 file đó).
+
+**Người dùng yêu cầu**: đọc `SPEC_ChuDe_ClaudeCode.md` và thực hiện toàn bộ, đúng thứ tự phase
+P0→P6 (mục 7 SPEC), mỗi phase 1 commit, dừng sau P2 và P5 để test hồi quy Lớp 1/2 (TC-R01…R09).
+Chốt sẵn 4 điểm mục 11 (khỏi hỏi lại PM): **RS-01** xác nhận 238 từ/15 chủ đề (không phải 202/14 như
+dòng tiêu đề Excel cũ); **RS-03** giữ chủ đề 6 (Thứ/ngày/tháng) trong G02 dù dễ hơn các chủ đề khác;
+**RS-06** dùng nguyên 238 câu trong `sentences.json`, không sửa; **RS-09** giữ nguyên cách cấm 7 cặp
+số `-teen`/`-ty` xuất hiện chung câu hỏi. RS-05/RS-08 không đụng.
+
+### Kiến trúc — "Chủ đề" là 1 `grade` giả (grade=9)
+
+`lib/data/course.dart` (file mới) — `kTopicCourseId = 9`, `isTopicCourse(grade)`,
+`courseFolder(grade)` (`'chude'` thay vì `'lop$grade'`), `courseLabel(grade)` (`'Chủ đề'` thay vì
+`'Lớp N'`). Chọn giá trị 9 (không phải 0/-1/99): còn chỗ cho Lớp 6-8 sau này, là số dương hợp lệ cho
+mọi phép `%` (`AppColors.unitColor`), và nếu lỡ quên 1 nhánh `isTopicCourse` ở đâu đó thì UI hiện rõ
+"Lớp 9" — sai dễ phát hiện ngay khi test thay vì âm thầm sai. Nhờ vậy: **không cần migrate DB** (cột
+`grade` có sẵn từ Sprint 4, chỉ thêm 1 giá trị mới), **không đổi shape JSON** (11 file JSON của Chủ
+đề giống hệt Lớp 1/2, chỉ `UnitInfo` thêm 1 field optional `cover`), **không đụng thư mục cũ**
+(`assets/{data,content}/chude/` mới, không sửa `lop1/`/`lop2/`).
+
+### P0 (`e056bdf`) — Copy ảnh + dữ liệu JSON
+
+Giải nén `04_image+audio/03_Chu-de/ChuDe_noi_dung.zip` (đã sinh sẵn từ 1 phiên Cowork khác trước đó:
+253 ảnh PNG 512×512 vector tự vẽ + 9 file JSON game + `units.json`/`vocabulary.json`, không có bản
+quyền SGK). `python _tools/verify_data.py` → `LOI: 0 CANH BAO: 0`. Copy vào
+`assets/{data,content}/chude/`, khai báo `image/` trong `pubspec.yaml` (chưa khai `audio/` vì chưa
+sinh — Flutter fail build nếu khai thư mục rỗng). `flutter pub get` sạch.
+
+### P1 (`e349ae6`) — Sinh 298 file audio TTS
+
+Không có băng SGK cho 238 từ tự do (khác Lớp 1/2 cắt từ đĩa Global Success) → sinh mới bằng
+`edge-tts` (`en-GB-SoniaNeural` cho từ, `en-GB-RyanNeural` cho câu mẫu, tốc độ -25%/-15%, chuẩn hoá
+`loudnorm -16 LUFS` 44.1kHz mono — trùng thông số bộ Lớp 1). Script
+`_tools/gen_chude_audio.py` báo `ok=298 loi=0`, không cảnh báo độ dài bất thường. **Kiểm tra độc lập
+bằng `faster-whisper base.en`** (không thay thế nghe tay) trên 20 từ khó (SPEC mục 6.5) + 7 cặp số
+`-teen`/`-ty`: 32/34 khớp rõ ràng, **cả 7 cặp số đều đọc đúng không lẫn lộn** (model tự chuẩn hoá
+thành chữ số nhưng luôn đúng, vd `thirteen`→"13" không phải "30"); 2 từ đáng nghe lại thủ công
+(`colour` — STT ra "color", nhiều khả năng chỉ là chuẩn hoá chính tả Anh-Mỹ; `guava` — STT ra
+"quava") — đã ghi vào `04_image+audio/03_Chu-de/README_ChuDe.md`, **PM vẫn cần tự nghe tay tối
+thiểu 20-25 file** theo đúng checklist SPEC (STT không thay thế được). Khai báo `audio/` trong
+`pubspec.yaml`.
+
+### P2 (`b8f5af0`) — Tầng dữ liệu
+
+`content_repository.dart` (`asset()`/`load()` đổi `'lop$grade'` → `courseFolder(grade)`),
+`models.dart` (`UnitInfo` thêm `cover` optional + getter `isTopic`/`shortLabel`),
+`progress_repository.dart` (`isUnitUnlocked` thêm `{sequential = true}` — Chủ đề truyền `false` vì
+học tự do không khoá tuần tự; thêm `maxStarsForUnit(hasContent)` — tính đúng mẫu số sao khi 1
+unit/chủ đề thiếu dữ liệu 1 game, vd G06 rỗng ở Chủ đề). Mọi thay đổi là nhánh mới/tham số có default
+= hành vi cũ → **không đổi hành vi Lớp 1/2**. `flutter analyze` sạch.
+
+### P3 (`cb9fc20`) — Màn hình
+
+`grade_select_screen.dart` (thêm ô "Chủ đề" cuối lưới, `GradeOption` thêm field `icon`),
+`home_screen.dart` (tiêu đề "Chọn chủ đề", không khoá tuần tự, mẫu số sao loại trừ G06, thẻ có ảnh
+bìa + ẩn dòng phonics khi rỗng), `unit_screen.dart` (AppBar hiện tên chủ đề qua `unit.shortLabel`,
+`extraGamesForUnit` thêm tham số `grade`), `checkpoints.dart` (`_topicFunTimeGameDef` — Lật thẻ dùng
+`isCheckpointUnlocked` thay vì `isFunTimeUnlocked` vì chủ đề học tự do không có "chủ đề liền trước";
+mọi chủ đề đều có cả Lật thẻ + Boss Quiz của chính nó), `common_widgets.dart`
+(`GameAppBarTitle` hiện "Chủ đề • tên" thay vì "Lớp N • Unit N"), 3 màn game checkpoint
+(letter_hunt/memory_match/boss_quiz) đổi nhãn unit.
+
+### P4 (`d2de726`) — Huy hiệu
+
+`badge_defs.dart` thêm field `courseId`/`subtitle`/getter `caption` + 15 `BadgeDef` chủ đề (giữ
+nguyên 4 cái cũ, không đổi `badgeId`); `badges_screen.dart` lọc danh mục hiển thị theo `grade` đang
+xem (null = tất cả, chỉ lọc HIỂN THỊ, không đụng DB nên không mất huy hiệu đã đạt).
+
+### P5 (`a0d76e4`, `ffc9554`) — Rà soát trước build
+
+Chạy `/code-review` mức medium (8 góc nhìn: line-scan, removed-behavior, cross-file, reuse,
+simplification, efficiency, altitude, conventions) trên toàn bộ diff P0-P4. **3 phát hiện thật đã
+sửa**:
+1. **Bug** — 7/10 màn game (G01/G02/G03/G04/G05/G06/G08) quên đổi sang `unit.shortLabel` (chỉ
+   UnitScreen + G09/G10/G12 được sửa trong code mẫu gốc của SPEC) — AppBar Chủ đề hiện số unit thô
+   (vd "Chủ đề • 3 • Flashcard") thay vì tên chủ đề ("Chủ đề • Động vật • Flashcard"). An toàn cho
+   Lớp 1-5 vì `shortLabel` trả về đúng `'$unitId'` khi không phải Chủ đề.
+2. `pubspec.yaml` thiếu dòng thư mục gốc `TopicNN/` (chỉ có `image/`+`audio/`) khác quy ước
+   lop1/lop2 (đủ 3 dòng) — đã thêm cho đủ 15 chủ đề.
+3. Đổi tên biến `topic` → `isTopic` (quy ước boolean `is/has/can`, `CLAUDE.md` mục 6); thêm
+   `maxLines`/`overflow` cho phụ đề huy hiệu Chủ đề (dài hơn hẳn "Sau Unit N" cũ).
+
+5 phát hiện khác (trùng lặp `_funTimeGameDef`/`_topicFunTimeGameDef`, trùng ternary nhãn unit ở
+boss_quiz/memory_match, `maxStarsForUnit` trùng logic `maxStarsPerUnit`, tên tham số `sequential`,
+tính lại `maxStars` mỗi grid-cell) **cố ý không sửa** — đều khớp đúng code mẫu đã duyệt trong SPEC,
+sửa sẽ lệch khỏi tài liệu mà không được yêu cầu; đã ghi rõ trong review để biết nếu sau này cần dọn.
+
+`flutter analyze`/`dart format`/`pub get` sạch xuyên suốt P0-P5. Build APK debug:
+`05_Build_APK/Nin&Min's English-debug-2026-09-13-2-chude-p3p4p5.apk` (bản trước đó — chỉ P0-P2 —
+là `...-1-chude-p0p1p2.apk`; commit `ffc9554` đổi CR-036→CR-037 chỉ sửa comment, không cần build
+lại APK).
+
+### Trạng thái — CHƯA TEST TRÊN ĐIỆN THOẠI THẬT
+
+**Chưa có ai chạy TC-001…026 (mục 9.1, chức năng Chủ đề) và TC-R01…R09 (mục 9.2, hồi quy Lớp
+1/2)** trên máy thật — môi trường làm việc không có emulator/thiết bị Android kết nối
+(`flutter emulators`/`adb devices` đều rỗng), nên toàn bộ kiểm chứng ở trên chỉ ở mức code/dữ liệu
+(đọc lại từng đường dẫn khoá/mở, đối chiếu dữ liệu JSON thật, `/code-review`), **không phải xác nhận
+UI/gameplay thật**. Việc tiếp theo bắt buộc: cài
+`Nin&Min's English-debug-2026-09-13-2-chude-p3p4p5.apk` lên điện thoại đang có tiến độ Lớp 1/2 thật
+(không gỡ cài lại) và chạy đủ 35 test case mục 9 của SPEC.

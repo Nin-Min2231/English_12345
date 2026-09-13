@@ -237,6 +237,37 @@ token G05) PASS toàn bộ. Đổi quy ước đặt tên file build sang bắt 
 thật** (người dùng xác nhận 2026-08-28, gồm cả audio Unit 1, Unit 2-16, và Lật thẻ sau Unit 2 với
 `isFunTimeUnlocked` mới). Lớp 1 coi như hoàn tất. Chi tiết đầy đủ: `BUGS_CR.md` CR-034.
 
+**CR-035 (2026-09-01)** — bỏ hẳn G06 "Hoàn thành câu" khỏi Lớp 1 (chỉ sửa dữ liệu
+`g06_mindmap.json` rỗng, cơ chế `hasContent`/`countFor==0` có sẵn từ CR-028/033 tự lo phần ẩn game)
++ ẩn nút "Gợi ý" G05 khi câu không có audio (per-item, Lớp 2 không đổi hành vi). Chi tiết đầy đủ:
+`BUGS_CR.md` CR-035.
+
+**CR-036 (2026-09-01)** — G08 Ghi âm: "Dừng ghi âm" bấm nhiều lần gây khó hiểu cho bé, mọi lớp.
+`_stopListening()` (`record_screen.dart`) tự khoá nút + hiện overlay loading **ngay khi bấm** thay vì
+chờ callback bất đồng bộ của `speech_to_text` (trễ tùy thiết bị, trước đó trong lúc chờ nút vẫn bấm
+được). Dùng chung 1 file mọi lớp nên áp dụng ngay cho cả Lớp 1/2. Chi tiết đầy đủ: `BUGS_CR.md`
+CR-036.
+
+**CR-037 (2026-09-13) — Thêm luồng học "Chủ đề" (15 chủ đề, 238 từ), đồng cấp với Lớp 1-5.**
+> ⚠️ Tài liệu yêu cầu gốc (`02_Phan_tich/00_Chu_de/SPEC_ChuDe_ClaudeCode.md`) tự đặt tên là "CR-036"
+> (viết bởi 1 phiên khác, trùng số với CR-036 ở trên) — app dùng **CR-037** để khỏi 2 CR trùng số,
+> xem ghi chú đầu mục `BUGS_CR.md` CR-037.
+
+Kiến trúc: "Chủ đề" là **1 giá trị `grade` giả** (`kTopicCourseId = 9`, `lib/data/course.dart`) —
+đồng cấp với Lớp 1-5 nhưng tái dùng NGUYÊN mọi máy móc đã có theo `grade` (đường dẫn asset/data, cột
+DB `grade` của tiến độ + huy hiệu) thay vì thêm 1 chiều dữ liệu mới → **không migrate DB**, **không
+đổi shape JSON**. Đã code đủ P0→P5 (9 commit `feat(chude):`/`fix(chude):`, xem `BUGS_CR.md` CR-037
+để biết chi tiết từng phase): copy 253 ảnh + sinh 298 audio TTS (`edge-tts`, kiểm tra độc lập bằng
+`faster-whisper`) + tầng dữ liệu (`course.dart` mới) + màn hình (Chọn chủ đề, Unit, Lật thẻ/Boss Quiz
+riêng mỗi chủ đề — dùng `isCheckpointUnlocked` thay vì `isFunTimeUnlocked` vì học tự do không có
+"chủ đề liền trước") + 15 huy hiệu chủ đề + `/code-review` mức medium (sửa 3 phát hiện thật, trong
+đó có bug 7 màn game quên đổi nhãn AppBar sang tên chủ đề). `flutter analyze`/`dart format`/`pub get`
+sạch xuyên suốt. Build APK debug mới nhất:
+`05_Build_APK/Nin&Min's English-debug-2026-09-13-2-chude-p3p4p5.apk` — **CHƯA TEST trên điện thoại
+thật** (môi trường code không có emulator/thiết bị) — việc tiếp theo ưu tiên #1 là chạy đủ
+TC-001…026 + TC-R01…R09 (mục 9 của SPEC) trên máy thật rồi mới làm P6 (đã làm 1 phần: cập nhật tài
+liệu này + `BUGS_CR.md`).
+
 **Sprint 1 (P0) đã xong** trước đó, đã build thật và cài lên điện thoại test:
 - Nạp JSON config từ `assets/data` (data-driven) — vẫn giữ, không đổi sang Drift cho content tĩnh.
 - Luồng đầy đủ: **ProfileSelect** (F02, tạo/chọn hồ sơ trẻ) → **Home** (F01, bản đồ 16 unit có sao + khóa) → **Unit** (F03, 3 game mở tuần tự) → 3 game P0 (G01 Flashcard, G02 Nghe chọn hình, G03 Điền chữ) → trả sao về lưu **Drift** (F14).
@@ -297,28 +328,39 @@ lib/
   core/widgets/common_widgets.dart  # PrimaryButton, SecondaryButton, StarBar, WordImage
                                      # (Sprint 4: thêm field `grade` bắt buộc),
                                      # AppScaffold, AnswerFeedbackOverlay (đúng/sai),
-                                     # GameAppBarTitle ("Lớp X • Unit Y • Tên game", CR-029),
+                                     # GameAppBarTitle ("Lớp X • Unit Y • Tên game", CR-029;
+                                     # CR-037: "Chủ đề • tên chủ đề" khi isTopicCourse(grade)),
                                      # tileGridRowHeight() (co hàng lưới 2 cột theo ngân sách
                                      # chiều cao cố định — dùng ở G04/G05, CR-029),
                                      # WrongAnswerLockMixin + WrongAnswerLockOverlay (khóa màn
                                      # hình + đếm lùi sau 3 lần sai liên tiếp, CR-030 — dùng ở
                                      # G02/G03/G04/G05/G06/G10/G12, KHÔNG dùng ở G01/G08/G09)
   core/widgets/parent_gate.dart # F15 — showParentGate(), confirmDeleteProfile() (2026-07-23)
+  data/course.dart              # CR-037 (MỚI) — kTopicCourseId=9, isTopicCourse(grade),
+                                 # courseFolder(grade) ('chude' hay 'lop$grade'), courseLabel(grade)
+                                 # ('Chủ đề' hay 'Lớp N'). File riêng (không nhét vào
+                                 # content_repository.dart) để models.dart dùng được không tạo
+                                 # import vòng models ↔ content_repository.
   data/models/models.dart      # UnitInfo (Sprint 4: thêm field `grade`, gán bởi loader —
-                                # KHÔNG đọc từ units.json), FlashCard, ListenQuestion, FillItem,
+                                # KHÔNG đọc từ units.json; CR-037: thêm field `cover` optional —
+                                # null cho Lớp 1-5 — + getter `isTopic`/`shortLabel` (tên chủ đề
+                                # thay vì số unit)), FlashCard, ListenQuestion, FillItem,
                                 # ScrambleItem, SentenceItem, MindmapOption, MindmapItem,
                                 # MemoryPairItem (G09), WordHuntQuestion (G10, đổi từ
                                 # HuntLetterItem — CR-020), BossQuizQuestion/Option (G12)
   data/content_repository.dart # Sprint 4: `load({required int grade})` + field `grade` trên
                                 # instance; `asset({grade, relativePath})` là hàm THUẦN (không
-                                # còn static const assetBase) — đọc `assets/data/lop$grade/...`;
-                                # mọi đọc file game (`gNN_*.json`) qua `_readOptionalGame()`
+                                # còn static const assetBase) — đọc `assets/data/lop$grade/...`
+                                # (CR-037: đổi thành `assets/data/${courseFolder(grade)}/...` —
+                                # Chủ đề đọc `assets/data/chude/...`); mọi đọc file game
+                                # (`gNN_*.json`) qua `_readOptionalGame()`
                                 # (file thiếu -> instances rỗng, KHÔNG ném lỗi — bắt buộc vì Lớp
                                 # 1 Unit 1 chưa có g09/g12); nạp JSON -> map theo unit_id
                                 # (huntByUnit là Map<int,List<WordHuntQuestion>> — CR-020)
   data/db/app_database.dart    # Drift: Profiles, LessonProgressTable, EarnedBadges — cả 2 bảng
-                                # sau có thêm cột `grade` (Sprint 4, default 2, schemaVersion 3)
-                                # (+ .g.dart sinh ra)
+                                # sau có thêm cột `grade` (Sprint 4, default 2, schemaVersion 3).
+                                # CR-037 KHÔNG migrate thêm — Chủ đề chỉ dùng thêm 1 GIÁ TRỊ mới
+                                # (grade=9) của cột đã có, schemaVersion vẫn 3. (+ .g.dart sinh ra)
   data/repositories/
     profile_repository.dart    # watchProfiles(), create(), update(), delete() (F15, 2026-07-23;
                                 # delete() xóa cả EarnedBadges từ Sprint 3)
@@ -327,7 +369,12 @@ lib/
                                 # TẠI QUERY) — mọi hàm thuần còn lại (isUnitUnlocked,
                                 # isGameUnlocked, isCheckpointUnlocked, isFunTimeUnlocked,
                                 # starsFor, totalStarsForUnit) KHÔNG cần `grade` vì hoạt động
-                                # trên list `progress` đã được lọc sẵn theo lớp
+                                # trên list `progress` đã được lọc sẵn theo lớp. CR-037:
+                                # isUnitUnlocked thêm `{bool sequential = true}` (Chủ đề truyền
+                                # false — học tự do, mọi chủ đề luôn mở); thêm
+                                # maxStarsForUnit(hasContent) — mẫu số sao ĐÚNG khi 1 unit/chủ đề
+                                # thiếu dữ liệu 1 game (Chủ đề không có G06); `maxStarsPerUnit` cũ
+                                # giữ nguyên cho Lớp 1-5 (không sửa, xem RS-05 SPEC CR-037)
     badge_repository.dart      # Sprint 3 — watchForProfile()/award() (Sprint 4: thêm `grade`,
                                 # cùng lý do progress_repository.dart — badgeId dùng chung mọi lớp)
   services/audio_service.dart  # just_audio, singleton, kiểm tra SettingsService.soundOn;
@@ -336,18 +383,29 @@ lib/
   services/settings_service.dart  # F15 — âm thanh on/off, độ khó easy/hard (2026-07-23)
   features/
     grade/grade_select_screen.dart  # Sprint 4 — SCR-00 "Chọn lớp", đứng giữa ProfileSelect và
-                                     # Home; GradeOption/kGradeOptions (mô phỏng pattern GameDef)
+                                     # Home; GradeOption/kGradeOptions (mô phỏng pattern GameDef).
+                                     # CR-037: GradeOption thêm field `icon`; kGradeOptions thêm
+                                     # mục "Chủ đề" (grade=kTopicCourseId) ở CUỐI danh sách
     profile/profile_select_screen.dart   # F02 — chọn/tạo hồ sơ; chạm giữ để sửa/xóa (F15).
                                           # Sprint 4: bỏ field `repo` (chưa có lớp lúc này),
                                           # `_openProfile` đi tới GradeSelectScreen, không phải Home
     settings/settings_screen.dart  # F15 — cài đặt + xóa hồ sơ. Sprint 4: bỏ field `repo` (cùng
                                     # lý do trên)
     badges/badge_defs.dart, badges_screen.dart  # Sprint 3 — F13/G12, xem huy hiệu đã/chưa đạt.
-                                                 # Sprint 4: BadgesScreen thêm field `grade` bắt buộc
+                                                 # Sprint 4: BadgesScreen thêm field `grade` bắt buộc.
+                                                 # CR-037: BadgeDef thêm field `courseId` (null=lớp,
+                                                 # kTopicCourseId=chủ đề)/`subtitle`/getter `caption`
+                                                 # + hàm topicBadgeId(); thêm 15 BadgeDef chủ đề
+                                                 # (giữ nguyên 4 cái cũ, không đổi badgeId);
+                                                 # BadgesScreen lọc danh mục hiển thị theo `grade`
+                                                 # đang xem (chỉ lọc HIỂN THỊ, không đụng DB)
     home/  flashcard/
     unit/unit_screen.dart, game_defs.dart  # F03; kUnitGames = danh sách game/unit (mọi unit)
     unit/checkpoints.dart  # Sprint 3 — Lật thẻ/Boss Quiz chỉ gắn 1 unit cụ thể, không phải
-                            # kUnitGames; extraGamesForUnit()
+                            # kUnitGames; extraGamesForUnit(grade, unitId) — CR-037 thêm tham
+                            # số grade; nhánh Chủ đề trả về CẢ Lật thẻ (_topicFunTimeGameDef,
+                            # dùng isCheckpointUnlocked thay vì isFunTimeUnlocked vì chủ đề học
+                            # tự do không có "chủ đề liền trước") + Boss Quiz cho MỖI chủ đề
     games/listen_pick/  games/fill_letter/  games/scramble/
     games/sentence_build/  games/mindmap/  # G05, G06 (Sprint 2 Phase 2, 2026-07-23)
     games/record/record_screen.dart  # G08 ghi âm + nhận diện giọng nói tự chấm điểm (CR-018)
@@ -372,6 +430,18 @@ assets/
   content/lop1/UnitNN/{image,audio}/...   # mirror của 04_image+audio/01_Lop-1/UnitNN, đủ 16 unit
                                      # (CR-034) — KHÔNG unit nào có sentence_pattern.mp3 (G05 Lớp 1
                                      # audio: null mọi unit, đã xác nhận không phải thiếu riêng Unit1)
+  # CR-037 (2026-09-13) — luồng "Chủ đề", đồng cấp với lopN nhưng KHÔNG phải 1 "lớp" —
+  # courseFolder(9) = 'chude' (lib/data/course.dart).
+  data/chude/{units,vocabulary}.json + data/chude/games/g0{1,2,3,4,5,6,9}_*.json,
+  g10_letter_hunt.json, g12_boss_quiz.json         # 15 chủ đề, 238 từ. g06_mindmap.json RỖNG
+                                                    # (`{"instances": []}` — Chủ đề bỏ hẳn G06,
+                                                    # giống cách Lớp 1 làm ở CR-035). units.json
+                                                    # có thêm field `cover` (KHÔNG có ở lop1/lop2)
+  content/chude/TopicNN/{image,audio}/...   # mirror của 04_image+audio/03_Chu-de/TopicNN — ảnh
+                                     # vector tự vẽ (không bản quyền SGK, khác lop1/lop2), audio
+                                     # sinh bằng TTS (`edge-tts`, xem mục 9) — mỗi câu G05 có audio
+                                     # RIÊNG (`sentence_T###.mp3`), KHÔNG dùng chung 1 file/unit
+                                     # như lop1/lop2's sentence_pattern.mp3
   sfx/correct.mp3, wrong.mp3          # âm hiệu ứng đúng/sai (đã có 2026-07-23) — dùng chung mọi
                                      # lớp, không nằm trong lopN/
 ```
@@ -383,15 +453,21 @@ DB tiến độ/hồ sơ (SQLite qua Drift) nằm trong app documents dir của 
 
 Đường dẫn asset trong JSON là **tương đối** (vd `Unit01/image/pasta.png`); prefix bundle (Sprint 4)
 = `assets/content/lop$grade/` (hàm `ContentRepository.asset({grade, relativePath})` — không còn
-static const `assetBase`, phải truyền `grade` rõ ràng mỗi lần gọi).
+static const `assetBase`, phải truyền `grade` rõ ràng mỗi lần gọi). **CR-037**: hàm đổi thành
+`assets/content/${courseFolder(grade)}/` — với Chủ đề (`grade=9`) ra `assets/content/chude/...`.
 
 **Quan trọng — đồng bộ ảnh/audio (xem CR-001 trong `BUGS_CR.md`)**: `assets/content/lopN/` là bản
 **copy thủ công** của `../04_image+audio/0N_Lop-N/`, KHÔNG tự động đồng bộ. Sửa/thay ảnh hoặc audio
 gốc xong **PHẢI copy lại đè vào `assets/content/lopN/UnitNN/...` tương ứng rồi build lại** — nếu
-không, app vẫn chạy bản cũ dù nguồn đã đổi.
+không, app vẫn chạy bản cũ dù nguồn đã đổi. **`assets/content/chude/` (CR-037) cùng quy tắc** — bản
+copy thủ công của `../../04_image+audio/03_Chu-de/`, không tự đồng bộ.
 
 ## 5. Định dạng JSON config (quan trọng khi thêm game)
 
+- `units.json`: `units[]` = `{unit_id, theme, phonics, word_count}` — **CR-037 (Chủ đề)** thêm 1
+  field optional `cover` (vd `"Topic01/image/_cover.png"`, ảnh bìa hiện trên thẻ ở màn "Chọn chủ đề")
+  và `phonics` luôn là **chuỗi rỗng** `""` (Chủ đề không học theo âm) — lop1/lop2 KHÔNG có `cover`
+  (`UnitInfo.cover` = null) và `phonics` luôn có giá trị thật.
 - `g01_flashcard.json`: `instances[].config.cards[]` = `{word_id, word, ipa, meaning_vi, image, audio}`.
 - `g02_listen_pick.json`: `instances[].config.questions[]` = `{word_id, prompt_audio, options[{word_id,image}], answer_idx}`.
 - `g03_fill_letter.json`: `instances[].config.items[]` = `{word_id, word, image, audio, hidden_idx[], answer, distractors[]}` (digraph `sh`/`er` tính 1 "ô" nhưng vẫn chiếm 2 index liền nhau trong `hidden_idx`). **Mỗi từ có 3 lượt liên tiếp** (2026-07-23, CR-010). **Số ô ẩn theo độ dài từ** (2026-07-26, CR-020): từ <4 chữ cái ẩn 1 ô/lượt (như cũ); từ ≥4 chữ cái ẩn **2 ô cùng lúc/lượt**, vị trí 2 ô chọn ngẫu nhiên trong các ô của từ nên **`hidden_idx` có thể KHÔNG liền nhau** (vd `[2,4]`) — `answer`/`distractors` khi đó dài 2-3 ký tự tùy có dính ô digraph hay không; `distractors` sinh riêng theo từng lượt (không còn dùng chung cho cả 3 lượt như từ <4 chữ cái, vì độ dài có thể khác nhau giữa các lượt) và LUÔN là chữ đơn (2026-07-26, CR-023 — trước đó CR-020 từng dùng chuỗi cùng độ dài với `answer` cho 1 lượt chạm gộp, nay `fill_letter_screen.dart` cho điền RIÊNG từng ký tự 1 lượt chạm nên khay chữ phải là chữ đơn: `answer.split('') + distractors`). `fill_letter_screen.dart` ghép hiển thị theo từng ký tự (`_wordSpans`), không giả định `hidden_idx` liền dải; `_filledCount` theo dõi đã điền đúng bao nhiêu ô (trái sang phải).
@@ -410,6 +486,15 @@ không, app vẫn chạy bản cũ dù nguồn đã đổi.
   "săn chữ có thưởng" mà CR-020 vô tình bỏ. Model cũ `HuntLetterItem` (config phẳng, chỉ 1 mục/unit,
   `target_letter`) đã bỏ hẳn.
 - `g12_boss_quiz.json` (Sprint 3, CR-019): `instances[].config.questions[]` = `{source_game, unit_id, prompt_text?, prompt_audio?, prompt_image?, options[{image?,text?}], answer_idx}` — `unit_id` của instance là unit gắn Boss Quiz (4/8/12/16); mỗi câu hỏi có `unit_id` riêng (unit gốc câu hỏi đó, để tham khảo). Trộn từ dữ liệu **đã có sẵn** của G02 (giữ nguyên)/G03 (dedupe 1 lượt/từ, đổi thành trắc nghiệm chữ)/G05 (đổi thành trắc nghiệm, câu nhiễu = xáo token của chính câu đúng). Không nạp mới content — sinh 1 lần bằng script, review tay trước khi dùng.
+- **CR-037 — Chủ đề**: cả 9 file JSON trong `assets/data/chude/` giống **HỆT 100%** shape ở trên
+  (không sửa 1 dòng parser nào trong `models.dart`/`content_repository.dart` ngoài field `cover`
+  optional). Khác biệt DUY NHẤT theo nội dung: `g06_mindmap.json` = `{"instances": []}` (bỏ hẳn G06,
+  giống Lớp 1 CR-035); `g05_sentence.json` mỗi câu có `audio` **riêng từng câu**
+  (`sentence_T###.mp3`, KHÔNG dùng chung 1 file/unit như lop1/lop2); `g09_memory.json`/
+  `g12_boss_quiz.json` có `covers_units = [tid]` (1 chủ đề, không phải 2 unit ôn tập). Sinh lại từ
+  `04_image+audio/03_Chu-de/_tools/gen_chude_data.py` (đổi số câu/game: sửa hằng `CAP` đầu file) +
+  `gen_chude_audio.py` (audio TTS, xem mục 9) — không liên quan gì tới script sinh G01-G12 của
+  lop1/lop2 ở dưới.
 
 Sinh lại config: xem `../03_Assets/data_json/README_data.md`. Script sinh G01-G04 đọc từ `04_image+audio/manifest.csv`; G05/G06 đọc trực tiếp từ `02_Phan_tich/…xlsx` sheet `02_Giáo trình chi tiết` cột F + tái dùng `g02_listen_pick.json`/`vocabulary.json` (không có manifest riêng, xem lịch sử `SPRINT2_PLAN.md` Phase 2 nếu cần sinh lại); G09/G10/G12 (Sprint 3) đọc trực tiếp từ `units.json`/`g01_flashcard.json`/`g02_listen_pick.json`/`g03_fill_letter.json`/`g05_sentence.json` đã có sẵn trong app, không cần tài liệu Excel gốc nữa (xem `SPRINT3_PLAN.md` từng phase). Sau khi sinh, **copy** vào `assets/data/` và `assets/data/games/`.
 
@@ -612,6 +697,18 @@ ro theo quyết định ghi trong `SPRINT2_PLAN.md` Context).
   `assets/sfx/score_low.mp3` (<=50 điểm), `score_mid.mp3` (51-80), `score_high.mp3` (81-100) —
   `AudioService.playSfx()` tự bỏ qua an toàn nếu thiếu file (không crash, giống cách xử lý
   `correct.mp3`/`wrong.mp3` ở trên) nên app vẫn chạy được, chỉ im lặng phần này cho tới khi có file.
+- **Audio Chủ đề (CR-037, 2026-09-13) — TTS, khác hẳn cách làm audio SGK ở trên**: 238 từ tự do
+  (không thuộc giáo trình nào) → không có băng gốc để cắt như Lớp 1/2, phải **sinh mới bằng
+  Text-to-Speech**. Dùng `edge-tts` (`en-GB-SoniaNeural` cho 238 từ, `en-GB-RyanNeural` cho 60 câu
+  mẫu G05, tốc độ -25%/-15%, chuẩn hoá `loudnorm -16 LUFS` 44.1kHz mono — cố ý trùng thông số bộ
+  audio Lớp 1 để âm lượng đồng đều khi bé đổi qua lại giữa Lớp và Chủ đề). Script:
+  `04_image+audio/03_Chu-de/_tools/gen_chude_audio.py` (`--dry-run`/`--only-missing`, có 2 engine dự
+  phòng `gtts`/`piper` nếu `edge-tts` bị chặn mạng). Đã sinh đủ 298/298 file (2026-09-13), kiểm tra
+  độc lập bằng `faster-whisper` (không thay thế nghe tay) cho 20 từ khó + 7 cặp số `-teen`/`-ty` —
+  32/34 khớp, 2 từ (`colour`, `guava`) cần PM tự nghe lại. **PM vẫn cần nghe tay tối thiểu 20-25 file**
+  theo checklist mục 6.5 `SPEC_ChuDe_ClaudeCode.md` trước khi coi là xong hẳn — STT không thay thế
+  được bước này. Muốn sinh lại (đổi giọng/tốc độ): sửa hằng số đầu `gen_chude_audio.py` rồi chạy lại,
+  không cần sửa code Dart.
 
 ## 10. Edge case đã biết (giữ khi refactor)
 
