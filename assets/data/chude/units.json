@@ -1,0 +1,111 @@
+{
+  "course": "Học theo chủ đề (Topics)",
+  "total_units": 15,
+  "units": [
+    {
+      "unit_id": 1,
+      "theme": "Màu sắc (Colours)",
+      "phonics": "",
+      "word_count": 14,
+      "cover": "Topic01/image/_cover.png"
+    },
+    {
+      "unit_id": 2,
+      "theme": "Trái cây (Fruits)",
+      "phonics": "",
+      "word_count": 14,
+      "cover": "Topic02/image/_cover.png"
+    },
+    {
+      "unit_id": 3,
+      "theme": "Động vật (Animals)",
+      "phonics": "",
+      "word_count": 16,
+      "cover": "Topic03/image/_cover.png"
+    },
+    {
+      "unit_id": 4,
+      "theme": "Thời tiết (Weather)",
+      "phonics": "",
+      "word_count": 13,
+      "cover": "Topic04/image/_cover.png"
+    },
+    {
+      "unit_id": 5,
+      "theme": "Bốn mùa (Seasons)",
+      "phonics": "",
+      "word_count": 10,
+      "cover": "Topic05/image/_cover.png"
+    },
+    {
+      "unit_id": 6,
+      "theme": "Thứ, ngày, tháng (Days & Months)",
+      "phonics": "",
+      "word_count": 23,
+      "cover": "Topic06/image/_cover.png"
+    },
+    {
+      "unit_id": 7,
+      "theme": "Cảm xúc (Feelings)",
+      "phonics": "",
+      "word_count": 14,
+      "cover": "Topic07/image/_cover.png"
+    },
+    {
+      "unit_id": 8,
+      "theme": "Bộ phận cơ thể người (Body parts)",
+      "phonics": "",
+      "word_count": 15,
+      "cover": "Topic08/image/_cover.png"
+    },
+    {
+      "unit_id": 9,
+      "theme": "Hình khối (Shapes)",
+      "phonics": "",
+      "word_count": 12,
+      "cover": "Topic09/image/_cover.png"
+    },
+    {
+      "unit_id": 10,
+      "theme": "Phương tiện giao thông (Transport)",
+      "phonics": "",
+      "word_count": 14,
+      "cover": "Topic10/image/_cover.png"
+    },
+    {
+      "unit_id": 11,
+      "theme": "Quan hệ gia đình (Family)",
+      "phonics": "",
+      "word_count": 15,
+      "cover": "Topic11/image/_cover.png"
+    },
+    {
+      "unit_id": 12,
+      "theme": "Nghề nghiệp (Jobs)",
+      "phonics": "",
+      "word_count": 15,
+      "cover": "Topic12/image/_cover.png"
+    },
+    {
+      "unit_id": 13,
+      "theme": "Dụng cụ học tập (School things)",
+      "phonics": "",
+      "word_count": 15,
+      "cover": "Topic13/image/_cover.png"
+    },
+    {
+      "unit_id": 14,
+      "theme": "Món ăn (Food & Drinks)",
+      "phonics": "",
+      "word_count": 15,
+      "cover": "Topic14/image/_cover.png"
+    },
+    {
+      "unit_id": 15,
+      "theme": "Số đếm (Numbers)",
+      "phonics": "",
+      "word_count": 33,
+      "cover": "Topic15/image/_cover.png"
+    }
+  ]
+}

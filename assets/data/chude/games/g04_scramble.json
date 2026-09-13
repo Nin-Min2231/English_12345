@@ -1,0 +1,682 @@
+{
+  "game_type_id": "g04",
+  "game_type_name": "Xếp chữ",
+  "asset_base": "assets/content/chude/",
+  "instances": [
+    {
+      "game_id": "T01_G04",
+      "unit_id": 1,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T007",
+            "word": "pink",
+            "image": "Topic01/image/pink.png",
+            "audio": "Topic01/audio/word_pink.mp3"
+          },
+          {
+            "word_id": "T003",
+            "word": "yellow",
+            "image": "Topic01/image/yellow.png",
+            "audio": "Topic01/audio/word_yellow.mp3"
+          },
+          {
+            "word_id": "T011",
+            "word": "grey",
+            "image": "Topic01/image/grey.png",
+            "audio": "Topic01/audio/word_grey.mp3"
+          },
+          {
+            "word_id": "T014",
+            "word": "colour",
+            "image": "Topic01/image/colour.png",
+            "audio": "Topic01/audio/word_colour.mp3"
+          },
+          {
+            "word_id": "T012",
+            "word": "gold",
+            "image": "Topic01/image/gold.png",
+            "audio": "Topic01/audio/word_gold.mp3"
+          },
+          {
+            "word_id": "T010",
+            "word": "white",
+            "image": "Topic01/image/white.png",
+            "audio": "Topic01/audio/word_white.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T02_G04",
+      "unit_id": 2,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T022",
+            "word": "pineapple",
+            "image": "Topic02/image/pineapple.png",
+            "audio": "Topic02/audio/word_pineapple.mp3"
+          },
+          {
+            "word_id": "T026",
+            "word": "peach",
+            "image": "Topic02/image/peach.png",
+            "audio": "Topic02/audio/word_peach.mp3"
+          },
+          {
+            "word_id": "T020",
+            "word": "watermelon",
+            "image": "Topic02/image/watermelon.png",
+            "audio": "Topic02/audio/word_watermelon.mp3"
+          },
+          {
+            "word_id": "T016",
+            "word": "banana",
+            "image": "Topic02/image/banana.png",
+            "audio": "Topic02/audio/word_banana.mp3"
+          },
+          {
+            "word_id": "T027",
+            "word": "pear",
+            "image": "Topic02/image/pear.png",
+            "audio": "Topic02/audio/word_pear.mp3"
+          },
+          {
+            "word_id": "T025",
+            "word": "coconut",
+            "image": "Topic02/image/coconut.png",
+            "audio": "Topic02/audio/word_coconut.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T03_G04",
+      "unit_id": 3,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T037",
+            "word": "horse",
+            "image": "Topic03/image/horse.png",
+            "audio": "Topic03/audio/word_horse.mp3"
+          },
+          {
+            "word_id": "T040",
+            "word": "lion",
+            "image": "Topic03/image/lion.png",
+            "audio": "Topic03/audio/word_lion.mp3"
+          },
+          {
+            "word_id": "T041",
+            "word": "monkey",
+            "image": "Topic03/image/monkey.png",
+            "audio": "Topic03/audio/word_monkey.mp3"
+          },
+          {
+            "word_id": "T036",
+            "word": "cow",
+            "image": "Topic03/image/cow.png",
+            "audio": "Topic03/audio/word_cow.mp3"
+          },
+          {
+            "word_id": "T033",
+            "word": "chicken",
+            "image": "Topic03/image/chicken.png",
+            "audio": "Topic03/audio/word_chicken.mp3"
+          },
+          {
+            "word_id": "T039",
+            "word": "tiger",
+            "image": "Topic03/image/tiger.png",
+            "audio": "Topic03/audio/word_tiger.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T04_G04",
+      "unit_id": 4,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T045",
+            "word": "weather",
+            "image": "Topic04/image/weather.png",
+            "audio": "Topic04/audio/word_weather.mp3"
+          },
+          {
+            "word_id": "T049",
+            "word": "windy",
+            "image": "Topic04/image/windy.png",
+            "audio": "Topic04/audio/word_windy.mp3"
+          },
+          {
+            "word_id": "T046",
+            "word": "sunny",
+            "image": "Topic04/image/sunny.png",
+            "audio": "Topic04/audio/word_sunny.mp3"
+          },
+          {
+            "word_id": "T056",
+            "word": "cool",
+            "image": "Topic04/image/cool.png",
+            "audio": "Topic04/audio/word_cool.mp3"
+          },
+          {
+            "word_id": "T052",
+            "word": "foggy",
+            "image": "Topic04/image/foggy.png",
+            "audio": "Topic04/audio/word_foggy.mp3"
+          },
+          {
+            "word_id": "T051",
+            "word": "stormy",
+            "image": "Topic04/image/stormy.png",
+            "audio": "Topic04/audio/word_stormy.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T05_G04",
+      "unit_id": 5,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T060",
+            "word": "summer",
+            "image": "Topic05/image/summer.png",
+            "audio": "Topic05/audio/word_summer.mp3"
+          },
+          {
+            "word_id": "T061",
+            "word": "autumn",
+            "image": "Topic05/image/autumn.png",
+            "audio": "Topic05/audio/word_autumn.mp3"
+          },
+          {
+            "word_id": "T058",
+            "word": "season",
+            "image": "Topic05/image/season.png",
+            "audio": "Topic05/audio/word_season.mp3"
+          },
+          {
+            "word_id": "T064",
+            "word": "flower",
+            "image": "Topic05/image/flower.png",
+            "audio": "Topic05/audio/word_flower.mp3"
+          },
+          {
+            "word_id": "T067",
+            "word": "snow",
+            "image": "Topic05/image/snow.png",
+            "audio": "Topic05/audio/word_snow.mp3"
+          },
+          {
+            "word_id": "T063",
+            "word": "winter",
+            "image": "Topic05/image/winter.png",
+            "audio": "Topic05/audio/word_winter.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T06_G04",
+      "unit_id": 6,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T076",
+            "word": "February",
+            "image": "Topic06/image/february.png",
+            "audio": "Topic06/audio/word_february.mp3"
+          },
+          {
+            "word_id": "T068",
+            "word": "Monday",
+            "image": "Topic06/image/monday.png",
+            "audio": "Topic06/audio/word_monday.mp3"
+          },
+          {
+            "word_id": "T090",
+            "word": "weekend",
+            "image": "Topic06/image/weekend.png",
+            "audio": "Topic06/audio/word_weekend.mp3"
+          },
+          {
+            "word_id": "T073",
+            "word": "Saturday",
+            "image": "Topic06/image/saturday.png",
+            "audio": "Topic06/audio/word_saturday.mp3"
+          },
+          {
+            "word_id": "T086",
+            "word": "December",
+            "image": "Topic06/image/december.png",
+            "audio": "Topic06/audio/word_december.mp3"
+          },
+          {
+            "word_id": "T080",
+            "word": "June",
+            "image": "Topic06/image/june.png",
+            "audio": "Topic06/audio/word_june.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T07_G04",
+      "unit_id": 7,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T101",
+            "word": "shy",
+            "image": "Topic07/image/shy.png",
+            "audio": "Topic07/audio/word_shy.mp3"
+          },
+          {
+            "word_id": "T097",
+            "word": "scared",
+            "image": "Topic07/image/scared.png",
+            "audio": "Topic07/audio/word_scared.mp3"
+          },
+          {
+            "word_id": "T099",
+            "word": "bored",
+            "image": "Topic07/image/bored.png",
+            "audio": "Topic07/audio/word_bored.mp3"
+          },
+          {
+            "word_id": "T092",
+            "word": "sad",
+            "image": "Topic07/image/sad.png",
+            "audio": "Topic07/audio/word_sad.mp3"
+          },
+          {
+            "word_id": "T091",
+            "word": "happy",
+            "image": "Topic07/image/happy.png",
+            "audio": "Topic07/audio/word_happy.mp3"
+          },
+          {
+            "word_id": "T104",
+            "word": "sleepy",
+            "image": "Topic07/image/sleepy.png",
+            "audio": "Topic07/audio/word_sleepy.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T08_G04",
+      "unit_id": 8,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T107",
+            "word": "face",
+            "image": "Topic08/image/face.png",
+            "audio": "Topic08/audio/word_face.mp3"
+          },
+          {
+            "word_id": "T110",
+            "word": "nose",
+            "image": "Topic08/image/nose.png",
+            "audio": "Topic08/audio/word_nose.mp3"
+          },
+          {
+            "word_id": "T108",
+            "word": "eye",
+            "image": "Topic08/image/eye.png",
+            "audio": "Topic08/audio/word_eye.mp3"
+          },
+          {
+            "word_id": "T106",
+            "word": "hair",
+            "image": "Topic08/image/hair.png",
+            "audio": "Topic08/audio/word_hair.mp3"
+          },
+          {
+            "word_id": "T117",
+            "word": "finger",
+            "image": "Topic08/image/finger.png",
+            "audio": "Topic08/audio/word_finger.mp3"
+          },
+          {
+            "word_id": "T111",
+            "word": "mouth",
+            "image": "Topic08/image/mouth.png",
+            "audio": "Topic08/audio/word_mouth.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T09_G04",
+      "unit_id": 9,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T130",
+            "word": "sphere",
+            "image": "Topic09/image/sphere.png",
+            "audio": "Topic09/audio/word_sphere.mp3"
+          },
+          {
+            "word_id": "T127",
+            "word": "heart",
+            "image": "Topic09/image/heart.png",
+            "audio": "Topic09/audio/word_heart.mp3"
+          },
+          {
+            "word_id": "T124",
+            "word": "rectangle",
+            "image": "Topic09/image/rectangle.png",
+            "audio": "Topic09/audio/word_rectangle.mp3"
+          },
+          {
+            "word_id": "T126",
+            "word": "star",
+            "image": "Topic09/image/star.png",
+            "audio": "Topic09/audio/word_star.mp3"
+          },
+          {
+            "word_id": "T120",
+            "word": "shape",
+            "image": "Topic09/image/shape.png",
+            "audio": "Topic09/audio/word_shape.mp3"
+          },
+          {
+            "word_id": "T123",
+            "word": "triangle",
+            "image": "Topic09/image/triangle.png",
+            "audio": "Topic09/audio/word_triangle.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T10_G04",
+      "unit_id": 10,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T135",
+            "word": "bus",
+            "image": "Topic10/image/bus.png",
+            "audio": "Topic10/audio/word_bus.mp3"
+          },
+          {
+            "word_id": "T144",
+            "word": "scooter",
+            "image": "Topic10/image/scooter.png",
+            "audio": "Topic10/audio/word_scooter.mp3"
+          },
+          {
+            "word_id": "T139",
+            "word": "helicopter",
+            "image": "Topic10/image/helicopter.png",
+            "audio": "Topic10/audio/word_helicopter.mp3"
+          },
+          {
+            "word_id": "T140",
+            "word": "boat",
+            "image": "Topic10/image/boat.png",
+            "audio": "Topic10/audio/word_boat.mp3"
+          },
+          {
+            "word_id": "T137",
+            "word": "train",
+            "image": "Topic10/image/train.png",
+            "audio": "Topic10/audio/word_train.mp3"
+          },
+          {
+            "word_id": "T136",
+            "word": "taxi",
+            "image": "Topic10/image/taxi.png",
+            "audio": "Topic10/audio/word_taxi.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T11_G04",
+      "unit_id": 11,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T152",
+            "word": "son",
+            "image": "Topic11/image/son.png",
+            "audio": "Topic11/audio/word_son.mp3"
+          },
+          {
+            "word_id": "T160",
+            "word": "baby",
+            "image": "Topic11/image/baby.png",
+            "audio": "Topic11/audio/word_baby.mp3"
+          },
+          {
+            "word_id": "T150",
+            "word": "brother",
+            "image": "Topic11/image/brother.png",
+            "audio": "Topic11/audio/word_brother.mp3"
+          },
+          {
+            "word_id": "T149",
+            "word": "mother",
+            "image": "Topic11/image/mother.png",
+            "audio": "Topic11/audio/word_mother.mp3"
+          },
+          {
+            "word_id": "T153",
+            "word": "daughter",
+            "image": "Topic11/image/daughter.png",
+            "audio": "Topic11/audio/word_daughter.mp3"
+          },
+          {
+            "word_id": "T146",
+            "word": "family",
+            "image": "Topic11/image/family.png",
+            "audio": "Topic11/audio/word_family.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T12_G04",
+      "unit_id": 12,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T173",
+            "word": "pilot",
+            "image": "Topic12/image/pilot.png",
+            "audio": "Topic12/audio/word_pilot.mp3"
+          },
+          {
+            "word_id": "T166",
+            "word": "farmer",
+            "image": "Topic12/image/farmer.png",
+            "audio": "Topic12/audio/word_farmer.mp3"
+          },
+          {
+            "word_id": "T167",
+            "word": "worker",
+            "image": "Topic12/image/worker.png",
+            "audio": "Topic12/audio/word_worker.mp3"
+          },
+          {
+            "word_id": "T163",
+            "word": "doctor",
+            "image": "Topic12/image/doctor.png",
+            "audio": "Topic12/audio/word_doctor.mp3"
+          },
+          {
+            "word_id": "T172",
+            "word": "singer",
+            "image": "Topic12/image/singer.png",
+            "audio": "Topic12/audio/word_singer.mp3"
+          },
+          {
+            "word_id": "T161",
+            "word": "teacher",
+            "image": "Topic12/image/teacher.png",
+            "audio": "Topic12/audio/word_teacher.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T13_G04",
+      "unit_id": 13,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T178",
+            "word": "notebook",
+            "image": "Topic13/image/notebook.png",
+            "audio": "Topic13/audio/word_notebook.mp3"
+          },
+          {
+            "word_id": "T188",
+            "word": "chalk",
+            "image": "Topic13/image/chalk.png",
+            "audio": "Topic13/audio/word_chalk.mp3"
+          },
+          {
+            "word_id": "T177",
+            "word": "book",
+            "image": "Topic13/image/book.png",
+            "audio": "Topic13/audio/word_book.mp3"
+          },
+          {
+            "word_id": "T190",
+            "word": "scissors",
+            "image": "Topic13/image/scissors.png",
+            "audio": "Topic13/audio/word_scissors.mp3"
+          },
+          {
+            "word_id": "T184",
+            "word": "bag",
+            "image": "Topic13/image/bag.png",
+            "audio": "Topic13/audio/word_bag.mp3"
+          },
+          {
+            "word_id": "T180",
+            "word": "pencil",
+            "image": "Topic13/image/pencil.png",
+            "audio": "Topic13/audio/word_pencil.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T14_G04",
+      "unit_id": 14,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T194",
+            "word": "soup",
+            "image": "Topic14/image/soup.png",
+            "audio": "Topic14/audio/word_soup.mp3"
+          },
+          {
+            "word_id": "T202",
+            "word": "candy",
+            "image": "Topic14/image/candy.png",
+            "audio": "Topic14/audio/word_candy.mp3"
+          },
+          {
+            "word_id": "T196",
+            "word": "meat",
+            "image": "Topic14/image/meat.png",
+            "audio": "Topic14/audio/word_meat.mp3"
+          },
+          {
+            "word_id": "T191",
+            "word": "rice",
+            "image": "Topic14/image/rice.png",
+            "audio": "Topic14/audio/word_rice.mp3"
+          },
+          {
+            "word_id": "T204",
+            "word": "milk",
+            "image": "Topic14/image/milk.png",
+            "audio": "Topic14/audio/word_milk.mp3"
+          },
+          {
+            "word_id": "T198",
+            "word": "vegetable",
+            "image": "Topic14/image/vegetable.png",
+            "audio": "Topic14/audio/word_vegetable.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T15_G04",
+      "unit_id": 15,
+      "order_idx": 4,
+      "config": {
+        "items": [
+          {
+            "word_id": "T223",
+            "word": "seventeen",
+            "image": "Topic15/image/seventeen.png",
+            "audio": "Topic15/audio/word_seventeen.mp3"
+          },
+          {
+            "word_id": "T219",
+            "word": "thirteen",
+            "image": "Topic15/image/thirteen.png",
+            "audio": "Topic15/audio/word_thirteen.mp3"
+          },
+          {
+            "word_id": "T213",
+            "word": "seven",
+            "image": "Topic15/image/seven.png",
+            "audio": "Topic15/audio/word_seven.mp3"
+          },
+          {
+            "word_id": "T226",
+            "word": "twenty",
+            "image": "Topic15/image/twenty.png",
+            "audio": "Topic15/audio/word_twenty.mp3"
+          },
+          {
+            "word_id": "T232",
+            "word": "eighty",
+            "image": "Topic15/image/eighty.png",
+            "audio": "Topic15/audio/word_eighty.mp3"
+          },
+          {
+            "word_id": "T210",
+            "word": "four",
+            "image": "Topic15/image/four.png",
+            "audio": "Topic15/audio/word_four.mp3"
+          }
+        ]
+      }
+    }
+  ]
+}

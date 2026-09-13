@@ -1,0 +1,762 @@
+{
+  "game_type_id": "g05",
+  "game_type_name": "Lắp ráp câu",
+  "asset_base": "assets/content/chude/",
+  "instances": [
+    {
+      "game_id": "T01_G05",
+      "unit_id": 1,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "My ball is red.",
+            "tokens": [
+              "My",
+              "ball",
+              "is",
+              "red."
+            ],
+            "audio": "Topic01/audio/sentence_T001.mp3"
+          },
+          {
+            "sentence": "My ball is grey.",
+            "tokens": [
+              "My",
+              "ball",
+              "is",
+              "grey."
+            ],
+            "audio": "Topic01/audio/sentence_T011.mp3"
+          },
+          {
+            "sentence": "What colour is it?",
+            "tokens": [
+              "What",
+              "colour",
+              "is",
+              "it?"
+            ],
+            "audio": "Topic01/audio/sentence_T014.mp3"
+          },
+          {
+            "sentence": "My ball is orange.",
+            "tokens": [
+              "My",
+              "ball",
+              "is",
+              "orange."
+            ],
+            "audio": "Topic01/audio/sentence_T002.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T02_G05",
+      "unit_id": 2,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I like mangoes.",
+            "tokens": [
+              "I",
+              "like",
+              "mangoes."
+            ],
+            "audio": "Topic02/audio/sentence_T018.mp3"
+          },
+          {
+            "sentence": "I like lemons.",
+            "tokens": [
+              "I",
+              "like",
+              "lemons."
+            ],
+            "audio": "Topic02/audio/sentence_T023.mp3"
+          },
+          {
+            "sentence": "I like strawberries.",
+            "tokens": [
+              "I",
+              "like",
+              "strawberries."
+            ],
+            "audio": "Topic02/audio/sentence_T021.mp3"
+          },
+          {
+            "sentence": "I like pineapples.",
+            "tokens": [
+              "I",
+              "like",
+              "pineapples."
+            ],
+            "audio": "Topic02/audio/sentence_T022.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T03_G05",
+      "unit_id": 3,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I have a parrot.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "parrot."
+            ],
+            "audio": "Topic03/audio/sentence_T043.mp3"
+          },
+          {
+            "sentence": "I have a rabbit.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "rabbit."
+            ],
+            "audio": "Topic03/audio/sentence_T042.mp3"
+          },
+          {
+            "sentence": "I have a lion.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "lion."
+            ],
+            "audio": "Topic03/audio/sentence_T040.mp3"
+          },
+          {
+            "sentence": "I have a fish.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "fish."
+            ],
+            "audio": "Topic03/audio/sentence_T032.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T04_G05",
+      "unit_id": 4,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "It is cool today.",
+            "tokens": [
+              "It",
+              "is",
+              "cool",
+              "today."
+            ],
+            "audio": "Topic04/audio/sentence_T056.mp3"
+          },
+          {
+            "sentence": "It is cold today.",
+            "tokens": [
+              "It",
+              "is",
+              "cold",
+              "today."
+            ],
+            "audio": "Topic04/audio/sentence_T054.mp3"
+          },
+          {
+            "sentence": "It is snowy today.",
+            "tokens": [
+              "It",
+              "is",
+              "snowy",
+              "today."
+            ],
+            "audio": "Topic04/audio/sentence_T050.mp3"
+          },
+          {
+            "sentence": "How is the weather today?",
+            "tokens": [
+              "How",
+              "is",
+              "the",
+              "weather",
+              "today?"
+            ],
+            "audio": "Topic04/audio/sentence_T045.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T05_G05",
+      "unit_id": 5,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I like spring.",
+            "tokens": [
+              "I",
+              "like",
+              "spring."
+            ],
+            "audio": "Topic05/audio/sentence_T059.mp3"
+          },
+          {
+            "sentence": "I like summer.",
+            "tokens": [
+              "I",
+              "like",
+              "summer."
+            ],
+            "audio": "Topic05/audio/sentence_T060.mp3"
+          },
+          {
+            "sentence": "There are four seasons.",
+            "tokens": [
+              "There",
+              "are",
+              "four",
+              "seasons."
+            ],
+            "audio": "Topic05/audio/sentence_T058.mp3"
+          },
+          {
+            "sentence": "Fall is my favourite season.",
+            "tokens": [
+              "Fall",
+              "is",
+              "my",
+              "favourite",
+              "season."
+            ],
+            "audio": "Topic05/audio/sentence_T062.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T06_G05",
+      "unit_id": 6,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "Today is Friday.",
+            "tokens": [
+              "Today",
+              "is",
+              "Friday."
+            ],
+            "audio": "Topic06/audio/sentence_T072.mp3"
+          },
+          {
+            "sentence": "Today is a happy day.",
+            "tokens": [
+              "Today",
+              "is",
+              "a",
+              "happy",
+              "day."
+            ],
+            "audio": "Topic06/audio/sentence_T087.mp3"
+          },
+          {
+            "sentence": "My birthday is in July.",
+            "tokens": [
+              "My",
+              "birthday",
+              "is",
+              "in",
+              "July."
+            ],
+            "audio": "Topic06/audio/sentence_T081.mp3"
+          },
+          {
+            "sentence": "Today is Saturday.",
+            "tokens": [
+              "Today",
+              "is",
+              "Saturday."
+            ],
+            "audio": "Topic06/audio/sentence_T073.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T07_G05",
+      "unit_id": 7,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I am thirsty today.",
+            "tokens": [
+              "I",
+              "am",
+              "thirsty",
+              "today."
+            ],
+            "audio": "Topic07/audio/sentence_T096.mp3"
+          },
+          {
+            "sentence": "I am sleepy today.",
+            "tokens": [
+              "I",
+              "am",
+              "sleepy",
+              "today."
+            ],
+            "audio": "Topic07/audio/sentence_T104.mp3"
+          },
+          {
+            "sentence": "I am worried today.",
+            "tokens": [
+              "I",
+              "am",
+              "worried",
+              "today."
+            ],
+            "audio": "Topic07/audio/sentence_T103.mp3"
+          },
+          {
+            "sentence": "I am shy today.",
+            "tokens": [
+              "I",
+              "am",
+              "shy",
+              "today."
+            ],
+            "audio": "Topic07/audio/sentence_T101.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T08_G05",
+      "unit_id": 8,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "This is my nose.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "nose."
+            ],
+            "audio": "Topic08/audio/sentence_T110.mp3"
+          },
+          {
+            "sentence": "My hair is black.",
+            "tokens": [
+              "My",
+              "hair",
+              "is",
+              "black."
+            ],
+            "audio": "Topic08/audio/sentence_T106.mp3"
+          },
+          {
+            "sentence": "This is my ear.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "ear."
+            ],
+            "audio": "Topic08/audio/sentence_T109.mp3"
+          },
+          {
+            "sentence": "This is my foot.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "foot."
+            ],
+            "audio": "Topic08/audio/sentence_T119.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T09_G05",
+      "unit_id": 9,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "It is a star.",
+            "tokens": [
+              "It",
+              "is",
+              "a",
+              "star."
+            ],
+            "audio": "Topic09/audio/sentence_T126.mp3"
+          },
+          {
+            "sentence": "It is a cone.",
+            "tokens": [
+              "It",
+              "is",
+              "a",
+              "cone."
+            ],
+            "audio": "Topic09/audio/sentence_T131.mp3"
+          },
+          {
+            "sentence": "What shape is it?",
+            "tokens": [
+              "What",
+              "shape",
+              "is",
+              "it?"
+            ],
+            "audio": "Topic09/audio/sentence_T120.mp3"
+          },
+          {
+            "sentence": "It is a diamond.",
+            "tokens": [
+              "It",
+              "is",
+              "a",
+              "diamond."
+            ],
+            "audio": "Topic09/audio/sentence_T128.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T10_G05",
+      "unit_id": 10,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I go to school by car.",
+            "tokens": [
+              "I",
+              "go",
+              "to",
+              "school",
+              "by",
+              "car."
+            ],
+            "audio": "Topic10/audio/sentence_T134.mp3"
+          },
+          {
+            "sentence": "I go to school by bus.",
+            "tokens": [
+              "I",
+              "go",
+              "to",
+              "school",
+              "by",
+              "bus."
+            ],
+            "audio": "Topic10/audio/sentence_T135.mp3"
+          },
+          {
+            "sentence": "We go to the island by boat.",
+            "tokens": [
+              "We",
+              "go",
+              "to",
+              "the",
+              "island",
+              "by",
+              "boat."
+            ],
+            "audio": "Topic10/audio/sentence_T140.mp3"
+          },
+          {
+            "sentence": "The helicopter can fly.",
+            "tokens": [
+              "The",
+              "helicopter",
+              "can",
+              "fly."
+            ],
+            "audio": "Topic10/audio/sentence_T139.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T11_G05",
+      "unit_id": 11,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "This is my mother.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "mother."
+            ],
+            "audio": "Topic11/audio/sentence_T149.mp3"
+          },
+          {
+            "sentence": "This is my cousin.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "cousin."
+            ],
+            "audio": "Topic11/audio/sentence_T159.mp3"
+          },
+          {
+            "sentence": "The baby is sleeping.",
+            "tokens": [
+              "The",
+              "baby",
+              "is",
+              "sleeping."
+            ],
+            "audio": "Topic11/audio/sentence_T160.mp3"
+          },
+          {
+            "sentence": "This is my aunt.",
+            "tokens": [
+              "This",
+              "is",
+              "my",
+              "aunt."
+            ],
+            "audio": "Topic11/audio/sentence_T158.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T12_G05",
+      "unit_id": 12,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "He is a police officer.",
+            "tokens": [
+              "He",
+              "is",
+              "a",
+              "police",
+              "officer."
+            ],
+            "audio": "Topic12/audio/sentence_T169.mp3"
+          },
+          {
+            "sentence": "He is a driver.",
+            "tokens": [
+              "He",
+              "is",
+              "a",
+              "driver."
+            ],
+            "audio": "Topic12/audio/sentence_T168.mp3"
+          },
+          {
+            "sentence": "He is a worker.",
+            "tokens": [
+              "He",
+              "is",
+              "a",
+              "worker."
+            ],
+            "audio": "Topic12/audio/sentence_T167.mp3"
+          },
+          {
+            "sentence": "He is a doctor.",
+            "tokens": [
+              "He",
+              "is",
+              "a",
+              "doctor."
+            ],
+            "audio": "Topic12/audio/sentence_T163.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T13_G05",
+      "unit_id": 13,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I have a crayon.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "crayon."
+            ],
+            "audio": "Topic13/audio/sentence_T181.mp3"
+          },
+          {
+            "sentence": "Please sit on the chair.",
+            "tokens": [
+              "Please",
+              "sit",
+              "on",
+              "the",
+              "chair."
+            ],
+            "audio": "Topic13/audio/sentence_T186.mp3"
+          },
+          {
+            "sentence": "I need some glue.",
+            "tokens": [
+              "I",
+              "need",
+              "some",
+              "glue."
+            ],
+            "audio": "Topic13/audio/sentence_T189.mp3"
+          },
+          {
+            "sentence": "I have a pen.",
+            "tokens": [
+              "I",
+              "have",
+              "a",
+              "pen."
+            ],
+            "audio": "Topic13/audio/sentence_T179.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T14_G05",
+      "unit_id": 14,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "The cake is very big.",
+            "tokens": [
+              "The",
+              "cake",
+              "is",
+              "very",
+              "big."
+            ],
+            "audio": "Topic14/audio/sentence_T201.mp3"
+          },
+          {
+            "sentence": "I like ice cream.",
+            "tokens": [
+              "I",
+              "like",
+              "ice",
+              "cream."
+            ],
+            "audio": "Topic14/audio/sentence_T203.mp3"
+          },
+          {
+            "sentence": "I like sandwiches.",
+            "tokens": [
+              "I",
+              "like",
+              "sandwiches."
+            ],
+            "audio": "Topic14/audio/sentence_T200.mp3"
+          },
+          {
+            "sentence": "I like sweet candy.",
+            "tokens": [
+              "I",
+              "like",
+              "sweet",
+              "candy."
+            ],
+            "audio": "Topic14/audio/sentence_T202.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T15_G05",
+      "unit_id": 15,
+      "lesson_no": 1,
+      "order_idx": 5,
+      "config": {
+        "items": [
+          {
+            "sentence": "I have seven books.",
+            "tokens": [
+              "I",
+              "have",
+              "seven",
+              "books."
+            ],
+            "audio": "Topic15/audio/sentence_T213.mp3"
+          },
+          {
+            "sentence": "I have three books.",
+            "tokens": [
+              "I",
+              "have",
+              "three",
+              "books."
+            ],
+            "audio": "Topic15/audio/sentence_T209.mp3"
+          },
+          {
+            "sentence": "What number is it?",
+            "tokens": [
+              "What",
+              "number",
+              "is",
+              "it?"
+            ],
+            "audio": "Topic15/audio/sentence_T238.mp3"
+          },
+          {
+            "sentence": "I have nine books.",
+            "tokens": [
+              "I",
+              "have",
+              "nine",
+              "books."
+            ],
+            "audio": "Topic15/audio/sentence_T215.mp3"
+          }
+        ]
+      }
+    }
+  ]
+}

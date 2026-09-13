@@ -1,0 +1,2076 @@
+{
+  "game_type_id": "g01",
+  "game_type_name": "Flashcard",
+  "asset_base": "assets/content/chude/",
+  "instances": [
+    {
+      "game_id": "T01_G01",
+      "unit_id": 1,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T001",
+            "word": "red",
+            "ipa": "/red/",
+            "meaning_vi": "màu đỏ",
+            "image": "Topic01/image/red.png",
+            "audio": "Topic01/audio/word_red.mp3"
+          },
+          {
+            "word_id": "T002",
+            "word": "orange",
+            "ipa": "/ˈɒr.ɪndʒ/",
+            "meaning_vi": "màu cam",
+            "image": "Topic01/image/orange.png",
+            "audio": "Topic01/audio/word_orange.mp3"
+          },
+          {
+            "word_id": "T003",
+            "word": "yellow",
+            "ipa": "/ˈjel.əʊ/",
+            "meaning_vi": "màu vàng",
+            "image": "Topic01/image/yellow.png",
+            "audio": "Topic01/audio/word_yellow.mp3"
+          },
+          {
+            "word_id": "T004",
+            "word": "green",
+            "ipa": "/ɡriːn/",
+            "meaning_vi": "màu xanh lá cây",
+            "image": "Topic01/image/green.png",
+            "audio": "Topic01/audio/word_green.mp3"
+          },
+          {
+            "word_id": "T005",
+            "word": "blue",
+            "ipa": "/bluː/",
+            "meaning_vi": "màu xanh da trời",
+            "image": "Topic01/image/blue.png",
+            "audio": "Topic01/audio/word_blue.mp3"
+          },
+          {
+            "word_id": "T006",
+            "word": "purple",
+            "ipa": "/ˈpɜː.pl/",
+            "meaning_vi": "màu tím",
+            "image": "Topic01/image/purple.png",
+            "audio": "Topic01/audio/word_purple.mp3"
+          },
+          {
+            "word_id": "T007",
+            "word": "pink",
+            "ipa": "/pɪŋk/",
+            "meaning_vi": "màu hồng",
+            "image": "Topic01/image/pink.png",
+            "audio": "Topic01/audio/word_pink.mp3"
+          },
+          {
+            "word_id": "T008",
+            "word": "brown",
+            "ipa": "/braʊn/",
+            "meaning_vi": "màu nâu",
+            "image": "Topic01/image/brown.png",
+            "audio": "Topic01/audio/word_brown.mp3"
+          },
+          {
+            "word_id": "T009",
+            "word": "black",
+            "ipa": "/blæk/",
+            "meaning_vi": "màu đen",
+            "image": "Topic01/image/black.png",
+            "audio": "Topic01/audio/word_black.mp3"
+          },
+          {
+            "word_id": "T010",
+            "word": "white",
+            "ipa": "/waɪt/",
+            "meaning_vi": "màu trắng",
+            "image": "Topic01/image/white.png",
+            "audio": "Topic01/audio/word_white.mp3"
+          },
+          {
+            "word_id": "T011",
+            "word": "grey",
+            "ipa": "/ɡreɪ/",
+            "meaning_vi": "màu xám",
+            "image": "Topic01/image/grey.png",
+            "audio": "Topic01/audio/word_grey.mp3"
+          },
+          {
+            "word_id": "T012",
+            "word": "gold",
+            "ipa": "/ɡəʊld/",
+            "meaning_vi": "màu vàng kim",
+            "image": "Topic01/image/gold.png",
+            "audio": "Topic01/audio/word_gold.mp3"
+          },
+          {
+            "word_id": "T013",
+            "word": "silver",
+            "ipa": "/ˈsɪl.və/",
+            "meaning_vi": "màu bạc",
+            "image": "Topic01/image/silver.png",
+            "audio": "Topic01/audio/word_silver.mp3"
+          },
+          {
+            "word_id": "T014",
+            "word": "colour",
+            "ipa": "/ˈkʌl.ə/",
+            "meaning_vi": "màu sắc",
+            "image": "Topic01/image/colour.png",
+            "audio": "Topic01/audio/word_colour.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T02_G01",
+      "unit_id": 2,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T015",
+            "word": "apple",
+            "ipa": "/ˈæp.l/",
+            "meaning_vi": "quả táo",
+            "image": "Topic02/image/apple.png",
+            "audio": "Topic02/audio/word_apple.mp3"
+          },
+          {
+            "word_id": "T016",
+            "word": "banana",
+            "ipa": "/bəˈnɑː.nə/",
+            "meaning_vi": "quả chuối",
+            "image": "Topic02/image/banana.png",
+            "audio": "Topic02/audio/word_banana.mp3"
+          },
+          {
+            "word_id": "T017",
+            "word": "orange",
+            "ipa": "/ˈɒr.ɪndʒ/",
+            "meaning_vi": "quả cam",
+            "image": "Topic02/image/orange.png",
+            "audio": "Topic02/audio/word_orange.mp3"
+          },
+          {
+            "word_id": "T018",
+            "word": "mango",
+            "ipa": "/ˈmæŋ.ɡəʊ/",
+            "meaning_vi": "quả xoài",
+            "image": "Topic02/image/mango.png",
+            "audio": "Topic02/audio/word_mango.mp3"
+          },
+          {
+            "word_id": "T019",
+            "word": "grape",
+            "ipa": "/ɡreɪp/",
+            "meaning_vi": "quả nho",
+            "image": "Topic02/image/grape.png",
+            "audio": "Topic02/audio/word_grape.mp3"
+          },
+          {
+            "word_id": "T020",
+            "word": "watermelon",
+            "ipa": "/ˈwɔː.tə.mel.ən/",
+            "meaning_vi": "quả dưa hấu",
+            "image": "Topic02/image/watermelon.png",
+            "audio": "Topic02/audio/word_watermelon.mp3"
+          },
+          {
+            "word_id": "T021",
+            "word": "strawberry",
+            "ipa": "/ˈstrɔː.bər.i/",
+            "meaning_vi": "quả dâu tây",
+            "image": "Topic02/image/strawberry.png",
+            "audio": "Topic02/audio/word_strawberry.mp3"
+          },
+          {
+            "word_id": "T022",
+            "word": "pineapple",
+            "ipa": "/ˈpaɪn.æp.l/",
+            "meaning_vi": "quả dứa (quả thơm)",
+            "image": "Topic02/image/pineapple.png",
+            "audio": "Topic02/audio/word_pineapple.mp3"
+          },
+          {
+            "word_id": "T023",
+            "word": "lemon",
+            "ipa": "/ˈlem.ən/",
+            "meaning_vi": "quả chanh vàng",
+            "image": "Topic02/image/lemon.png",
+            "audio": "Topic02/audio/word_lemon.mp3"
+          },
+          {
+            "word_id": "T024",
+            "word": "papaya",
+            "ipa": "/pəˈpaɪ.ə/",
+            "meaning_vi": "quả đu đủ",
+            "image": "Topic02/image/papaya.png",
+            "audio": "Topic02/audio/word_papaya.mp3"
+          },
+          {
+            "word_id": "T025",
+            "word": "coconut",
+            "ipa": "/ˈkəʊ.kə.nʌt/",
+            "meaning_vi": "quả dừa",
+            "image": "Topic02/image/coconut.png",
+            "audio": "Topic02/audio/word_coconut.mp3"
+          },
+          {
+            "word_id": "T026",
+            "word": "peach",
+            "ipa": "/piːtʃ/",
+            "meaning_vi": "quả đào",
+            "image": "Topic02/image/peach.png",
+            "audio": "Topic02/audio/word_peach.mp3"
+          },
+          {
+            "word_id": "T027",
+            "word": "pear",
+            "ipa": "/peə/",
+            "meaning_vi": "quả lê",
+            "image": "Topic02/image/pear.png",
+            "audio": "Topic02/audio/word_pear.mp3"
+          },
+          {
+            "word_id": "T028",
+            "word": "guava",
+            "ipa": "/ˈɡwɑː.və/",
+            "meaning_vi": "quả ổi",
+            "image": "Topic02/image/guava.png",
+            "audio": "Topic02/audio/word_guava.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T03_G01",
+      "unit_id": 3,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T029",
+            "word": "dog",
+            "ipa": "/dɒɡ/",
+            "meaning_vi": "con chó",
+            "image": "Topic03/image/dog.png",
+            "audio": "Topic03/audio/word_dog.mp3"
+          },
+          {
+            "word_id": "T030",
+            "word": "cat",
+            "ipa": "/kæt/",
+            "meaning_vi": "con mèo",
+            "image": "Topic03/image/cat.png",
+            "audio": "Topic03/audio/word_cat.mp3"
+          },
+          {
+            "word_id": "T031",
+            "word": "bird",
+            "ipa": "/bɜːd/",
+            "meaning_vi": "con chim",
+            "image": "Topic03/image/bird.png",
+            "audio": "Topic03/audio/word_bird.mp3"
+          },
+          {
+            "word_id": "T032",
+            "word": "fish",
+            "ipa": "/fɪʃ/",
+            "meaning_vi": "con cá",
+            "image": "Topic03/image/fish.png",
+            "audio": "Topic03/audio/word_fish.mp3"
+          },
+          {
+            "word_id": "T033",
+            "word": "chicken",
+            "ipa": "/ˈtʃɪk.ɪn/",
+            "meaning_vi": "con gà",
+            "image": "Topic03/image/chicken.png",
+            "audio": "Topic03/audio/word_chicken.mp3"
+          },
+          {
+            "word_id": "T034",
+            "word": "duck",
+            "ipa": "/dʌk/",
+            "meaning_vi": "con vịt",
+            "image": "Topic03/image/duck.png",
+            "audio": "Topic03/audio/word_duck.mp3"
+          },
+          {
+            "word_id": "T035",
+            "word": "pig",
+            "ipa": "/pɪɡ/",
+            "meaning_vi": "con lợn (con heo)",
+            "image": "Topic03/image/pig.png",
+            "audio": "Topic03/audio/word_pig.mp3"
+          },
+          {
+            "word_id": "T036",
+            "word": "cow",
+            "ipa": "/kaʊ/",
+            "meaning_vi": "con bò",
+            "image": "Topic03/image/cow.png",
+            "audio": "Topic03/audio/word_cow.mp3"
+          },
+          {
+            "word_id": "T037",
+            "word": "horse",
+            "ipa": "/hɔːs/",
+            "meaning_vi": "con ngựa",
+            "image": "Topic03/image/horse.png",
+            "audio": "Topic03/audio/word_horse.mp3"
+          },
+          {
+            "word_id": "T038",
+            "word": "elephant",
+            "ipa": "/ˈel.ɪ.fənt/",
+            "meaning_vi": "con voi",
+            "image": "Topic03/image/elephant.png",
+            "audio": "Topic03/audio/word_elephant.mp3"
+          },
+          {
+            "word_id": "T039",
+            "word": "tiger",
+            "ipa": "/ˈtaɪ.ɡə/",
+            "meaning_vi": "con hổ",
+            "image": "Topic03/image/tiger.png",
+            "audio": "Topic03/audio/word_tiger.mp3"
+          },
+          {
+            "word_id": "T040",
+            "word": "lion",
+            "ipa": "/ˈlaɪ.ən/",
+            "meaning_vi": "con sư tử",
+            "image": "Topic03/image/lion.png",
+            "audio": "Topic03/audio/word_lion.mp3"
+          },
+          {
+            "word_id": "T041",
+            "word": "monkey",
+            "ipa": "/ˈmʌŋ.ki/",
+            "meaning_vi": "con khỉ",
+            "image": "Topic03/image/monkey.png",
+            "audio": "Topic03/audio/word_monkey.mp3"
+          },
+          {
+            "word_id": "T042",
+            "word": "rabbit",
+            "ipa": "/ˈræb.ɪt/",
+            "meaning_vi": "con thỏ",
+            "image": "Topic03/image/rabbit.png",
+            "audio": "Topic03/audio/word_rabbit.mp3"
+          },
+          {
+            "word_id": "T043",
+            "word": "parrot",
+            "ipa": "/ˈpær.ət/",
+            "meaning_vi": "con vẹt",
+            "image": "Topic03/image/parrot.png",
+            "audio": "Topic03/audio/word_parrot.mp3"
+          },
+          {
+            "word_id": "T044",
+            "word": "snake",
+            "ipa": "/sneɪk/",
+            "meaning_vi": "con rắn",
+            "image": "Topic03/image/snake.png",
+            "audio": "Topic03/audio/word_snake.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T04_G01",
+      "unit_id": 4,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T045",
+            "word": "weather",
+            "ipa": "/ˈweð.ə/",
+            "meaning_vi": "thời tiết",
+            "image": "Topic04/image/weather.png",
+            "audio": "Topic04/audio/word_weather.mp3"
+          },
+          {
+            "word_id": "T046",
+            "word": "sunny",
+            "ipa": "/ˈsʌn.i/",
+            "meaning_vi": "có nắng, trời nắng",
+            "image": "Topic04/image/sunny.png",
+            "audio": "Topic04/audio/word_sunny.mp3"
+          },
+          {
+            "word_id": "T047",
+            "word": "rainy",
+            "ipa": "/ˈreɪ.ni/",
+            "meaning_vi": "có mưa, trời mưa",
+            "image": "Topic04/image/rainy.png",
+            "audio": "Topic04/audio/word_rainy.mp3"
+          },
+          {
+            "word_id": "T048",
+            "word": "cloudy",
+            "ipa": "/ˈklaʊ.di/",
+            "meaning_vi": "nhiều mây",
+            "image": "Topic04/image/cloudy.png",
+            "audio": "Topic04/audio/word_cloudy.mp3"
+          },
+          {
+            "word_id": "T049",
+            "word": "windy",
+            "ipa": "/ˈwɪn.di/",
+            "meaning_vi": "có gió",
+            "image": "Topic04/image/windy.png",
+            "audio": "Topic04/audio/word_windy.mp3"
+          },
+          {
+            "word_id": "T050",
+            "word": "snowy",
+            "ipa": "/ˈsnəʊ.i/",
+            "meaning_vi": "có tuyết",
+            "image": "Topic04/image/snowy.png",
+            "audio": "Topic04/audio/word_snowy.mp3"
+          },
+          {
+            "word_id": "T051",
+            "word": "stormy",
+            "ipa": "/ˈstɔː.mi/",
+            "meaning_vi": "có bão",
+            "image": "Topic04/image/stormy.png",
+            "audio": "Topic04/audio/word_stormy.mp3"
+          },
+          {
+            "word_id": "T052",
+            "word": "foggy",
+            "ipa": "/ˈfɒɡ.i/",
+            "meaning_vi": "có sương mù",
+            "image": "Topic04/image/foggy.png",
+            "audio": "Topic04/audio/word_foggy.mp3"
+          },
+          {
+            "word_id": "T053",
+            "word": "hot",
+            "ipa": "/hɒt/",
+            "meaning_vi": "nóng",
+            "image": "Topic04/image/hot.png",
+            "audio": "Topic04/audio/word_hot.mp3"
+          },
+          {
+            "word_id": "T054",
+            "word": "cold",
+            "ipa": "/kəʊld/",
+            "meaning_vi": "lạnh",
+            "image": "Topic04/image/cold.png",
+            "audio": "Topic04/audio/word_cold.mp3"
+          },
+          {
+            "word_id": "T055",
+            "word": "warm",
+            "ipa": "/wɔːm/",
+            "meaning_vi": "ấm áp",
+            "image": "Topic04/image/warm.png",
+            "audio": "Topic04/audio/word_warm.mp3"
+          },
+          {
+            "word_id": "T056",
+            "word": "cool",
+            "ipa": "/kuːl/",
+            "meaning_vi": "mát mẻ",
+            "image": "Topic04/image/cool.png",
+            "audio": "Topic04/audio/word_cool.mp3"
+          },
+          {
+            "word_id": "T057",
+            "word": "rainbow",
+            "ipa": "/ˈreɪn.bəʊ/",
+            "meaning_vi": "cầu vồng",
+            "image": "Topic04/image/rainbow.png",
+            "audio": "Topic04/audio/word_rainbow.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T05_G01",
+      "unit_id": 5,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T058",
+            "word": "season",
+            "ipa": "/ˈsiː.zn/",
+            "meaning_vi": "mùa",
+            "image": "Topic05/image/season.png",
+            "audio": "Topic05/audio/word_season.mp3"
+          },
+          {
+            "word_id": "T059",
+            "word": "spring",
+            "ipa": "/sprɪŋ/",
+            "meaning_vi": "mùa xuân",
+            "image": "Topic05/image/spring.png",
+            "audio": "Topic05/audio/word_spring.mp3"
+          },
+          {
+            "word_id": "T060",
+            "word": "summer",
+            "ipa": "/ˈsʌm.ə/",
+            "meaning_vi": "mùa hè",
+            "image": "Topic05/image/summer.png",
+            "audio": "Topic05/audio/word_summer.mp3"
+          },
+          {
+            "word_id": "T061",
+            "word": "autumn",
+            "ipa": "/ˈɔː.təm/",
+            "meaning_vi": "mùa thu (Anh - Anh)",
+            "image": "Topic05/image/autumn.png",
+            "audio": "Topic05/audio/word_autumn.mp3"
+          },
+          {
+            "word_id": "T062",
+            "word": "fall",
+            "ipa": "/fɔːl/",
+            "meaning_vi": "mùa thu (Anh - Mỹ)",
+            "image": "Topic05/image/fall.png",
+            "audio": "Topic05/audio/word_fall.mp3"
+          },
+          {
+            "word_id": "T063",
+            "word": "winter",
+            "ipa": "/ˈwɪn.tə/",
+            "meaning_vi": "mùa đông",
+            "image": "Topic05/image/winter.png",
+            "audio": "Topic05/audio/word_winter.mp3"
+          },
+          {
+            "word_id": "T064",
+            "word": "flower",
+            "ipa": "/ˈflaʊ.ə/",
+            "meaning_vi": "bông hoa (đặc trưng mùa xuân)",
+            "image": "Topic05/image/flower.png",
+            "audio": "Topic05/audio/word_flower.mp3"
+          },
+          {
+            "word_id": "T065",
+            "word": "beach",
+            "ipa": "/biːtʃ/",
+            "meaning_vi": "bãi biển (đặc trưng mùa hè)",
+            "image": "Topic05/image/beach.png",
+            "audio": "Topic05/audio/word_beach.mp3"
+          },
+          {
+            "word_id": "T066",
+            "word": "leaf",
+            "ipa": "/liːf/",
+            "meaning_vi": "chiếc lá (đặc trưng mùa thu)",
+            "image": "Topic05/image/leaf.png",
+            "audio": "Topic05/audio/word_leaf.mp3"
+          },
+          {
+            "word_id": "T067",
+            "word": "snow",
+            "ipa": "/snəʊ/",
+            "meaning_vi": "tuyết (đặc trưng mùa đông)",
+            "image": "Topic05/image/snow.png",
+            "audio": "Topic05/audio/word_snow.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T06_G01",
+      "unit_id": 6,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T068",
+            "word": "Monday",
+            "ipa": "/ˈmʌn.deɪ/",
+            "meaning_vi": "thứ Hai",
+            "image": "Topic06/image/monday.png",
+            "audio": "Topic06/audio/word_monday.mp3"
+          },
+          {
+            "word_id": "T069",
+            "word": "Tuesday",
+            "ipa": "/ˈtjuːz.deɪ/",
+            "meaning_vi": "thứ Ba",
+            "image": "Topic06/image/tuesday.png",
+            "audio": "Topic06/audio/word_tuesday.mp3"
+          },
+          {
+            "word_id": "T070",
+            "word": "Wednesday",
+            "ipa": "/ˈwenz.deɪ/",
+            "meaning_vi": "thứ Tư",
+            "image": "Topic06/image/wednesday.png",
+            "audio": "Topic06/audio/word_wednesday.mp3"
+          },
+          {
+            "word_id": "T071",
+            "word": "Thursday",
+            "ipa": "/ˈθɜːz.deɪ/",
+            "meaning_vi": "thứ Năm",
+            "image": "Topic06/image/thursday.png",
+            "audio": "Topic06/audio/word_thursday.mp3"
+          },
+          {
+            "word_id": "T072",
+            "word": "Friday",
+            "ipa": "/ˈfraɪ.deɪ/",
+            "meaning_vi": "thứ Sáu",
+            "image": "Topic06/image/friday.png",
+            "audio": "Topic06/audio/word_friday.mp3"
+          },
+          {
+            "word_id": "T073",
+            "word": "Saturday",
+            "ipa": "/ˈsæt.ə.deɪ/",
+            "meaning_vi": "thứ Bảy",
+            "image": "Topic06/image/saturday.png",
+            "audio": "Topic06/audio/word_saturday.mp3"
+          },
+          {
+            "word_id": "T074",
+            "word": "Sunday",
+            "ipa": "/ˈsʌn.deɪ/",
+            "meaning_vi": "Chủ nhật",
+            "image": "Topic06/image/sunday.png",
+            "audio": "Topic06/audio/word_sunday.mp3"
+          },
+          {
+            "word_id": "T075",
+            "word": "January",
+            "ipa": "/ˈdʒæn.ju.ə.ri/",
+            "meaning_vi": "tháng Một",
+            "image": "Topic06/image/january.png",
+            "audio": "Topic06/audio/word_january.mp3"
+          },
+          {
+            "word_id": "T076",
+            "word": "February",
+            "ipa": "/ˈfeb.ru.ə.ri/",
+            "meaning_vi": "tháng Hai",
+            "image": "Topic06/image/february.png",
+            "audio": "Topic06/audio/word_february.mp3"
+          },
+          {
+            "word_id": "T077",
+            "word": "March",
+            "ipa": "/mɑːtʃ/",
+            "meaning_vi": "tháng Ba",
+            "image": "Topic06/image/march.png",
+            "audio": "Topic06/audio/word_march.mp3"
+          },
+          {
+            "word_id": "T078",
+            "word": "April",
+            "ipa": "/ˈeɪ.prəl/",
+            "meaning_vi": "tháng Tư",
+            "image": "Topic06/image/april.png",
+            "audio": "Topic06/audio/word_april.mp3"
+          },
+          {
+            "word_id": "T079",
+            "word": "May",
+            "ipa": "/meɪ/",
+            "meaning_vi": "tháng Năm",
+            "image": "Topic06/image/may.png",
+            "audio": "Topic06/audio/word_may.mp3"
+          },
+          {
+            "word_id": "T080",
+            "word": "June",
+            "ipa": "/dʒuːn/",
+            "meaning_vi": "tháng Sáu",
+            "image": "Topic06/image/june.png",
+            "audio": "Topic06/audio/word_june.mp3"
+          },
+          {
+            "word_id": "T081",
+            "word": "July",
+            "ipa": "/dʒuˈlaɪ/",
+            "meaning_vi": "tháng Bảy",
+            "image": "Topic06/image/july.png",
+            "audio": "Topic06/audio/word_july.mp3"
+          },
+          {
+            "word_id": "T082",
+            "word": "August",
+            "ipa": "/ˈɔː.ɡəst/",
+            "meaning_vi": "tháng Tám",
+            "image": "Topic06/image/august.png",
+            "audio": "Topic06/audio/word_august.mp3"
+          },
+          {
+            "word_id": "T083",
+            "word": "September",
+            "ipa": "/sepˈtem.bə/",
+            "meaning_vi": "tháng Chín",
+            "image": "Topic06/image/september.png",
+            "audio": "Topic06/audio/word_september.mp3"
+          },
+          {
+            "word_id": "T084",
+            "word": "October",
+            "ipa": "/ɒkˈtəʊ.bə/",
+            "meaning_vi": "tháng Mười",
+            "image": "Topic06/image/october.png",
+            "audio": "Topic06/audio/word_october.mp3"
+          },
+          {
+            "word_id": "T085",
+            "word": "November",
+            "ipa": "/nəʊˈvem.bə/",
+            "meaning_vi": "tháng Mười một",
+            "image": "Topic06/image/november.png",
+            "audio": "Topic06/audio/word_november.mp3"
+          },
+          {
+            "word_id": "T086",
+            "word": "December",
+            "ipa": "/dɪˈsem.bə/",
+            "meaning_vi": "tháng Mười hai",
+            "image": "Topic06/image/december.png",
+            "audio": "Topic06/audio/word_december.mp3"
+          },
+          {
+            "word_id": "T087",
+            "word": "today",
+            "ipa": "/təˈdeɪ/",
+            "meaning_vi": "hôm nay",
+            "image": "Topic06/image/today.png",
+            "audio": "Topic06/audio/word_today.mp3"
+          },
+          {
+            "word_id": "T088",
+            "word": "tomorrow",
+            "ipa": "/təˈmɒr.əʊ/",
+            "meaning_vi": "ngày mai",
+            "image": "Topic06/image/tomorrow.png",
+            "audio": "Topic06/audio/word_tomorrow.mp3"
+          },
+          {
+            "word_id": "T089",
+            "word": "yesterday",
+            "ipa": "/ˈjes.tə.deɪ/",
+            "meaning_vi": "hôm qua",
+            "image": "Topic06/image/yesterday.png",
+            "audio": "Topic06/audio/word_yesterday.mp3"
+          },
+          {
+            "word_id": "T090",
+            "word": "weekend",
+            "ipa": "/ˈwiːk.end/",
+            "meaning_vi": "cuối tuần",
+            "image": "Topic06/image/weekend.png",
+            "audio": "Topic06/audio/word_weekend.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T07_G01",
+      "unit_id": 7,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T091",
+            "word": "happy",
+            "ipa": "/ˈhæp.i/",
+            "meaning_vi": "vui vẻ, hạnh phúc",
+            "image": "Topic07/image/happy.png",
+            "audio": "Topic07/audio/word_happy.mp3"
+          },
+          {
+            "word_id": "T092",
+            "word": "sad",
+            "ipa": "/sæd/",
+            "meaning_vi": "buồn",
+            "image": "Topic07/image/sad.png",
+            "audio": "Topic07/audio/word_sad.mp3"
+          },
+          {
+            "word_id": "T093",
+            "word": "angry",
+            "ipa": "/ˈæŋ.ɡri/",
+            "meaning_vi": "tức giận",
+            "image": "Topic07/image/angry.png",
+            "audio": "Topic07/audio/word_angry.mp3"
+          },
+          {
+            "word_id": "T094",
+            "word": "tired",
+            "ipa": "/ˈtaɪəd/",
+            "meaning_vi": "mệt mỏi",
+            "image": "Topic07/image/tired.png",
+            "audio": "Topic07/audio/word_tired.mp3"
+          },
+          {
+            "word_id": "T095",
+            "word": "hungry",
+            "ipa": "/ˈhʌŋ.ɡri/",
+            "meaning_vi": "đói",
+            "image": "Topic07/image/hungry.png",
+            "audio": "Topic07/audio/word_hungry.mp3"
+          },
+          {
+            "word_id": "T096",
+            "word": "thirsty",
+            "ipa": "/ˈθɜː.sti/",
+            "meaning_vi": "khát nước",
+            "image": "Topic07/image/thirsty.png",
+            "audio": "Topic07/audio/word_thirsty.mp3"
+          },
+          {
+            "word_id": "T097",
+            "word": "scared",
+            "ipa": "/skeəd/",
+            "meaning_vi": "sợ hãi",
+            "image": "Topic07/image/scared.png",
+            "audio": "Topic07/audio/word_scared.mp3"
+          },
+          {
+            "word_id": "T098",
+            "word": "excited",
+            "ipa": "/ɪkˈsaɪ.tɪd/",
+            "meaning_vi": "hào hứng, phấn khích",
+            "image": "Topic07/image/excited.png",
+            "audio": "Topic07/audio/word_excited.mp3"
+          },
+          {
+            "word_id": "T099",
+            "word": "bored",
+            "ipa": "/bɔːd/",
+            "meaning_vi": "chán",
+            "image": "Topic07/image/bored.png",
+            "audio": "Topic07/audio/word_bored.mp3"
+          },
+          {
+            "word_id": "T100",
+            "word": "surprised",
+            "ipa": "/səˈpraɪzd/",
+            "meaning_vi": "ngạc nhiên",
+            "image": "Topic07/image/surprised.png",
+            "audio": "Topic07/audio/word_surprised.mp3"
+          },
+          {
+            "word_id": "T101",
+            "word": "shy",
+            "ipa": "/ʃaɪ/",
+            "meaning_vi": "nhút nhát, e thẹn",
+            "image": "Topic07/image/shy.png",
+            "audio": "Topic07/audio/word_shy.mp3"
+          },
+          {
+            "word_id": "T102",
+            "word": "proud",
+            "ipa": "/praʊd/",
+            "meaning_vi": "tự hào",
+            "image": "Topic07/image/proud.png",
+            "audio": "Topic07/audio/word_proud.mp3"
+          },
+          {
+            "word_id": "T103",
+            "word": "worried",
+            "ipa": "/ˈwʌr.id/",
+            "meaning_vi": "lo lắng",
+            "image": "Topic07/image/worried.png",
+            "audio": "Topic07/audio/word_worried.mp3"
+          },
+          {
+            "word_id": "T104",
+            "word": "sleepy",
+            "ipa": "/ˈsliː.pi/",
+            "meaning_vi": "buồn ngủ",
+            "image": "Topic07/image/sleepy.png",
+            "audio": "Topic07/audio/word_sleepy.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T08_G01",
+      "unit_id": 8,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T105",
+            "word": "head",
+            "ipa": "/hed/",
+            "meaning_vi": "cái đầu",
+            "image": "Topic08/image/head.png",
+            "audio": "Topic08/audio/word_head.mp3"
+          },
+          {
+            "word_id": "T106",
+            "word": "hair",
+            "ipa": "/heə/",
+            "meaning_vi": "tóc",
+            "image": "Topic08/image/hair.png",
+            "audio": "Topic08/audio/word_hair.mp3"
+          },
+          {
+            "word_id": "T107",
+            "word": "face",
+            "ipa": "/feɪs/",
+            "meaning_vi": "khuôn mặt",
+            "image": "Topic08/image/face.png",
+            "audio": "Topic08/audio/word_face.mp3"
+          },
+          {
+            "word_id": "T108",
+            "word": "eye",
+            "ipa": "/aɪ/",
+            "meaning_vi": "mắt",
+            "image": "Topic08/image/eye.png",
+            "audio": "Topic08/audio/word_eye.mp3"
+          },
+          {
+            "word_id": "T109",
+            "word": "ear",
+            "ipa": "/ɪə/",
+            "meaning_vi": "tai",
+            "image": "Topic08/image/ear.png",
+            "audio": "Topic08/audio/word_ear.mp3"
+          },
+          {
+            "word_id": "T110",
+            "word": "nose",
+            "ipa": "/nəʊz/",
+            "meaning_vi": "mũi",
+            "image": "Topic08/image/nose.png",
+            "audio": "Topic08/audio/word_nose.mp3"
+          },
+          {
+            "word_id": "T111",
+            "word": "mouth",
+            "ipa": "/maʊθ/",
+            "meaning_vi": "miệng",
+            "image": "Topic08/image/mouth.png",
+            "audio": "Topic08/audio/word_mouth.mp3"
+          },
+          {
+            "word_id": "T112",
+            "word": "tooth",
+            "ipa": "/tuːθ/",
+            "meaning_vi": "cái răng (số nhiều: teeth)",
+            "image": "Topic08/image/tooth.png",
+            "audio": "Topic08/audio/word_tooth.mp3"
+          },
+          {
+            "word_id": "T113",
+            "word": "neck",
+            "ipa": "/nek/",
+            "meaning_vi": "cổ",
+            "image": "Topic08/image/neck.png",
+            "audio": "Topic08/audio/word_neck.mp3"
+          },
+          {
+            "word_id": "T114",
+            "word": "shoulder",
+            "ipa": "/ˈʃəʊl.də/",
+            "meaning_vi": "vai",
+            "image": "Topic08/image/shoulder.png",
+            "audio": "Topic08/audio/word_shoulder.mp3"
+          },
+          {
+            "word_id": "T115",
+            "word": "arm",
+            "ipa": "/ɑːm/",
+            "meaning_vi": "cánh tay",
+            "image": "Topic08/image/arm.png",
+            "audio": "Topic08/audio/word_arm.mp3"
+          },
+          {
+            "word_id": "T116",
+            "word": "hand",
+            "ipa": "/hænd/",
+            "meaning_vi": "bàn tay",
+            "image": "Topic08/image/hand.png",
+            "audio": "Topic08/audio/word_hand.mp3"
+          },
+          {
+            "word_id": "T117",
+            "word": "finger",
+            "ipa": "/ˈfɪŋ.ɡə/",
+            "meaning_vi": "ngón tay",
+            "image": "Topic08/image/finger.png",
+            "audio": "Topic08/audio/word_finger.mp3"
+          },
+          {
+            "word_id": "T118",
+            "word": "leg",
+            "ipa": "/leɡ/",
+            "meaning_vi": "chân (cẳng chân)",
+            "image": "Topic08/image/leg.png",
+            "audio": "Topic08/audio/word_leg.mp3"
+          },
+          {
+            "word_id": "T119",
+            "word": "foot",
+            "ipa": "/fʊt/",
+            "meaning_vi": "bàn chân (số nhiều: feet)",
+            "image": "Topic08/image/foot.png",
+            "audio": "Topic08/audio/word_foot.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T09_G01",
+      "unit_id": 9,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T120",
+            "word": "shape",
+            "ipa": "/ʃeɪp/",
+            "meaning_vi": "hình dạng",
+            "image": "Topic09/image/shape.png",
+            "audio": "Topic09/audio/word_shape.mp3"
+          },
+          {
+            "word_id": "T121",
+            "word": "circle",
+            "ipa": "/ˈsɜː.kl/",
+            "meaning_vi": "hình tròn",
+            "image": "Topic09/image/circle.png",
+            "audio": "Topic09/audio/word_circle.mp3"
+          },
+          {
+            "word_id": "T122",
+            "word": "square",
+            "ipa": "/skweə/",
+            "meaning_vi": "hình vuông",
+            "image": "Topic09/image/square.png",
+            "audio": "Topic09/audio/word_square.mp3"
+          },
+          {
+            "word_id": "T123",
+            "word": "triangle",
+            "ipa": "/ˈtraɪ.æŋ.ɡl/",
+            "meaning_vi": "hình tam giác",
+            "image": "Topic09/image/triangle.png",
+            "audio": "Topic09/audio/word_triangle.mp3"
+          },
+          {
+            "word_id": "T124",
+            "word": "rectangle",
+            "ipa": "/ˈrek.tæŋ.ɡl/",
+            "meaning_vi": "hình chữ nhật",
+            "image": "Topic09/image/rectangle.png",
+            "audio": "Topic09/audio/word_rectangle.mp3"
+          },
+          {
+            "word_id": "T125",
+            "word": "oval",
+            "ipa": "/ˈəʊ.vl/",
+            "meaning_vi": "hình bầu dục",
+            "image": "Topic09/image/oval.png",
+            "audio": "Topic09/audio/word_oval.mp3"
+          },
+          {
+            "word_id": "T126",
+            "word": "star",
+            "ipa": "/stɑː/",
+            "meaning_vi": "hình ngôi sao",
+            "image": "Topic09/image/star.png",
+            "audio": "Topic09/audio/word_star.mp3"
+          },
+          {
+            "word_id": "T127",
+            "word": "heart",
+            "ipa": "/hɑːt/",
+            "meaning_vi": "hình trái tim",
+            "image": "Topic09/image/heart.png",
+            "audio": "Topic09/audio/word_heart.mp3"
+          },
+          {
+            "word_id": "T128",
+            "word": "diamond",
+            "ipa": "/ˈdaɪə.mənd/",
+            "meaning_vi": "hình thoi",
+            "image": "Topic09/image/diamond.png",
+            "audio": "Topic09/audio/word_diamond.mp3"
+          },
+          {
+            "word_id": "T129",
+            "word": "cube",
+            "ipa": "/kjuːb/",
+            "meaning_vi": "khối lập phương",
+            "image": "Topic09/image/cube.png",
+            "audio": "Topic09/audio/word_cube.mp3"
+          },
+          {
+            "word_id": "T130",
+            "word": "sphere",
+            "ipa": "/sfɪə/",
+            "meaning_vi": "khối cầu",
+            "image": "Topic09/image/sphere.png",
+            "audio": "Topic09/audio/word_sphere.mp3"
+          },
+          {
+            "word_id": "T131",
+            "word": "cone",
+            "ipa": "/kəʊn/",
+            "meaning_vi": "hình nón",
+            "image": "Topic09/image/cone.png",
+            "audio": "Topic09/audio/word_cone.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T10_G01",
+      "unit_id": 10,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T132",
+            "word": "bicycle",
+            "ipa": "/ˈbaɪ.sɪ.kl/",
+            "meaning_vi": "xe đạp",
+            "image": "Topic10/image/bicycle.png",
+            "audio": "Topic10/audio/word_bicycle.mp3"
+          },
+          {
+            "word_id": "T133",
+            "word": "motorbike",
+            "ipa": "/ˈməʊ.tə.baɪk/",
+            "meaning_vi": "xe máy",
+            "image": "Topic10/image/motorbike.png",
+            "audio": "Topic10/audio/word_motorbike.mp3"
+          },
+          {
+            "word_id": "T134",
+            "word": "car",
+            "ipa": "/kɑː/",
+            "meaning_vi": "xe ô tô",
+            "image": "Topic10/image/car.png",
+            "audio": "Topic10/audio/word_car.mp3"
+          },
+          {
+            "word_id": "T135",
+            "word": "bus",
+            "ipa": "/bʌs/",
+            "meaning_vi": "xe buýt",
+            "image": "Topic10/image/bus.png",
+            "audio": "Topic10/audio/word_bus.mp3"
+          },
+          {
+            "word_id": "T136",
+            "word": "taxi",
+            "ipa": "/ˈtæk.si/",
+            "meaning_vi": "xe taxi",
+            "image": "Topic10/image/taxi.png",
+            "audio": "Topic10/audio/word_taxi.mp3"
+          },
+          {
+            "word_id": "T137",
+            "word": "train",
+            "ipa": "/treɪn/",
+            "meaning_vi": "tàu hoả",
+            "image": "Topic10/image/train.png",
+            "audio": "Topic10/audio/word_train.mp3"
+          },
+          {
+            "word_id": "T138",
+            "word": "plane",
+            "ipa": "/pleɪn/",
+            "meaning_vi": "máy bay",
+            "image": "Topic10/image/plane.png",
+            "audio": "Topic10/audio/word_plane.mp3"
+          },
+          {
+            "word_id": "T139",
+            "word": "helicopter",
+            "ipa": "/ˈhel.ɪ.kɒp.tə/",
+            "meaning_vi": "máy bay trực thăng",
+            "image": "Topic10/image/helicopter.png",
+            "audio": "Topic10/audio/word_helicopter.mp3"
+          },
+          {
+            "word_id": "T140",
+            "word": "boat",
+            "ipa": "/bəʊt/",
+            "meaning_vi": "thuyền",
+            "image": "Topic10/image/boat.png",
+            "audio": "Topic10/audio/word_boat.mp3"
+          },
+          {
+            "word_id": "T141",
+            "word": "ship",
+            "ipa": "/ʃɪp/",
+            "meaning_vi": "tàu thuỷ",
+            "image": "Topic10/image/ship.png",
+            "audio": "Topic10/audio/word_ship.mp3"
+          },
+          {
+            "word_id": "T142",
+            "word": "truck",
+            "ipa": "/trʌk/",
+            "meaning_vi": "xe tải",
+            "image": "Topic10/image/truck.png",
+            "audio": "Topic10/audio/word_truck.mp3"
+          },
+          {
+            "word_id": "T143",
+            "word": "ambulance",
+            "ipa": "/ˈæm.bjə.ləns/",
+            "meaning_vi": "xe cứu thương",
+            "image": "Topic10/image/ambulance.png",
+            "audio": "Topic10/audio/word_ambulance.mp3"
+          },
+          {
+            "word_id": "T144",
+            "word": "scooter",
+            "ipa": "/ˈskuː.tə/",
+            "meaning_vi": "xe tay ga, xe scooter",
+            "image": "Topic10/image/scooter.png",
+            "audio": "Topic10/audio/word_scooter.mp3"
+          },
+          {
+            "word_id": "T145",
+            "word": "subway",
+            "ipa": "/ˈsʌb.weɪ/",
+            "meaning_vi": "tàu điện ngầm",
+            "image": "Topic10/image/subway.png",
+            "audio": "Topic10/audio/word_subway.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T11_G01",
+      "unit_id": 11,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T146",
+            "word": "family",
+            "ipa": "/ˈfæm.əl.i/",
+            "meaning_vi": "gia đình",
+            "image": "Topic11/image/family.png",
+            "audio": "Topic11/audio/word_family.mp3"
+          },
+          {
+            "word_id": "T147",
+            "word": "parents",
+            "ipa": "/ˈpeə.rənts/",
+            "meaning_vi": "bố mẹ",
+            "image": "Topic11/image/parents.png",
+            "audio": "Topic11/audio/word_parents.mp3"
+          },
+          {
+            "word_id": "T148",
+            "word": "father",
+            "ipa": "/ˈfɑː.ðə/",
+            "meaning_vi": "bố (cha)",
+            "image": "Topic11/image/father.png",
+            "audio": "Topic11/audio/word_father.mp3"
+          },
+          {
+            "word_id": "T149",
+            "word": "mother",
+            "ipa": "/ˈmʌð.ə/",
+            "meaning_vi": "mẹ",
+            "image": "Topic11/image/mother.png",
+            "audio": "Topic11/audio/word_mother.mp3"
+          },
+          {
+            "word_id": "T150",
+            "word": "brother",
+            "ipa": "/ˈbrʌð.ə/",
+            "meaning_vi": "anh trai, em trai",
+            "image": "Topic11/image/brother.png",
+            "audio": "Topic11/audio/word_brother.mp3"
+          },
+          {
+            "word_id": "T151",
+            "word": "sister",
+            "ipa": "/ˈsɪs.tə/",
+            "meaning_vi": "chị gái, em gái",
+            "image": "Topic11/image/sister.png",
+            "audio": "Topic11/audio/word_sister.mp3"
+          },
+          {
+            "word_id": "T152",
+            "word": "son",
+            "ipa": "/sʌn/",
+            "meaning_vi": "con trai",
+            "image": "Topic11/image/son.png",
+            "audio": "Topic11/audio/word_son.mp3"
+          },
+          {
+            "word_id": "T153",
+            "word": "daughter",
+            "ipa": "/ˈdɔː.tə/",
+            "meaning_vi": "con gái",
+            "image": "Topic11/image/daughter.png",
+            "audio": "Topic11/audio/word_daughter.mp3"
+          },
+          {
+            "word_id": "T154",
+            "word": "grandparents",
+            "ipa": "/ˈɡræn.peə.rənts/",
+            "meaning_vi": "ông bà",
+            "image": "Topic11/image/grandparents.png",
+            "audio": "Topic11/audio/word_grandparents.mp3"
+          },
+          {
+            "word_id": "T155",
+            "word": "grandfather",
+            "ipa": "/ˈɡræn.fɑː.ðə/",
+            "meaning_vi": "ông",
+            "image": "Topic11/image/grandfather.png",
+            "audio": "Topic11/audio/word_grandfather.mp3"
+          },
+          {
+            "word_id": "T156",
+            "word": "grandmother",
+            "ipa": "/ˈɡræn.mʌð.ə/",
+            "meaning_vi": "bà",
+            "image": "Topic11/image/grandmother.png",
+            "audio": "Topic11/audio/word_grandmother.mp3"
+          },
+          {
+            "word_id": "T157",
+            "word": "uncle",
+            "ipa": "/ˈʌŋ.kl/",
+            "meaning_vi": "chú, bác trai, cậu",
+            "image": "Topic11/image/uncle.png",
+            "audio": "Topic11/audio/word_uncle.mp3"
+          },
+          {
+            "word_id": "T158",
+            "word": "aunt",
+            "ipa": "/ɑːnt/",
+            "meaning_vi": "cô, dì, bác gái",
+            "image": "Topic11/image/aunt.png",
+            "audio": "Topic11/audio/word_aunt.mp3"
+          },
+          {
+            "word_id": "T159",
+            "word": "cousin",
+            "ipa": "/ˈkʌz.n/",
+            "meaning_vi": "anh chị em họ",
+            "image": "Topic11/image/cousin.png",
+            "audio": "Topic11/audio/word_cousin.mp3"
+          },
+          {
+            "word_id": "T160",
+            "word": "baby",
+            "ipa": "/ˈbeɪ.bi/",
+            "meaning_vi": "em bé",
+            "image": "Topic11/image/baby.png",
+            "audio": "Topic11/audio/word_baby.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T12_G01",
+      "unit_id": 12,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T161",
+            "word": "teacher",
+            "ipa": "/ˈtiː.tʃə/",
+            "meaning_vi": "giáo viên",
+            "image": "Topic12/image/teacher.png",
+            "audio": "Topic12/audio/word_teacher.mp3"
+          },
+          {
+            "word_id": "T162",
+            "word": "student",
+            "ipa": "/ˈstjuː.dnt/",
+            "meaning_vi": "học sinh, sinh viên",
+            "image": "Topic12/image/student.png",
+            "audio": "Topic12/audio/word_student.mp3"
+          },
+          {
+            "word_id": "T163",
+            "word": "doctor",
+            "ipa": "/ˈdɒk.tə/",
+            "meaning_vi": "bác sĩ",
+            "image": "Topic12/image/doctor.png",
+            "audio": "Topic12/audio/word_doctor.mp3"
+          },
+          {
+            "word_id": "T164",
+            "word": "nurse",
+            "ipa": "/nɜːs/",
+            "meaning_vi": "y tá",
+            "image": "Topic12/image/nurse.png",
+            "audio": "Topic12/audio/word_nurse.mp3"
+          },
+          {
+            "word_id": "T165",
+            "word": "dentist",
+            "ipa": "/ˈden.tɪst/",
+            "meaning_vi": "nha sĩ",
+            "image": "Topic12/image/dentist.png",
+            "audio": "Topic12/audio/word_dentist.mp3"
+          },
+          {
+            "word_id": "T166",
+            "word": "farmer",
+            "ipa": "/ˈfɑː.mə/",
+            "meaning_vi": "nông dân",
+            "image": "Topic12/image/farmer.png",
+            "audio": "Topic12/audio/word_farmer.mp3"
+          },
+          {
+            "word_id": "T167",
+            "word": "worker",
+            "ipa": "/ˈwɜː.kə/",
+            "meaning_vi": "công nhân",
+            "image": "Topic12/image/worker.png",
+            "audio": "Topic12/audio/word_worker.mp3"
+          },
+          {
+            "word_id": "T168",
+            "word": "driver",
+            "ipa": "/ˈdraɪ.və/",
+            "meaning_vi": "tài xế",
+            "image": "Topic12/image/driver.png",
+            "audio": "Topic12/audio/word_driver.mp3"
+          },
+          {
+            "word_id": "T169",
+            "word": "police officer",
+            "ipa": "/pəˈliːs ˌɒf.ɪ.sə/",
+            "meaning_vi": "cảnh sát",
+            "image": "Topic12/image/police_officer.png",
+            "audio": "Topic12/audio/word_police_officer.mp3"
+          },
+          {
+            "word_id": "T170",
+            "word": "firefighter",
+            "ipa": "/ˈfaɪə.faɪ.tə/",
+            "meaning_vi": "lính cứu hoả",
+            "image": "Topic12/image/firefighter.png",
+            "audio": "Topic12/audio/word_firefighter.mp3"
+          },
+          {
+            "word_id": "T171",
+            "word": "cook",
+            "ipa": "/kʊk/",
+            "meaning_vi": "đầu bếp",
+            "image": "Topic12/image/cook.png",
+            "audio": "Topic12/audio/word_cook.mp3"
+          },
+          {
+            "word_id": "T172",
+            "word": "singer",
+            "ipa": "/ˈsɪŋ.ə/",
+            "meaning_vi": "ca sĩ",
+            "image": "Topic12/image/singer.png",
+            "audio": "Topic12/audio/word_singer.mp3"
+          },
+          {
+            "word_id": "T173",
+            "word": "pilot",
+            "ipa": "/ˈpaɪ.lət/",
+            "meaning_vi": "phi công",
+            "image": "Topic12/image/pilot.png",
+            "audio": "Topic12/audio/word_pilot.mp3"
+          },
+          {
+            "word_id": "T174",
+            "word": "engineer",
+            "ipa": "/ˌen.dʒɪˈnɪə/",
+            "meaning_vi": "kỹ sư",
+            "image": "Topic12/image/engineer.png",
+            "audio": "Topic12/audio/word_engineer.mp3"
+          },
+          {
+            "word_id": "T175",
+            "word": "postman",
+            "ipa": "/ˈpəʊst.mən/",
+            "meaning_vi": "người đưa thư",
+            "image": "Topic12/image/postman.png",
+            "audio": "Topic12/audio/word_postman.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T13_G01",
+      "unit_id": 13,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T176",
+            "word": "school",
+            "ipa": "/skuːl/",
+            "meaning_vi": "trường học",
+            "image": "Topic13/image/school.png",
+            "audio": "Topic13/audio/word_school.mp3"
+          },
+          {
+            "word_id": "T177",
+            "word": "book",
+            "ipa": "/bʊk/",
+            "meaning_vi": "quyển sách",
+            "image": "Topic13/image/book.png",
+            "audio": "Topic13/audio/word_book.mp3"
+          },
+          {
+            "word_id": "T178",
+            "word": "notebook",
+            "ipa": "/ˈnəʊt.bʊk/",
+            "meaning_vi": "quyển vở",
+            "image": "Topic13/image/notebook.png",
+            "audio": "Topic13/audio/word_notebook.mp3"
+          },
+          {
+            "word_id": "T179",
+            "word": "pen",
+            "ipa": "/pen/",
+            "meaning_vi": "bút mực",
+            "image": "Topic13/image/pen.png",
+            "audio": "Topic13/audio/word_pen.mp3"
+          },
+          {
+            "word_id": "T180",
+            "word": "pencil",
+            "ipa": "/ˈpen.sl/",
+            "meaning_vi": "bút chì",
+            "image": "Topic13/image/pencil.png",
+            "audio": "Topic13/audio/word_pencil.mp3"
+          },
+          {
+            "word_id": "T181",
+            "word": "crayon",
+            "ipa": "/ˈkreɪ.ən/",
+            "meaning_vi": "bút sáp màu",
+            "image": "Topic13/image/crayon.png",
+            "audio": "Topic13/audio/word_crayon.mp3"
+          },
+          {
+            "word_id": "T182",
+            "word": "eraser",
+            "ipa": "/ɪˈreɪ.zə/",
+            "meaning_vi": "cục tẩy",
+            "image": "Topic13/image/eraser.png",
+            "audio": "Topic13/audio/word_eraser.mp3"
+          },
+          {
+            "word_id": "T183",
+            "word": "ruler",
+            "ipa": "/ˈruː.lə/",
+            "meaning_vi": "thước kẻ",
+            "image": "Topic13/image/ruler.png",
+            "audio": "Topic13/audio/word_ruler.mp3"
+          },
+          {
+            "word_id": "T184",
+            "word": "bag",
+            "ipa": "/bæɡ/",
+            "meaning_vi": "cặp sách",
+            "image": "Topic13/image/bag.png",
+            "audio": "Topic13/audio/word_bag.mp3"
+          },
+          {
+            "word_id": "T185",
+            "word": "desk",
+            "ipa": "/desk/",
+            "meaning_vi": "bàn học",
+            "image": "Topic13/image/desk.png",
+            "audio": "Topic13/audio/word_desk.mp3"
+          },
+          {
+            "word_id": "T186",
+            "word": "chair",
+            "ipa": "/tʃeə/",
+            "meaning_vi": "cái ghế",
+            "image": "Topic13/image/chair.png",
+            "audio": "Topic13/audio/word_chair.mp3"
+          },
+          {
+            "word_id": "T187",
+            "word": "board",
+            "ipa": "/bɔːd/",
+            "meaning_vi": "cái bảng",
+            "image": "Topic13/image/board.png",
+            "audio": "Topic13/audio/word_board.mp3"
+          },
+          {
+            "word_id": "T188",
+            "word": "chalk",
+            "ipa": "/tʃɔːk/",
+            "meaning_vi": "viên phấn",
+            "image": "Topic13/image/chalk.png",
+            "audio": "Topic13/audio/word_chalk.mp3"
+          },
+          {
+            "word_id": "T189",
+            "word": "glue",
+            "ipa": "/ɡluː/",
+            "meaning_vi": "hồ dán",
+            "image": "Topic13/image/glue.png",
+            "audio": "Topic13/audio/word_glue.mp3"
+          },
+          {
+            "word_id": "T190",
+            "word": "scissors",
+            "ipa": "/ˈsɪz.əz/",
+            "meaning_vi": "cái kéo",
+            "image": "Topic13/image/scissors.png",
+            "audio": "Topic13/audio/word_scissors.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T14_G01",
+      "unit_id": 14,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T191",
+            "word": "rice",
+            "ipa": "/raɪs/",
+            "meaning_vi": "cơm, gạo",
+            "image": "Topic14/image/rice.png",
+            "audio": "Topic14/audio/word_rice.mp3"
+          },
+          {
+            "word_id": "T192",
+            "word": "bread",
+            "ipa": "/bred/",
+            "meaning_vi": "bánh mì",
+            "image": "Topic14/image/bread.png",
+            "audio": "Topic14/audio/word_bread.mp3"
+          },
+          {
+            "word_id": "T193",
+            "word": "noodles",
+            "ipa": "/ˈnuː.dlz/",
+            "meaning_vi": "mì, bún, phở",
+            "image": "Topic14/image/noodles.png",
+            "audio": "Topic14/audio/word_noodles.mp3"
+          },
+          {
+            "word_id": "T194",
+            "word": "soup",
+            "ipa": "/suːp/",
+            "meaning_vi": "canh, súp",
+            "image": "Topic14/image/soup.png",
+            "audio": "Topic14/audio/word_soup.mp3"
+          },
+          {
+            "word_id": "T195",
+            "word": "egg",
+            "ipa": "/eɡ/",
+            "meaning_vi": "quả trứng",
+            "image": "Topic14/image/egg.png",
+            "audio": "Topic14/audio/word_egg.mp3"
+          },
+          {
+            "word_id": "T196",
+            "word": "meat",
+            "ipa": "/miːt/",
+            "meaning_vi": "thịt",
+            "image": "Topic14/image/meat.png",
+            "audio": "Topic14/audio/word_meat.mp3"
+          },
+          {
+            "word_id": "T197",
+            "word": "beef",
+            "ipa": "/biːf/",
+            "meaning_vi": "thịt bò",
+            "image": "Topic14/image/beef.png",
+            "audio": "Topic14/audio/word_beef.mp3"
+          },
+          {
+            "word_id": "T198",
+            "word": "vegetable",
+            "ipa": "/ˈvedʒ.tə.bl/",
+            "meaning_vi": "rau củ",
+            "image": "Topic14/image/vegetable.png",
+            "audio": "Topic14/audio/word_vegetable.mp3"
+          },
+          {
+            "word_id": "T199",
+            "word": "cheese",
+            "ipa": "/tʃiːz/",
+            "meaning_vi": "phô mai",
+            "image": "Topic14/image/cheese.png",
+            "audio": "Topic14/audio/word_cheese.mp3"
+          },
+          {
+            "word_id": "T200",
+            "word": "sandwich",
+            "ipa": "/ˈsæn.wɪdʒ/",
+            "meaning_vi": "bánh mì kẹp",
+            "image": "Topic14/image/sandwich.png",
+            "audio": "Topic14/audio/word_sandwich.mp3"
+          },
+          {
+            "word_id": "T201",
+            "word": "cake",
+            "ipa": "/keɪk/",
+            "meaning_vi": "bánh ngọt",
+            "image": "Topic14/image/cake.png",
+            "audio": "Topic14/audio/word_cake.mp3"
+          },
+          {
+            "word_id": "T202",
+            "word": "candy",
+            "ipa": "/ˈkæn.di/",
+            "meaning_vi": "kẹo",
+            "image": "Topic14/image/candy.png",
+            "audio": "Topic14/audio/word_candy.mp3"
+          },
+          {
+            "word_id": "T203",
+            "word": "ice cream",
+            "ipa": "/ˈaɪs kriːm/",
+            "meaning_vi": "kem",
+            "image": "Topic14/image/ice_cream.png",
+            "audio": "Topic14/audio/word_ice_cream.mp3"
+          },
+          {
+            "word_id": "T204",
+            "word": "milk",
+            "ipa": "/mɪlk/",
+            "meaning_vi": "sữa",
+            "image": "Topic14/image/milk.png",
+            "audio": "Topic14/audio/word_milk.mp3"
+          },
+          {
+            "word_id": "T205",
+            "word": "water",
+            "ipa": "/ˈwɔː.tə/",
+            "meaning_vi": "nước",
+            "image": "Topic14/image/water.png",
+            "audio": "Topic14/audio/word_water.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "T15_G01",
+      "unit_id": 15,
+      "phonics": "",
+      "lesson_no": 1,
+      "order_idx": 1,
+      "config": {
+        "cards": [
+          {
+            "word_id": "T206",
+            "word": "zero",
+            "ipa": "/ˈzɪə.rəʊ/",
+            "meaning_vi": "số không",
+            "image": "Topic15/image/zero.png",
+            "audio": "Topic15/audio/word_zero.mp3"
+          },
+          {
+            "word_id": "T207",
+            "word": "one",
+            "ipa": "/wʌn/",
+            "meaning_vi": "số một",
+            "image": "Topic15/image/one.png",
+            "audio": "Topic15/audio/word_one.mp3"
+          },
+          {
+            "word_id": "T208",
+            "word": "two",
+            "ipa": "/tuː/",
+            "meaning_vi": "số hai",
+            "image": "Topic15/image/two.png",
+            "audio": "Topic15/audio/word_two.mp3"
+          },
+          {
+            "word_id": "T209",
+            "word": "three",
+            "ipa": "/θriː/",
+            "meaning_vi": "số ba",
+            "image": "Topic15/image/three.png",
+            "audio": "Topic15/audio/word_three.mp3"
+          },
+          {
+            "word_id": "T210",
+            "word": "four",
+            "ipa": "/fɔː/",
+            "meaning_vi": "số bốn",
+            "image": "Topic15/image/four.png",
+            "audio": "Topic15/audio/word_four.mp3"
+          },
+          {
+            "word_id": "T211",
+            "word": "five",
+            "ipa": "/faɪv/",
+            "meaning_vi": "số năm",
+            "image": "Topic15/image/five.png",
+            "audio": "Topic15/audio/word_five.mp3"
+          },
+          {
+            "word_id": "T212",
+            "word": "six",
+            "ipa": "/sɪks/",
+            "meaning_vi": "số sáu",
+            "image": "Topic15/image/six.png",
+            "audio": "Topic15/audio/word_six.mp3"
+          },
+          {
+            "word_id": "T213",
+            "word": "seven",
+            "ipa": "/ˈsev.n/",
+            "meaning_vi": "số bảy",
+            "image": "Topic15/image/seven.png",
+            "audio": "Topic15/audio/word_seven.mp3"
+          },
+          {
+            "word_id": "T214",
+            "word": "eight",
+            "ipa": "/eɪt/",
+            "meaning_vi": "số tám",
+            "image": "Topic15/image/eight.png",
+            "audio": "Topic15/audio/word_eight.mp3"
+          },
+          {
+            "word_id": "T215",
+            "word": "nine",
+            "ipa": "/naɪn/",
+            "meaning_vi": "số chín",
+            "image": "Topic15/image/nine.png",
+            "audio": "Topic15/audio/word_nine.mp3"
+          },
+          {
+            "word_id": "T216",
+            "word": "ten",
+            "ipa": "/ten/",
+            "meaning_vi": "số mười",
+            "image": "Topic15/image/ten.png",
+            "audio": "Topic15/audio/word_ten.mp3"
+          },
+          {
+            "word_id": "T217",
+            "word": "eleven",
+            "ipa": "/ɪˈlev.n/",
+            "meaning_vi": "số mười một",
+            "image": "Topic15/image/eleven.png",
+            "audio": "Topic15/audio/word_eleven.mp3"
+          },
+          {
+            "word_id": "T218",
+            "word": "twelve",
+            "ipa": "/twelv/",
+            "meaning_vi": "số mười hai",
+            "image": "Topic15/image/twelve.png",
+            "audio": "Topic15/audio/word_twelve.mp3"
+          },
+          {
+            "word_id": "T219",
+            "word": "thirteen",
+            "ipa": "/ˌθɜːˈtiːn/",
+            "meaning_vi": "số mười ba",
+            "image": "Topic15/image/thirteen.png",
+            "audio": "Topic15/audio/word_thirteen.mp3"
+          },
+          {
+            "word_id": "T220",
+            "word": "fourteen",
+            "ipa": "/ˌfɔːˈtiːn/",
+            "meaning_vi": "số mười bốn",
+            "image": "Topic15/image/fourteen.png",
+            "audio": "Topic15/audio/word_fourteen.mp3"
+          },
+          {
+            "word_id": "T221",
+            "word": "fifteen",
+            "ipa": "/ˌfɪfˈtiːn/",
+            "meaning_vi": "số mười lăm",
+            "image": "Topic15/image/fifteen.png",
+            "audio": "Topic15/audio/word_fifteen.mp3"
+          },
+          {
+            "word_id": "T222",
+            "word": "sixteen",
+            "ipa": "/ˌsɪkˈstiːn/",
+            "meaning_vi": "số mười sáu",
+            "image": "Topic15/image/sixteen.png",
+            "audio": "Topic15/audio/word_sixteen.mp3"
+          },
+          {
+            "word_id": "T223",
+            "word": "seventeen",
+            "ipa": "/ˌsev.nˈtiːn/",
+            "meaning_vi": "số mười bảy",
+            "image": "Topic15/image/seventeen.png",
+            "audio": "Topic15/audio/word_seventeen.mp3"
+          },
+          {
+            "word_id": "T224",
+            "word": "eighteen",
+            "ipa": "/ˌeɪˈtiːn/",
+            "meaning_vi": "số mười tám",
+            "image": "Topic15/image/eighteen.png",
+            "audio": "Topic15/audio/word_eighteen.mp3"
+          },
+          {
+            "word_id": "T225",
+            "word": "nineteen",
+            "ipa": "/ˌnaɪnˈtiːn/",
+            "meaning_vi": "số mười chín",
+            "image": "Topic15/image/nineteen.png",
+            "audio": "Topic15/audio/word_nineteen.mp3"
+          },
+          {
+            "word_id": "T226",
+            "word": "twenty",
+            "ipa": "/ˈtwen.ti/",
+            "meaning_vi": "số hai mươi",
+            "image": "Topic15/image/twenty.png",
+            "audio": "Topic15/audio/word_twenty.mp3"
+          },
+          {
+            "word_id": "T227",
+            "word": "thirty",
+            "ipa": "/ˈθɜː.ti/",
+            "meaning_vi": "số ba mươi",
+            "image": "Topic15/image/thirty.png",
+            "audio": "Topic15/audio/word_thirty.mp3"
+          },
+          {
+            "word_id": "T228",
+            "word": "forty",
+            "ipa": "/ˈfɔː.ti/",
+            "meaning_vi": "số bốn mươi",
+            "image": "Topic15/image/forty.png",
+            "audio": "Topic15/audio/word_forty.mp3"
+          },
+          {
+            "word_id": "T229",
+            "word": "fifty",
+            "ipa": "/ˈfɪf.ti/",
+            "meaning_vi": "số năm mươi",
+            "image": "Topic15/image/fifty.png",
+            "audio": "Topic15/audio/word_fifty.mp3"
+          },
+          {
+            "word_id": "T230",
+            "word": "sixty",
+            "ipa": "/ˈsɪk.sti/",
+            "meaning_vi": "số sáu mươi",
+            "image": "Topic15/image/sixty.png",
+            "audio": "Topic15/audio/word_sixty.mp3"
+          },
+          {
+            "word_id": "T231",
+            "word": "seventy",
+            "ipa": "/ˈsev.n.ti/",
+            "meaning_vi": "số bảy mươi",
+            "image": "Topic15/image/seventy.png",
+            "audio": "Topic15/audio/word_seventy.mp3"
+          },
+          {
+            "word_id": "T232",
+            "word": "eighty",
+            "ipa": "/ˈeɪ.ti/",
+            "meaning_vi": "số tám mươi",
+            "image": "Topic15/image/eighty.png",
+            "audio": "Topic15/audio/word_eighty.mp3"
+          },
+          {
+            "word_id": "T233",
+            "word": "ninety",
+            "ipa": "/ˈnaɪn.ti/",
+            "meaning_vi": "số chín mươi",
+            "image": "Topic15/image/ninety.png",
+            "audio": "Topic15/audio/word_ninety.mp3"
+          },
+          {
+            "word_id": "T234",
+            "word": "one hundred",
+            "ipa": "/wʌn ˈhʌn.drəd/",
+            "meaning_vi": "số một trăm",
+            "image": "Topic15/image/one_hundred.png",
+            "audio": "Topic15/audio/word_one_hundred.mp3"
+          },
+          {
+            "word_id": "T235",
+            "word": "one thousand",
+            "ipa": "/wʌn ˈθaʊ.zənd/",
+            "meaning_vi": "số một nghìn",
+            "image": "Topic15/image/one_thousand.png",
+            "audio": "Topic15/audio/word_one_thousand.mp3"
+          },
+          {
+            "word_id": "T236",
+            "word": "one million",
+            "ipa": "/wʌn ˈmɪl.jən/",
+            "meaning_vi": "số một triệu",
+            "image": "Topic15/image/one_million.png",
+            "audio": "Topic15/audio/word_one_million.mp3"
+          },
+          {
+            "word_id": "T237",
+            "word": "one billion",
+            "ipa": "/wʌn ˈbɪl.jən/",
+            "meaning_vi": "số một tỷ",
+            "image": "Topic15/image/one_billion.png",
+            "audio": "Topic15/audio/word_one_billion.mp3"
+          },
+          {
+            "word_id": "T238",
+            "word": "number",
+            "ipa": "/ˈnʌm.bə/",
+            "meaning_vi": "con số, chữ số",
+            "image": "Topic15/image/number.png",
+            "audio": "Topic15/audio/word_number.mp3"
+          }
+        ]
+      }
+    }
+  ]
+}
