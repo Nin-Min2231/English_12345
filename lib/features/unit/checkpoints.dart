@@ -3,16 +3,10 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/course.dart';
 import '../../data/repositories/progress_repository.dart';
+import '../badges/badge_defs.dart';
 import '../games/boss_quiz/boss_quiz_screen.dart';
 import '../games/memory_match/memory_match_screen.dart';
 import 'game_defs.dart';
-
-// CR-036 — id huy hiệu Boss Quiz của 1 chủ đề (badge_topic_01 … badge_topic_15).
-// Định nghĩa tạm ở đây (P3) vì badge_defs.dart (P4) chưa có; P4 sẽ chuyển hàm
-// này sang badge_defs.dart (cùng nơi khai báo 15 BadgeDef tương ứng) và xoá
-// bản này, đổi checkpoints.dart sang import từ đó.
-String topicBadgeId(int topicId) =>
-    'badge_topic_${topicId.toString().padLeft(2, '0')}';
 
 /// Sprint 3 — 1 điểm mốc gắn vào 1 unit cụ thể (không phải mọi unit như
 /// G01-G10): Fun Time (G09) sau Unit 2/6/10/14, Boss Quiz (G12) sau Unit

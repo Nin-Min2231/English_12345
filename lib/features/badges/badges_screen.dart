@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
+import '../../data/course.dart';
 import '../../data/db/app_database.dart';
 import '../../data/repositories/badge_repository.dart';
 import 'badge_defs.dart';
@@ -34,6 +35,15 @@ class BadgesScreen extends StatelessWidget {
         builder: (context, snapshot) {
           final earnedIds =
               (snapshot.data ?? const []).map((e) => e.badgeId).toSet();
+          // CR-036: lọc danh mục huy hiệu theo khoá học đang xem. KHÔNG lọc thì màn
+          // huy hiệu của Lớp 2 sẽ hiện thêm 15 ô mờ của Chủ đề (và ngược lại).
+          final defs = grade == null
+              ? kBadgeDefs // từ màn "Chọn lớp": hiện TẤT CẢ
+              : isTopicCourse(grade!)
+                  ? kBadgeDefs
+                      .where((b) => b.courseId == kTopicCourseId)
+                      .toList()
+                  : kBadgeDefs.where((b) => b.courseId == null).toList();
           return GridView.builder(
             padding: const EdgeInsets.all(AppSpacing.lg),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -42,12 +52,9 @@ class BadgesScreen extends StatelessWidget {
               mainAxisSpacing: AppSpacing.md,
               childAspectRatio: 1.1,
             ),
-            itemCount: kBadgeDefs.length,
-            itemBuilder: (context, i) {
-              final b = kBadgeDefs[i];
-              return _BadgeCard(
-                  badge: b, earned: earnedIds.contains(b.badgeId));
-            },
+            itemCount: defs.length,
+            itemBuilder: (context, i) => _BadgeCard(
+                badge: defs[i], earned: earnedIds.contains(defs[i].badgeId)),
           );
         },
       ),
@@ -87,7 +94,7 @@ class _BadgeCard extends StatelessWidget {
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text('Sau Unit ${badge.afterUnit}',
+              Text(badge.caption,
                   style: const TextStyle(
                       fontSize: 12, color: AppColors.textSecondary)),
             ],
