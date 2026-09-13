@@ -181,7 +181,11 @@ class _BossQuizScreenState extends State<BossQuizScreen>
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.fromUnit}-${widget.toUnit}',
+            unitLabel: widget.unit.isTopic
+                ? widget.unit.theme
+                : (widget.fromUnit == widget.toUnit
+                    ? '${widget.fromUnit}'
+                    : '${widget.fromUnit}-${widget.toUnit}'),
             gameName: 'Boss Quiz'),
       ),
       body: Stack(

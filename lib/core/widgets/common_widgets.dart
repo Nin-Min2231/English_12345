@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../data/content_repository.dart';
+import '../../data/course.dart';
 import '../theme/app_theme.dart';
 
 /// Nút chính to, bo tròn (sheet 09 — PrimaryButton).
@@ -134,9 +135,11 @@ class GameAppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // CR-036: luồng Chủ đề hiện "Chủ đề • <tên chủ đề>" thay cho "Lớp N • Unit N".
+    final topic = isTopicCourse(grade);
     final parts = [
-      'Lớp $grade',
-      'Unit $unitLabel',
+      courseLabel(grade),
+      topic ? unitLabel : 'Unit $unitLabel',
       if (gameName != null) gameName!,
     ];
     return Text(

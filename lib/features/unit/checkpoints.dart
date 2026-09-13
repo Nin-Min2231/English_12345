@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
+import '../../data/course.dart';
 import '../../data/repositories/progress_repository.dart';
 import '../games/boss_quiz/boss_quiz_screen.dart';
 import '../games/memory_match/memory_match_screen.dart';
 import 'game_defs.dart';
+
+// CR-036 — id huy hiệu Boss Quiz của 1 chủ đề (badge_topic_01 … badge_topic_15).
+// Định nghĩa tạm ở đây (P3) vì badge_defs.dart (P4) chưa có; P4 sẽ chuyển hàm
+// này sang badge_defs.dart (cùng nơi khai báo 15 BadgeDef tương ứng) và xoá
+// bản này, đổi checkpoints.dart sang import từ đó.
+String topicBadgeId(int topicId) =>
+    'badge_topic_${topicId.toString().padLeft(2, '0')}';
 
 /// Sprint 3 — 1 điểm mốc gắn vào 1 unit cụ thể (không phải mọi unit như
 /// G01-G10): Fun Time (G09) sau Unit 2/6/10/14, Boss Quiz (G12) sau Unit
@@ -85,10 +93,42 @@ GameDef _bossQuizGameDef(Checkpoint cp) => GameDef(
       ),
     );
 
+/// CR-036 — Lật thẻ cho CHỦ ĐỀ: điều kiện mở khoá dùng [isCheckpointUnlocked]
+/// (4 game lõi của CHÍNH chủ đề đó), KHÔNG dùng [isFunTimeUnlocked] như lớp
+/// 1-5. Lý do: isFunTimeUnlocked đòi hỏi hoàn tất MỌI game của CẢ 2 unit trong
+/// phạm vi ôn tập — chủ đề học tự do, không có "chủ đề liền trước" nên điều
+/// kiện đó vô nghĩa (và sẽ khoá cứng vĩnh viễn).
+GameDef _topicFunTimeGameDef(Checkpoint cp) => GameDef(
+      gameType: 'g09',
+      baseLabel: 'Lật thẻ',
+      countSuffix: (n) => '($n cặp)',
+      icon: Icons.grid_view_rounded,
+      color: AppColors.successDark,
+      isUnlockedOverride: (repo, contentRepo, progress, unitId) =>
+          repo.isCheckpointUnlocked(progress, unitId),
+      countFor: (repo, unitId) => repo.funTimeByUnit[unitId]?.length ?? 0,
+      buildScreen: (context, repo, unit) => MemoryMatchScreen(
+        unit: unit,
+        pairs: repo.funTimeByUnit[unit.unitId] ?? const [],
+        fromUnit: cp.fromUnit,
+        toUnit: cp.toUnit,
+      ),
+    );
+
 /// Game bổ sung (nếu có) cho 1 unit cụ thể, ngoài [kUnitGames] (danh sách
 /// dùng chung cho mọi unit). afterUnit của Fun Time (2/6/10/14) và Boss Quiz
 /// (4/8/12/16) không bao giờ trùng nhau nên 1 unit chỉ có tối đa 1 checkpoint.
-List<GameDef> extraGamesForUnit(int unitId) {
+/// CR-036 — thêm tham số [grade]. Lớp 1-5 giữ nguyên 100% hành vi cũ.
+List<GameDef> extraGamesForUnit(int grade, int unitId) {
+  if (isTopicCourse(grade)) {
+    // MỌI chủ đề đều có Lật thẻ + Boss Quiz của CHÍNH nó (fromUnit == toUnit).
+    final cp = Checkpoint(
+        afterUnit: unitId,
+        fromUnit: unitId,
+        toUnit: unitId,
+        badgeId: topicBadgeId(unitId));
+    return [_topicFunTimeGameDef(cp), _bossQuizGameDef(cp)];
+  }
   for (final cp in kFunTimeCheckpoints) {
     if (cp.afterUnit == unitId) return [_funTimeGameDef(cp)];
   }

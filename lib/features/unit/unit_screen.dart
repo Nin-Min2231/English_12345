@@ -99,7 +99,7 @@ class _UnitScreenState extends State<UnitScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        title: GameAppBarTitle(grade: unit.grade, unitLabel: '${unit.unitId}'),
+        title: GameAppBarTitle(grade: unit.grade, unitLabel: unit.shortLabel),
       ),
       body: StreamBuilder<List<LessonProgress>>(
         stream: _progressRepo.watchForProfile(widget.profile.id,
@@ -114,7 +114,11 @@ class _UnitScreenState extends State<UnitScreen> {
                   style: const TextStyle(
                       fontSize: 26, fontWeight: FontWeight.bold)),
               const SizedBox(height: AppSpacing.xs),
-              Text('Âm phonics của bài: "${unit.phonics}"',
+              // CR-036: Chủ đề không có âm phonics -> hiện số từ thay vì dòng âm.
+              Text(
+                  unit.phonics.isEmpty
+                      ? '${unit.wordCount} từ vựng trong chủ đề này'
+                      : 'Âm phonics của bài: "${unit.phonics}"',
                   style: const TextStyle(
                       fontSize: 16, color: AppColors.textSecondary)),
               const SizedBox(height: AppSpacing.xl),
@@ -129,7 +133,8 @@ class _UnitScreenState extends State<UnitScreen> {
                 ],
               // Sprint 3 — Fun Time (G09) / Boss Quiz (G12) chỉ xuất hiện
               // trên đúng 1 unit checkpoint, xem checkpoints.dart.
-              for (final game in extraGamesForUnit(unit.unitId))
+              // CR-036: truyền thêm grade để biết lấy checkpoint của lớp hay của chủ đề
+              for (final game in extraGamesForUnit(unit.grade, unit.unitId))
                 if (game.countFor(widget.repo, unit.unitId) > 0) ...[
                   _gameRowFor(context, game, progress, unit),
                   const SizedBox(height: AppSpacing.lg),

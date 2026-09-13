@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../data/content_repository.dart';
+import '../../data/course.dart';
 import '../../data/db/app_database.dart';
 import '../badges/badges_screen.dart';
 import '../home/home_screen.dart';
@@ -19,15 +20,23 @@ class GradeOption {
   final String subtitle;
   final bool enabled;
 
+  /// CR-036 — icon riêng cho từng mục; mặc định = icon sách như cũ nên 5 mục
+  /// Lớp 1-5 không phải sửa gì.
+  final IconData icon;
+
   const GradeOption({
     required this.grade,
     required this.label,
     required this.subtitle,
     required this.enabled,
+    this.icon = Icons.menu_book_rounded,
   });
 }
 
 const kGradeOptions = [
+  // 5 mục Lớp 1-5: GIỮ NGUYÊN TỪNG KÝ TỰ, kể cả phụ đề Lớp 1 đang cũ ("Đang
+  // phát triển — Unit 1" trong khi CR-034 đã làm đủ 16/16 unit). Sửa phụ đề đó
+  // là việc của 1 CR khác, không gộp vào đây.
   GradeOption(
       grade: 1,
       label: 'Lớp 1',
@@ -38,6 +47,14 @@ const kGradeOptions = [
   GradeOption(grade: 3, label: 'Lớp 3', subtitle: 'Sắp ra mắt', enabled: false),
   GradeOption(grade: 4, label: 'Lớp 4', subtitle: 'Sắp ra mắt', enabled: false),
   GradeOption(grade: 5, label: 'Lớp 5', subtitle: 'Sắp ra mắt', enabled: false),
+  // CR-036 — ĐỒNG CẤP với các lớp (yêu cầu PM), đặt cuối lưới để 5 lớp giữ
+  // nguyên vị trí quen thuộc.
+  GradeOption(
+      grade: kTopicCourseId,
+      label: 'Chủ đề',
+      subtitle: '15 chủ đề • 238 từ',
+      enabled: true,
+      icon: Icons.category_rounded),
 ];
 
 class GradeSelectScreen extends StatefulWidget {
@@ -172,8 +189,7 @@ class _GradeCard extends StatelessWidget {
                   const Icon(Icons.lock_rounded,
                       color: AppColors.textSecondary, size: 32)
                 else
-                  const Icon(Icons.menu_book_rounded,
-                      color: AppColors.primary, size: 32),
+                  Icon(option.icon, color: AppColors.primary, size: 32),
                 const SizedBox(height: AppSpacing.sm),
                 Text(option.label,
                     style: const TextStyle(

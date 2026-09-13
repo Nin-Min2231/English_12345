@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../data/content_repository.dart';
+import '../../data/course.dart';
 import '../../data/db/app_database.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/progress_repository.dart';
 import '../badges/badges_screen.dart';
 import '../settings/settings_screen.dart';
+import '../unit/game_defs.dart';
 import '../unit/unit_screen.dart';
 
 /// F01 — Trang chủ & Bản đồ Unit: hiện sao đã đạt + khóa unit chưa mở.
@@ -22,12 +24,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final progressRepo = ProgressRepository(db);
+    final isTopic = isTopicCourse(repo.grade);
     return AppScaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        title: const Text('Chọn bài học',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+        title: Text(isTopic ? 'Chọn chủ đề' : 'Chọn bài học',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         actions: [
           IconButton(
             tooltip: 'Huy hiệu',
@@ -66,21 +69,27 @@ class HomeScreen extends StatelessWidget {
           final progress = snapshot.data ?? const [];
           return GridView.builder(
             padding: const EdgeInsets.all(AppSpacing.lg),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: AppSpacing.md,
               mainAxisSpacing: AppSpacing.md,
-              childAspectRatio: 1.1,
+              childAspectRatio: isTopic ? 0.86 : 1.1,
             ),
             itemCount: repo.units.length,
             itemBuilder: (context, i) {
               final u = repo.units[i];
-              final unlocked = progressRepo.isUnitUnlocked(progress, u.unitId);
+              final unlocked = progressRepo.isUnitUnlocked(progress, u.unitId,
+                  sequential: !isTopic);
               final stars = progressRepo.totalStarsForUnit(progress, u.unitId);
+              // CR-036: Chủ đề bỏ G06 nên mẫu số phải tính theo game CÓ dữ liệu.
+              final maxStars = isTopic
+                  ? progressRepo.maxStarsForUnit(
+                      (t) => gameDefsByType[t]!.countFor(repo, u.unitId) > 0)
+                  : progressRepo.maxStarsPerUnit;
               return _UnitCard(
                 unit: u,
                 stars: stars,
-                maxStars: progressRepo.maxStarsPerUnit,
+                maxStars: maxStars,
                 locked: !unlocked,
                 onTap: !unlocked
                     ? null
@@ -157,7 +166,20 @@ class _UnitCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                const Spacer(),
+                // Ảnh bìa chủ đề (Lớp 1-5: unit.cover == null ⇒ giữ nguyên layout cũ)
+                if (unit.cover != null) ...[
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                      child: WordImage(
+                          grade: unit.grade,
+                          relativePath: unit.cover!,
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                ] else
+                  const Spacer(),
                 Text(
                   unit.theme,
                   style: const TextStyle(
@@ -168,7 +190,10 @@ class _UnitCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: AppSpacing.xs),
-                Text('Âm: ${unit.phonics}   •   ${unit.wordCount} từ',
+                Text(
+                    unit.phonics.isEmpty
+                        ? '${unit.wordCount} từ'
+                        : 'Âm: ${unit.phonics}   •   ${unit.wordCount} từ',
                     style: const TextStyle(
                         fontSize: 13, color: AppColors.textSecondary)),
               ],

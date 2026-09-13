@@ -204,7 +204,7 @@ class _LetterHuntScreenState extends State<LetterHuntScreen>
         foregroundColor: Colors.white,
         title: GameAppBarTitle(
             grade: widget.unit.grade,
-            unitLabel: '${widget.unit.unitId}',
+            unitLabel: widget.unit.shortLabel,
             gameName: 'Săn chữ'),
       ),
       body: Stack(
