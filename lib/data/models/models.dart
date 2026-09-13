@@ -2,14 +2,21 @@
 /// Không hardcode nội dung: mọi thứ đọc từ JSON (data-driven, sheet 06).
 library;
 
+import '../course.dart';
+
 class UnitInfo {
   final int unitId;
   // Sprint 4 — đa lớp (1-5). KHÔNG có trong units.json — do
   // ContentRepository.load(grade:) gán vào lúc nạp, không phải đọc từ JSON.
   final int grade;
   final String theme;
-  final String phonics;
+  final String phonics; // Chủ đề: CHUỖI RỖNG (không học theo âm)
   final int wordCount;
+
+  /// CR-036 — ảnh bìa chủ đề (vd "Topic01/image/_cover.png").
+  /// Lớp 1-5 KHÔNG có trường này trong units.json ⇒ null. Đường dẫn tương đối
+  /// giống mọi asset khác, ghép prefix bằng ContentRepository.asset().
+  final String? cover;
 
   const UnitInfo({
     required this.unitId,
@@ -17,7 +24,13 @@ class UnitInfo {
     required this.theme,
     required this.phonics,
     required this.wordCount,
+    this.cover,
   });
+
+  bool get isTopic => isTopicCourse(grade);
+
+  /// Nhãn ngắn cho AppBar: Chủ đề hiện TÊN, lớp 1-5 hiện SỐ unit.
+  String get shortLabel => isTopic ? theme : '$unitId';
 
   factory UnitInfo.fromJson(Map<String, dynamic> j, {required int grade}) =>
       UnitInfo(
@@ -26,6 +39,7 @@ class UnitInfo {
         theme: j['theme'] as String,
         phonics: j['phonics'] as String,
         wordCount: j['word_count'] as int,
+        cover: j['cover'] as String?,
       );
 }
 

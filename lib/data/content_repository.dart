@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'course.dart';
 import 'models/models.dart';
 
 /// Nạp toàn bộ nội dung (unit + config game) từ assets/data một lần khi mở app.
@@ -48,7 +49,7 @@ class ContentRepository {
   /// `WordImage`, `AudioService.play`) đều đã có sẵn `grade` qua `UnitInfo`
   /// đang cầm, nên không cần giữ "lớp hiện tại" ở đâu cả.
   static String asset({required int grade, required String relativePath}) =>
-      'assets/content/lop$grade/$relativePath';
+      'assets/content/${courseFolder(grade)}/$relativePath';
 
   static Future<Map<String, dynamic>> _read(String path) async {
     final raw = await rootBundle.loadString(path);
@@ -69,7 +70,7 @@ class ContentRepository {
   }
 
   static Future<ContentRepository> load({required int grade}) async {
-    final base = 'assets/data/lop$grade';
+    final base = 'assets/data/${courseFolder(grade)}';
     final unitsRaw = await _read('$base/units.json');
     final units = (unitsRaw['units'] as List)
         .map((e) => UnitInfo.fromJson(e as Map<String, dynamic>, grade: grade))

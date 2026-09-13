@@ -119,10 +119,25 @@ class ProgressRepository {
 
   /// F01 — unit 1 luôn mở; unit sau cần unit trước hoàn thành **4 game lõi**
   /// (g01-g04, ≥1 sao mỗi game) — g05/g06/g08/g10 không chặn mở unit tiếp theo.
-  bool isUnitUnlocked(List<LessonProgress> progress, int unitId) {
+  /// CR-036: [sequential] = false cho luồng "Chủ đề" — bé chọn chủ đề nào
+  /// trước cũng được (yêu cầu PM), nên MỌI chủ đề luôn mở. Mặc định true =
+  /// y hệt hành vi cũ của Lớp 1-5, không nơi gọi cũ nào phải sửa.
+  bool isUnitUnlocked(List<LessonProgress> progress, int unitId,
+      {bool sequential = true}) {
+    if (!sequential) return true;
     if (unitId <= 1) return true;
     return _coreGameTypes.every((g) => starsFor(progress, unitId - 1, g) >= 1);
   }
+
+  /// CR-036 — tổng sao TỐI ĐA của 1 unit/chủ đề, CHỈ tính game thật sự có dữ
+  /// liệu ở unit đó. Cần cho Chủ đề vì G06 trống: dùng `maxStarsPerUnit` cũ sẽ
+  /// hiện mẫu số 23 trong khi tối đa thực tế chỉ 20 → trẻ không bao giờ đầy sao.
+  /// (Lớp 1 cũng đang có đúng vấn đề này với G06 — xem RS-05, KHÔNG sửa trong
+  /// phạm vi CR này.)
+  int maxStarsForUnit(bool Function(String gameType) hasContent) =>
+      kGameTypeOrder
+          .where(hasContent)
+          .fold(0, (sum, g) => sum + (_maxStarsByGameType[g] ?? 3));
 
   /// Sprint 3 — checkpoint Fun Time (G09) / Boss Quiz (G12) gắn vào 1 unit cụ
   /// thể (xem checkpoints.dart). Khác isUnitUnlocked: kiểm tra 4 game lõi của
